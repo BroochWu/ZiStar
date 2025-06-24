@@ -1,0 +1,9 @@
+[
+  {
+    "key": "maincharacter_idle_count",
+    "desc": "主角idle待机数量",
+    "param_type": 1,
+    "int_value": 4,
+    "str_value": ""
+  }
+]
