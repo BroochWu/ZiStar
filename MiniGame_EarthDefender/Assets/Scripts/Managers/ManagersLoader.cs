@@ -17,6 +17,7 @@ public class ManagersLoader : MonoBehaviour
         // managers.AddComponent<UIManager>();
 
 
+        Debug.Log(cfg.Tables.tb.GlobalParam.Get("maincharacter_idle_count") != null ? "tables加载成功" : "tables加载失败");
 
 
         // 设置为跨场景持久化

@@ -7,6 +7,6 @@ dotnet %LUBAN_DLL% ^
     -d json  ^
     --conf luban.conf ^
     -x outputCodeDir=..\MiniGame_EarthDefender\Assets\Scripts\Luban\Output\CSharp ^
-    -x outputDataDir=..\MiniGame_EarthDefender\Assets\StreamingAssets\Luban\Output\Json
+    -x outputDataDir=..\MiniGame_EarthDefender\Assets\Resources\Luban\Output\Json
 
 pause

@@ -19,7 +19,7 @@ MonoBehaviour:
     assetLoadType: 0
     compressDataPackage: 0
     VideoUrl: 
-    DST: 
+    DST: D:\Mine\Project\MiniGame_EarthDefender\MiniGame_EarthDefender\
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: StreamingAssets;
