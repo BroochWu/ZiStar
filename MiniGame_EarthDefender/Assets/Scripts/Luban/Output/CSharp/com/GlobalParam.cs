@@ -19,7 +19,7 @@ public sealed partial class GlobalParam : Luban.BeanBase
     {
         { if(!_buf["key"].IsString) { throw new SerializationException(); }  Key = _buf["key"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
-        { if(!_buf["param_type"].IsNumber) { throw new SerializationException(); }  ParamType = (Enums.Com_ParamType)_buf["param_type"].AsInt; }
+        { if(!_buf["param_type"].IsNumber) { throw new SerializationException(); }  ParamType = (Enums.Com.ParamType)_buf["param_type"].AsInt; }
         { if(!_buf["int_value"].IsNumber) { throw new SerializationException(); }  IntValue = _buf["int_value"]; }
         { if(!_buf["str_value"].IsString) { throw new SerializationException(); }  StrValue = _buf["str_value"]; }
     }
@@ -40,7 +40,7 @@ public sealed partial class GlobalParam : Luban.BeanBase
     /// <summary>
     /// 参数类型
     /// </summary>
-    public readonly Enums.Com_ParamType ParamType;
+    public readonly Enums.Com.ParamType ParamType;
     /// <summary>
     /// 整型值
     /// </summary>

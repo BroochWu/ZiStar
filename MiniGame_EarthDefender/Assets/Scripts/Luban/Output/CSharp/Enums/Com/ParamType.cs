@@ -9,12 +9,12 @@
 
 
 
-namespace cfg.Enums
+namespace cfg.Enums.Com
 { 
     /// <summary>
     /// ,
     /// </summary>
-    public enum Com_ParamType
+    public enum ParamType
     {
         /// <summary>
         /// 整型

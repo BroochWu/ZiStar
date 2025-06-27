@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "text_name": "枪",
+    "bullet_prefab": "bullet",
+    "bullet_speed": 8,
+    "max_lifetime": 3,
+    "rate_of_fire": 4,
+    "row_count": 3,
+    "row_space": 1,
+    "column_count": 1,
+    "column_space": 0.2,
+    "bullet_scale": 7000
+  },
+  {
+    "id": 2,
+    "text_name": "导弹",
+    "bullet_prefab": "bullet",
+    "bullet_speed": 10,
+    "max_lifetime": 3,
+    "rate_of_fire": 0.2,
+    "row_count": 1,
+    "row_space": 0,
+    "column_count": 1,
+    "column_space": 1,
+    "bullet_scale": 10000
+  }
+]

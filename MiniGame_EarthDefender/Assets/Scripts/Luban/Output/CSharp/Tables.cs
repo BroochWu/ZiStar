@@ -15,16 +15,19 @@ namespace cfg
 public partial class Tables
 {
     public Tbcom.GlobalParam GlobalParam {get; }
+    public Tbweapon.Weapon Weapon {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         GlobalParam = new Tbcom.GlobalParam(loader("com_global_param"));
+        Weapon = new Tbweapon.Weapon(loader("weapon"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
         GlobalParam.ResolveRef(this);
+        Weapon.ResolveRef(this);
     }
 }
 
