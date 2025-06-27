@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationTarget: {fileID: 327842865793068216}
   cursorObj: {fileID: 0}
-  shootPath: {fileID: 763416112110563407}
+  shootPath: {fileID: 8857797380858322452}
   equipedWeapon: []
 --- !u!1 &1519207930442762712
 GameObject:

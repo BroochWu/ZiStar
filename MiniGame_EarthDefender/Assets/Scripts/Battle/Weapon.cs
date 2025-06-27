@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 //武器类
@@ -10,7 +9,7 @@ public class Weapon : MonoBehaviour
     int rowCount;//行数
     float rowSpace;//行间距
     GameObject bulletPrefab;
-    Vector3 bulletInitPos;//子弹初始坐标
+    Transform bulletInitTranform;//子弹初始坐标
     public float bulletSpeed;
     public int bulletScale;
     Coroutine corShootBullet;
@@ -22,10 +21,14 @@ public class Weapon : MonoBehaviour
 
 
 
-    public void Initialize(int weaponId, Vector3 position)
+    public void Initialize(int weaponId, Transform bulletInitTranform)
     {
         this.weaponId = weaponId;
-        bulletInitPos = position;
+        // bulletInitPos = Player.instance.shootPath.transform.position;
+
+        this.bulletInitTranform = bulletInitTranform;
+
+
 
         thisWeapon = cfg.Tables.tb.Weapon.Get(weaponId);
 
@@ -52,8 +55,9 @@ public class Weapon : MonoBehaviour
         {
             yield return rateOfFire;
 
-            var spawnPos = bulletInitPos;
+            var spawnPos = bulletInitTranform.position;
             Quaternion rotation = Player.instance.rotationTarget.transform.rotation;
+            Vector3 perpendicular = Vector3.Cross(rotation * Vector3.up, Vector3.forward).normalized;
 
             //计算同行子弹的生成坐标
             //1就基于原点，否则单数-d*数量*间隔，偶数-0.5d*数量*间隔
@@ -62,16 +66,11 @@ public class Weapon : MonoBehaviour
             {
                 break;
             }
-            else if (rowCount % 2 == 0)
-            {
-                spawnPos.x = bulletInitPos.x - rowSpace * rowCount;
-            }
             else
             {
-                spawnPos.x = bulletInitPos.x - 0.5f * rowSpace * (rowCount - 1);
+                spawnPos = bulletInitTranform.position - (rowCount % 2 == 0 ? 0.5f : 1f) * perpendicular * rowSpace * (rowCount - 1);
             }
-
-
+            // Debug.Log(spawnPos + "  " + bulletInitPos);
             for (int i = 1; i <= rowCount; i++)
             {
 
@@ -80,7 +79,7 @@ public class Weapon : MonoBehaviour
 
                 bullet.GetComponent<Bullet>().Initialize(this);
 
-                spawnPos.x += rowSpace;
+                spawnPos += rowSpace * perpendicular;
             }
 
             yield return null;

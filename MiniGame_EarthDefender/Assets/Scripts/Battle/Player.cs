@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     public GameObject rotationTarget;
     public GameObject cursorObj;
-    public Transform shootPath;
+    public GameObject shootPath;
 
     public List<Weapon> equipedWeapon;
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         
         // 添加武器组件
         Weapon weapon = weaponObj.AddComponent<Weapon>();
-        weapon.Initialize(weaponId, shootPath.position);
+        weapon.Initialize(weaponId, shootPath.transform);
         
         equipedWeapon.Add(weapon);
 
