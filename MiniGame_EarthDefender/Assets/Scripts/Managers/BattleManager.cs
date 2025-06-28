@@ -9,8 +9,12 @@ public class BattleManager : MonoBehaviour
     public Transform PortalsPath;
     public GameObject PortalPrefab;
 
+
     public float GameTime;
+
+
     bool canGameTimeCount;//可以计数了
+    Dictionary<int,bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
 
 
 
@@ -73,6 +77,19 @@ public class BattleManager : MonoBehaviour
     {
         if (canGameTimeCount) GameTime += Time.deltaTime;
     }
+
+
+
+    /// <summary>
+    /// 创造怪物
+    /// </summary>
+    void CreateEnemy()
+    {
+        //我想想，我计划这样：首先将预生成的怪物列表按照时间生成顺序升序排序
+        //之后游戏时间正常跑，并用游戏时间去判断【第0个】怪物的诞生时间，一旦>=，就生成、移除
+
+    }
+
 
 
 

@@ -21,7 +21,7 @@ public sealed partial class Wave_EnemyCreate : Luban.BeanBase
     public Wave_EnemyCreate(JSONNode _buf) 
     {
         { if(!_buf["init_time"].IsNumber) { throw new SerializationException(); }  InitTime = _buf["init_time"]; }
-        { if(!_buf["enemy_id"].IsObject) { throw new SerializationException(); }  EnemyId = global::cfg.Beans.Enemy_Init.DeserializeEnemy_Init(_buf["enemy_id"]);  }
+        { if(!_buf["enemy_init"].IsObject) { throw new SerializationException(); }  EnemyInit = global::cfg.Beans.Enemy_Init.DeserializeEnemy_Init(_buf["enemy_init"]);  }
     }
 
     public static Wave_EnemyCreate DeserializeWave_EnemyCreate(JSONNode _buf)
@@ -36,21 +36,21 @@ public sealed partial class Wave_EnemyCreate : Luban.BeanBase
     /// <summary>
     /// 敌人id和数量
     /// </summary>
-    public readonly Beans.Enemy_Init EnemyId;
+    public readonly Beans.Enemy_Init EnemyInit;
    
     public const int __ID__ = -1465421239;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        EnemyId?.ResolveRef(tables);
+        EnemyInit?.ResolveRef(tables);
     }
 
     public override string ToString()
     {
         return "{ "
         + "initTime:" + InitTime + ","
-        + "enemyId:" + EnemyId + ","
+        + "enemyInit:" + EnemyInit + ","
         + "}";
     }
 }

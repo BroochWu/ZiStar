@@ -22,7 +22,7 @@ public sealed partial class Enemy_Init : Luban.BeanBase
     {
         { if(!_buf["enemy_id"].IsNumber) { throw new SerializationException(); }  EnemyId = _buf["enemy_id"]; }
         EnemyId_Ref = null;
-        { if(!_buf["count"].IsNumber) { throw new SerializationException(); }  Count = _buf["count"]; }
+        { var __json0 = _buf["angles"]; if(!__json0.IsArray) { throw new SerializationException(); } Angles = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  Angles.Add(__v0); }   }
     }
 
     public static Enemy_Init DeserializeEnemy_Init(JSONNode _buf)
@@ -36,9 +36,9 @@ public sealed partial class Enemy_Init : Luban.BeanBase
     public readonly int EnemyId;
     public enemy.Enemy EnemyId_Ref;
     /// <summary>
-    /// 数量
+    /// 角度（有几个会生成几个）
     /// </summary>
-    public readonly int Count;
+    public readonly System.Collections.Generic.List<int> Angles;
    
     public const int __ID__ = -984560686;
     public override int GetTypeId() => __ID__;
@@ -52,7 +52,7 @@ public sealed partial class Enemy_Init : Luban.BeanBase
     {
         return "{ "
         + "enemyId:" + EnemyId + ","
-        + "count:" + Count + ","
+        + "angles:" + Luban.StringUtil.CollectionToString(Angles) + ","
         + "}";
     }
 }
