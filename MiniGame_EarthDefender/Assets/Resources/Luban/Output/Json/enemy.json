@@ -1,0 +1,7 @@
+[
+  {
+    "id": 1001,
+    "text_name": "小怪物",
+    "prefab": "Enemy"
+  }
+]

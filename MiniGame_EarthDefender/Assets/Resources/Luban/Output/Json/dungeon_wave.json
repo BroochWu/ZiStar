@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "enemy_create": [
+      {
+        "init_time": 2,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 1
+        }
+      },
+      {
+        "init_time": 4,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 1
+        }
+      },
+      {
+        "init_time": 6,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 3
+        }
+      },
+      {
+        "init_time": 8,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 1
+        }
+      },
+      {
+        "init_time": 10,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "enemy_create": [
+      {
+        "init_time": 1,
+        "enemy_id": {
+          "enemy_id": 1001,
+          "count": 1
+        }
+      }
+    ]
+  }
+]

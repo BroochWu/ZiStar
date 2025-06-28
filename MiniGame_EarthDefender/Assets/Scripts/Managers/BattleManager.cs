@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
@@ -9,6 +8,9 @@ public class BattleManager : MonoBehaviour
     public Transform bulletPath;
     public Transform PortalsPath;
     public GameObject PortalPrefab;
+
+    public float GameTime;
+    bool canGameTimeCount;//可以计数了
 
 
 
@@ -41,6 +43,14 @@ public class BattleManager : MonoBehaviour
     }
 
 
+
+    void Start()
+    {
+        BattleStart(1);
+    }
+
+
+
     /// <summary>
     /// 游戏开始
     /// </summary>
@@ -49,8 +59,30 @@ public class BattleManager : MonoBehaviour
     {
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
 
+        foreach (var i in config.Portals)
+        {
+            CreatePortals(i.Position);
+        }
+        canGameTimeCount = true;
+        GameTime = 0;
 
         Debug.Log(config.TextName + " 已加载！");
+    }
+
+    void Update()
+    {
+        if (canGameTimeCount) GameTime += Time.deltaTime;
+    }
+
+
+
+    /// <summary>
+    /// 游戏结束
+    /// </summary>
+    void BattleOver()
+    {
+        GameTime = 0;
+        canGameTimeCount = false;
     }
 
 
