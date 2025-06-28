@@ -13,9 +13,9 @@ using SimpleJSON;
 
 namespace cfg
 {
-public partial struct vector4
+public partial struct Vector4
 {
-    public vector4(JSONNode _buf) 
+    public Vector4(JSONNode _buf) 
     {
         { if(!_buf["x"].IsNumber) { throw new SerializationException(); }  X = _buf["x"]; }
         { if(!_buf["y"].IsNumber) { throw new SerializationException(); }  Y = _buf["y"]; }
@@ -23,9 +23,9 @@ public partial struct vector4
         { if(!_buf["w"].IsNumber) { throw new SerializationException(); }  W = _buf["w"]; }
     }
 
-    public static vector4 Deserializevector4(JSONNode _buf)
+    public static Vector4 DeserializeVector4(JSONNode _buf)
     {
-        return new vector4(_buf);
+        return new Vector4(_buf);
     }
 
     public readonly float X;

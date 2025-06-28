@@ -13,17 +13,17 @@ using SimpleJSON;
 
 namespace cfg
 {
-public partial struct vector2
+public partial struct Vector2
 {
-    public vector2(JSONNode _buf) 
+    public Vector2(JSONNode _buf) 
     {
         { if(!_buf["x"].IsNumber) { throw new SerializationException(); }  X = _buf["x"]; }
         { if(!_buf["y"].IsNumber) { throw new SerializationException(); }  Y = _buf["y"]; }
     }
 
-    public static vector2 Deserializevector2(JSONNode _buf)
+    public static Vector2 DeserializeVector2(JSONNode _buf)
     {
-        return new vector2(_buf);
+        return new Vector2(_buf);
     }
 
     public readonly float X;

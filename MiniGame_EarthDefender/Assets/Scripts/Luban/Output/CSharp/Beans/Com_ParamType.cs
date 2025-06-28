@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Beans
 {
+/// <summary>
+/// 参数类型
+/// </summary>
 public sealed partial class Com_ParamType : Luban.BeanBase
 {
     public Com_ParamType(JSONNode _buf) 

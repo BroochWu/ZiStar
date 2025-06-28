@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
     public Transform bulletPath;
-
+    public Transform PortalsPath;
+    public GameObject PortalPrefab;
 
 
 
@@ -30,11 +32,37 @@ public class BattleManager : MonoBehaviour
 
 
         if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
+        if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
+        if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
 
 
 
     }
+
+
+    /// <summary>
+    /// 游戏开始
+    /// </summary>
+    /// <param name="dungeonId">关卡id</param>
+    public void BattleStart(int dungeonId)
+    {
+        var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
+
+
+        Debug.Log(config.TextName + " 已加载！");
+    }
+
+
+    /// <summary>
+    /// 生成传送门
+    /// </summary>
+    void CreatePortals(Vector2 position)
+    {
+        Instantiate(PortalPrefab, position, Quaternion.identity);
+    }
+
+
 
     /// <summary>
     /// 获取指定类型的子弹对象池
@@ -103,7 +131,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private GameObject CreateBulletInstance(GameObject prefab, string bulletType)
     {
-        GameObject bullet = Instantiate(prefab,bulletPath);
+        GameObject bullet = Instantiate(prefab, bulletPath);
         bullet.GetComponent<Bullet>().bulletType = bulletType;
 
         return bullet;
