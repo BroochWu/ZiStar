@@ -30,11 +30,11 @@ public sealed partial class Wave_EnemyCreate : Luban.BeanBase
     }
 
     /// <summary>
-    /// 传送门坐标
+    /// 生成时间
     /// </summary>
     public readonly float InitTime;
     /// <summary>
-    /// 传送门绑定的波次id
+    /// 敌人id和数量
     /// </summary>
     public readonly Beans.Enemy_Init EnemyId;
    
