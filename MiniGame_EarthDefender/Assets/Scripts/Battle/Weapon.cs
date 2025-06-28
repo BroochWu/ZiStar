@@ -1,89 +1,116 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
-//武器类
 public class Weapon : MonoBehaviour
 {
+    public int weaponId;
+    private int rowCount;
+    private float rowSpace;
+    private Transform bulletInitTransform;
+    private Coroutine corShootBullet;
+    private WaitForSeconds rateOfFire;
+    public float bulletSpeed { get; private set; }
+    public int bulletScale { get; private set; }
+    public float bulletReleaseTime { get; private set; }
+    private cfg.weapon.Weapon thisWeapon;
+    private string bulletType;
 
-    public int weaponId;//武器的id，指定自己是什么武器
-    int rowCount;//行数
-    float rowSpace;//行间距
-    GameObject bulletPrefab;
-    Transform bulletInitTranform;//子弹初始坐标
-    public float bulletSpeed;
-    public int bulletScale;
-    Coroutine corShootBullet;
-    WaitForSeconds rateOfFire;
-    public WaitForSeconds bulletReleaseTime;
-    cfg.weapon.Weapon thisWeapon;
-
-
-
-
-
-    public void Initialize(int weaponId, Transform bulletInitTranform)
+    public void Initialize(int weaponId, Transform bulletInitTransform)
     {
         this.weaponId = weaponId;
-        // bulletInitPos = Player.instance.shootPath.transform.position;
+        this.bulletInitTransform = bulletInitTransform;
 
-        this.bulletInitTranform = bulletInitTranform;
-
-
-
+        // 加载配置
         thisWeapon = cfg.Tables.tb.Weapon.Get(weaponId);
+        if (thisWeapon == null)
+        {
+            Debug.LogError($"Weapon config not found for ID: {weaponId}");
+            return;
+        }
 
-        //重新装配一下luban的表数据，免得日后有改动
-
+        // 初始化武器参数
         rateOfFire = new WaitForSeconds(1f / thisWeapon.RateOfFire);
-        bulletReleaseTime = new WaitForSeconds(thisWeapon.MaxLifetime);
+        bulletReleaseTime = thisWeapon.MaxLifetime;
         rowCount = thisWeapon.RowCount;
         rowSpace = thisWeapon.RowSpace;
         bulletSpeed = thisWeapon.BulletSpeed;
         bulletScale = thisWeapon.BulletScale;
-        bulletPrefab = Resources.Load<GameObject>($"Prefabs/Bullets/{thisWeapon.BulletPrefab}");
+        bulletType = thisWeapon.BulletPrefab;
 
-        corShootBullet = Player.instance.StartCoroutine(ShootBullet());
+        // 预热对象池（可选）
+        BattleManager.Instance?.WarmUpPool(bulletType, rowCount * 5);
+
+        // 启动射击协程
+        corShootBullet = StartCoroutine(ShootBullet());
     }
 
     /// <summary>
     /// 武器发射子弹
     /// </summary>
-    /// <returns></returns>
     public IEnumerator ShootBullet()
     {
         while (true)
         {
             yield return rateOfFire;
 
-            var spawnPos = bulletInitTranform.position;
+            var spawnPos = bulletInitTransform.position;
             Quaternion rotation = Player.instance.rotationTarget.transform.rotation;
-            Vector3 perpendicular = Vector3.Cross(rotation * Vector3.up, Vector3.forward).normalized;
 
-            //计算同行子弹的生成坐标
-            //1就基于原点，否则单数-d*数量*间隔，偶数-0.5d*数量*间隔
-            //先找到最左边的点，然后逐个生成
-            if (rowCount == 1)
+            // 获取发射方向
+            Vector3 fireDirection = rotation * Vector3.up;
+
+            // 计算垂直于发射方向的向量
+            Vector3 perpendicular = Vector3.Cross(fireDirection, Vector3.forward).normalized;
+
+            // 计算起始位置（居中分布）
+            if (rowCount > 1)
             {
-                break;
-            }
-            else
-            {
-                spawnPos = bulletInitTranform.position - (rowCount % 2 == 0 ? 0.5f : 1f) * perpendicular * rowSpace * (rowCount - 1);
-            }
-            // Debug.Log(spawnPos + "  " + bulletInitPos);
-            for (int i = 1; i <= rowCount; i++)
-            {
-
-                //生成行
-                GameObject bullet = Instantiate(bulletPrefab, spawnPos, rotation);
-
-                bullet.GetComponent<Bullet>().Initialize(this);
-
-                spawnPos += rowSpace * perpendicular;
+                float totalWidth = rowSpace * (rowCount - 1);
+                Vector3 startOffset = perpendicular * (totalWidth / 2f);
+                spawnPos = bulletInitTransform.position - startOffset;
             }
 
-            yield return null;
+            // 生成子弹行
+            for (int i = 0; i < rowCount; i++)
+            {
+                // 从对象池获取子弹
+                GameObject bullet = GetBulletFromPool();
+
+                // 设置子弹位置和旋转
+                bullet.transform.position = spawnPos;
+                bullet.transform.rotation = rotation;
+
+                // 初始化子弹
+                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                if (bulletComponent != null)
+                {
+                    bulletComponent.Initialize(this);
+                }
+                spawnPos += perpendicular * rowSpace;
+            }
         }
+    }
+
+    /// <summary>
+    /// 从对象池获取子弹
+    /// </summary>
+    private GameObject GetBulletFromPool()
+    {
+        if (BattleManager.Instance == null)
+        {
+            Debug.LogError("BattleManager not found!");
+            return null;
+        }
+
+        IObjectPool<GameObject> pool = BattleManager.Instance.GetBulletPool(bulletType);
+        if (pool == null)
+        {
+            Debug.LogError($"Failed to get bullet pool for type: {bulletType}");
+            return null;
+        }
+
+        return pool.Get();
     }
 
     /// <summary>
@@ -93,9 +120,8 @@ public class Weapon : MonoBehaviour
     {
         if (corShootBullet != null)
         {
-            Player.instance.StopCoroutine(corShootBullet);
+            StopCoroutine(corShootBullet);
             corShootBullet = null;
         }
     }
-
 }

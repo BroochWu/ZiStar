@@ -13,7 +13,7 @@ public class ManagersLoader : MonoBehaviour
 
 
         // 添加管理器组件
-        // managers.AddComponent<GameManager>();
+         managers.AddComponent<BattleManager>();
         // managers.AddComponent<UIManager>();
 
 

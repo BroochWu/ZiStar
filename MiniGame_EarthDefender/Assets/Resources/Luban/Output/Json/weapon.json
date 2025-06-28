@@ -6,11 +6,11 @@
     "bullet_speed": 12,
     "max_lifetime": 3,
     "rate_of_fire": 4,
-    "row_count": 2,
+    "row_count": 3,
     "row_space": 0.4,
     "column_count": 1,
     "column_space": 0.2,
-    "bullet_scale": 7000
+    "bullet_scale": 2000
   },
   {
     "id": 2,
