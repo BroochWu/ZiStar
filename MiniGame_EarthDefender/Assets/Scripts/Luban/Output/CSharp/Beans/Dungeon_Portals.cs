@@ -38,14 +38,14 @@ public sealed partial class Dungeon_Portals : Luban.BeanBase
     /// 传送门绑定的波次id
     /// </summary>
     public readonly int WaveId;
-    public dungeon.Wave WaveId_Ref;
+    public dungeon.DungeonWave WaveId_Ref;
    
     public const int __ID__ = -1336252553;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        WaveId_Ref = tables.Wave.GetOrDefault(WaveId);
+        WaveId_Ref = tables.DungeonWave.GetOrDefault(WaveId);
     }
 
     public override string ToString()

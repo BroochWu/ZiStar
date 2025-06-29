@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
     public Transform bulletPath;
     public Transform PortalsPath;
+    public Transform EnemysPath;
     public GameObject PortalPrefab;
 
 
@@ -14,7 +16,7 @@ public class BattleManager : MonoBehaviour
 
 
     bool canGameTimeCount;//可以计数了
-    Dictionary<int,bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
+    Dictionary<int, bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
 
 
 
@@ -39,6 +41,7 @@ public class BattleManager : MonoBehaviour
 
         if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
         if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
+        if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
 
@@ -65,7 +68,8 @@ public class BattleManager : MonoBehaviour
 
         foreach (var i in config.Portals)
         {
-            CreatePortals(i.Position);
+            Debug.Log(i.WaveId + " 波次已加载");
+            CreatePortals(i.WaveId_Ref, i.Position);
         }
         canGameTimeCount = true;
         GameTime = 0;
@@ -79,16 +83,6 @@ public class BattleManager : MonoBehaviour
     }
 
 
-
-    /// <summary>
-    /// 创造怪物
-    /// </summary>
-    void CreateEnemy()
-    {
-        //我想想，我计划这样：首先将预生成的怪物列表按照时间生成顺序升序排序
-        //之后游戏时间正常跑，并用游戏时间去判断【第0个】怪物的诞生时间，一旦>=，就生成、移除
-
-    }
 
 
 
@@ -106,9 +100,10 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 生成传送门
     /// </summary>
-    void CreatePortals(Vector2 position)
+    void CreatePortals(cfg.dungeon.DungeonWave waveId_Ref, Vector2 position)
     {
-        Instantiate(PortalPrefab, position, Quaternion.identity);
+        var Portal = Instantiate(PortalPrefab, position, Quaternion.identity);
+        Portal.AddComponent<Portal>().Initialize(waveId_Ref);
     }
 
 
@@ -157,7 +152,6 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private IObjectPool<GameObject> CreateBulletPool(string bulletType)
     {
-        // 获取预制体
         if (!bulletPrefabs.TryGetValue(bulletType, out GameObject prefab))
         {
             Debug.LogError($"Bullet prefab not loaded: {bulletType}");
@@ -169,7 +163,7 @@ public class BattleManager : MonoBehaviour
             actionOnGet: (bullet) => OnGetBullet(bullet),
             actionOnRelease: (bullet) => OnReleaseBullet(bullet),
             actionOnDestroy: (bullet) => Destroy(bullet),
-            collectionCheck: true,
+            collectionCheck: true, // 启用集合检查
             defaultCapacity: 20,
             maxSize: 100
         );
@@ -191,6 +185,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void OnGetBullet(GameObject bullet)
     {
+        if (bullet == null) return;
+
         bullet.SetActive(true);
 
         // 重置子弹状态
@@ -206,6 +202,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void OnReleaseBullet(GameObject bullet)
     {
+        if(bullet == null) return;
+
         bullet.SetActive(false);
         bullet.transform.position = Player.instance.shootPath.transform.position;
     }

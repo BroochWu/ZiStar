@@ -832,8 +832,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPath: {fileID: 1880603437}
   PortalsPath: {fileID: 1503802839}
+  EnemysPath: {fileID: 1283614229}
   PortalPrefab: {fileID: 8770212461898048473, guid: 316e0a38748b76145ae11b699fce52fd, type: 3}
   GameTime: 0
+--- !u!1 &1283614228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283614229}
+  m_Layer: 0
+  m_Name: Enemys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283614229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283614228}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.36447662, y: 0.31909645, z: -0.12186236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1501069208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,5 +1092,6 @@ SceneRoots:
   - {fileID: 531587554}
   - {fileID: 1503802839}
   - {fileID: 1880603437}
+  - {fileID: 1283614229}
   - {fileID: 548407400}
   - {fileID: 439414253}

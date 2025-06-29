@@ -17,7 +17,7 @@ public partial class Tables
     public Tbcom.GlobalParam GlobalParam {get; }
     public Tbweapon.Weapon Weapon {get; }
     public Tbdungeon.Dungeon Dungeon {get; }
-    public Tbdungeon.Wave Wave {get; }
+    public Tbdungeon.DungeonWave DungeonWave {get; }
     public Tbenemy.Enemy Enemy {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
@@ -25,7 +25,7 @@ public partial class Tables
         GlobalParam = new Tbcom.GlobalParam(loader("com_global_param"));
         Weapon = new Tbweapon.Weapon(loader("weapon"));
         Dungeon = new Tbdungeon.Dungeon(loader("dungeon"));
-        Wave = new Tbdungeon.Wave(loader("dungeon_wave"));
+        DungeonWave = new Tbdungeon.DungeonWave(loader("dungeon_wave"));
         Enemy = new Tbenemy.Enemy(loader("enemy"));
         ResolveRef();
     }
@@ -35,7 +35,7 @@ public partial class Tables
         GlobalParam.ResolveRef(this);
         Weapon.ResolveRef(this);
         Dungeon.ResolveRef(this);
-        Wave.ResolveRef(this);
+        DungeonWave.ResolveRef(this);
         Enemy.ResolveRef(this);
     }
 }

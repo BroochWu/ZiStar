@@ -13,17 +13,17 @@ using SimpleJSON;
 
 namespace cfg.dungeon
 {
-public sealed partial class Wave : Luban.BeanBase
+public sealed partial class DungeonWave : Luban.BeanBase
 {
-    public Wave(JSONNode _buf) 
+    public DungeonWave(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { var __json0 = _buf["enemy_create"]; if(!__json0.IsArray) { throw new SerializationException(); } EnemyCreate = new System.Collections.Generic.List<Beans.Wave_EnemyCreate>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Wave_EnemyCreate __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Wave_EnemyCreate.DeserializeWave_EnemyCreate(__e0);  }  EnemyCreate.Add(__v0); }   }
     }
 
-    public static Wave DeserializeWave(JSONNode _buf)
+    public static DungeonWave DeserializeDungeonWave(JSONNode _buf)
     {
-        return new dungeon.Wave(_buf);
+        return new dungeon.DungeonWave(_buf);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public sealed partial class Wave : Luban.BeanBase
     public readonly int Id;
     public readonly System.Collections.Generic.List<Beans.Wave_EnemyCreate> EnemyCreate;
    
-    public const int __ID__ = 1460816333;
+    public const int __ID__ = 782460799;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
