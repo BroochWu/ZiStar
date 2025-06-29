@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
         bulletType = thisWeapon.BulletPrefab;
 
         // 预热对象池（可选）
-        BattleManager.Instance?.WarmUpPool(bulletType, rowCount * 5);
+        // BattleManager.Instance?.poolBullet.WarmUpPool(bulletType, rowCount * 5);
 
         // 启动射击协程
         corShootBullet = StartCoroutine(ShootBullet());
@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
             return null;
         }
 
-        IObjectPool<GameObject> pool = BattleManager.Instance.GetBulletPool(bulletType);
+        IObjectPool<GameObject> pool = BattleManager.Instance.poolBullet.GetBulletPool(bulletType);
         if (pool == null)
         {
             Debug.LogError($"Failed to get bullet pool for type: {bulletType}");

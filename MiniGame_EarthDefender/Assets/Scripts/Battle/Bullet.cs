@@ -76,7 +76,7 @@ public class Bullet : MonoBehaviour
         }
 
         // 获取对象池
-        IObjectPool<GameObject> pool = BattleManager.Instance.GetBulletPool(bulletType);
+        IObjectPool<GameObject> pool = BattleManager.Instance.poolBullet.GetBulletPool(bulletType);
         if (pool != null)
         {
             try
