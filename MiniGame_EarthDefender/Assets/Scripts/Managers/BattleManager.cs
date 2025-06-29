@@ -241,4 +241,7 @@ public class BattleManager : MonoBehaviour
         }
         bulletPools.Clear();
     }
+
+
+    
 }

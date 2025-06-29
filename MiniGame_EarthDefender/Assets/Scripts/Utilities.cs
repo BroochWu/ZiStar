@@ -46,3 +46,33 @@ public static class ExternalTypeUtil
     }
 }
 
+
+
+public static class Utility
+{
+    /// <summary>
+    /// 2D朝向
+    /// </summary>
+    /// <param name="whom">谁要转</param>
+    /// <param name="target">转向谁</param>
+    public static void LookTarget2D(Transform whom, Transform target, float rotationSpeed)
+    {
+        // 计算方向向量
+        Vector2 direction = target.position - whom.position;
+
+        // 计算旋转角度
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        // 应用旋转（2D游戏使用Z轴旋转）
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        // 平滑旋转
+        whom.rotation = Quaternion.Slerp(
+            whom.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
+
+    }
+
+}
