@@ -7,14 +7,14 @@ public class Portal : MonoBehaviour
 
 
 
-    public void Initialize(cfg.dungeon.DungeonWave wave)
+    public void Initialize(cfg.dungeon.DungeonWave wave, int dungeonLevel)
     {
         this.wave = wave;
         var ec = wave.EnemyCreate;
 
         foreach (var i in ec)
         {
-            StartCoroutine(EnemyCreator(i.InitTime, i.EnemyInit));
+            StartCoroutine(EnemyCreator(i.InitTime, i.EnemyInit, dungeonLevel));
         }
     }
 
@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
     /// <summary>
     /// 创造怪物
     /// </summary>
-    IEnumerator EnemyCreator(float time, cfg.Beans.Enemy_Init enemy_Init)
+    IEnumerator EnemyCreator(float time, cfg.Beans.Enemy_Init enemy_Init, int enemyLevel)
     {
         //我想想，我计划这样：首先将预生成的怪物列表按照时间生成顺序升序排序
         //之后游戏时间正常跑，并用游戏时间去判断【第0个】怪物的诞生时间，一旦>=，就生成、移除
@@ -44,7 +44,7 @@ public class Portal : MonoBehaviour
                 moveDirection);
 
             obj.transform.SetParent(BattleManager.Instance.EnemysPath);
-            obj.AddComponent<Enemy>().Initialize(enemy_Init.EnemyId_Ref);
+            obj.GetComponent<Enemy>()?.Initialize(enemy_Init.EnemyId_Ref, enemyLevel);
 
         }
 

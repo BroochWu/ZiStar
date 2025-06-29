@@ -10,7 +10,8 @@
     "row_space": 0.4,
     "column_count": 1,
     "column_space": 0.2,
-    "bullet_scale": 2000
+    "bullet_scale": 2000,
+    "level_id": 1001
   },
   {
     "id": 2,
@@ -23,6 +24,7 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000
+    "bullet_scale": 10000,
+    "level_id": 1002
   }
 ]

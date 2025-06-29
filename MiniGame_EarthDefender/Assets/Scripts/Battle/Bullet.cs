@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 public class Bullet : MonoBehaviour
 {
     public string bulletType;
+    public int bulletDamage { get; private set; }
     private Weapon parent;
     private float lifetime;
     private float timer;
@@ -17,6 +18,9 @@ public class Bullet : MonoBehaviour
         isReleased = false; // 重置释放标记
 
         transform.localScale = Vector3.one * parent.bulletScale / 10000f;
+
+        //子弹继承武器的伤害
+        bulletDamage = parent.damage;
     }
 
     public void ResetState()
@@ -28,7 +32,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         if (isReleased) return; // 已释放则不再处理
-        
+
         // 移动子弹
         transform.Translate(Vector3.up * parent.bulletSpeed * Time.deltaTime);
 
@@ -45,9 +49,9 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isReleased) return; // 已释放则不再处理碰撞
-        
+
         Debug.Log("碰撞到" + other.tag);
-        
+
         // 碰撞处理
         if (other.CompareTag("Enemy") || other.CompareTag("Boundary"))
         {
@@ -60,14 +64,14 @@ public class Bullet : MonoBehaviour
         // 如果已经释放过，直接返回
         if (isReleased) return;
         isReleased = true; // 标记为已释放
-        
+
         // 确保BattleManager存在
         if (BattleManager.Instance == null)
         {
             Destroy(gameObject);
             return;
         }
-        
+
         // 确保子弹类型有效
         if (string.IsNullOrEmpty(bulletType))
         {

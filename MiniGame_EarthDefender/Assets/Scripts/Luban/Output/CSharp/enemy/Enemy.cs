@@ -20,6 +20,9 @@ public sealed partial class Enemy : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["prefab"].IsString) { throw new SerializationException(); }  Prefab = _buf["prefab"]; }
+        { if(!_buf["multi_move_speed"].IsNumber) { throw new SerializationException(); }  MultiMoveSpeed = _buf["multi_move_speed"]; }
+        { if(!_buf["angle_damp"].IsNumber) { throw new SerializationException(); }  AngleDamp = _buf["angle_damp"]; }
+        { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
     }
 
     public static Enemy DeserializeEnemy(JSONNode _buf)
@@ -39,6 +42,18 @@ public sealed partial class Enemy : Luban.BeanBase
     /// prefab名称
     /// </summary>
     public readonly string Prefab;
+    /// <summary>
+    /// 移动速度倍率（万分数）
+    /// </summary>
+    public readonly int MultiMoveSpeed;
+    /// <summary>
+    /// 转角阻尼（万分数）
+    /// </summary>
+    public readonly int AngleDamp;
+    /// <summary>
+    /// 等级组id（伤害等养成）
+    /// </summary>
+    public readonly int LevelId;
    
     public const int __ID__ = -1023814270;
     public override int GetTypeId() => __ID__;
@@ -53,6 +68,9 @@ public sealed partial class Enemy : Luban.BeanBase
         + "id:" + Id + ","
         + "textName:" + TextName + ","
         + "prefab:" + Prefab + ","
+        + "multiMoveSpeed:" + MultiMoveSpeed + ","
+        + "angleDamp:" + AngleDamp + ","
+        + "levelId:" + LevelId + ","
         + "}";
     }
 }

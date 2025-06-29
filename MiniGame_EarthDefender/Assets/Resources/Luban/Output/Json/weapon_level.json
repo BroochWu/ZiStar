@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1001,
+    "level": 1,
+    "damage": 10
+  },
+  {
+    "id": 1001,
+    "level": 2,
+    "damage": 15
+  },
+  {
+    "id": 1001,
+    "level": 3,
+    "damage": 20
+  },
+  {
+    "id": 1002,
+    "level": 1,
+    "damage": 10
+  },
+  {
+    "id": 1002,
+    "level": 2,
+    "damage": 20
+  }
+]

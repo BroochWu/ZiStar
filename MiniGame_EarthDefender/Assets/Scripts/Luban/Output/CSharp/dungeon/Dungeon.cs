@@ -19,6 +19,7 @@ public sealed partial class Dungeon : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["dungeon_level"].IsNumber) { throw new SerializationException(); }  DungeonLevel = _buf["dungeon_level"]; }
         { var __json0 = _buf["portals"]; if(!__json0.IsArray) { throw new SerializationException(); } Portals = new System.Collections.Generic.List<Beans.Dungeon_Portals>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Dungeon_Portals __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Dungeon_Portals.DeserializeDungeon_Portals(__e0);  }  Portals.Add(__v0); }   }
     }
 
@@ -35,6 +36,10 @@ public sealed partial class Dungeon : Luban.BeanBase
     /// 关卡名称
     /// </summary>
     public readonly string TextName;
+    /// <summary>
+    /// 关卡等级
+    /// </summary>
+    public readonly int DungeonLevel;
     public readonly System.Collections.Generic.List<Beans.Dungeon_Portals> Portals;
    
     public const int __ID__ = -841579674;
@@ -50,6 +55,7 @@ public sealed partial class Dungeon : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "dungeonLevel:" + DungeonLevel + ","
         + "portals:" + Luban.StringUtil.CollectionToString(Portals) + ","
         + "}";
     }

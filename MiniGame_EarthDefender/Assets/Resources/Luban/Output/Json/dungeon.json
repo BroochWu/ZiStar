@@ -2,6 +2,7 @@
   {
     "id": 1,
     "text_name": "第一关",
+    "dungeon_level": 1,
     "portals": [
       {
         "position": {
@@ -22,6 +23,7 @@
   {
     "id": 2,
     "text_name": "第二关",
+    "dungeon_level": 2,
     "portals": [
       {
         "position": {

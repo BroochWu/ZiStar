@@ -94,11 +94,11 @@ public class Player : MonoBehaviour
         // 创建武器对象
         GameObject weaponObj = new GameObject($"Weapon_{weaponId}");
         weaponObj.transform.SetParent(transform);
-        
+
         // 添加武器组件
         Weapon weapon = weaponObj.AddComponent<Weapon>();
-        weapon.Initialize(weaponId, shootPath.transform);
-        
+        weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath.transform, 1);
+
         equipedWeapon.Add(weapon);
 
     }

@@ -4,32 +4,46 @@ using UnityEngine.Pool;
 
 public class Weapon : MonoBehaviour
 {
-    public int weaponId;
     private int rowCount;
     private float rowSpace;
     private Transform bulletInitTransform;
     private Coroutine corShootBullet;
     private WaitForSeconds rateOfFire;
+    public int damage;
+    private int weaponLevel;
+
+
     public float bulletSpeed { get; private set; }
     public int bulletScale { get; private set; }
     public float bulletReleaseTime { get; private set; }
     private cfg.weapon.Weapon thisWeapon;
     private string bulletType;
 
-    public void Initialize(int weaponId, Transform bulletInitTransform)
+    public void Initialize(cfg.weapon.Weapon weapon, Transform bulletInitTransform, int weaponLevel)
     {
-        this.weaponId = weaponId;
-        this.bulletInitTransform = bulletInitTransform;
 
         // 加载配置
-        thisWeapon = cfg.Tables.tb.Weapon.Get(weaponId);
+        this.thisWeapon = weapon;
+        this.bulletInitTransform = bulletInitTransform;
+        this.weaponLevel = weaponLevel;
+        //初始化武器伤害
+        this.damage = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).Damage;
+
         if (thisWeapon == null)
         {
-            Debug.LogError($"Weapon config not found for ID: {weaponId}");
+            Debug.LogError($"Weapon config not found for ID: {thisWeapon.Id}");
             return;
         }
 
-        // 初始化武器参数
+        UpdateData();
+    }
+
+    /// <summary>
+    /// 更新数据
+    /// </summary>
+    void UpdateData()
+    {
+        // 初始化武器参数(这些未来可能都不是固定读表的)
         rateOfFire = new WaitForSeconds(1f / thisWeapon.RateOfFire);
         bulletReleaseTime = thisWeapon.MaxLifetime;
         rowCount = thisWeapon.RowCount;
@@ -37,12 +51,14 @@ public class Weapon : MonoBehaviour
         bulletSpeed = thisWeapon.BulletSpeed;
         bulletScale = thisWeapon.BulletScale;
         bulletType = thisWeapon.BulletPrefab;
+        damage = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).Damage;
 
         // 预热对象池（可选）
         // BattleManager.Instance?.poolBullet.WarmUpPool(bulletType, rowCount * 5);
 
         // 启动射击协程
         corShootBullet = StartCoroutine(ShootBullet());
+
     }
 
     /// <summary>
@@ -103,7 +119,7 @@ public class Weapon : MonoBehaviour
             return null;
         }
 
-        IObjectPool<GameObject> pool = BattleManager.Instance.poolBullet.GetBulletPool(bulletType);
+        IObjectPool<GameObject> pool = PoolBullet.instance.GetBulletPool(bulletType);
         if (pool == null)
         {
             Debug.LogError($"Failed to get bullet pool for type: {bulletType}");

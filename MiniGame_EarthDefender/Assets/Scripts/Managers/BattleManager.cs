@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.Pool;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 
 public class BattleManager : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class BattleManager : MonoBehaviour
 
 
     public float GameTime;
-
+    int dungeonLevel;//关卡等级
 
     bool canGameTimeCount;//可以计数了
     Dictionary<int, bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
@@ -60,6 +58,8 @@ public class BattleManager : MonoBehaviour
     public void BattleStart(int dungeonId)
     {
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
+        dungeonLevel = config.DungeonLevel;
+
 
         foreach (var i in config.Portals)
         {
@@ -98,9 +98,20 @@ public class BattleManager : MonoBehaviour
     void CreatePortals(cfg.dungeon.DungeonWave waveId_Ref, Vector2 position)
     {
         var Portal = Instantiate(PortalPrefab, position, Quaternion.identity);
-        Portal.AddComponent<Portal>().Initialize(waveId_Ref);
+        var portalLevel = dungeonLevel;
+        Portal.AddComponent<Portal>().Initialize(waveId_Ref, portalLevel);
     }
 
-
+    /// <summary>
+    /// 计算伤害公式
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="currentHp"></param>
+    public int CalDamage(int damage, int currentHp)
+    {
+        var newHp = (currentHp - damage) > 0 ? (currentHp - damage) : 0;
+        Debug.Log("newHp" + newHp);
+        return newHp;
+    }
 
 }

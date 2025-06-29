@@ -2,6 +2,9 @@
   {
     "id": 1001,
     "text_name": "小怪物",
-    "prefab": "Enemy"
+    "prefab": "Enemy",
+    "multi_move_speed": 5000,
+    "angle_damp": 1000,
+    "level_id": 1001
   }
 ]

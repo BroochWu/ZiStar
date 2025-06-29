@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class PoolBullet
 {
 
-    public PoolBullet instance { get; private set; }
+    public static PoolBullet instance { get; private set; }
 
     // 子弹对象池字典（按子弹类型）
     private Dictionary<string, IObjectPool<GameObject>> bulletPools =
@@ -16,7 +16,7 @@ public class PoolBullet
         new Dictionary<string, GameObject>();
 
 
-    void Awake()
+    public PoolBullet()
     {
 
         if (instance != null)
@@ -27,6 +27,7 @@ public class PoolBullet
 
 
         instance = this;
+        Debug.Log("poolbullet实例已加载");
 
     }
 
