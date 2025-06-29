@@ -17,9 +17,15 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        // transform.position += Time.deltaTime * Vector3.down;
-        // transform.position += transform.position * Time.deltaTime;
-        transform.position += transform.up * Time.deltaTime;
+        //敌人最终目标是地球半径某处
+
+        if (Vector3.Distance(transform.position, Player.instance.rotationTarget.transform.position) >= cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue)
+        {
+            //Debug.Log("当前距离：" + Vector3.Distance(transform.position, Player.instance.rotationTarget.transform.position));
+            transform.position += transform.up * Time.deltaTime;
+
+        }
+
     }
 
 

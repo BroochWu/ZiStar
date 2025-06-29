@@ -5,5 +5,12 @@
     "param_type": 1,
     "int_value": 4,
     "str_value": ""
+  },
+  {
+    "key": "enemy_stop_distance",
+    "desc": "敌人会在距离地球X距离时停止移动并播放攻击动作",
+    "param_type": 1,
+    "int_value": 5,
+    "str_value": ""
   }
 ]
