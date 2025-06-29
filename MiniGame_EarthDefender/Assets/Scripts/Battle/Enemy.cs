@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
         if (HpBar == null)
         {
-            HpBar = transform.Find("HpBar").gameObject;
+            HpBar = transform.Find("root/HpBar").gameObject;
             Debug.Log("未找到HpBar，重新加载");
         }
         HpBar.SetActive(false);
@@ -48,14 +48,14 @@ public class Enemy : MonoBehaviour
 
         if (HpLight == null)
         {
-            HpLight = transform.Find("HpBar/Hp").gameObject;
+            HpLight = transform.Find("root/HpBar/Hp").gameObject;
             Debug.Log("未找到HpLight，重新加载");
         }
 
 
         if (sprite == null)
         {
-            sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+            sprite = transform.Find("root/Sprite").GetComponent<SpriteRenderer>();
             Debug.Log("未找到sprite，重新加载");
         }
 
