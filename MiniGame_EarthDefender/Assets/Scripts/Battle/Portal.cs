@@ -1,18 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    cfg.dungeon.DungeonWave wave;
-
-
-
     public void Initialize(cfg.dungeon.DungeonWave wave, int dungeonLevel)
     {
-        this.wave = wave;
-        var ec = wave.EnemyCreate;
-
-        foreach (var i in ec)
+        foreach (var i in wave.EnemyCreate)
         {
             StartCoroutine(EnemyCreator(i.InitTime, i.EnemyInit, dungeonLevel));
         }
@@ -37,14 +31,15 @@ public class Portal : MonoBehaviour
         {
             Quaternion moveDirection = Quaternion.Euler(0, 0, i + 180);
 
-            var obj = Instantiate(
-                prefab,
-                //默认朝下生成
-                transform.position,
-                moveDirection);
+            // var obj = Instantiate(
+            //     prefab,
+            //     //默认朝下生成
+            //     transform.position,
+            //     moveDirection);
 
-            obj.transform.SetParent(BattleManager.Instance.EnemysPath);
-            obj.GetComponent<Enemy>()?.Initialize(enemy_Init.EnemyId_Ref, enemyLevel);
+            // obj.transform.SetParent(BattleManager.Instance.EnemysPath);
+            var obj = ObjectPoolManager.Instance.GetEnemy(enemy_Init.EnemyId_Ref.Id);
+            obj.GetOrAddComponent<Enemy>()?.Initialize(enemy_Init.EnemyId_Ref, enemyLevel, moveDirection, this);
 
         }
 

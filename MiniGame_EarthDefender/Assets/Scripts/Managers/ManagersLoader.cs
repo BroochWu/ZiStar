@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ManagersLoader : MonoBehaviour
@@ -5,15 +6,15 @@ public class ManagersLoader : MonoBehaviour
     void Awake()
     {
         // 确保只存在一个管理器容器
-        if (GameObject.Find("Managers")) return;
+        if (GameObject.Find("Loader")) return;
 
         // 创建管理器容器
-        GameObject managers = new GameObject("Managers");
+        GameObject managers = new GameObject("Loader");
 
 
 
         // 添加管理器组件
-         managers.AddComponent<BattleManager>();
+        managers.GetOrAddComponent<BattleManager>();
         // managers.AddComponent<UIManager>();
 
 

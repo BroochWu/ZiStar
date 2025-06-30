@@ -113,20 +113,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private GameObject GetBulletFromPool()
     {
-        if (BattleManager.Instance == null)
-        {
-            Debug.LogError("BattleManager not found!");
-            return null;
-        }
-
-        IObjectPool<GameObject> pool = PoolBullet.instance.GetBulletPool(bulletType);
-        if (pool == null)
-        {
-            Debug.LogError($"Failed to get bullet pool for type: {bulletType}");
-            return null;
-        }
-
-        return pool.Get();
+        return BattleManager.Instance.poolManager.GetBullet(bulletType);
     }
 
     /// <summary>

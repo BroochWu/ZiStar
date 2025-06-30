@@ -3,52 +3,90 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject HpBar;//血条栏组
-    public GameObject HpLight;//会掉的那个血条
+    [Header("索引")]
+    public GameObject hpBar;//血条栏组
+    public GameObject hpLight;//会掉的那个血条
     public SpriteRenderer sprite;//形象
-    int enemyLevel;
-    WaitForSeconds HitWait = new WaitForSeconds(0.1f);
+
+
+    [Header("识别")]
+    public int enemyId; // 用于对象池回收
+
+    //敌人配置
+    public cfg.enemy.Enemy config;
+
+    // 敌人属性
+    WaitForSeconds HitWait = new WaitForSeconds(0.1f);//受击变色时间
     public int Damage { get; private set; }
-    public int InitHp { get; private set; }
+    public int InitHp { get; private set; }//初始血量
     int currentHp;
-
-
-    GameObject prefab;
     Transform Earth;
+    int enemyLevel;
+
+
+
 
     float rotationSpeed;
-    cfg.enemy.Enemy config;
 
 
-    public void Initialize(cfg.enemy.Enemy enemy, int enemyLevel)
+    public void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
     {
+        transform.rotation = initDir;
+        transform.position = parent.transform.position;
+
         config = enemy;
         this.enemyLevel = enemyLevel;
+        enemyId = config.Id;
 
         rotationSpeed = enemy.AngleDamp / 10000f;
-        this.prefab = Resources.Load<GameObject>($"Prefabs/Enemys/{enemy.Prefab}");
+
+        //重置状态
+        ResetState();
+
     }
+
+    /// <summary>
+    /// 重置敌人状态
+    /// </summary>
+    public void ResetState()
+    {
+
+        // 重置材质颜色
+        if (sprite != null) sprite.material.color = Color.white;
+
+        // 隐藏血条
+        if (hpBar != null) hpBar.SetActive(false);
+
+
+        //接下来重置数据
+        if (config == null) return;
+
+        //初始化血量
+        InitHp = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Hp;
+        // 重置生命值
+        currentHp = InitHp;
+        //初始化伤害
+        Damage = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Damage;
+
+
+    }
+
 
     void Awake()
     {
-        Earth = Player.instance.rotationTarget.transform;
-    }
 
-    void Start()
-    {
-
-        if (HpBar == null)
+        if (hpBar == null)
         {
-            HpBar = transform.Find("root/HpBar").gameObject;
+            hpBar = transform.Find("root/HpBar").gameObject;
             Debug.Log("未找到HpBar，重新加载");
         }
-        HpBar.SetActive(false);
+        hpBar.SetActive(false);
 
 
 
-        if (HpLight == null)
+        if (hpLight == null)
         {
-            HpLight = transform.Find("root/HpBar/Hp").gameObject;
+            hpLight = transform.Find("root/HpBar/Hp").gameObject;
             Debug.Log("未找到HpLight，重新加载");
         }
 
@@ -59,29 +97,18 @@ public class Enemy : MonoBehaviour
             Debug.Log("未找到sprite，重新加载");
         }
 
-
-
-        //初始化伤害
-        Damage = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Damage;
-        //初始化血量
-        InitHp = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Hp;
-        currentHp = InitHp;
-
-
+        Earth = Player.instance.rotationTarget.transform;
     }
+
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log($"检测到鼠标左键，此时的{HpBar.activeInHierarchy}");
-            HpBar.SetActive(!HpBar.activeInHierarchy);
-        }
-
-
         if (config == null) return;
+
+
         //朝向地球的方向
         Utility.LookTarget2D(transform, Earth, rotationSpeed);
+
 
 
         //敌人最终目标是地球半径某处，抵达即停止并攻击
@@ -106,12 +133,13 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnHit());
 
             //Debug.Log(other.GetComponent<Bullet>().bulletDamage + "  " + currentHp);
-            currentHp = BattleManager.Instance.CalDamage(other.GetComponent<Bullet>().bulletDamage, currentHp);
+            Bullet bullet = other.GetComponent<Bullet>();
+            currentHp = BattleManager.Instance.CalDamage(bullet.bulletDamage, currentHp);
             if (currentHp > 0)
             {
-                HpBar.SetActive(true);
+                hpBar.SetActive(true);
                 //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
-                HpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
+                hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
             }
             else
             {
@@ -126,9 +154,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void OnDie()
     {
-        HpBar.SetActive(false);
-        Destroy(gameObject);
-        Debug.LogWarning("后面记得把敌人写进对象池啊");
+        hpBar.SetActive(false);
+        BattleManager.Instance.ReturnEnemy(this);
+        // Debug.LogWarning("后面记得把敌人写进对象池啊");
     }
 
 

@@ -1,12 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Pool;
+using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
-    public Transform bulletPath;
+
+    public ObjectPoolManager poolManager;
+
+
+
     public Transform PortalsPath;
-    public Transform EnemysPath;
     public GameObject PortalPrefab;
 
 
@@ -17,7 +22,6 @@ public class BattleManager : MonoBehaviour
     Dictionary<int, bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
 
 
-    public PoolBullet poolBullet = new PoolBullet();
 
 
 
@@ -31,10 +35,11 @@ public class BattleManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        poolManager = gameObject.GetOrAddComponent<ObjectPoolManager>();
 
-        if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
+        // if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
         if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
-        if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
+        // if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
 
@@ -57,6 +62,9 @@ public class BattleManager : MonoBehaviour
     /// <param name="dungeonId">关卡id</param>
     public void BattleStart(int dungeonId)
     {
+        //预热怪物
+        //PreloadLevelEnemies(dungeonId);
+
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
         dungeonLevel = config.DungeonLevel;
 
@@ -109,9 +117,44 @@ public class BattleManager : MonoBehaviour
     /// <param name="currentHp"></param>
     public int CalDamage(int damage, int currentHp)
     {
-        var newHp = (currentHp - damage) > 0 ? (currentHp - damage) : 0;
-        Debug.Log("newHp" + newHp);
-        return newHp;
+        return Mathf.Max(0, currentHp - damage);
+    }
+
+    /// <summary>
+    /// 回收子弹（简化版）
+    /// </summary>
+    public void ReturnBullet(Bullet bullet)
+    {
+        bullet.isReleased = true;
+        poolManager.ReleaseBullet(bullet.gameObject);
+    }
+
+    /// <summary>
+    /// 回收敌人（简化版）
+    /// </summary>
+    public void ReturnEnemy(Enemy enemy)
+    {
+        poolManager.ReleaseEnemy(enemy.gameObject);
+    }
+
+    void PreloadLevelEnemies(int dungeonId)
+    {
+        var dungeonConfig = cfg.Tables.tb.Dungeon.Get(dungeonId);
+        foreach (var portal in dungeonConfig.Portals)
+        {
+            foreach (var enemySpawn in portal.WaveId_Ref.EnemyCreate)
+            {
+                //不同的enemy预热数量不一样，每个id最多预热10个
+                int enemyId = enemySpawn.EnemyInit.EnemyId;
+                int preloadCount = CalculatePreloadCount(enemySpawn);
+                poolManager.PreloadEnemyType(enemyId, preloadCount);
+            }
+        }
+    }
+    int CalculatePreloadCount(cfg.Beans.Wave_EnemyCreate enemySpawn)
+    {
+        // 根据敌人数量和生成频率计算预加载数量
+        return Mathf.Min(10, enemySpawn.EnemyInit.Angles.Count * 2);
     }
 
 }
