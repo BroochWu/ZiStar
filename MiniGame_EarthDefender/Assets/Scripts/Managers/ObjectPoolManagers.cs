@@ -5,7 +5,6 @@ using UnityEngine.Pool;
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance { get; private set; }
-
     // 对象池容器
     private Dictionary<string, ObjectPool<GameObject>> bulletPools =
         new Dictionary<string, ObjectPool<GameObject>>();
@@ -38,6 +37,15 @@ public class ObjectPoolManager : MonoBehaviour
         bulletContainer.SetParent(transform);
         enemyContainer.SetParent(transform);
     }
+
+    void Start()
+    {
+        
+        
+    } 
+
+
+
 
     // ================= 子弹池管理 =================
 
@@ -153,7 +161,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// <summary>
     /// 预加载敌人类型
     /// </summary>
-    public void PreloadEnemyType(int enemyId, int prewarmCount = 5)
+    public void PreloadEnemyType(int enemyId, int prewarmCount)
     {
         if (!enemyPools.ContainsKey(enemyId))
         {

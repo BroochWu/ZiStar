@@ -121,33 +121,54 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void TakeDamage(int damage)
     {
         if (config == null) return;
 
 
-        // 示例：当敌人被子弹击中
-        if (other.CompareTag("PlayerBullet"))
+        StartCoroutine(OnHit());
+
+        currentHp = BattleManager.Instance.CalDamage(damage, currentHp);
+        if (currentHp > 0)
         {
-
-            StartCoroutine(OnHit());
-
-            //Debug.Log(other.GetComponent<Bullet>().bulletDamage + "  " + currentHp);
-            Bullet bullet = other.GetComponent<Bullet>();
-            currentHp = BattleManager.Instance.CalDamage(bullet.bulletDamage, currentHp);
-            if (currentHp > 0)
-            {
-                hpBar.SetActive(true);
-                //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
-                hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
-            }
-            else
-            {
-                //死亡
-                OnDie();
-            }
+            hpBar.SetActive(true);
+            //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
+            hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
+        }
+        else
+        {
+            //死亡
+            OnDie();
         }
     }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (config == null) return;
+
+
+    //     // 示例：当敌人被子弹击中
+    //     if (other.CompareTag("PlayerBullet"))
+    //     {
+
+    //         StartCoroutine(OnHit());
+
+    //         //Debug.Log(other.GetComponent<Bullet>().bulletDamage + "  " + currentHp);
+    //         Bullet bullet = other.GetComponent<Bullet>();
+    //         currentHp = BattleManager.Instance.CalDamage(bullet.bulletDamage, currentHp);
+    //         if (currentHp > 0)
+    //         {
+    //             hpBar.SetActive(true);
+    //             //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
+    //             hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
+    //         }
+    //         else
+    //         {
+    //             //死亡
+    //             OnDie();
+    //         }
+    //     }
+    // }
+
 
     /// <summary>
     /// 敌人死亡时
@@ -166,6 +187,8 @@ public class Enemy : MonoBehaviour
     /// <returns></returns>
     IEnumerator OnHit()
     {
+        if (!enabled) yield break;
+        
         sprite.material.color = Color.red;
         yield return HitWait;
         sprite.material.color = Color.white;

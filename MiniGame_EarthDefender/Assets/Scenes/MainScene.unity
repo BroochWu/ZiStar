@@ -784,6 +784,9 @@ GameObject:
   - component: {fileID: 772931062}
   - component: {fileID: 772931061}
   - component: {fileID: 772931063}
+  - component: {fileID: 772931066}
+  - component: {fileID: 772931065}
+  - component: {fileID: 772931064}
   m_Layer: 0
   m_Name: Loader
   m_TagString: Untagged
@@ -830,11 +833,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bda80eb937f9c4da767035a8d6349a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPath: {fileID: 1880603437}
+  poolManager: {fileID: 0}
   PortalsPath: {fileID: 1503802839}
-  EnemysPath: {fileID: 1283614229}
   PortalPrefab: {fileID: 8770212461898048473, guid: 316e0a38748b76145ae11b699fce52fd, type: 3}
   GameTime: 0
+--- !u!114 &772931064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772931060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3814844187665bc4599acaf87ed0788b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &772931065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772931060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a09324bf0988b4baef5f1834a0ad06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRenderer: {fileID: 0}
+  bulletRenderer: {fileID: 0}
+--- !u!114 &772931066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772931060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2d1d96c8b385f489b8d85bf00ca0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldBounds:
+    serializedVersion: 2
+    x: -100
+    y: -100
+    width: 200
+    height: 200
 --- !u!1 &1283614228
 GameObject:
   m_ObjectHideFlags: 0

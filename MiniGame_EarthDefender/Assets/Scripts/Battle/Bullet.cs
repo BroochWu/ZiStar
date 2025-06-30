@@ -39,14 +39,14 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // 碰撞处理
-        if (other.CompareTag("Enemy") || other.CompareTag("Boundary"))
-        {
-            if (!isReleased) BattleManager.Instance.ReturnBullet(this);
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     // 碰撞处理
+    //     if (other.CompareTag("Enemy") || other.CompareTag("Boundary"))
+    //     {
+    //         if (!isReleased) BattleManager.Instance.ReturnBullet(this);
+    //     }
+    // }
 
     /// <summary>
     /// 重置子弹状态

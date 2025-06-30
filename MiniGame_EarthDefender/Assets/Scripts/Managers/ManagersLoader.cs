@@ -15,6 +15,7 @@ public class ManagersLoader : MonoBehaviour
 
         // 添加管理器组件
         managers.GetOrAddComponent<BattleManager>();
+        managers.GetOrAddComponent<CollisionManager>();
         // managers.AddComponent<UIManager>();
 
 
