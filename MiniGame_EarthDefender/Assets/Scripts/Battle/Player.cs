@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public GameObject rotationTarget;
     public GameObject cursorObj;
     public GameObject shootPath;
+    public GameObject guideLine;
 
     public List<Weapon> equipedWeapon;
 
@@ -48,7 +49,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookTarget();
+        if (Input.GetMouseButton(0))
+        {
+            guideLine.SetActive(true);
+            LookTarget();
+        }
+        else
+        {
+            guideLine.SetActive(false);
+
+        }
     }
 
 
