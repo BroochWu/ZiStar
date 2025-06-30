@@ -1,196 +1,212 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("索引")]
-    public GameObject hpBar;//血条栏组
-    public GameObject hpLight;//会掉的那个血条
-    public SpriteRenderer sprite;//形象
+    enum EnemyState { MOVE, ATTACK }
 
+    // 静态缓存，所有敌人共享
+    private static Transform _earth;
+    private static int _enemyStopDisSqr; // 使用平方距离避免开方运算
+    private static float _hitDuration = 0.1f;
+    private static WaitForSeconds attackSep = new WaitForSeconds(0.5f);
 
-    [Header("识别")]
-    public int enemyId; // 用于对象池回收
+    [Header("组件引用")]
+    public GameObject hpBar;
+    public GameObject hpLight;
+    public SpriteRenderer sprite;
 
-    //敌人配置
+    [Header("敌人属性")]
+    public int enemyId;
     public cfg.enemy.Enemy config;
+    private int enemyLevel;
+    private string bulletType;
 
-    // 敌人属性
-    WaitForSeconds HitWait = new WaitForSeconds(0.1f);//受击变色时间
+
+    // 状态变量
+    private EnemyState _state;
+    private int _currentHp;
+    private float _moveSpeed;
+    private float _rotationSpeed;
+    private bool _isReleased;
+    private int _initOrder = 20;
+    private Material _spriteMaterial; // 缓存材质
+
+    // 属性优化
     public int Damage { get; private set; }
-    public int InitHp { get; private set; }//初始血量
-    int currentHp;
-    Transform Earth;
-    int enemyLevel;
+    public int InitHp { get; private set; }
 
+    void Awake()
+    {
+        // 静态初始化只执行一次
+        if (_earth == null)
+        {
+            _earth = Player.instance.rotationTarget.transform;
+            int stopDistance = cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue;
+            _enemyStopDisSqr = stopDistance * stopDistance; // 预计算平方值
+        }
 
+        // 缓存组件引用
+        if (hpBar == null) hpBar = transform.Find("root/HpBar").gameObject;
+        if (hpLight == null) hpLight = transform.Find("root/HpBar/Hp").gameObject;
+        if (sprite == null) sprite = transform.Find("root/Sprite").GetComponent<SpriteRenderer>();
 
-
-    float rotationSpeed;
-
+        hpBar.SetActive(false);
+        _spriteMaterial = sprite.material; // 缓存材质实例
+    }
 
     public void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
     {
-        transform.rotation = initDir;
-        transform.position = parent.transform.position;
+        _isReleased = false;
+        sprite.sortingOrder = _initOrder;
+        transform.SetPositionAndRotation(parent.transform.position, initDir);
 
         config = enemy;
         this.enemyLevel = enemyLevel;
         enemyId = config.Id;
+        bulletType = config.PrefabBullet;
 
-        rotationSpeed = enemy.AngleDamp / 10000f;
+        // 预计算速度值
+        _moveSpeed = config.MultiMoveSpeed * 0.0001f * Time.fixedDeltaTime;
+        _rotationSpeed = enemy.MultiAngle * 0.0001f;
 
-        //重置状态
         ResetState();
+    }
+
+    public void ResetState()
+    {
+        _state = EnemyState.MOVE;
+        _spriteMaterial.color = Color.white;
+        hpBar.SetActive(false);
+
+        if (config == null) return;
+
+        // 预计算属性
+        var levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
+        InitHp = levelData.Hp;
+        _currentHp = InitHp;
+        Damage = levelData.Damage;
+    }
+
+    void FixedUpdate()
+    {
+        if (_isReleased || _state != EnemyState.MOVE) return;
+
+        // 移动逻辑
+        transform.position += transform.up * _moveSpeed;
+
+        // // 旋转朝向（每帧执行）
+        // LookTarget2D(true);
+
+        Utility.LookTarget2D(transform, _earth, _rotationSpeed, true);
+
+
+        // Vector2 direction = _earth.position - transform.position;
+        // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        // Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotationSpeed);
+
+        // 优化距离检查：每5帧检查一次，每次检查顺便把层级-1，以让受击的永远在最前面
+        if (Time.frameCount % 5 == 0)
+        {
+            if ((transform.position - _earth.position).sqrMagnitude <= _enemyStopDisSqr)
+            {
+                _state = EnemyState.ATTACK;
+                StartCoroutine(Attack());
+            }
+
+            sprite.sortingOrder = Mathf.Max(sprite.sortingOrder - 1, _initOrder);
+        }
+
+
 
     }
 
     /// <summary>
-    /// 重置敌人状态
+    /// 开始攻击协程
     /// </summary>
-    public void ResetState()
+    /// <returns></returns>
+    IEnumerator Attack()
     {
-
-        // 重置材质颜色
-        if (sprite != null) sprite.material.color = Color.white;
-
-        // 隐藏血条
-        if (hpBar != null) hpBar.SetActive(false);
-
-
-        //接下来重置数据
-        if (config == null) return;
-
-        //初始化血量
-        InitHp = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Hp;
-        // 重置生命值
-        currentHp = InitHp;
-        //初始化伤害
-        Damage = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel).Damage;
-
-
-    }
-
-
-    void Awake()
-    {
-
-        if (hpBar == null)
+        while (true)
         {
-            hpBar = transform.Find("root/HpBar").gameObject;
-            Debug.Log("未找到HpBar，重新加载");
+            var obj = ObjectPoolManager.Instance.GetBullet(bulletType);
+            obj.GetOrAddComponent<Bullet>().Initialize(this);
+
+            yield return attackSep;
         }
-        hpBar.SetActive(false);
-
-
-
-        if (hpLight == null)
-        {
-            hpLight = transform.Find("root/HpBar/Hp").gameObject;
-            Debug.Log("未找到HpLight，重新加载");
-        }
-
-
-        if (sprite == null)
-        {
-            sprite = transform.Find("root/Sprite").GetComponent<SpriteRenderer>();
-            Debug.Log("未找到sprite，重新加载");
-        }
-
-        Earth = Player.instance.rotationTarget.transform;
-    }
-
-
-    void Update()
-    {
-        if (config == null) return;
-
-
-        //朝向地球的方向
-        Utility.LookTarget2D(transform, Earth, rotationSpeed);
-
-
-
-        //敌人最终目标是地球半径某处，抵达即停止并攻击
-        if (Vector3.Distance(transform.position, Earth.position) >= cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue)
-        {
-            //Debug.Log("当前距离：" + Vector3.Distance(transform.position, Player.instance.rotationTarget.transform.position));
-            transform.position += transform.up * Time.deltaTime * config.MultiMoveSpeed / 10000;
-
-        }
-
     }
 
     public void TakeDamage(int damage)
     {
-        if (config == null) return;
+        if (config == null || _isReleased) return;
 
+        _currentHp = BattleManager.Instance.CalDamage(damage, _currentHp);
 
-        StartCoroutine(OnHit());
-
-        currentHp = BattleManager.Instance.CalDamage(damage, currentHp);
-        if (currentHp > 0)
+        if (_currentHp <= 0)
         {
-            hpBar.SetActive(true);
-            //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
-            hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
+            OnDie();
         }
         else
         {
-            //死亡
-            OnDie();
+            // 显示血条并更新
+            hpBar.SetActive(true);
+            var hpRenderer = hpLight.GetComponent<SpriteRenderer>();
+            hpRenderer.size = new Vector2((float)_currentHp / InitHp, hpRenderer.size.y);
+
+            // 直接启动受击效果协程（少量实例）
+            StartCoroutine(OnHitEffect());
         }
     }
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (config == null) return;
 
-
-    //     // 示例：当敌人被子弹击中
-    //     if (other.CompareTag("PlayerBullet"))
-    //     {
-
-    //         StartCoroutine(OnHit());
-
-    //         //Debug.Log(other.GetComponent<Bullet>().bulletDamage + "  " + currentHp);
-    //         Bullet bullet = other.GetComponent<Bullet>();
-    //         currentHp = BattleManager.Instance.CalDamage(bullet.bulletDamage, currentHp);
-    //         if (currentHp > 0)
-    //         {
-    //             hpBar.SetActive(true);
-    //             //Debug.Log("血条长度 " + HpLight.GetComponent<SpriteRenderer>().size);
-    //             hpLight.GetComponent<SpriteRenderer>().size = (float)currentHp / InitHp * Vector2.right + Vector2.up;
-    //         }
-    //         else
-    //         {
-    //             //死亡
-    //             OnDie();
-    //         }
-    //     }
-    // }
-
-
-    /// <summary>
-    /// 敌人死亡时
-    /// </summary>
     void OnDie()
     {
         hpBar.SetActive(false);
-        BattleManager.Instance.ReturnEnemy(this);
-        // Debug.LogWarning("后面记得把敌人写进对象池啊");
+        ObjectPoolManager.Instance.ReleaseEnemy(gameObject);
+        _isReleased = true;
+    }
+
+    /// <summary>
+    /// 优化的2D朝向方法
+    /// </summary>
+    private void LookTarget2D(bool _stopWhileLook)
+    {
+        // 计算方向向量（无平方根计算）
+        Vector3 direction = _earth.position - transform.position;
+
+        // 计算旋转角度（使用Atan2）
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        // 计算当前角度差异
+        float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
+
+        // 检查是否需要停止
+        if (_stopWhileLook && Mathf.Abs(angleDiff) <= 0.1f)
+        {
+            return;
+        }
+
+        // 应用旋转（使用更高效的LerpAngle）
+        float newAngle = Mathf.LerpAngle(
+            transform.eulerAngles.z,
+            targetAngle,
+            _rotationSpeed * Time.fixedDeltaTime
+        );
+
+        transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
     }
 
 
-    /// <summary>
-    /// 受击协程表现
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator OnHit()
+    IEnumerator OnHitEffect()
     {
-        if (!enabled) yield break;
-        
-        sprite.material.color = Color.red;
-        yield return HitWait;
-        sprite.material.color = Color.white;
+        sprite.sortingOrder = 50;
+        _spriteMaterial.color = Color.red;
+
+        // 使用静态缓存的等待时间
+        yield return new WaitForSeconds(_hitDuration);
+
+        sprite.sortingOrder = _initOrder;
+        _spriteMaterial.color = Color.white;
     }
 }

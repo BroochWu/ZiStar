@@ -3,8 +3,9 @@
     "id": 1001,
     "text_name": "小怪物",
     "prefab": "Enemy",
-    "multi_move_speed": 5000,
-    "angle_damp": 1000,
+    "prefab_bullet": "Bullet_Enemy_1",
+    "multi_move_speed": 4000,
+    "multi_angle": 2500,
     "level_id": 1001
   }
 ]

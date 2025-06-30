@@ -3,30 +3,30 @@
     "id": 1001,
     "level": 1,
     "damage": 10,
-    "hp": 100
+    "hp": 30
   },
   {
     "id": 1001,
     "level": 2,
     "damage": 15,
-    "hp": 150
+    "hp": 50
   },
   {
     "id": 1001,
     "level": 3,
     "damage": 20,
-    "hp": 200
+    "hp": 70
   },
   {
     "id": 1002,
     "level": 1,
     "damage": 10,
-    "hp": 100
+    "hp": 30
   },
   {
     "id": 1002,
     "level": 2,
     "damage": 20,
-    "hp": 200
+    "hp": 50
   }
 ]

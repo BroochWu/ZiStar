@@ -120,22 +120,22 @@ public class BattleManager : MonoBehaviour
         return Mathf.Max(0, currentHp - damage);
     }
 
-    /// <summary>
-    /// 回收子弹（简化版）
-    /// </summary>
-    public void ReturnBullet(Bullet bullet)
-    {
-        bullet.isReleased = true;
-        poolManager.ReleaseBullet(bullet.gameObject);
-    }
+    // /// <summary>
+    // /// 回收子弹（简化版）
+    // /// </summary>
+    // public void ReturnBullet(Bullet bullet)
+    // {
+    //     bullet.isReleased = true;
+    //     poolManager.ReleaseBullet(bullet.gameObject);
+    // }
 
-    /// <summary>
-    /// 回收敌人（简化版）
-    /// </summary>
-    public void ReturnEnemy(Enemy enemy)
-    {
-        poolManager.ReleaseEnemy(enemy.gameObject);
-    }
+    // /// <summary>
+    // /// 回收敌人（简化版）
+    // /// </summary>
+    // public void ReturnEnemy(Enemy enemy)
+    // {
+    //     poolManager.ReleaseEnemy(enemy.gameObject);
+    // }
 
     void PreloadLevelEnemies(int dungeonId)
     {

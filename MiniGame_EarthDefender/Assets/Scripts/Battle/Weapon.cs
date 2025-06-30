@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class Weapon : MonoBehaviour
 {
     private int rowCount;
     private float rowSpace;
+    private int columnCount;
+    private WaitForSeconds columnSpace;
     private Transform bulletInitTransform;
     private Coroutine corShootBullet;
     private WaitForSeconds rateOfFire;
@@ -48,6 +49,8 @@ public class Weapon : MonoBehaviour
         bulletReleaseTime = thisWeapon.MaxLifetime;
         rowCount = thisWeapon.RowCount;
         rowSpace = thisWeapon.RowSpace;
+        columnCount = thisWeapon.ColumnCount;
+        columnSpace = new WaitForSeconds(thisWeapon.ColumnSpace);
         bulletSpeed = thisWeapon.BulletSpeed;
         bulletScale = thisWeapon.BulletScale;
         bulletType = thisWeapon.BulletPrefab;
@@ -87,23 +90,31 @@ public class Weapon : MonoBehaviour
                 spawnPos = bulletInitTransform.position - startOffset;
             }
 
+            var oldSpawnPos = spawnPos;
             // 生成子弹行
-            for (int i = 0; i < rowCount; i++)
+            for (int j = 0; j < columnCount; j++)
             {
-                // 从对象池获取子弹
-                GameObject bullet = GetBulletFromPool();
-
-                // 设置子弹位置和旋转
-                bullet.transform.position = spawnPos;
-                bullet.transform.rotation = rotation;
-
-                // 初始化子弹
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
-                if (bulletComponent != null)
+                spawnPos = oldSpawnPos;
+                // 生成子弹列
+                for (int i = 0; i < rowCount; i++)
                 {
-                    bulletComponent.Initialize(this);
+                    // 从对象池获取子弹
+                    GameObject bullet = GetBulletFromPool();
+
+                    // 设置子弹位置和旋转
+                    bullet.transform.position = spawnPos;
+                    bullet.transform.rotation = rotation;
+
+                    // 初始化子弹
+                    Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                    if (bulletComponent != null)
+                    {
+                        bulletComponent.Initialize(this);
+                    }
+                    spawnPos += perpendicular * rowSpace;
                 }
-                spawnPos += perpendicular * rowSpace;
+                yield return columnSpace;
+
             }
         }
     }
@@ -113,7 +124,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private GameObject GetBulletFromPool()
     {
-        return BattleManager.Instance.poolManager.GetBullet(bulletType);
+        return ObjectPoolManager.Instance.GetBullet(bulletType);
     }
 
     /// <summary>
