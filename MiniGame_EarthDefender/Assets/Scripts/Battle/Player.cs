@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             guideLine.SetActive(true);
-            LookTarget();
+            LookCursor();
         }
         else
         {
@@ -63,9 +63,9 @@ public class Player : MonoBehaviour
 
 
     /// <summary>
-    /// 看着目标
+    /// 看着鼠标位置
     /// </summary>
-    void LookTarget()
+    void LookCursor()
     {
         cursorObj.transform.position = (Vector2)mainCam.ScreenToWorldPoint(Input.mousePosition);
 
