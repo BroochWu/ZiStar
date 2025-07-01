@@ -21,25 +21,27 @@ public class Bullet : MonoBehaviour
     public void Initialize(Weapon parent)
     {
         bulletParent = BulletParent.PLAYER;
-        isReleased = false;
         speed = parent.bulletSpeed;
         lifeTime = parent.bulletReleaseTime;
-        timer = 0f;
         transform.localScale = Vector3.one * parent.bulletScale / 10000f;
 
-        //子弹继承武器的伤害
+
+        isReleased = false;
+        timer = 0f;
         bulletDamage = parent.damage;
     }
     public void Initialize(Enemy parent)
     {
 
         bulletParent = BulletParent.ENEMY;
-        isReleased = false;
         speed = 1;
         lifeTime = 1.5f;
-        timer = 0f;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
 
+
+        isReleased = false;
+        timer = 0f;
+        bulletDamage = parent.Damage;
         //敌人的子弹移动后自动销毁就行，不需要碰撞
     }
 
@@ -52,24 +54,29 @@ public class Bullet : MonoBehaviour
         if (!isReleased)
         {
             timer += Time.deltaTime;
-            switch (bulletParent)
-            {
-                case BulletParent.PLAYER:
-                    break;
-
-                case BulletParent.ENEMY:
-                    break;
-
-                default:
-                    Debug.LogError("子弹没有父类？");
-                    break;
-            }
 
             // 检查是否超过生存时间
             if (timer >= lifeTime)
             {
                 ObjectPoolManager.Instance.ReleaseBullet(gameObject);
-                isReleased = true;
+
+
+                switch (bulletParent)
+                {
+                    case BulletParent.PLAYER:
+                        break;
+
+                    case BulletParent.ENEMY:
+
+                        BattleManager.Instance.CalDamageEarthSuffer(bulletDamage);
+                        break;
+
+                    default:
+                        Debug.LogError("子弹没有父类？");
+                        break;
+                }
+
+
             }
 
         }

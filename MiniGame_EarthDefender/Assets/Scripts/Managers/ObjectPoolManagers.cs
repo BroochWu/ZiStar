@@ -40,9 +40,9 @@ public class ObjectPoolManager : MonoBehaviour
 
     void Start()
     {
-        
-        
-    } 
+
+
+    }
 
 
 
@@ -80,23 +80,19 @@ public class ObjectPoolManager : MonoBehaviour
     public void ReleaseBullet(GameObject bullet)
     {
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        if (bulletComponent == null)
-        {
-            Debug.LogWarning("尝试回收非子弹对象");
-            return;
-        }
 
         string bulletType = bulletComponent.bulletType;
 
-        if (bulletPools.ContainsKey(bulletType))
-        {
-            bulletPools[bulletType].Release(bullet);
-        }
-        else
-        {
-            Debug.LogWarning($"找不到子弹类型 {bulletType} 的对象池");
-            Destroy(bullet);
-        }
+        // if (bulletPools.ContainsKey(bulletType))
+        // {
+        if (!bulletComponent.isReleased) bulletPools[bulletType].Release(bullet);
+        bulletComponent.isReleased = true;
+        // }
+        // else
+        // {
+        //     Debug.LogWarning($"找不到子弹类型 {bulletType} 的对象池");
+        //     Destroy(bullet);
+        // }
     }
 
     // 创建子弹对象池
@@ -200,6 +196,7 @@ public class ObjectPoolManager : MonoBehaviour
         if (enemyPools.ContainsKey(enemyId))
         {
             enemyPools[enemyId].Release(enemy);
+            enemyComponent.isReleased = true;
         }
         else
         {

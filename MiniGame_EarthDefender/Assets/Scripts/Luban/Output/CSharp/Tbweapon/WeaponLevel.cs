@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbweapon
 {
+/// <summary>
+/// 武器等级表
+/// </summary>
 public partial class WeaponLevel
 {
     private readonly System.Collections.Generic.List<weapon.WeaponLevel> _dataList;

@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbdungeon
 {
+/// <summary>
+/// 关卡波次
+/// </summary>
 public partial class DungeonWave
 {
     private readonly System.Collections.Generic.Dictionary<int, dungeon.DungeonWave> _dataMap;

@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbdungeon
 {
+/// <summary>
+/// 关卡表
+/// </summary>
 public partial class Dungeon
 {
     private readonly System.Collections.Generic.Dictionary<int, dungeon.Dungeon> _dataMap;

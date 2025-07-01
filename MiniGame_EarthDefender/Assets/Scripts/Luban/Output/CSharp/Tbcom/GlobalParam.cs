@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbcom
 {
+/// <summary>
+/// 全局参数
+/// </summary>
 public partial class GlobalParam
 {
     private readonly System.Collections.Generic.Dictionary<string, com.GlobalParam> _dataMap;

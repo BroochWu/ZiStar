@@ -50,7 +50,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        //鼠标摁下、游戏没结束、没点到UI，就可以更换镜头
+        if (Input.GetMouseButton(0) && BattleManager.Instance.battleState == BattleState.ISBATTLEING && !EventSystem.current.IsPointerOverGameObject())
         {
             guideLine.SetActive(true);
             LookCursor();

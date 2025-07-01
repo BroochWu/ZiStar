@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbplayer
 {
+/// <summary>
+/// 玩家可养成属性
+/// </summary>
 public partial class PlayerAttrLevel
 {
     private readonly System.Collections.Generic.Dictionary<int, player.PlayerAttrLevel> _dataMap;

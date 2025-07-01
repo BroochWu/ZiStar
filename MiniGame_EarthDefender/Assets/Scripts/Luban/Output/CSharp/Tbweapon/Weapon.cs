@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbweapon
 {
+/// <summary>
+/// 武器表
+/// </summary>
 public partial class Weapon
 {
     private readonly System.Collections.Generic.Dictionary<int, weapon.Weapon> _dataMap;

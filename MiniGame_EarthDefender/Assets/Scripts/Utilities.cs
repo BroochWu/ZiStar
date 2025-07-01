@@ -121,7 +121,7 @@ public static class Utility
         float newAngle = Mathf.LerpAngle(
             whom.eulerAngles.z,
             targetAngle,
-            _rotationSpeed * Time.fixedDeltaTime
+            _rotationSpeed 
         );
 
         whom.rotation = Quaternion.Euler(0f, 0f, newAngle);

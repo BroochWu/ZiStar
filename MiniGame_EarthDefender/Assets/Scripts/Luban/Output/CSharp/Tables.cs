@@ -14,14 +14,50 @@ namespace cfg
 {
 public partial class Tables
 {
+    /// <summary>
+    /// 全局参数
+    /// </summary>
     public Tbcom.GlobalParam GlobalParam {get; }
+    /// <summary>
+    /// 武器表
+    /// </summary>
     public Tbweapon.Weapon Weapon {get; }
+    /// <summary>
+    /// 武器等级表
+    /// </summary>
     public Tbweapon.WeaponLevel WeaponLevel {get; }
+    /// <summary>
+    /// 关卡表
+    /// </summary>
     public Tbdungeon.Dungeon Dungeon {get; }
+    /// <summary>
+    /// 关卡波次
+    /// </summary>
     public Tbdungeon.DungeonWave DungeonWave {get; }
+    /// <summary>
+    /// 敌人
+    /// </summary>
     public Tbenemy.Enemy Enemy {get; }
+    /// <summary>
+    /// 敌人等级
+    /// </summary>
     public Tbenemy.EnemyLevel EnemyLevel {get; }
+    /// <summary>
+    /// 敌人类型表
+    /// </summary>
+    public Tbenemy.EnemyTypeIndex EnemyTypeIndex {get; }
+    /// <summary>
+    /// 玩家可养成属性
+    /// </summary>
     public Tbplayer.PlayerAttrLevel PlayerAttrLevel {get; }
+    /// <summary>
+    /// 玩家数据
+    /// </summary>
+    public Tbplayer.PlayerData PlayerData {get; }
+    /// <summary>
+    /// 道具表
+    /// </summary>
+    public Tbitem.Item Item {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -32,7 +68,10 @@ public partial class Tables
         DungeonWave = new Tbdungeon.DungeonWave(loader("dungeon_wave"));
         Enemy = new Tbenemy.Enemy(loader("enemy"));
         EnemyLevel = new Tbenemy.EnemyLevel(loader("enemy_level"));
+        EnemyTypeIndex = new Tbenemy.EnemyTypeIndex(loader("enemy_type_index"));
         PlayerAttrLevel = new Tbplayer.PlayerAttrLevel(loader("player_attr_level"));
+        PlayerData = new Tbplayer.PlayerData(loader("player_data"));
+        Item = new Tbitem.Item(loader("item"));
         ResolveRef();
     }
     
@@ -45,7 +84,10 @@ public partial class Tables
         DungeonWave.ResolveRef(this);
         Enemy.ResolveRef(this);
         EnemyLevel.ResolveRef(this);
+        EnemyTypeIndex.ResolveRef(this);
         PlayerAttrLevel.ResolveRef(this);
+        PlayerData.ResolveRef(this);
+        Item.ResolveRef(this);
     }
 }
 

@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbenemy
 {
+/// <summary>
+/// 敌人等级
+/// </summary>
 public partial class EnemyLevel
 {
     private readonly System.Collections.Generic.List<enemy.EnemyLevel> _dataList;

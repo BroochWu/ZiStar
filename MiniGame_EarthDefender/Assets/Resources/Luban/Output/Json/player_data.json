@@ -1,0 +1,22 @@
+[
+  {
+    "data_str": "playerData_hp_level",
+    "param_type": 1,
+    "param_value_init": "1"
+  },
+  {
+    "data_str": "dungeon_passed_level",
+    "param_type": 1,
+    "param_value_init": "0"
+  },
+  {
+    "data_str": "item_gold",
+    "param_type": 1,
+    "param_value_init": "1"
+  },
+  {
+    "data_str": "item_diamond",
+    "param_type": 1,
+    "param_value_init": "1"
+  }
+]

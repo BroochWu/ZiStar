@@ -23,6 +23,7 @@ public sealed partial class Enemy : Luban.BeanBase
         { if(!_buf["prefab_bullet"].IsString) { throw new SerializationException(); }  PrefabBullet = _buf["prefab_bullet"]; }
         { if(!_buf["multi_move_speed"].IsNumber) { throw new SerializationException(); }  MultiMoveSpeed = _buf["multi_move_speed"]; }
         { if(!_buf["multi_angle"].IsNumber) { throw new SerializationException(); }  MultiAngle = _buf["multi_angle"]; }
+        { if(!_buf["enemy_type"].IsNumber) { throw new SerializationException(); }  EnemyType = (Enums.Enemy.Type)_buf["enemy_type"].AsInt; }
         { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
     }
 
@@ -56,6 +57,10 @@ public sealed partial class Enemy : Luban.BeanBase
     /// </summary>
     public readonly int MultiAngle;
     /// <summary>
+    /// 怪物类型
+    /// </summary>
+    public readonly Enums.Enemy.Type EnemyType;
+    /// <summary>
     /// 等级组id（伤害等养成）
     /// </summary>
     public readonly int LevelId;
@@ -76,6 +81,7 @@ public sealed partial class Enemy : Luban.BeanBase
         + "prefabBullet:" + PrefabBullet + ","
         + "multiMoveSpeed:" + MultiMoveSpeed + ","
         + "multiAngle:" + MultiAngle + ","
+        + "enemyType:" + EnemyType + ","
         + "levelId:" + LevelId + ","
         + "}";
     }

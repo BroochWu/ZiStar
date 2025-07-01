@@ -13,6 +13,9 @@ using SimpleJSON;
 
 namespace cfg.Tbenemy
 {
+/// <summary>
+/// 敌人
+/// </summary>
 public partial class Enemy
 {
     private readonly System.Collections.Generic.Dictionary<int, enemy.Enemy> _dataMap;

@@ -1,9 +1,15 @@
 using UnityEngine;
-using System.Collections.Generic;
+
+public enum BattleState
+{
+    ISBATTLEING,
+    BATTLEOVER
+}
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
+    public BattleState battleState;
 
     [Header("资源索引")]
     //传送门
@@ -87,6 +93,8 @@ public class BattleManager : MonoBehaviour
         //加载UI
         UIManager.Instance.SwitchLayer(UILayer.BATTLELAYER);
 
+        battleState = BattleState.ISBATTLEING;
+
     }
 
     void Update()
@@ -104,8 +112,11 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void BattleOver()
     {
+        battleState = BattleState.BATTLEOVER;
         GameTime = 0;
         canGameTimeCount = false;
+        Time.timeScale = 0.05f;
+        UIManager.Instance.battleLayer.BattleOver();
     }
 
 
@@ -138,23 +149,20 @@ public class BattleManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 地球受到伤害时
+    /// </summary>
+    public void CalDamageEarthSuffer(int _damage)
+    {
 
-    // /// <summary>
-    // /// 回收子弹（简化版）
-    // /// </summary>
-    // public void ReturnBullet(Bullet bullet)
-    // {
-    //     bullet.isReleased = true;
-    //     poolManager.ReleaseBullet(bullet.gameObject);
-    // }
+        //游戏结束就不计算了
+        if (battleState == BattleState.BATTLEOVER) return;
 
-    // /// <summary>
-    // /// 回收敌人（简化版）
-    // /// </summary>
-    // public void ReturnEnemy(Enemy enemy)
-    // {
-    //     poolManager.ReleaseEnemy(enemy.gameObject);
-    // }
+
+        currentEarthHp = CalDamage(_damage, currentEarthHp);
+        UIManager.Instance.battleLayer.RefreshEarthHp();
+        if (currentEarthHp <= 0) BattleOver();
+    }
 
 
 

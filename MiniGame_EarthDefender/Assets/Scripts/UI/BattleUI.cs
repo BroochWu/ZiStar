@@ -5,6 +5,7 @@ public class BattleUI : MonoBehaviour
 {
     public Text gameTimeUI;
     public Text earthHpText;
+    public GameObject battleOver;
 
     private float updateFpsInterval = 1f; // 更新帧率的间隔
     private float fpsCounter; // fps计数器
@@ -13,6 +14,7 @@ public class BattleUI : MonoBehaviour
 
     public void Initialize()
     {
+        battleOver.SetActive(false);
         RefreshEarthHp();
     }
 
@@ -37,6 +39,14 @@ public class BattleUI : MonoBehaviour
     {
         Debug.Log("地球血量已更新");
         earthHpText.text = $"{BattleManager.Instance.currentEarthHp} / {BattleManager.Instance.dataInitEarthHp}";
+    }
+
+    /// <summary>
+    /// 游戏结束时的UI
+    /// </summary>
+    public void BattleOver()
+    {
+        battleOver.SetActive(true);
     }
 
 }

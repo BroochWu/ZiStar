@@ -25,11 +25,11 @@ public class Enemy : MonoBehaviour
 
 
     // 状态变量
+    public bool isReleased;
     private EnemyState _state;
     private int _currentHp;
     private float _moveSpeed;
     private float _rotationSpeed;
-    private bool _isReleased;
     private int _initOrder = 20;
     private Material _spriteMaterial; // 缓存材质
 
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
     {
-        _isReleased = false;
+        isReleased = false;
         sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
 
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         bulletType = config.PrefabBullet;
 
         // 预计算速度值
-        _moveSpeed = config.MultiMoveSpeed * 0.0001f * Time.fixedDeltaTime;
+        _moveSpeed = config.MultiMoveSpeed * 0.0001f ;
         _rotationSpeed = enemy.MultiAngle * 0.0001f;
 
         ResetState();
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_isReleased || _state != EnemyState.MOVE) return;
+        if (isReleased || _state != EnemyState.MOVE) return;
 
         // 移动逻辑
         transform.position += transform.up * _moveSpeed;
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (config == null || _isReleased) return;
+        if (config == null || isReleased) return;
 
         _currentHp = BattleManager.Instance.CalDamage(damage, _currentHp);
 
@@ -164,7 +164,6 @@ public class Enemy : MonoBehaviour
     {
         hpBar.SetActive(false);
         ObjectPoolManager.Instance.ReleaseEnemy(gameObject);
-        _isReleased = true;
     }
 
     /// <summary>

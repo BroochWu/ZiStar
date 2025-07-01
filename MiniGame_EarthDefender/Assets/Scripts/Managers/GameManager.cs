@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void BasicSetting()
     {
 
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 180;
     }
 
     /// <summary>
@@ -47,21 +47,33 @@ public class GameManager : MonoBehaviour
     {
         //根据是否通关过任意关卡来判断是否首次加载游戏
         if (PlayerPrefs.HasKey("dungeon_passed_level")) return;
-        Debug.Log("首次加载游戏");
         FirstLoad();
+        Debug.Log("首次加载游戏，加载成功");
     }
+
+
     /// <summary>
     /// 首次加载的内容
     /// </summary>
     void FirstLoad()
     {
+        var playerData = cfg.Tables.tb.PlayerData;
+        //初始化数据加载
+        foreach (var data in playerData.DataList)
+        {
+            switch (data.ParamType)
+            {
+                case cfg.Enums.Com.ParamType.INT:
+                    PlayerPrefs.SetInt(data.DataStr, int.Parse(data.ParamValueInit));
+                    break;
+                case cfg.Enums.Com.ParamType.STRING:
+                    PlayerPrefs.SetString(data.DataStr, data.ParamValueInit);
+                    break;
+            }
 
-        PlayerPrefs.SetInt("playerData_hp_level", 1);
-        //暂时去掉，这样每次都可以判断
-        PlayerPrefs.SetInt("dungeon_passed_level", 1);
+        }
 
     }
-
 
     [MenuItem("微信小游戏 / 清除存档")]
     public static void DeleteAllPrefs()

@@ -6,6 +6,7 @@ public class Portal : MonoBehaviour
 {
     public void Initialize(cfg.dungeon.DungeonWave wave, int dungeonLevel)
     {
+        Utility.LookTarget2D(transform, Player.instance.rotationTarget.transform, 1, true);
         foreach (var i in wave.EnemyCreate)
         {
             StartCoroutine(EnemyCreator(i.InitTime, i.EnemyInit, dungeonLevel));
@@ -26,18 +27,14 @@ public class Portal : MonoBehaviour
 
         var prefab = Resources.Load<GameObject>($"Prefabs/Enemys/{enemy_Init.EnemyId_Ref.Prefab}");
 
+        // 获取生成点的当前旋转
+        Quaternion portalBaseRotation = transform.rotation;
+
         //根据所填的角度的数量，有几个角度就生成几个怪物
         foreach (var i in enemy_Init.Angles)
         {
-            Quaternion moveDirection = Quaternion.Euler(0, 0, i + 180);
+            Quaternion moveDirection = portalBaseRotation * Quaternion.Euler(0, 0, i);
 
-            // var obj = Instantiate(
-            //     prefab,
-            //     //默认朝下生成
-            //     transform.position,
-            //     moveDirection);
-
-            // obj.transform.SetParent(BattleManager.Instance.EnemysPath);
             var obj = ObjectPoolManager.Instance.GetEnemy(enemy_Init.EnemyId_Ref.Id);
             obj.GetOrAddComponent<Enemy>()?.Initialize(enemy_Init.EnemyId_Ref, enemyLevel, moveDirection, this);
 

@@ -41,7 +41,7 @@ public class CollisionManager : MonoBehaviour
         foreach (var bullet in bullets)
         {
             if (!bullet.activeSelf) continue;
-            // 获取可能碰撞的对象
+            // 获取可能碰撞的敌人对象
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bullet);
 
