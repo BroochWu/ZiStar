@@ -76,7 +76,9 @@ MonoBehaviour:
     dstMinDir: 
     debugMode: 0
     force: 0
-  PlayerPrefsKeys: []
+  PlayerPrefsKeys:
+  - dungeon_passed_level
+  - player_data_hp_level
   FontOptions:
     CJK_Unified_Ideographs: 1
     C0_Controls_and_Basic_Latin: 1

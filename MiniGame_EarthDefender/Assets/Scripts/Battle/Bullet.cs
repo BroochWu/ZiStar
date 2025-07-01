@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         bulletParent = BulletParent.ENEMY;
         isReleased = false;
         speed = 1;
-        lifeTime = Random.Range(15, 20) / 10f;
+        lifeTime = 1.5f;
         timer = 0f;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
 

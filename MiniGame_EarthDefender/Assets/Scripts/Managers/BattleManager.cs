@@ -5,18 +5,24 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-
-
-
+    [Header("资源索引")]
+    //传送门
     public Transform PortalsPath;
     public GameObject PortalPrefab;
 
 
-    public float GameTime;
+    public float GameTime;//游戏进行时间
+    [Header("关卡数据")]
     int dungeonLevel;//关卡等级
 
+
     bool canGameTimeCount;//可以计数了
-    Dictionary<int, bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
+
+    //地球初始血量
+    public int dataInitEarthHp;
+
+    public int currentEarthHp;//地球当前血量
+
 
     void Awake()
     {
@@ -58,6 +64,12 @@ public class BattleManager : MonoBehaviour
         //预热怪物
         //PreloadLevelEnemies(dungeonId);
 
+        //玩家数据加载
+        var playerConfig = cfg.Tables.tb.PlayerAttrLevel;
+        dataInitEarthHp = playerConfig.Get(PlayerPrefs.GetInt("playerData_hp_level")).EarthHp;
+        currentEarthHp = dataInitEarthHp;
+
+        //关卡配置
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
         dungeonLevel = config.DungeonLevel;
 
@@ -117,6 +129,16 @@ public class BattleManager : MonoBehaviour
         return Mathf.Max(0, currentHp - damage);
     }
 
+
+    /// <summary>
+    /// 自动战斗（暂时不管）
+    /// </summary>
+    void AutoBattle()
+    {
+
+    }
+
+
     // /// <summary>
     // /// 回收子弹（简化版）
     // /// </summary>
@@ -134,24 +156,8 @@ public class BattleManager : MonoBehaviour
     //     poolManager.ReleaseEnemy(enemy.gameObject);
     // }
 
-    void PreloadLevelEnemies(int dungeonId)
-    {
-        var dungeonConfig = cfg.Tables.tb.Dungeon.Get(dungeonId);
-        foreach (var portal in dungeonConfig.Portals)
-        {
-            foreach (var enemySpawn in portal.WaveId_Ref.EnemyCreate)
-            {
-                //不同的enemy预热数量不一样，每个id最多预热10个
-                int enemyId = enemySpawn.EnemyInit.EnemyId;
-                int preloadCount = CalculatePreloadCount(enemySpawn);
-                ObjectPoolManager.Instance.PreloadEnemyType(enemyId, preloadCount);
-            }
-        }
-    }
-    int CalculatePreloadCount(cfg.Beans.Wave_EnemyCreate enemySpawn)
-    {
-        // 根据敌人数量和生成频率计算预加载数量
-        return Mathf.Min(10, enemySpawn.EnemyInit.Angles.Count * 2);
-    }
+
+
+
 
 }

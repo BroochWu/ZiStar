@@ -21,6 +21,7 @@ public partial class Tables
     public Tbdungeon.DungeonWave DungeonWave {get; }
     public Tbenemy.Enemy Enemy {get; }
     public Tbenemy.EnemyLevel EnemyLevel {get; }
+    public Tbplayer.PlayerAttrLevel PlayerAttrLevel {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -31,6 +32,7 @@ public partial class Tables
         DungeonWave = new Tbdungeon.DungeonWave(loader("dungeon_wave"));
         Enemy = new Tbenemy.Enemy(loader("enemy"));
         EnemyLevel = new Tbenemy.EnemyLevel(loader("enemy_level"));
+        PlayerAttrLevel = new Tbplayer.PlayerAttrLevel(loader("player_attr_level"));
         ResolveRef();
     }
     
@@ -43,6 +45,7 @@ public partial class Tables
         DungeonWave.ResolveRef(this);
         Enemy.ResolveRef(this);
         EnemyLevel.ResolveRef(this);
+        PlayerAttrLevel.ResolveRef(this);
     }
 }
 

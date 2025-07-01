@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
                 break;
             case UILayer.BATTLELAYER:
                 battleLayer.gameObject.SetActive(true);
+                battleLayer.Initialize();
                 break;
             default:
                 uiLayer = UILayer.NULL;
