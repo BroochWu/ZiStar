@@ -75,6 +75,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+
+
+
+
+
+
+
+
     [MenuItem("微信小游戏 / 清除存档")]
     public static void DeleteAllPrefs()
     {
