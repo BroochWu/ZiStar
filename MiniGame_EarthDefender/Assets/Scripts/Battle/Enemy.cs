@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         bulletType = config.PrefabBullet;
 
         // 预计算速度值
-        _moveSpeed = config.MultiMoveSpeed * 0.0001f ;
+        _moveSpeed = config.MultiMoveSpeed * 0.0001f;
         _rotationSpeed = enemy.MultiAngle * 0.0001f;
 
         ResetState();
@@ -164,6 +164,7 @@ public class Enemy : MonoBehaviour
     {
         hpBar.SetActive(false);
         ObjectPoolManager.Instance.ReleaseEnemy(gameObject);
+        BattleManager.Instance.UnregisterEnemy(this);
     }
 
     /// <summary>

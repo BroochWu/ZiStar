@@ -1,14 +1,18 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum BattleState
 {
     ISBATTLEING,
-    BATTLEOVER
+    BATTLEFAIL,
+    BATTLESUCCESS
 }
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
+    public static int dungeonLevel;//关卡等级
     public BattleState battleState;
 
     [Header("资源索引")]
@@ -19,8 +23,6 @@ public class BattleManager : MonoBehaviour
 
     public float GameTime;//游戏进行时间
     [Header("关卡数据")]
-    int dungeonLevel;//关卡等级
-
 
     bool canGameTimeCount;//可以计数了
 
@@ -28,6 +30,9 @@ public class BattleManager : MonoBehaviour
     public int dataInitEarthHp;
 
     public int currentEarthHp;//地球当前血量
+    List<Portal> activePortals = new();//活跃的传送门
+    List<Enemy> activeEnemys = new();//活跃的敌人
+    public int activeEnemysCount { get { return activeEnemys.Count; } }
 
 
     void Awake()
@@ -100,6 +105,19 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         if (canGameTimeCount) GameTime += Time.deltaTime;
+
+        if (Time.frameCount % 50 == 0)
+        {
+            //每50帧（大概1秒？）检测一次
+            if (activeEnemys.Count <= 0 && activePortals.Count <= 0 && battleState == BattleState.ISBATTLEING)
+            {
+                //当最后一波怪生成后
+                //再判断当前场上剩余的怪物数量
+                //如果最后一波怪物已经生成了&&怪物剩余数量==0，则战斗成功
+                //可能需要等待1秒以后再判断，以防边际情况
+                BattleSuccess();
+            }
+        }
     }
 
 
@@ -108,15 +126,26 @@ public class BattleManager : MonoBehaviour
 
 
     /// <summary>
-    /// 游戏结束
+    /// 战斗失败
     /// </summary>
     void BattleOver()
     {
-        battleState = BattleState.BATTLEOVER;
-        GameTime = 0;
+        //地球血量清零则战斗失败
+        battleState = BattleState.BATTLEFAIL;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
-        UIManager.Instance.battleLayer.BattleOver();
+        UIManager.Instance.battleLayer.BattleFail();
+    }
+
+    /// <summary>
+    /// 战斗成功
+    /// </summary>
+    void BattleSuccess()
+    {
+        battleState = BattleState.BATTLESUCCESS;
+        canGameTimeCount = false;
+        Time.timeScale = 0.05f;
+        UIManager.Instance.battleLayer.BattleSuccess();
     }
 
 
@@ -125,9 +154,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void CreatePortals(cfg.dungeon.DungeonWave waveId_Ref, Vector2 position)
     {
-        var Portal = Instantiate(PortalPrefab, position, Quaternion.identity);
-        var portalLevel = dungeonLevel;
-        Portal.AddComponent<Portal>().Initialize(waveId_Ref, portalLevel);
+        var Portal = Instantiate(PortalPrefab, position, Quaternion.identity).GetOrAddComponent<Portal>();
+        Portal.Initialize(waveId_Ref);
+        RegisterPortal(Portal);
     }
 
     /// <summary>
@@ -156,7 +185,7 @@ public class BattleManager : MonoBehaviour
     {
 
         //游戏结束就不计算了
-        if (battleState == BattleState.BATTLEOVER) return;
+        if (battleState != BattleState.ISBATTLEING) return;
 
 
         currentEarthHp = CalDamage(_damage, currentEarthHp);
@@ -165,7 +194,43 @@ public class BattleManager : MonoBehaviour
     }
 
 
+    #region "胜利条件相关信息注册"
+    // 注册传送门
+    public void RegisterPortal(Portal portal)
+    {
+        if (!activePortals.Contains(portal))
+        {
+            activePortals.Add(portal);
+        }
+    }
 
+    // 注销传送门
+    public void UnregisterPortal(Portal portal)
+    {
+        if (activePortals.Contains(portal))
+        {
+            activePortals.Remove(portal);
+        }
+    }
+
+    // 注册敌人
+    public void RegisterEnemy(Enemy enemy)
+    {
+        if (!activeEnemys.Contains(enemy))
+        {
+            activeEnemys.Add(enemy);
+        }
+    }
+
+    // 注销敌人
+    public void UnregisterEnemy(Enemy enemy)
+    {
+        if (activeEnemys.Contains(enemy))
+        {
+            activeEnemys.Remove(enemy);
+        }
+    }
+    #endregion
 
 
 }

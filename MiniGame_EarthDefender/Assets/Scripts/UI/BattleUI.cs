@@ -5,7 +5,8 @@ public class BattleUI : MonoBehaviour
 {
     public Text gameTimeUI;
     public Text earthHpText;
-    public GameObject battleOver;
+    public GameObject battleFail;
+    public GameObject battleSuccess;
 
     private float updateFpsInterval = 1f; // 更新帧率的间隔
     private float fpsCounter; // fps计数器
@@ -14,7 +15,8 @@ public class BattleUI : MonoBehaviour
 
     public void Initialize()
     {
-        battleOver.SetActive(false);
+        battleFail.SetActive(false);
+        battleSuccess.SetActive(false);
         RefreshEarthHp();
     }
 
@@ -29,7 +31,7 @@ public class BattleUI : MonoBehaviour
             updateFpsTimer = 0;
             fpsCounter = 0;
         }
-        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}";
+        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.activeEnemysCount}";
     }
 
     /// <summary>
@@ -37,16 +39,23 @@ public class BattleUI : MonoBehaviour
     /// </summary>
     public void RefreshEarthHp()
     {
-        Debug.Log("地球血量已更新");
         earthHpText.text = $"{BattleManager.Instance.currentEarthHp} / {BattleManager.Instance.dataInitEarthHp}";
     }
 
     /// <summary>
-    /// 游戏结束时的UI
+    /// 游戏失败时的UI
     /// </summary>
-    public void BattleOver()
+    public void BattleFail()
     {
-        battleOver.SetActive(true);
+        battleFail.SetActive(true);
+    }
+    /// <summary>
+    /// 游戏胜利时的UI
+    /// </summary>
+    public void BattleSuccess()
+    {
+        battleSuccess.SetActive(true);
+
     }
 
 }
