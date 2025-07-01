@@ -32,12 +32,15 @@ public class Bullet : MonoBehaviour
     }
     public void Initialize(Enemy parent)
     {
+
         bulletParent = BulletParent.ENEMY;
         isReleased = false;
         speed = 1;
-        lifeTime = 0.5f;
+        lifeTime = Random.Range(15, 20) / 10f;
         timer = 0f;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
+
+        //敌人的子弹移动后自动销毁就行，不需要碰撞
     }
 
 
@@ -46,51 +49,31 @@ public class Bullet : MonoBehaviour
         // 移动子弹
         transform.Translate(Vector3.up * speed * Time.deltaTime);
 
-        switch (bulletParent)
+        if (!isReleased)
         {
-            case BulletParent.PLAYER:
+            timer += Time.deltaTime;
+            switch (bulletParent)
+            {
+                case BulletParent.PLAYER:
+                    break;
 
+                case BulletParent.ENEMY:
+                    break;
 
-                if (!isReleased)
-                {
-                    // 更新生存时间
-                    timer += Time.deltaTime;
+                default:
+                    Debug.LogError("子弹没有父类？");
+                    break;
+            }
 
-                    // 检查是否超过生存时间
-                    if (timer >= lifeTime)
-                    {
-                        ObjectPoolManager.Instance.ReleaseBullet(this.gameObject);
-                        isReleased = true;
-                    }
-                }
-                break;
-
-            case BulletParent.ENEMY:
-                transform.position += transform.up * Time.deltaTime;
-                timer += Time.deltaTime;
-                if ((lifeTime <= timer) && !isReleased)
-                {
-                    ObjectPoolManager.Instance.ReleaseBullet(gameObject);
-                    isReleased = true;
-                    Debug.Log("release enemybullet");
-                }
-                break;
-
-            default:
-                Debug.LogError("子弹没有父类？");
-                break;
+            // 检查是否超过生存时间
+            if (timer >= lifeTime)
+            {
+                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+                isReleased = true;
+            }
 
         }
     }
-
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     // 碰撞处理
-    //     if (other.CompareTag("Enemy") || other.CompareTag("Boundary"))
-    //     {
-    //         if (!isReleased) BattleManager.Instance.ReturnBullet(this);
-    //     }
-    // }
 
     /// <summary>
     /// 重置子弹状态

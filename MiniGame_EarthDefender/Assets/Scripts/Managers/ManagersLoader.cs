@@ -14,13 +14,13 @@ public class ManagersLoader : MonoBehaviour
 
 
         // 添加管理器组件
-        managers.GetOrAddComponent<BattleManager>();
+        managers.GetOrAddComponent<GameManager>();
         managers.GetOrAddComponent<CollisionManager>();
         //managers.GetOrAddComponent<EntityManager>();
-        managers.GetOrAddComponent<GameManger>();
         managers.GetOrAddComponent<ObjectPoolManager>();
-        // managers.AddComponent<UIManager>();
+        managers.GetOrAddComponent<UIManager>();
 
+        managers.GetOrAddComponent<BattleManager>();
 
         // 设置为跨场景持久化
         DontDestroyOnLoad(managers);

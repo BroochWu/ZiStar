@@ -1,13 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Pool;
-using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-    public ObjectPoolManager poolManager;
 
 
 
@@ -21,21 +18,23 @@ public class BattleManager : MonoBehaviour
     bool canGameTimeCount;//可以计数了
     Dictionary<int, bool> enemyList;//要生成的怪物的列表，false是没创建，true是创建了
 
-
-
-
-
     void Awake()
     {
+        //实例
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
-        poolManager = gameObject.GetOrAddComponent<ObjectPoolManager>();
+    }
+
+
+
+    public void Initialize(int dungeonId)
+    {
+
 
         // if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
         if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
@@ -43,15 +42,9 @@ public class BattleManager : MonoBehaviour
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
 
+        //游戏开始
+        BattleStart(dungeonId);
 
-
-    }
-
-
-
-    void Start()
-    {
-        BattleStart(1);
     }
 
 
@@ -60,7 +53,7 @@ public class BattleManager : MonoBehaviour
     /// 游戏开始
     /// </summary>
     /// <param name="dungeonId">关卡id</param>
-    public void BattleStart(int dungeonId)
+    void BattleStart(int dungeonId)
     {
         //预热怪物
         //PreloadLevelEnemies(dungeonId);
@@ -78,6 +71,10 @@ public class BattleManager : MonoBehaviour
         GameTime = 0;
 
         Debug.Log(config.TextName + " 已加载！");
+
+        //加载UI
+        UIManager.Instance.SwitchLayer(UILayer.BATTLELAYER);
+
     }
 
     void Update()
@@ -147,7 +144,7 @@ public class BattleManager : MonoBehaviour
                 //不同的enemy预热数量不一样，每个id最多预热10个
                 int enemyId = enemySpawn.EnemyInit.EnemyId;
                 int preloadCount = CalculatePreloadCount(enemySpawn);
-                poolManager.PreloadEnemyType(enemyId, preloadCount);
+                ObjectPoolManager.Instance.PreloadEnemyType(enemyId, preloadCount);
             }
         }
     }
