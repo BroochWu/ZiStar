@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum BattleState
 {
+    NULL,
     ISBATTLEING,
     BATTLEFAIL,
     BATTLESUCCESS
@@ -28,6 +29,7 @@ public class BattleManager : MonoBehaviour
     public float GameTime;//游戏进行时间
     [Header("关卡数据")]
 
+    public int dungeonId;//关卡Id
     bool canGameTimeCount;//可以计数了
 
     //地球初始血量
@@ -99,6 +101,7 @@ public class BattleManager : MonoBehaviour
         //关卡配置
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
         dungeonLevel = config.DungeonLevel;
+        this.dungeonId = config.Id;
 
 
         foreach (var i in config.Portals)
@@ -112,7 +115,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log(config.TextName + " 已加载！");
 
         battleState = BattleState.ISBATTLEING;
-        
+
         //加载UI
         UIManager.Instance.SwitchLayer(UILayer.BATTLELAYER);
 
@@ -123,12 +126,14 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
+        if (battleState != BattleState.ISBATTLEING) return;
+
         if (canGameTimeCount) GameTime += Time.deltaTime;
 
         if (Time.frameCount % 50 == 0)
         {
             //每50帧（大概1秒？）检测一次
-            if (activeEnemys.Count <= 0 && activePortals.Count <= 0 && battleState == BattleState.ISBATTLEING)
+            if (activeEnemys.Count <= 0 && activePortals.Count <= 0)
             {
                 //当最后一波怪生成后
                 //再判断当前场上剩余的怪物数量
@@ -145,7 +150,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void ResetDungeon()
     {
-        Destroy(BattleObjectsPath.gameObject);
+        if (BattleObjectsPath != null) Destroy(BattleObjectsPath.gameObject);
 
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
@@ -159,7 +164,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 战斗失败
     /// </summary>
-    void BattleOver()
+    void BattleFail()
     {
         //地球血量清零则战斗失败
         battleState = BattleState.BATTLEFAIL;
@@ -176,10 +181,14 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void BattleSuccess()
     {
+        //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
+        PlayerPrefs.SetInt("dungeon_passed_level", dungeonId);
+
         battleState = BattleState.BATTLESUCCESS;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
 
+        //UI播放通关
         UIManager.Instance.battleLayer.BattleSuccess();
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
@@ -228,7 +237,7 @@ public class BattleManager : MonoBehaviour
 
         currentEarthHp = CalDamage(_damage, currentEarthHp);
         UIManager.Instance.battleLayer.RefreshEarthHp();
-        if (currentEarthHp <= 0) BattleOver();
+        if (currentEarthHp <= 0) BattleFail();
     }
 
 

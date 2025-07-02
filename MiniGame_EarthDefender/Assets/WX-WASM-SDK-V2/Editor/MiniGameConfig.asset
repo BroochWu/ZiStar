@@ -77,8 +77,10 @@ MonoBehaviour:
     debugMode: 0
     force: 0
   PlayerPrefsKeys:
-  - dungeon_passed_level
-  - player_data_hp_level
+  - playerData_hp_level
+  - 'dungeon_passed_level '
+  - 'item_gold '
+  - 'item_diamond '
   FontOptions:
     CJK_Unified_Ideographs: 1
     C0_Controls_and_Basic_Latin: 1

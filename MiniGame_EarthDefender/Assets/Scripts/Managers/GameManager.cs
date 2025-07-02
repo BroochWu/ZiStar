@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SwitchGameStateToBattle(1);
+        SwitchGameStateToMainView();
     }
 
 
@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
 
         //设置状态
         gameState = GameState.MAINVIEW;
-        //BattleManager.Instance.battleState = BattleState.BATTLEFAIL;
+        BattleManager.Instance.battleState = BattleState.NULL;
+        Time.timeScale = 1;
 
 
         UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);

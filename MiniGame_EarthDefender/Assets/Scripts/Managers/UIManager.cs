@@ -41,10 +41,11 @@ public class UIManager : MonoBehaviour
                 //如果要ShowNull，则代表要隐藏所有Layer
                 foreach (UILayer i in Enum.GetValues(typeof(UILayer)))
                 {
+                    if (i == UILayer.NULL) continue;
                     HideLayer(i);
                 }
                 break;
-                
+
             case UILayer.BATTLELAYER:
                 battleLayer.gameObject.SetActive(true);
                 battleLayer.Initialize();

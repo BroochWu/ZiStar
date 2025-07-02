@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &35883874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1405,10 +1405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldBounds:
     serializedVersion: 2
-    x: -100
-    y: -100
-    width: 200
-    height: 200
+    x: -300
+    y: -300
+    width: 400
+    height: 400
 --- !u!114 &772931067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,7 +2214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1887893609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2227,6 +2227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621592f7873ca4640b124ec33d2589be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonName: {fileID: 2071727347}
 --- !u!224 &1887893610
 RectTransform:
   m_ObjectHideFlags: 0
