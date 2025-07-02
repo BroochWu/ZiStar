@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,8 +17,11 @@ public class BattleManager : MonoBehaviour
     public BattleState battleState;
 
     [Header("资源索引")]
-    //传送门
+    public Transform BattleObjectsPath;
     public Transform PortalsPath;
+    public Transform BulletsPath;
+    public Transform EnemyPath;
+    //传送门
     public GameObject PortalPrefab;
 
 
@@ -52,11 +56,22 @@ public class BattleManager : MonoBehaviour
     public void Initialize(int dungeonId)
     {
 
-
         // if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
-        if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
+        // if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
         // if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
+
+        BattleObjectsPath = new GameObject("BattleObjects").transform;
+
+        PortalsPath = new GameObject("Portals").transform;
+        PortalsPath.SetParent(BattleObjectsPath);
+
+        BulletsPath = new GameObject("Bullets").transform;
+        BulletsPath.SetParent(BattleObjectsPath);
+
+        EnemyPath = new GameObject("Enemys").transform;
+        EnemyPath.SetParent(BattleObjectsPath);
+
 
 
         //游戏开始
@@ -74,6 +89,7 @@ public class BattleManager : MonoBehaviour
     {
         //预热怪物
         //PreloadLevelEnemies(dungeonId);
+
 
         //玩家数据加载
         var playerConfig = cfg.Tables.tb.PlayerAttrLevel;
@@ -95,10 +111,13 @@ public class BattleManager : MonoBehaviour
 
         Debug.Log(config.TextName + " 已加载！");
 
+        battleState = BattleState.ISBATTLEING;
+        
         //加载UI
         UIManager.Instance.SwitchLayer(UILayer.BATTLELAYER);
 
-        battleState = BattleState.ISBATTLEING;
+        //执行角色事件（装载武器）
+        Player.instance.BattleStart();
 
     }
 
@@ -121,6 +140,18 @@ public class BattleManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 释放所有的传送门和怪物
+    /// </summary>
+    public void ResetDungeon()
+    {
+        Destroy(BattleObjectsPath.gameObject);
+
+        //移除所有的玩家武器
+        Player.instance.RemoveAllWeapons();
+        ObjectPoolManager.Instance.ClearAllPools();
+        Player.instance.rotationTarget.transform.rotation = quaternion.identity;
+    }
 
 
 
@@ -134,7 +165,10 @@ public class BattleManager : MonoBehaviour
         battleState = BattleState.BATTLEFAIL;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
+
         UIManager.Instance.battleLayer.BattleFail();
+        //移除所有的玩家武器
+        Player.instance.RemoveAllWeapons();
     }
 
     /// <summary>
@@ -145,7 +179,10 @@ public class BattleManager : MonoBehaviour
         battleState = BattleState.BATTLESUCCESS;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
+
         UIManager.Instance.battleLayer.BattleSuccess();
+        //移除所有的玩家武器
+        Player.instance.RemoveAllWeapons();
     }
 
 
@@ -154,9 +191,10 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void CreatePortals(cfg.dungeon.DungeonWave waveId_Ref, Vector2 position)
     {
-        var Portal = Instantiate(PortalPrefab, position, Quaternion.identity).GetOrAddComponent<Portal>();
-        Portal.Initialize(waveId_Ref);
-        RegisterPortal(Portal);
+        var portal = Instantiate(PortalPrefab, position, Quaternion.identity).GetOrAddComponent<Portal>();
+        portal.transform.SetParent(PortalsPath);
+        portal.Initialize(waveId_Ref);
+        RegisterPortal(portal);
     }
 
     /// <summary>

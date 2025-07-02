@@ -4,7 +4,6 @@ public class EntityManager : MonoBehaviour
 {
     public InstancedRenderer enemyRenderer;
     public InstancedRenderer bulletRenderer;
-    ObjectPoolManager poolManager;
 
     void Start()
     {
@@ -15,13 +14,13 @@ public class EntityManager : MonoBehaviour
     void LateUpdate()
     {
         // 收集所有敌人的矩阵
-        foreach (Transform enemy in poolManager.enemyContainer.transform)
+        foreach (Transform enemy in BattleManager.Instance.EnemyPath.transform)
         {
             enemyRenderer.AddInstance(enemy.transform.localToWorldMatrix);
         }
 
         // 收集所有子弹的矩阵
-        foreach (Transform bullet in poolManager.bulletContainer.transform)
+        foreach (Transform bullet in BattleManager.Instance.BulletsPath.transform)
         {
             bulletRenderer.AddInstance(bullet.transform.localToWorldMatrix);
         }

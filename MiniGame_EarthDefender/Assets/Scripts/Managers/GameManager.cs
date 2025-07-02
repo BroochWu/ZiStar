@@ -1,9 +1,21 @@
 using UnityEditor;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        NULL,
+        BATTLE,//战斗中
+        MAINVIEW,//主场景中
+    }
+
+
     public static GameManager Instance;
+    public GameState gameState = GameState.NULL;
+
+
 
     void Awake()
     {
@@ -17,8 +29,29 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        BattleStart(1);
+        SwitchGameStateToBattle(1);
     }
+
+
+    /// <summary>
+    /// 切换游戏状态
+    /// </summary>
+    public void SwitchGameStateToMainView()
+    {
+        //关闭战斗场景
+        //将游戏状态切换为主界面
+        //打开主界面UI
+
+        //设置状态
+        gameState = GameState.MAINVIEW;
+        //BattleManager.Instance.battleState = BattleState.BATTLEFAIL;
+
+
+        UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);
+        BattleManager.Instance.ResetDungeon();
+
+    }
+
 
 
     /// <summary>
@@ -26,17 +59,20 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void BasicSetting()
     {
-
         Application.targetFrameRate = 180;
     }
+
+
 
     /// <summary>
     /// 战斗开始
     /// </summary>
     /// <param name="dungeonId"></param>
-    void BattleStart(int dungeonId)
+    public void SwitchGameStateToBattle(int dungeonId)
     {
+        //初始化战斗管理器
         BattleManager.Instance.Initialize(dungeonId);
+        gameState = GameState.BATTLE;
     }
 
 

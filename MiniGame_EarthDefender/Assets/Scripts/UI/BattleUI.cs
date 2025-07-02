@@ -58,4 +58,13 @@ public class BattleUI : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 返回主界面
+    /// </summary>
+    public void BackToMain()
+    {
+        Debug.Log("BackToMain");
+        GameManager.Instance.SwitchGameStateToMainView();
+    }
+
 }

@@ -16,9 +16,9 @@ public class ObjectPoolManager : MonoBehaviour
     private Dictionary<string, GameObject> prefabCache =
         new Dictionary<string, GameObject>();
 
-    // 父物体容器
-    public Transform bulletContainer { get; private set; }
-    public Transform enemyContainer { get; private set; }
+    // // 父物体容器
+    // public Transform bulletContainer { get; private set; }
+    // public Transform enemyContainer { get; private set; }
 
     void Awake()
     {
@@ -31,11 +31,11 @@ public class ObjectPoolManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // 创建容器
-        bulletContainer = new GameObject("BulletPool").transform;
-        enemyContainer = new GameObject("EnemyPool").transform;
-        bulletContainer.SetParent(transform);
-        enemyContainer.SetParent(transform);
+        // // 创建容器
+        // bulletContainer = new GameObject("BulletPool").transform;
+        // enemyContainer = new GameObject("EnemyPool").transform;
+        // bulletContainer.SetParent(transform);
+        // enemyContainer.SetParent(transform);
     }
 
     void Start()
@@ -121,7 +121,7 @@ public class ObjectPoolManager : MonoBehaviour
     // 创建子弹实例
     private GameObject CreateBulletInstance(GameObject prefab, string bulletType)
     {
-        GameObject bullet = Instantiate(prefab, bulletContainer);
+        GameObject bullet = Instantiate(prefab, BattleManager.Instance.BulletsPath);
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null)
         {
@@ -237,8 +237,8 @@ public class ObjectPoolManager : MonoBehaviour
     // 创建敌人实例
     private GameObject CreateEnemyInstance(GameObject prefab, int enemyId)
     {
-        GameObject enemy = Instantiate(prefab);
-        enemy.transform.SetParent(enemyContainer);
+        GameObject enemy = Instantiate(prefab,BattleManager.Instance.EnemyPath);
+        // enemy.transform.SetParent(enemyContainer);
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
         if (enemyComponent != null)
         {

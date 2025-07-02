@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public enum UILayer
 {
     NULL,
     BATTLELAYER,
+    MAINLAYER,
 }
 
 
@@ -12,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
     public BattleUI battleLayer;
+    public MainUI mainLayer;
     private UILayer uiLayer = UILayer.NULL;
 
     void Awake()
@@ -36,11 +39,19 @@ public class UIManager : MonoBehaviour
         {
             case UILayer.NULL:
                 //如果要ShowNull，则代表要隐藏所有Layer
-                HideLayer(UILayer.BATTLELAYER);
+                foreach (UILayer i in Enum.GetValues(typeof(UILayer)))
+                {
+                    HideLayer(i);
+                }
                 break;
+                
             case UILayer.BATTLELAYER:
                 battleLayer.gameObject.SetActive(true);
                 battleLayer.Initialize();
+                break;
+            case UILayer.MAINLAYER:
+                mainLayer.gameObject.SetActive(true);
+                mainLayer.Initialize();
                 break;
             default:
                 uiLayer = UILayer.NULL;
@@ -59,6 +70,9 @@ public class UIManager : MonoBehaviour
             case UILayer.BATTLELAYER:
                 battleLayer.gameObject.SetActive(false);
                 break;
+            case UILayer.MAINLAYER:
+                mainLayer.gameObject.SetActive(false);
+                break;
             default:
                 Debug.LogWarning($"没找到 {uiLayer} 层");
                 break;
@@ -67,7 +81,7 @@ public class UIManager : MonoBehaviour
 
 
     /// <summary>
-    /// 切换
+    /// 切换，关闭当前层，隐藏上一层
     /// </summary>
     /// <param name="uiLayer"></param>
     public void SwitchLayer(UILayer uiLayer)

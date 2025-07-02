@@ -42,16 +42,17 @@ public class Player : MonoBehaviour
         cursorObj.GetComponent<SpriteRenderer>().enabled = false;
 #endif
 
-        BattleStart();
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        //如果不是正在战斗，就不要进行后面的判断了
+        if ((GameManager.Instance.gameState != GameManager.GameState.BATTLE) || (BattleManager.Instance.battleState != BattleState.ISBATTLEING))
+            return;
+
         //鼠标摁下、游戏没结束、没点到UI，就可以更换镜头
-        if (Input.GetMouseButton(0) && BattleManager.Instance.battleState == BattleState.ISBATTLEING && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             guideLine.SetActive(true);
             LookCursor();
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 战斗开始时的操作
     /// </summary>
-    void BattleStart()
+    public void BattleStart()
     {
         AddWeapon(1);
     }
@@ -112,6 +113,18 @@ public class Player : MonoBehaviour
         weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath.transform, 1);
 
         equipedWeapon.Add(weapon);
+
+    }
+    /// <summary>
+    /// 移除所有武器
+    /// </summary>
+    public void RemoveAllWeapons()
+    {
+        foreach (var weapon in equipedWeapon)
+        {
+            Destroy(weapon.gameObject);
+        }
+        equipedWeapon.Clear();
 
     }
 
