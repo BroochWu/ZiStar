@@ -33,5 +33,19 @@
         "wave_id": 1002
       }
     ]
+  },
+  {
+    "id": 3,
+    "text_name": "第三关",
+    "dungeon_level": 3,
+    "portals": [
+      {
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "wave_id": 1001
+      }
+    ]
   }
 ]

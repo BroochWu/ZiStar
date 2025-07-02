@@ -41,7 +41,7 @@ public sealed partial class Enemy : Luban.BeanBase
     /// </summary>
     public readonly string TextName;
     /// <summary>
-    /// prefab名称
+    /// 形象prefab名称
     /// </summary>
     public readonly string Prefab;
     /// <summary>
