@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -61,6 +62,13 @@ public class BattleManager : MonoBehaviour
         // if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
         // if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
         // if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
+        StartCoroutine(CInitialize(dungeonId));
+
+    }
+
+    IEnumerator CInitialize(int dungeonId)
+    {
+        yield return new WaitForSeconds(1);
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
         BattleObjectsPath = new GameObject("BattleObjects").transform;
@@ -78,7 +86,7 @@ public class BattleManager : MonoBehaviour
 
         //游戏开始
         BattleStart(dungeonId);
-
+        yield return null;
     }
 
 

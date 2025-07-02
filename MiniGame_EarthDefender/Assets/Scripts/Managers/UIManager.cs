@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public enum UILayer
@@ -93,4 +94,5 @@ public class UIManager : MonoBehaviour
 
 
     }
+
 }
