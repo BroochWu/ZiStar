@@ -1,0 +1,126 @@
+[
+  {
+    "level": 0,
+    "next_exp": 2
+  },
+  {
+    "level": 1,
+    "next_exp": 4
+  },
+  {
+    "level": 2,
+    "next_exp": 6
+  },
+  {
+    "level": 3,
+    "next_exp": 8
+  },
+  {
+    "level": 4,
+    "next_exp": 10
+  },
+  {
+    "level": 5,
+    "next_exp": 12
+  },
+  {
+    "level": 6,
+    "next_exp": 14
+  },
+  {
+    "level": 7,
+    "next_exp": 16
+  },
+  {
+    "level": 8,
+    "next_exp": 18
+  },
+  {
+    "level": 9,
+    "next_exp": 20
+  },
+  {
+    "level": 10,
+    "next_exp": 22
+  },
+  {
+    "level": 11,
+    "next_exp": 24
+  },
+  {
+    "level": 12,
+    "next_exp": 26
+  },
+  {
+    "level": 13,
+    "next_exp": 28
+  },
+  {
+    "level": 14,
+    "next_exp": 30
+  },
+  {
+    "level": 15,
+    "next_exp": 32
+  },
+  {
+    "level": 16,
+    "next_exp": 34
+  },
+  {
+    "level": 17,
+    "next_exp": 36
+  },
+  {
+    "level": 18,
+    "next_exp": 38
+  },
+  {
+    "level": 19,
+    "next_exp": 40
+  },
+  {
+    "level": 20,
+    "next_exp": 42
+  },
+  {
+    "level": 21,
+    "next_exp": 44
+  },
+  {
+    "level": 22,
+    "next_exp": 46
+  },
+  {
+    "level": 23,
+    "next_exp": 48
+  },
+  {
+    "level": 24,
+    "next_exp": 50
+  },
+  {
+    "level": 25,
+    "next_exp": 52
+  },
+  {
+    "level": 26,
+    "next_exp": 54
+  },
+  {
+    "level": 27,
+    "next_exp": 56
+  },
+  {
+    "level": 28,
+    "next_exp": 58
+  },
+  {
+    "level": 29,
+    "next_exp": 60
+  },
+  {
+    "level": 30,
+    "next_exp": 62
+  }
+]

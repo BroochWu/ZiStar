@@ -37,6 +37,9 @@ public class BattleManager : MonoBehaviour
     public int dataInitEarthHp;
 
     public int currentEarthHp;//地球当前血量
+    public int currentExp;//玩家当前经验值
+    public int nextExp;//玩家当前经验值
+    public int currentLv;//玩家当前等级
     List<Portal> activePortals = new();//活跃的传送门
     List<Enemy> activeEnemys = new();//活跃的敌人
     public int activeEnemysCount { get { return activeEnemys.Count; } }
@@ -111,17 +114,19 @@ public class BattleManager : MonoBehaviour
         dungeonLevel = config.DungeonLevel;
         this.dungeonId = config.Id;
 
-
+        //创建黑洞以生成敌人波次
         foreach (var i in config.Portals)
         {
             Debug.Log(i.WaveId + " 波次已加载");
             CreatePortals(i.WaveId_Ref, i.Position);
         }
+
+        //关卡初始化
+        currentExp = 0;
+        currentLv = 0;
+        nextExp = cfg.Tables.tb.DungeonExp.Get(currentLv).NextExp;
         canGameTimeCount = true;
         GameTime = 0;
-
-        Debug.Log(config.TextName + " 已加载！");
-
         battleState = BattleState.ISBATTLEING;
 
         //加载UI
@@ -283,9 +288,48 @@ public class BattleManager : MonoBehaviour
         if (activeEnemys.Contains(enemy))
         {
             activeEnemys.Remove(enemy);
+            GainExp(enemy.enemyExp);
+            UIManager.Instance.battleLayer.RefreshExpLevel();
         }
     }
     #endregion
 
+
+    /// <summary>
+    /// 获得经验
+    /// </summary>
+    /// <param name="_number"></param>
+    public void GainExp(int _number)
+    {
+        currentExp += _number;
+        CheckLevelUp();
+    }
+
+    /// <summary>
+    /// 检测是否升级
+    /// </summary>
+    void CheckLevelUp()
+    {
+        nextExp = cfg.Tables.tb.DungeonExp.Get(currentLv).NextExp;
+        if (currentExp >= nextExp)
+        {
+            //升级
+            currentExp -= nextExp;
+            currentLv += 1;
+            LevelUp();
+        }
+
+    }
+
+    /// <summary>
+    /// 升级操作
+    /// </summary>
+    void LevelUp()
+    {
+        Debug.Log("升级成功");
+
+        //判断连续升级（后面可能是选好卡牌以后判断？）
+        CheckLevelUp();
+    }
 
 }

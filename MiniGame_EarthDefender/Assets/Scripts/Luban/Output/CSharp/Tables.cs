@@ -35,6 +35,10 @@ public partial class Tables
     /// </summary>
     public Tbdungeon.DungeonWave DungeonWave {get; }
     /// <summary>
+    /// 关卡玩家升级
+    /// </summary>
+    public Tbdungeon.DungeonExp DungeonExp {get; }
+    /// <summary>
     /// 敌人
     /// </summary>
     public Tbenemy.Enemy Enemy {get; }
@@ -66,6 +70,7 @@ public partial class Tables
         WeaponLevel = new Tbweapon.WeaponLevel(loader("weapon_level"));
         Dungeon = new Tbdungeon.Dungeon(loader("dungeon"));
         DungeonWave = new Tbdungeon.DungeonWave(loader("dungeon_wave"));
+        DungeonExp = new Tbdungeon.DungeonExp(loader("dungeon_exp"));
         Enemy = new Tbenemy.Enemy(loader("enemy"));
         EnemyLevel = new Tbenemy.EnemyLevel(loader("enemy_level"));
         EnemyTypeIndex = new Tbenemy.EnemyTypeIndex(loader("enemy_type_index"));
@@ -82,6 +87,7 @@ public partial class Tables
         WeaponLevel.ResolveRef(this);
         Dungeon.ResolveRef(this);
         DungeonWave.ResolveRef(this);
+        DungeonExp.ResolveRef(this);
         Enemy.ResolveRef(this);
         EnemyLevel.ResolveRef(this);
         EnemyTypeIndex.ResolveRef(this);

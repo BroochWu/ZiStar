@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public cfg.enemy.Enemy config;
     private int enemyLevel;
     private string bulletType;
-
+    public int enemyExp;
 
     // 状态变量
     public bool isReleased;
@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
         this.enemyLevel = enemyLevel;
         enemyId = config.Id;
         bulletType = config.PrefabBullet;
+        enemyExp = cfg.Tables.tb.EnemyTypeIndex.Get(config.EnemyType).Exp;//击杀怪物获得的经验值
 
         // 预计算速度值
         _moveSpeed = config.MultiMoveSpeed * 0.0001f;

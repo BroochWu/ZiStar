@@ -7,6 +7,8 @@ public class BattleUI : MonoBehaviour
     public Text earthHpText;
     public GameObject battleFail;
     public GameObject battleSuccess;
+    public GameObject expProgressBar;//经验值进度条
+    public Text expLvText;//当前等级
 
     private float updateFpsInterval = 1f; // 更新帧率的间隔
     private float fpsCounter; // fps计数器
@@ -18,6 +20,7 @@ public class BattleUI : MonoBehaviour
         battleFail.SetActive(false);
         battleSuccess.SetActive(false);
         RefreshEarthHp();
+        RefreshExpLevel();
     }
 
     void Update()
@@ -65,6 +68,19 @@ public class BattleUI : MonoBehaviour
     {
         Debug.Log("BackToMain");
         GameManager.Instance.SwitchGameStateToMainView();
+    }
+
+
+    /// <summary>
+    /// 更新经验等级
+    /// </summary>
+    public void RefreshExpLevel()
+    {
+        var _currentLv = BattleManager.Instance.currentLv;
+        float _currentExp = BattleManager.Instance.currentExp;
+        float _nextExp = BattleManager.Instance.nextExp;
+        expLvText.text = _currentLv.ToString();
+        expProgressBar.transform.localScale = new Vector3(_currentExp / _nextExp, 1, 1);
     }
 
 }
