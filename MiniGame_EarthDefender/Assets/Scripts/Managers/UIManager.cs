@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public enum UILayer
@@ -7,6 +6,7 @@ public enum UILayer
     NULL,
     BATTLELAYER,
     MAINLAYER,
+    DEVELOPLAYER,
 }
 
 
@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public BattleUI battleLayer;
     public MainUI mainLayer;
+    public DevelopUI developLayer;
+    public GameObject bottomTabs;
     private UILayer uiLayer = UILayer.NULL;
 
     void Awake()
@@ -36,6 +38,7 @@ public class UIManager : MonoBehaviour
     void ShowLayer(UILayer uiLayer)
     {
 
+        SetUILayer(uiLayer);
         switch (uiLayer)
         {
             case UILayer.NULL:
@@ -48,12 +51,19 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UILayer.BATTLELAYER:
+                SetBottomTabs(false);
                 battleLayer.gameObject.SetActive(true);
                 battleLayer.Initialize();
                 break;
             case UILayer.MAINLAYER:
+                SetBottomTabs(true);
                 mainLayer.gameObject.SetActive(true);
                 mainLayer.Initialize();
+                break;
+            case UILayer.DEVELOPLAYER:
+                SetBottomTabs(true);
+                developLayer.gameObject.SetActive(true);
+                //developLayer.Initialize();
                 break;
             default:
                 uiLayer = UILayer.NULL;
@@ -61,7 +71,6 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
-        this.uiLayer = uiLayer;
     }
 
 
@@ -74,6 +83,9 @@ public class UIManager : MonoBehaviour
                 break;
             case UILayer.MAINLAYER:
                 mainLayer.gameObject.SetActive(false);
+                break;
+            case UILayer.DEVELOPLAYER:
+                developLayer.gameObject.SetActive(false);
                 break;
             default:
                 Debug.LogWarning($"没找到 {uiLayer} 层");
@@ -89,10 +101,31 @@ public class UIManager : MonoBehaviour
     public void SwitchLayer(UILayer uiLayer)
     {
         //隐藏当前层，并打开下一层
-        if (this.uiLayer != UILayer.NULL) HideLayer(this.uiLayer);
+        if (this.uiLayer != UILayer.NULL)
+            HideLayer(this.uiLayer);
         ShowLayer(uiLayer);
 
 
+    }
+
+    /// <summary>
+    /// 设置是否显示底部页签
+    /// </summary>
+    /// <param name="_bool"></param>
+    void SetBottomTabs(bool _bool)
+    {
+        bottomTabs.SetActive(_bool);
+    }
+
+
+    public UILayer GetUILayer()
+    {
+        return uiLayer;
+    }
+
+    void SetUILayer(UILayer uiLayer)
+    {
+        this.uiLayer = uiLayer;
     }
 
 }

@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 #if !UNITY_EDITOR
         cursorObj.GetComponent<SpriteRenderer>().enabled = false;
 #endif
-
+        guideLine.SetActive(false);
     }
 
     // Update is called once per frame
