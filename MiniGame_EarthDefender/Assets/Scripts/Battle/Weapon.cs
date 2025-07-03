@@ -47,7 +47,7 @@ public class Weapon : MonoBehaviour
     int GetWeaponAttack()
     {
         var atkLv = PlayerPrefs.GetInt("playerData_atk_level");
-        var basicValue = cfg.Tables.tb.PlayerAttrLevel.Get(atkLv).BasicAtk;
+        var basicValue = cfg.Tables.tb.PlayerAttrLevel.Get(atkLv).BasicAtk.Value;
         var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
 
         float final = basicValue * (1 + additionValue);

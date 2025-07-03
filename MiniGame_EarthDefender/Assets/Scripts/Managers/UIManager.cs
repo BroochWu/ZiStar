@@ -51,8 +51,6 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UILayer.BATTLELAYER:
-                SetBottomTabs(false);
-                battleLayer.gameObject.SetActive(true);
                 battleLayer.Initialize();
                 break;
             case UILayer.MAINLAYER:
@@ -63,7 +61,7 @@ public class UIManager : MonoBehaviour
             case UILayer.DEVELOPLAYER:
                 SetBottomTabs(true);
                 developLayer.gameObject.SetActive(true);
-                //developLayer.Initialize();
+                developLayer.Initialize();
                 break;
             default:
                 uiLayer = UILayer.NULL;
@@ -79,6 +77,7 @@ public class UIManager : MonoBehaviour
         switch (uiLayer)
         {
             case UILayer.BATTLELAYER:
+                SetBottomTabs(false);
                 battleLayer.gameObject.SetActive(false);
                 break;
             case UILayer.MAINLAYER:
@@ -100,6 +99,11 @@ public class UIManager : MonoBehaviour
     /// <param name="uiLayer"></param>
     public void SwitchLayer(UILayer uiLayer)
     {
+        if (uiLayer == this.uiLayer)
+        {
+            Debug.LogWarning("已在此层了");
+            return;
+        }
         //隐藏当前层，并打开下一层
         if (this.uiLayer != UILayer.NULL)
             HideLayer(this.uiLayer);

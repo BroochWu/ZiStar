@@ -17,6 +17,7 @@ public class BattleUI : MonoBehaviour
 
     public void Initialize()
     {
+        gameObject.SetActive(true);
         battleFail.SetActive(false);
         battleSuccess.SetActive(false);
         RefreshEarthHp();

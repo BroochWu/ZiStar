@@ -18,8 +18,8 @@ public sealed partial class PlayerAttrLevel : Luban.BeanBase
     public PlayerAttrLevel(JSONNode _buf) 
     {
         { if(!_buf["level"].IsNumber) { throw new SerializationException(); }  Level = _buf["level"]; }
-        { if(!_buf["basic_hp"].IsNumber) { throw new SerializationException(); }  BasicHp = _buf["basic_hp"]; }
-        { if(!_buf["basic_atk"].IsNumber) { throw new SerializationException(); }  BasicAtk = _buf["basic_atk"]; }
+        { if(!_buf["basic_hp"].IsObject) { throw new SerializationException(); }  BasicHp = global::cfg.Beans.Com_ValueResPair.DeserializeCom_ValueResPair(_buf["basic_hp"]);  }
+        { if(!_buf["basic_atk"].IsObject) { throw new SerializationException(); }  BasicAtk = global::cfg.Beans.Com_ValueResPair.DeserializeCom_ValueResPair(_buf["basic_atk"]);  }
     }
 
     public static PlayerAttrLevel DeserializePlayerAttrLevel(JSONNode _buf)
@@ -31,20 +31,16 @@ public sealed partial class PlayerAttrLevel : Luban.BeanBase
     /// 等级
     /// </summary>
     public readonly int Level;
-    /// <summary>
-    /// 城防血量
-    /// </summary>
-    public readonly int BasicHp;
-    /// <summary>
-    /// 基础伤害
-    /// </summary>
-    public readonly int BasicAtk;
+    public readonly Beans.Com_ValueResPair BasicHp;
+    public readonly Beans.Com_ValueResPair BasicAtk;
    
     public const int __ID__ = -2070093563;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        BasicHp?.ResolveRef(tables);
+        BasicAtk?.ResolveRef(tables);
     }
 
     public override string ToString()
