@@ -111,7 +111,9 @@ public class Enemy : MonoBehaviour
         // 优化距离检查：每5帧检查一次，每次检查顺便把层级-1，以让受击的永远在最前面
         if (Time.frameCount % 5 == 0)
         {
-            if ((transform.position - _earth.position).sqrMagnitude <= _enemyStopDisSqr)
+            var dis = ((Vector2)(transform.position - _earth.position)).sqrMagnitude;
+            // Debug.Log(dis + " " + _enemyStopDisSqr);
+            if (dis <= _enemyStopDisSqr)
             {
                 _state = EnemyState.ATTACK;
                 StartCoroutine(Attack());

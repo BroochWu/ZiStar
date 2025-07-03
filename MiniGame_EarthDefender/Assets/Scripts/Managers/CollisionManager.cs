@@ -70,8 +70,15 @@ public class CollisionManager : MonoBehaviour
         SimpleCollider colA = a.GetComponent<SimpleCollider>();
         SimpleCollider colB = b.GetComponent<SimpleCollider>();
 
-        float distance = Vector2.Distance(a.transform.position, b.transform.position);
-        return distance < (colA.Size + colB.Size) / 2f;
+        // float distance = Vector2.Distance(a.transform.position, b.transform.position);
+        // return distance < (colA.Size + colB.Size) / 2f;
+
+        //注意Z轴
+        float distance =
+         (a.transform.position - b.transform.position).sqrMagnitude -
+         (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z);
+        // Debug.Log("碰撞：" + distance + " " + Mathf.Pow((colA.Size + colB.Size) / 2f, 2));
+        return distance < Mathf.Pow((colA.Size + colB.Size) / 2f, 2);
     }
 
     public void RegisterEnemy(GameObject enemy)
