@@ -2,26 +2,26 @@
   {
     "id": 1001,
     "level": 1,
-    "damage": 10
+    "damage_multi": 0
   },
   {
     "id": 1001,
     "level": 2,
-    "damage": 15
+    "damage_multi": 500
   },
   {
     "id": 1001,
     "level": 3,
-    "damage": 20
+    "damage_multi": 1000
   },
   {
     "id": 1002,
     "level": 1,
-    "damage": 10
+    "damage_multi": 0
   },
   {
     "id": 1002,
     "level": 2,
-    "damage": 20
+    "damage_multi": 500
   }
 ]

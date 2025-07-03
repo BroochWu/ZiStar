@@ -1,26 +1,32 @@
 [
   {
     "level": 1,
-    "earth_hp": 1000
+    "basic_hp": 1000,
+    "basic_atk": 10
   },
   {
     "level": 2,
-    "earth_hp": 1200
+    "basic_hp": 1200,
+    "basic_atk": 12
   },
   {
     "level": 3,
-    "earth_hp": 1400
+    "basic_hp": 1400,
+    "basic_atk": 14
   },
   {
     "level": 4,
-    "earth_hp": 1600
+    "basic_hp": 1600,
+    "basic_atk": 16
   },
   {
     "level": 5,
-    "earth_hp": 1800
+    "basic_hp": 1800,
+    "basic_atk": 18
   },
   {
     "level": 6,
-    "earth_hp": 2000
+    "basic_hp": 2000,
+    "basic_atk": 20
   }
 ]

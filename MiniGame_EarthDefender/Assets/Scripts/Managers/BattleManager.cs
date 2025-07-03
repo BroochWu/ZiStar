@@ -106,7 +106,7 @@ public class BattleManager : MonoBehaviour
 
         //玩家数据加载
         var playerConfig = cfg.Tables.tb.PlayerAttrLevel;
-        dataInitEarthHp = playerConfig.Get(PlayerPrefs.GetInt("playerData_hp_level")).EarthHp;
+        dataInitEarthHp = playerConfig.Get(PlayerPrefs.GetInt("playerData_hp_level")).BasicHp;
         currentEarthHp = dataInitEarthHp;
 
         //关卡配置

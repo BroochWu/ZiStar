@@ -19,7 +19,7 @@ public sealed partial class WeaponLevel : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["level"].IsNumber) { throw new SerializationException(); }  Level = _buf["level"]; }
-        { if(!_buf["damage"].IsNumber) { throw new SerializationException(); }  Damage = _buf["damage"]; }
+        { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
     }
 
     public static WeaponLevel DeserializeWeaponLevel(JSONNode _buf)
@@ -36,9 +36,9 @@ public sealed partial class WeaponLevel : Luban.BeanBase
     /// </summary>
     public readonly int Level;
     /// <summary>
-    /// 伤害
+    /// 伤害加成率（万分数）
     /// </summary>
-    public readonly int Damage;
+    public readonly int DamageMulti;
    
     public const int __ID__ = 327594454;
     public override int GetTypeId() => __ID__;
@@ -52,7 +52,7 @@ public sealed partial class WeaponLevel : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "level:" + Level + ","
-        + "damage:" + Damage + ","
+        + "damageMulti:" + DamageMulti + ","
         + "}";
     }
 }

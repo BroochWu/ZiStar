@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
 
         isReleased = false;
         timer = 0f;
-        bulletDamage = parent.damage;
+        bulletDamage = parent.attack;
     }
     public void Initialize(Enemy parent)
     {

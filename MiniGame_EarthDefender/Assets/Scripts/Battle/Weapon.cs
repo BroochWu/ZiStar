@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     private Transform bulletInitTransform;
     private Coroutine corShootBullet;
     private WaitForSeconds rateOfFire;
-    public int damage;
+    public int attack;
     private int weaponLevel;
 
 
@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour
         this.bulletInitTransform = bulletInitTransform;
         this.weaponLevel = weaponLevel;
         //初始化武器伤害
-        this.damage = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).Damage;
+        this.attack = GetWeaponAttack();
 
         if (thisWeapon == null)
         {
@@ -37,6 +37,22 @@ public class Weapon : MonoBehaviour
         }
 
         UpdateData();
+    }
+
+
+    /// <summary>
+    /// 获取武器伤害
+    /// </summary>
+    /// <returns></returns>
+    int GetWeaponAttack()
+    {
+        var atkLv = PlayerPrefs.GetInt("playerData_atk_level");
+        var basicValue = cfg.Tables.tb.PlayerAttrLevel.Get(atkLv).BasicAtk;
+        var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
+
+        float final = basicValue * (1 + additionValue);
+
+        return (int)final;
     }
 
     /// <summary>
@@ -54,7 +70,7 @@ public class Weapon : MonoBehaviour
         bulletSpeed = thisWeapon.BulletSpeed;
         bulletScale = thisWeapon.BulletScale;
         bulletType = thisWeapon.BulletPrefab;
-        damage = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).Damage;
+        attack = GetWeaponAttack();
 
         // 预热对象池（可选）
         // BattleManager.Instance?.poolBullet.WarmUpPool(bulletType, rowCount * 5);

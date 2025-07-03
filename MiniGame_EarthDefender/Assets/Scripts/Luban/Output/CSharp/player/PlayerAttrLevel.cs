@@ -18,7 +18,8 @@ public sealed partial class PlayerAttrLevel : Luban.BeanBase
     public PlayerAttrLevel(JSONNode _buf) 
     {
         { if(!_buf["level"].IsNumber) { throw new SerializationException(); }  Level = _buf["level"]; }
-        { if(!_buf["earth_hp"].IsNumber) { throw new SerializationException(); }  EarthHp = _buf["earth_hp"]; }
+        { if(!_buf["basic_hp"].IsNumber) { throw new SerializationException(); }  BasicHp = _buf["basic_hp"]; }
+        { if(!_buf["basic_atk"].IsNumber) { throw new SerializationException(); }  BasicAtk = _buf["basic_atk"]; }
     }
 
     public static PlayerAttrLevel DeserializePlayerAttrLevel(JSONNode _buf)
@@ -33,7 +34,11 @@ public sealed partial class PlayerAttrLevel : Luban.BeanBase
     /// <summary>
     /// 城防血量
     /// </summary>
-    public readonly int EarthHp;
+    public readonly int BasicHp;
+    /// <summary>
+    /// 基础伤害
+    /// </summary>
+    public readonly int BasicAtk;
    
     public const int __ID__ = -2070093563;
     public override int GetTypeId() => __ID__;
@@ -46,7 +51,8 @@ public sealed partial class PlayerAttrLevel : Luban.BeanBase
     {
         return "{ "
         + "level:" + Level + ","
-        + "earthHp:" + EarthHp + ","
+        + "basicHp:" + BasicHp + ","
+        + "basicAtk:" + BasicAtk + ","
         + "}";
     }
 }

@@ -5,6 +5,11 @@
     "param_value_init": "1"
   },
   {
+    "data_str": "playerData_atk_level",
+    "param_type": 1,
+    "param_value_init": "1"
+  },
+  {
     "data_str": "dungeon_passed_level",
     "param_type": 1,
     "param_value_init": "0"
