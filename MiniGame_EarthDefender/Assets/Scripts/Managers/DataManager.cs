@@ -68,12 +68,14 @@ public class DataManager : MonoBehaviour
     {
         if (!isCostEnough)
         {
-            Debug.LogWarning("资源不足，升级失败！");
+            // Debug.LogWarning("资源不足，升级失败！");
+            UIManager.Instance.CommonToast("资源不足，升级失败！");
             return false;
         }
         if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicHp == null)
         {
-            Debug.LogWarning("已满级！");
+            // Debug.LogWarning("已满级！");
+            UIManager.Instance.CommonToast("已满级！");
             return false;
         }
         PlayerPrefs.SetInt("playerData_hp_level", newLv);
@@ -83,12 +85,12 @@ public class DataManager : MonoBehaviour
     {
         if (!isCostEnough)
         {
-            Debug.LogWarning("资源不足，升级失败！");
+            UIManager.Instance.CommonToast("资源不足，升级失败！");
             return false;
         }
         if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicAtk == null)
         {
-            Debug.LogWarning("已满级！");
+            UIManager.Instance.CommonToast("已满级！");
             return false;
         }
         PlayerPrefs.SetInt("playerData_atk_level", newLv);

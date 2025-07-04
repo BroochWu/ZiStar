@@ -19,6 +19,7 @@ public sealed partial class Item : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["image_path"].IsString) { throw new SerializationException(); }  ImagePath = _buf["image_path"]; }
     }
 
     public static Item DeserializeItem(JSONNode _buf)
@@ -34,6 +35,10 @@ public sealed partial class Item : Luban.BeanBase
     /// 名称
     /// </summary>
     public readonly string TextName;
+    /// <summary>
+    /// 图片地址
+    /// </summary>
+    public readonly string ImagePath;
    
     public const int __ID__ = 2107285806;
     public override int GetTypeId() => __ID__;
@@ -47,6 +52,7 @@ public sealed partial class Item : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "imagePath:" + ImagePath + ","
         + "}";
     }
 }

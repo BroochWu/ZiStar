@@ -6,9 +6,11 @@ public class DevelopUI : MonoBehaviour
     public Text atkLevelText;
     public Text atkValueText;
     public Text atkLevelUpCostText;
+    public Image atkLevelUpCostImg;
     public Text hpLevelText;
     public Text hpValueText;
     public Text hpLevelUpCostText;
+    public Image hpLevelUpCostImg;
 
     private int nowHpLevel;
     private int nowAtkLevel;
@@ -30,7 +32,7 @@ public class DevelopUI : MonoBehaviour
         //当前等级
         nowAtkLevel = PlayerPrefs.GetInt("playerData_atk_level");
         //消耗资源
-        SetAtkResText(false);
+        RefreshAtkResCost(false);
         //数据
         atkLevelText.text = $"等级：{nowAtkLevel}";
         atkValueText.text = DataManager.Instance.GetPlayerBasicAtk().ToString();
@@ -39,7 +41,7 @@ public class DevelopUI : MonoBehaviour
     void RefreshPlayerHp()
     {
         nowHpLevel = PlayerPrefs.GetInt("playerData_hp_level");
-        SetHpResText(false);
+        RefreshHpResCost(false);
         hpLevelText.text = $"等级：{nowHpLevel}";
         hpValueText.text = DataManager.Instance.GetPlayerBasicHp().ToString();
 
@@ -48,21 +50,22 @@ public class DevelopUI : MonoBehaviour
     public void TryLevelUpAtk()
     {
         nowAtkLevel = PlayerPrefs.GetInt("playerData_atk_level");
-        SetAtkResText(true);
+        RefreshAtkResCost(true);
         RefreshPlayerAtk();
 
     }
     public void TryLevelUpHp()
     {
         nowHpLevel = PlayerPrefs.GetInt("playerData_hp_level");
-        SetHpResText(true);
+        RefreshHpResCost(true);
         RefreshPlayerHp();
 
     }
 
-    void SetAtkResText(bool cost)
+    void RefreshAtkResCost(bool cost)
     {
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowAtkLevel).BasicAtk.ItemRequire;
+        atkLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
         //需要消耗资源，并且成功升级了
         if (cost)
         {
@@ -75,9 +78,10 @@ public class DevelopUI : MonoBehaviour
             item.Require,
             DataManager.Instance.GetResourceCount(item.Id_Ref));
     }
-    void SetHpResText(bool cost)
+    void RefreshHpResCost(bool cost)
     {
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowHpLevel).BasicHp.ItemRequire;
+        hpLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
 
         //需要消耗资源、未满级、资源足够，则消耗资源并成功升级
         if (cost)

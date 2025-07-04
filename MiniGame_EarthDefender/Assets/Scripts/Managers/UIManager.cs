@@ -1,4 +1,5 @@
 using System;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public enum UILayer
@@ -18,6 +19,8 @@ public class UIManager : MonoBehaviour
     public MainUI mainLayer;
     public DevelopUI developLayer;
     public GameObject bottomTabs;
+    public Transform dynamicContainer;//动态UI
+    public GameObject CommonToastObj;
     private UILayer uiLayer = UILayer.NULL;
 
     void Awake()
@@ -130,6 +133,13 @@ public class UIManager : MonoBehaviour
     void SetUILayer(UILayer uiLayer)
     {
         this.uiLayer = uiLayer;
+    }
+
+    public void CommonToast(string desc)
+    {
+        var a = Instantiate(CommonToastObj, dynamicContainer).GetComponent<CommonToast>();
+        a.Initialize(desc);
+
     }
 
 }

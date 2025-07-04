@@ -1,10 +1,12 @@
 [
   {
     "id": 1,
-    "text_name": "金币"
+    "text_name": "金币",
+    "image_path": "Items/item_gold"
   },
   {
     "id": 2,
-    "text_name": "钻石"
+    "text_name": "钻石",
+    "image_path": "Items/item_diamond"
   }
 ]
