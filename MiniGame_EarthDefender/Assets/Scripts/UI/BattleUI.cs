@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,10 +7,13 @@ public class BattleUI : MonoBehaviour
 {
     public Text gameTimeUI;
     public Text earthHpText;
+    public GameObject battleOver;
     public GameObject battleFail;
     public GameObject battleSuccess;
     public GameObject expProgressBar;//经验值进度条
+    public Transform AwardsContainer;//奖励列表
     public Text expLvText;//当前等级
+    public Dictionary<cfg.item.Item, int> awardsList = new();
 
     private float updateFpsInterval = 1f; // 更新帧率的间隔
     private float fpsCounter; // fps计数器
@@ -17,11 +22,19 @@ public class BattleUI : MonoBehaviour
 
     public void Initialize()
     {
-        gameObject.SetActive(true);
+        foreach (Transform child in AwardsContainer)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+
+        battleOver.SetActive(false);
         battleFail.SetActive(false);
         battleSuccess.SetActive(false);
         RefreshEarthHp();
         RefreshExpLevel();
+
+        gameObject.SetActive(true);
+
     }
 
     void Update()
@@ -51,14 +64,18 @@ public class BattleUI : MonoBehaviour
     /// </summary>
     public void BattleFail()
     {
+        battleOver.SetActive(true);
         battleFail.SetActive(true);
+        StartCoroutine(AddAwardList());
     }
     /// <summary>
     /// 游戏胜利时的UI
     /// </summary>
     public void BattleSuccess()
     {
+        battleOver.SetActive(true);
         battleSuccess.SetActive(true);
+        StartCoroutine(AddAwardList());
 
     }
 
@@ -82,6 +99,18 @@ public class BattleUI : MonoBehaviour
         float _nextExp = BattleManager.Instance.nextExp;
         expLvText.text = _currentLv.ToString();
         expProgressBar.transform.localScale = new Vector3(_currentExp / _nextExp, 1, 1);
+    }
+
+    IEnumerator AddAwardList()
+    {
+        var itemObj = Resources.Load<GameObject>("Prefabs/Common/Item");
+        var wait = new WaitForSecondsRealtime(0.5f);
+        foreach (var award in awardsList)
+        {
+            if (award.Value == 0) continue;
+            Instantiate(itemObj, AwardsContainer).GetComponent<ItemUI>().Initialize(award.Key, award.Value);
+            yield return wait;
+        }
     }
 
 }

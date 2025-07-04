@@ -22,11 +22,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -46,11 +46,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -70,11 +70,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -101,11 +101,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -132,11 +132,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -163,11 +163,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -194,11 +194,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   },
@@ -225,11 +225,11 @@
     "pass_award": [
       {
         "id": 1,
-        "require": 10
+        "number": 10
       },
       {
         "id": 2,
-        "require": 5
+        "number": 5
       }
     ]
   }

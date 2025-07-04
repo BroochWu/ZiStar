@@ -13,6 +13,20 @@ public class DataManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 获取奖励
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="count"></param>
+    public void GainResource(cfg.item.Item item, int count)
+    {
+        var nowHas = 0;
+        if (PlayerPrefs.HasKey($"item_{item.Id}"))
+        {
+            nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
+        }
+        PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
+    }
 
     /// <summary>
     /// 当玩家要消耗资源时进行检测

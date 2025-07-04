@@ -70,12 +70,12 @@ public class DevelopUI : MonoBehaviour
         if (cost)
         {
             // nowAtkLevel += 1;
-            DataManager.Instance.SetPlayerBasicAtkLevel(nowAtkLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Require));
+            DataManager.Instance.SetPlayerBasicAtkLevel(nowAtkLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Number));
         }
 
         SetRequireResText(
             atkLevelUpCostText,
-            item.Require,
+            item.Number,
             DataManager.Instance.GetResourceCount(item.Id_Ref));
     }
     void RefreshHpResCost(bool cost)
@@ -87,12 +87,12 @@ public class DevelopUI : MonoBehaviour
         if (cost)
         {
             // nowHpLevel += 1;;
-            DataManager.Instance.SetPlayerBasicHpLevel(nowHpLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Require));
+            DataManager.Instance.SetPlayerBasicHpLevel(nowHpLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Number));
         }
 
         SetRequireResText(
             hpLevelUpCostText,
-            item.Require,
+            item.Number,
             DataManager.Instance.GetResourceCount(item.Id_Ref));
     }
 

@@ -22,7 +22,7 @@ public sealed partial class Item_Require : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         Id_Ref = null;
-        { if(!_buf["require"].IsNumber) { throw new SerializationException(); }  Require = _buf["require"]; }
+        { if(!_buf["number"].IsNumber) { throw new SerializationException(); }  Number = _buf["number"]; }
     }
 
     public static Item_Require DeserializeItem_Require(JSONNode _buf)
@@ -36,9 +36,9 @@ public sealed partial class Item_Require : Luban.BeanBase
     public readonly int Id;
     public item.Item Id_Ref;
     /// <summary>
-    /// 要几个
+    /// 数量
     /// </summary>
-    public readonly int Require;
+    public readonly int Number;
    
     public const int __ID__ = 1138206116;
     public override int GetTypeId() => __ID__;
@@ -52,7 +52,7 @@ public sealed partial class Item_Require : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "require:" + Require + ","
+        + "number:" + Number + ","
         + "}";
     }
 }

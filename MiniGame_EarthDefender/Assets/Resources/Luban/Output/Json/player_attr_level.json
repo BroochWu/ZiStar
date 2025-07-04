@@ -5,14 +5,14 @@
       "value": 1000,
       "item_require": {
         "id": 1,
-        "require": 1
+        "number": 1
       }
     },
     "basic_atk": {
       "value": 10,
       "item_require": {
         "id": 1,
-        "require": 1
+        "number": 1
       }
     }
   },
@@ -22,14 +22,14 @@
       "value": 1200,
       "item_require": {
         "id": 1,
-        "require": 2
+        "number": 2
       }
     },
     "basic_atk": {
       "value": 12,
       "item_require": {
         "id": 1,
-        "require": 2
+        "number": 2
       }
     }
   },
@@ -39,14 +39,14 @@
       "value": 1400,
       "item_require": {
         "id": 1,
-        "require": 4
+        "number": 4
       }
     },
     "basic_atk": {
       "value": 14,
       "item_require": {
         "id": 1,
-        "require": 4
+        "number": 4
       }
     }
   },
@@ -56,14 +56,14 @@
       "value": 1600,
       "item_require": {
         "id": 1,
-        "require": 6
+        "number": 6
       }
     },
     "basic_atk": {
       "value": 16,
       "item_require": {
         "id": 1,
-        "require": 6
+        "number": 6
       }
     }
   },
@@ -73,14 +73,14 @@
       "value": 1800,
       "item_require": {
         "id": 1,
-        "require": 8
+        "number": 8
       }
     },
     "basic_atk": {
       "value": 18,
       "item_require": {
         "id": 1,
-        "require": 8
+        "number": 8
       }
     }
   },
@@ -90,14 +90,14 @@
       "value": 2000,
       "item_require": {
         "id": 1,
-        "require": 10
+        "number": 10
       }
     },
     "basic_atk": {
       "value": 20,
       "item_require": {
         "id": 1,
-        "require": 10
+        "number": 10
       }
     }
   }
