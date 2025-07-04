@@ -21,6 +21,7 @@ public sealed partial class Dungeon : Luban.BeanBase
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["dungeon_level"].IsNumber) { throw new SerializationException(); }  DungeonLevel = _buf["dungeon_level"]; }
         { var __json0 = _buf["portals"]; if(!__json0.IsArray) { throw new SerializationException(); } Portals = new System.Collections.Generic.List<Beans.Dungeon_Portals>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Dungeon_Portals __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Dungeon_Portals.DeserializeDungeon_Portals(__e0);  }  Portals.Add(__v0); }   }
+        { var __json0 = _buf["pass_award"]; if(!__json0.IsArray) { throw new SerializationException(); } PassAward = new System.Collections.Generic.List<Beans.Item_Require>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Item_Require __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Item_Require.DeserializeItem_Require(__e0);  }  PassAward.Add(__v0); }   }
     }
 
     public static Dungeon DeserializeDungeon(JSONNode _buf)
@@ -41,6 +42,10 @@ public sealed partial class Dungeon : Luban.BeanBase
     /// </summary>
     public readonly int DungeonLevel;
     public readonly System.Collections.Generic.List<Beans.Dungeon_Portals> Portals;
+    /// <summary>
+    /// 通关奖励
+    /// </summary>
+    public readonly System.Collections.Generic.List<Beans.Item_Require> PassAward;
    
     public const int __ID__ = -841579674;
     public override int GetTypeId() => __ID__;
@@ -48,6 +53,7 @@ public sealed partial class Dungeon : Luban.BeanBase
     public  void ResolveRef(Tables tables)
     {
         foreach (var _e in Portals) { _e?.ResolveRef(tables); }
+        foreach (var _e in PassAward) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
@@ -57,6 +63,7 @@ public sealed partial class Dungeon : Luban.BeanBase
         + "textName:" + TextName + ","
         + "dungeonLevel:" + DungeonLevel + ","
         + "portals:" + Luban.StringUtil.CollectionToString(Portals) + ","
+        + "passAward:" + Luban.StringUtil.CollectionToString(PassAward) + ","
         + "}";
     }
 }
