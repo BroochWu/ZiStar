@@ -15,12 +15,12 @@
     "param_value_init": "0"
   },
   {
-    "data_str": "item_gold",
+    "data_str": "item_1",
     "param_type": 1,
-    "param_value_init": "100"
+    "param_value_init": "10"
   },
   {
-    "data_str": "item_diamond",
+    "data_str": "item_2",
     "param_type": 1,
     "param_value_init": "0"
   }

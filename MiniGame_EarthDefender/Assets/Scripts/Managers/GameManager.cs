@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         BasicSetting();
-        CheckIfFirstLoad();
 
         mainCam = Camera.main;
         mainCamBattlePos = new Vector3(0, 0, -10);
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CheckIfFirstLoad();
         SwitchGameStateToMainView();
     }
 
@@ -103,33 +103,11 @@ public class GameManager : MonoBehaviour
     {
         //根据是否通关过任意关卡来判断是否首次加载游戏
         if (PlayerPrefs.HasKey("dungeon_passed_level")) return;
-        FirstLoad();
+        //加载初始数据
+        DataManager.Instance.FirstLoad();
         Debug.Log("首次加载游戏，加载成功");
     }
 
-
-    /// <summary>
-    /// 首次加载的内容
-    /// </summary>
-    void FirstLoad()
-    {
-        var playerData = cfg.Tables.tb.PlayerData;
-        //初始化数据加载
-        foreach (var data in playerData.DataList)
-        {
-            switch (data.ParamType)
-            {
-                case cfg.Enums.Com.ParamType.INT:
-                    PlayerPrefs.SetInt(data.DataStr, int.Parse(data.ParamValueInit));
-                    break;
-                case cfg.Enums.Com.ParamType.STRING:
-                    PlayerPrefs.SetString(data.DataStr, data.ParamValueInit);
-                    break;
-            }
-
-        }
-
-    }
 
 
     void MoveCamera(Vector3 newPos, int newSize)
