@@ -80,6 +80,14 @@ public class DevelopUI : MonoBehaviour
                     DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, true);
                 }
             }
+            else
+            {
+                if (cost) UIManager.Instance.CommonToast("资源不足！");
+            }
+        }
+        else
+        {
+            if (cost) UIManager.Instance.CommonToast("已满级！");
         }
 
         SetRequireResText(
@@ -107,6 +115,14 @@ public class DevelopUI : MonoBehaviour
 
                 }
             }
+            else
+            {
+                if (cost) UIManager.Instance.CommonToast("资源不足！");
+            }
+        }
+        else
+        {
+            if (cost) UIManager.Instance.CommonToast("已满级！");
         }
 
         SetRequireResText(

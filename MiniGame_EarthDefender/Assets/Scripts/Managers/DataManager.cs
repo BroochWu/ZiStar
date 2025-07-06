@@ -39,7 +39,6 @@ public class DataManager : MonoBehaviour
         var nowHas = GetResourceCount(item);
         if (count > nowHas)
         {
-            if (wantToCost) UIManager.Instance.CommonToast("资源不足！");
             return false;
         }
 
@@ -87,9 +86,6 @@ public class DataManager : MonoBehaviour
     {
         if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicHp == null)
         {
-            // Debug.LogWarning("已满级！");
-            if (wantToLevelUp) UIManager.Instance.CommonToast("已满级！");
-
             return false;
         }
 
