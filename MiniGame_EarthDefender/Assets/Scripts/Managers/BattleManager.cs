@@ -384,7 +384,6 @@ public class BattleManager : MonoBehaviour
             {
                 DataManager.Instance.GainResource(award.Id_Ref, num);
                 UIManager.Instance.battleLayer.awardsList.Add(award.Id_Ref, num);
-                Debug.Log("in BM:" + award.Id_Ref + "  " + num + "  " + _multi + "  " + battleState);
             }
         }
 

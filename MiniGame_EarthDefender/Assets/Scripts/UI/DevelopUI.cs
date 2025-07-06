@@ -67,39 +67,59 @@ public class DevelopUI : MonoBehaviour
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowAtkLevel).BasicAtk.ItemRequire;
         atkLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
         //需要消耗资源，并且成功升级了
-        if (cost)
+        var isRed = true;
+        // nowAtkLevel += 1;
+        if (DataManager.Instance.CheckOrSetPLBasicAtkLevel(nowAtkLevel + 1, false))
         {
-            // nowAtkLevel += 1;
-            DataManager.Instance.SetPlayerBasicAtkLevel(nowAtkLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Number));
+            if (DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, false))
+            {
+                isRed = false;
+                if (cost)
+                {
+                    DataManager.Instance.CheckOrSetPLBasicAtkLevel(nowAtkLevel + 1, true);
+                    DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, true);
+                }
+            }
         }
 
         SetRequireResText(
             atkLevelUpCostText,
             item.Number,
-            DataManager.Instance.GetResourceCount(item.Id_Ref));
+            DataManager.Instance.GetResourceCount(item.Id_Ref),
+            isRed);
     }
     void RefreshHpResCost(bool cost)
     {
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowHpLevel).BasicHp.ItemRequire;
         hpLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
+        var isRed = true;
 
         //需要消耗资源、未满级、资源足够，则消耗资源并成功升级
-        if (cost)
+        if (DataManager.Instance.CheckOrSetPLBasicHpLevel(nowHpLevel + 1, false))
         {
-            // nowHpLevel += 1;;
-            DataManager.Instance.SetPlayerBasicHpLevel(nowHpLevel + 1, DataManager.Instance.CostResource(item.Id_Ref, item.Number));
+            if (DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, false))
+            {
+                isRed = false;
+                if (cost)
+                {
+                    DataManager.Instance.CheckOrSetPLBasicHpLevel(nowHpLevel + 1, true);
+                    DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, true);
+
+                }
+            }
         }
 
         SetRequireResText(
             hpLevelUpCostText,
             item.Number,
-            DataManager.Instance.GetResourceCount(item.Id_Ref));
+            DataManager.Instance.GetResourceCount(item.Id_Ref),
+            isRed);
     }
 
-    void SetRequireResText(Text _text, int _costItemCount, int _nowItemCount)
+    void SetRequireResText(Text _text, int _costItemCount, int _nowItemCount, bool isRed)
     {
         _text.text = _costItemCount.ToString();
-        _text.color = _nowItemCount >= _costItemCount ? Color.black : Color.red;
+        _text.color = isRed ? Color.red : Color.black;
     }
 
 

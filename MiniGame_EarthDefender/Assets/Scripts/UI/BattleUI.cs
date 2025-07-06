@@ -132,7 +132,6 @@ public class BattleUI : MonoBehaviour
             if (award.Value == 0) continue;
             Instantiate(itemObj, awardsContainer).GetComponent<ItemUI>().Initialize(award.Key, award.Value);
 
-            Debug.Log("in BUI:" + award.Key + "  " + award.Value);
         }
     }
 

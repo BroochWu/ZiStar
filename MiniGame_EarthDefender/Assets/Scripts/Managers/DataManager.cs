@@ -1,5 +1,6 @@
 //专门管理玩家数据类
 
+using cfg.Beans;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -33,18 +34,22 @@ public class DataManager : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <param name="count"></param>
-    public bool CostResource(cfg.item.Item item, int count)
+    public bool CheckOrCostResource(cfg.item.Item item, int count, bool wantToCost)
     {
         var nowHas = GetResourceCount(item);
         if (count > nowHas)
         {
-            Debug.LogWarning("资源不足！");
+            if (wantToCost) UIManager.Instance.CommonToast("资源不足！");
             return false;
         }
 
-        var newValue = nowHas - count;
-        PlayerPrefs.SetInt($"item_{item.Id}", newValue);
-        Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+        if (wantToCost)
+        {
+            var newValue = nowHas - count;
+            PlayerPrefs.SetInt($"item_{item.Id}", newValue);
+            Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+        }
+
         return true;
     }
 
@@ -78,35 +83,33 @@ public class DataManager : MonoBehaviour
         return playerConfig.Get(PlayerPrefs.GetInt("playerData_atk_level")).BasicAtk.Value;
     }
 
-    public bool SetPlayerBasicHpLevel(int newLv, bool isCostEnough)
+    public bool CheckOrSetPLBasicHpLevel(int newLv, bool wantToLevelUp)
     {
-        if (!isCostEnough)
-        {
-            // Debug.LogWarning("资源不足，升级失败！");
-            UIManager.Instance.CommonToast("资源不足，升级失败！");
-            return false;
-        }
         if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicHp == null)
         {
             // Debug.LogWarning("已满级！");
-            UIManager.Instance.CommonToast("已满级！");
+            if (wantToLevelUp) UIManager.Instance.CommonToast("已满级！");
+
             return false;
         }
+
+        if (!wantToLevelUp) return true;
+
         PlayerPrefs.SetInt("playerData_hp_level", newLv);
+
         return true;
     }
-    public bool SetPlayerBasicAtkLevel(int newLv, bool isCostEnough)
+
+    public bool CheckOrSetPLBasicAtkLevel(int newLv, bool wantToLevelUp)
     {
-        if (!isCostEnough)
-        {
-            UIManager.Instance.CommonToast("资源不足，升级失败！");
-            return false;
-        }
         if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicAtk == null)
         {
-            UIManager.Instance.CommonToast("已满级！");
+            if (wantToLevelUp) UIManager.Instance.CommonToast("已满级！");
             return false;
         }
+
+        if (!wantToLevelUp) return true;
+
         PlayerPrefs.SetInt("playerData_atk_level", newLv);
         return true;
     }
