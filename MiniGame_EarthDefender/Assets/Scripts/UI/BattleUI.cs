@@ -11,7 +11,7 @@ public class BattleUI : MonoBehaviour
     public GameObject battleFail;
     public GameObject battleSuccess;
     public GameObject expProgressBar;//经验值进度条
-    public Transform AwardsContainer;//奖励列表
+    public Transform awardsContainer;//奖励列表
     public Text expLvText;//当前等级
     public Dictionary<cfg.item.Item, int> awardsList = new();
 
@@ -22,7 +22,7 @@ public class BattleUI : MonoBehaviour
 
     public void Initialize()
     {
-        foreach (Transform child in AwardsContainer)
+        foreach (Transform child in awardsContainer)
         {
             DestroyImmediate(child.gameObject);
         }
@@ -66,7 +66,7 @@ public class BattleUI : MonoBehaviour
     {
         battleOver.SetActive(true);
         battleFail.SetActive(true);
-        StartCoroutine(AddAwardList());
+        AddAwardList();
     }
     /// <summary>
     /// 游戏胜利时的UI
@@ -75,7 +75,7 @@ public class BattleUI : MonoBehaviour
     {
         battleOver.SetActive(true);
         battleSuccess.SetActive(true);
-        StartCoroutine(AddAwardList());
+        AddAwardList();
 
     }
 
@@ -101,15 +101,24 @@ public class BattleUI : MonoBehaviour
         expProgressBar.transform.localScale = new Vector3(_currentExp / _nextExp, 1, 1);
     }
 
-    IEnumerator AddAwardList()
+    void AddAwardList()
+    {
+        foreach (Transform a in awardsContainer)
+        {
+            DestroyImmediate(a.gameObject);
+        }
+        StartCoroutine(CorAddAwardList());
+    }
+
+    IEnumerator CorAddAwardList()
     {
         var itemObj = Resources.Load<GameObject>("Prefabs/Common/Item");
         var wait = new WaitForSecondsRealtime(0.5f);
         foreach (var award in awardsList)
         {
-            if (award.Value == 0) continue;
-            Instantiate(itemObj, AwardsContainer).GetComponent<ItemUI>().Initialize(award.Key, award.Value);
             yield return wait;
+            if (award.Value == 0) continue;
+            Instantiate(itemObj, awardsContainer).GetComponent<ItemUI>().Initialize(award.Key, award.Value);
         }
     }
 

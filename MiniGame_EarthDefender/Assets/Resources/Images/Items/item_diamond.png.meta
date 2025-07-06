@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      item_diamond_0: 9000493864713880545
+      item_diamond_1: -1232347626719038922
+      item_diamond_2: 74066800144127249
+      item_diamond_3: 569833037020877403
+      item_diamond_4: 6821874934137251380
+      item_diamond_5: 609033103279991346
+      item_diamond_6: -9157307408859509882
+      item_diamond_7: -3119684206874920573
+      item_diamond_8: 4900818468299737264
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

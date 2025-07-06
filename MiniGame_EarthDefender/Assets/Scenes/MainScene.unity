@@ -178,7 +178,7 @@ MonoBehaviour:
   battleFail: {fileID: 355724183}
   battleSuccess: {fileID: 637676916}
   expProgressBar: {fileID: 759753707}
-  AwardsContainer: {fileID: 471422621}
+  awardsContainer: {fileID: 471422621}
   expLvText: {fileID: 60236268}
 --- !u!1 &58323171
 GameObject:
