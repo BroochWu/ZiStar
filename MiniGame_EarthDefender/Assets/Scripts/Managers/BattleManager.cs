@@ -178,9 +178,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void BattleFail()
     {
+        battleState = BattleState.BATTLEFAIL;
         //地球血量清零则战斗失败
         AwardDungeon();
-        battleState = BattleState.BATTLEFAIL;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
 
@@ -194,11 +194,11 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void BattleSuccess()
     {
+        battleState = BattleState.BATTLESUCCESS;
         //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
         AwardDungeon();
         PlayerPrefs.SetInt("dungeon_passed_level", dungeonId);
 
-        battleState = BattleState.BATTLESUCCESS;
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
 
@@ -347,7 +347,7 @@ public class BattleManager : MonoBehaviour
         //   - 思路：加大玩家直接采取拿体力（假设有）换道具的方式的成本，鼓励玩家正常游玩
         //   - 20秒内主动退出将没有奖励
         //   - 20秒后主动退出只能获得10%
-        //   - 存活30秒失败，获得30%
+        //   - 存活小于40秒失败，获得30%；否则获得50%
         //   - 存活60秒失败，获得50%
 
         var _awardPassed = cfg.Tables.tb.Dungeon.Get(dungeonId).PassAward;
@@ -358,11 +358,11 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleState == BattleState.BATTLEFAIL)
         {
-            if (GameTime <= 30)
+            if (GameTime <= 40)
             {
                 _multi = 0.3f;
             }
-            else if (GameTime <= 60 && GameTime > 30)
+            else if (GameTime > 40)
             {
                 _multi = 0.5f;
             }
@@ -384,6 +384,7 @@ public class BattleManager : MonoBehaviour
             {
                 DataManager.Instance.GainResource(award.Id_Ref, num);
                 UIManager.Instance.battleLayer.awardsList.Add(award.Id_Ref, num);
+                Debug.Log("in BM:" + award.Id_Ref + "  " + num + "  " + _multi + "  " + battleState);
             }
         }
 

@@ -8,6 +8,7 @@ public class BattleUI : MonoBehaviour
     public Text gameTimeUI;
     public Text earthHpText;
     public GameObject battleOver;
+    public GameObject backBattleUI;
     public GameObject battleFail;
     public GameObject battleSuccess;
     public GameObject expProgressBar;//经验值进度条
@@ -34,8 +35,15 @@ public class BattleUI : MonoBehaviour
         RefreshEarthHp();
         RefreshExpLevel();
 
+        backBattleUI.SetActive(true);
         gameObject.SetActive(true);
 
+    }
+
+    public void UnRegister()
+    {
+        gameObject.SetActive(false);
+        backBattleUI.SetActive(false);
     }
 
     void Update()
@@ -109,8 +117,6 @@ public class BattleUI : MonoBehaviour
             DestroyImmediate(a.gameObject);
         }
 
-        Debug.Log(awardsList);
-
         awardsEmpty.SetActive(awardsList.Count == 0);
 
         if (awardsList.Count != 0) StartCoroutine(CorAddAwardList());
@@ -125,6 +131,8 @@ public class BattleUI : MonoBehaviour
             yield return wait;
             if (award.Value == 0) continue;
             Instantiate(itemObj, awardsContainer).GetComponent<ItemUI>().Initialize(award.Key, award.Value);
+
+            Debug.Log("in BUI:" + award.Key + "  " + award.Value);
         }
     }
 

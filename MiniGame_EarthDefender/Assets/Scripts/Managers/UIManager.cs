@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
         {
             case UILayer.BATTLELAYER:
                 SetBottomTabs(false);
-                battleLayer.gameObject.SetActive(false);
+                battleLayer.UnRegister();
                 break;
             case UILayer.MAINLAYER:
                 mainLayer.gameObject.SetActive(false);

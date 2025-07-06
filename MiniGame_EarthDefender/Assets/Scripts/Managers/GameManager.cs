@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Camera mainCam;
     private Vector3 mainCamBattlePos;
     private Vector3 mainCamMainViewPos;
-    private int mainCamBattleSize;
+    private float mainCamBattleSize;
     private int mainCamMainViewSize;
     private Coroutine CorCameraMove;
 
@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
         BasicSetting();
 
         mainCam = Camera.main;
-        mainCamBattlePos = new Vector3(0, 0, -10);
+        mainCamBattlePos = new Vector3(0, -0.3f, -10);
         mainCamMainViewPos = new Vector3(0, -25, -10);
-        mainCamBattleSize = 5;
+        mainCamBattleSize = 5.8f;
         mainCamMainViewSize = 30;
 
 
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    void MoveCamera(Vector3 newPos, int newSize)
+    void MoveCamera(Vector3 newPos, float newSize)
     {
         if (CorCameraMove != null) StopCoroutine(CorCameraMove);
         CorCameraMove = StartCoroutine(CameraMove(newPos, newSize));
@@ -121,9 +121,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="newPos"></param>
     /// <returns></returns>
-    IEnumerator CameraMove(Vector3 newPos, int newSize)
+    IEnumerator CameraMove(Vector3 newPos, float newSize)
     {
-        while (Mathf.Abs(newSize - mainCam.orthographicSize) >= 0.05f)
+        while (Mathf.Abs(newSize - mainCam.orthographicSize) >= 0.02f)
         {
             mainCam.transform.position = Vector3.Slerp(mainCam.transform.position, newPos, 0.04f);
             mainCam.orthographicSize = Mathf.Lerp(mainCam.orthographicSize, newSize, 0.04f);
