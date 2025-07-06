@@ -356,7 +356,7 @@ public class BattleManager : MonoBehaviour
         {
             _multi = 1;
         }
-        if (battleState == BattleState.BATTLEFAIL)
+        else if (battleState == BattleState.BATTLEFAIL)
         {
             if (GameTime <= 30)
             {
@@ -370,6 +370,10 @@ public class BattleManager : MonoBehaviour
             {
                 return;
             }
+        }
+        else
+        {
+            Debug.LogWarning($"干哪来了？怎么没有{battleState}啊");
         }
 
         UIManager.Instance.battleLayer.awardsList.Clear();
