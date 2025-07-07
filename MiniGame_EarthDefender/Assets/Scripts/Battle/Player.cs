@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject cursorObj;
     public GameObject shootPath;
     public GameObject guideLine;
+    public GameObject earthSprite;
 
     public List<Weapon> equipedWeapon;
 
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
     Camera mainCam;
     Vector2 targetTransform;
     float angle;
+    const float EARTH_ROTATE_SPEED = 0.5f;
 
     void Awake()
     {
@@ -47,6 +50,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        earthSprite.transform.Rotate(Vector3.back * Time.deltaTime * EARTH_ROTATE_SPEED);
+
         //如果不是正在战斗，就不要进行后面的判断了
         if ((GameManager.Instance.gameState != GameManager.GameState.BATTLE) || (BattleManager.Instance.battleState != BattleState.ISBATTLEING))
             return;

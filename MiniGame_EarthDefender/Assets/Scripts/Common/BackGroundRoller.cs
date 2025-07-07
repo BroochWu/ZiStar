@@ -12,5 +12,13 @@ public class BackGroundRoller : MonoBehaviour
     void Update()
     {
         mat.mainTextureOffset += Time.deltaTime * (Vector2.right + Vector2.up) * multi;
+        if (GameManager.Instance.gameState == GameManager.GameState.BATTLE)
+        {
+            mat.mainTextureScale = Vector2.Lerp(mat.mainTextureScale, 30 * (Vector2.right + Vector2.up), 0.05f);
+        }
+        else
+        {
+            mat.mainTextureScale = Vector2.Lerp(mat.mainTextureScale, 12 * (Vector2.right + Vector2.up), 0.05f);
+        }
     }
 }

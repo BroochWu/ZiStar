@@ -51,6 +51,7 @@ MonoBehaviour:
   cursorObj: {fileID: 0}
   shootPath: {fileID: 8857797380858322452}
   guideLine: {fileID: 7956663422290026013}
+  earthSprite: {fileID: 9044129385258249474}
   equipedWeapon: []
 --- !u!1 &1519207930442762712
 GameObject:
