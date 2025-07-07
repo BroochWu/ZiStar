@@ -40,14 +40,16 @@ public class CollisionManager : MonoBehaviour
         // 检测子弹与敌人的碰撞
         foreach (var bullet in bullets)
         {
-            if (!bullet.activeSelf) continue;
+            if (!bullet.activeInHierarchy)
+                continue;
             // 获取可能碰撞的敌人对象
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bullet);
 
             foreach (var obj in potentialCollisions)
             {
-                if (!obj.activeSelf) continue;
+                if (!obj.activeInHierarchy)
+                    continue;
 
                 if (obj.CompareTag("Enemy") && IsColliding(bullet, obj))
                 {
@@ -66,19 +68,23 @@ public class CollisionManager : MonoBehaviour
 
     bool IsColliding(GameObject a, GameObject b)
     {
-        // 简化的圆形碰撞检测
+        if (a == null || b == null) return false;
+        if (a.activeInHierarchy && b.activeInHierarchy == false) return false;
+
         SimpleCollider colA = a.GetComponent<SimpleCollider>();
         SimpleCollider colB = b.GetComponent<SimpleCollider>();
 
-        // float distance = Vector2.Distance(a.transform.position, b.transform.position);
-        // return distance < (colA.Size + colB.Size) / 2f;
+        if (colA == null || colB == null) return false;
 
-        //注意Z轴
-        float distance =
-         (a.transform.position - b.transform.position).sqrMagnitude -
-         (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z);
-        // Debug.Log("碰撞：" + distance + " " + Mathf.Pow((colA.Size + colB.Size) / 2f, 2));
-        return distance < Mathf.Pow((colA.Size + colB.Size) / 2f, 2);
+        // 简化的圆形碰撞检测（完全忽略Z轴）
+        Vector2 posA = new Vector2(a.transform.position.x, a.transform.position.y);
+        Vector2 posB = new Vector2(b.transform.position.x, b.transform.position.y);
+
+        float distanceSqr = (posA - posB).sqrMagnitude;
+        float radiusSum = (colA.Size + colB.Size) / 2f;
+        float minDistanceSqr = radiusSum * radiusSum;
+
+        return distanceSqr < minDistanceSqr;
     }
 
     public void RegisterEnemy(GameObject enemy)
@@ -100,4 +106,35 @@ public class CollisionManager : MonoBehaviour
     {
         bullets.Remove(bullet);
     }
+
+
+    // 调试绘制四叉树
+    void OnDrawGizmos()
+    {
+        if (quadTree != null)
+        {
+            DrawQuadTree(quadTree);
+        }
+    }
+
+    void DrawQuadTree(QuadTree qt)
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(new Vector3(qt.Bounds.center.x, qt.Bounds.center.y, 0),
+                            new Vector3(qt.Bounds.width, qt.Bounds.height, 0));
+
+        if (qt.Nodes != null)
+        {
+            foreach (var node in qt.Nodes)
+            {
+                if (node != null) DrawQuadTree(node);
+            }
+        }
+    }
+}
+// 添加辅助属性到QuadTree类
+public partial class QuadTree
+{
+    public Rect Bounds => bounds;
+    public QuadTree[] Nodes => nodes;
 }

@@ -80,13 +80,14 @@ public class ObjectPoolManager : MonoBehaviour
     public void ReleaseBullet(GameObject bullet)
     {
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
+        if (bulletComponent.isReleased) return;
 
+        bulletComponent.isReleased = true;
         string bulletType = bulletComponent.bulletType;
-
         // if (bulletPools.ContainsKey(bulletType))
         // {
-        if (!bulletComponent.isReleased) bulletPools[bulletType].Release(bullet);
-        bulletComponent.isReleased = true;
+        bulletPools[bulletType].Release(bullet);
+        bullet.transform.position = Player.instance.shootPath.transform.position;
         // }
         // else
         // {
@@ -237,7 +238,7 @@ public class ObjectPoolManager : MonoBehaviour
     // 创建敌人实例
     private GameObject CreateEnemyInstance(GameObject prefab, int enemyId)
     {
-        GameObject enemy = Instantiate(prefab,BattleManager.Instance.EnemyPath);
+        GameObject enemy = Instantiate(prefab, BattleManager.Instance.EnemyPath);
         // enemy.transform.SetParent(enemyContainer);
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
         if (enemyComponent != null)
