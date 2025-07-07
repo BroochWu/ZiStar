@@ -27,6 +27,17 @@ public class DataManager : MonoBehaviour
             nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         }
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
+        RefreshTopPLPanel(item.Id);
+    }
+
+
+    /// <summary>
+    /// 刷新顶部资源栏
+    /// </summary>
+    /// <param name="itemId"></param>
+    void RefreshTopPLPanel(int itemId)
+    {
+        if (itemId == 1 || itemId == 2) UIManager.Instance.topPLPanel.Refresh();
     }
 
     /// <summary>
@@ -49,6 +60,7 @@ public class DataManager : MonoBehaviour
             Debug.Log($"{item.TextName} 剩余数量 {newValue}");
         }
 
+        RefreshTopPLPanel(item.Id);
         return true;
     }
 
@@ -66,6 +78,17 @@ public class DataManager : MonoBehaviour
         }
         return PlayerPrefs.GetInt($"item_{item.Id}");
     }
+    public int GetResourceCount(int itemId)
+    {
+        if (!PlayerPrefs.HasKey($"item_{itemId}"))
+        {
+            Debug.LogWarning($"没有找到道具 {itemId} ！返回 0 个");
+            return 0;
+        }
+        return PlayerPrefs.GetInt($"item_{itemId}");
+    }
+
+
 
     /// <summary>
     /// 这里只记具体值

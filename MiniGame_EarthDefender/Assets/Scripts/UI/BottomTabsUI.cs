@@ -6,6 +6,7 @@ public class BottomTabsUI : MonoBehaviour
 {
     public Button buttonDevelop;
     public Button buttonCommand;
+    public Button buttonWeapons;
 
     void Awake()
     {
@@ -63,5 +64,11 @@ public class BottomTabsUI : MonoBehaviour
     {
         UIManager.Instance.SwitchLayer(UILayer.DEVELOPLAYER);
         CheckNow();
+    }
+    public void SwitchToWeapons()
+    {
+        UIManager.Instance.CommonToast("暂未开发");
+        // UIManager.Instance.SwitchLayer(UILayer.DEVELOPLAYER);
+        // CheckNow();
     }
 }

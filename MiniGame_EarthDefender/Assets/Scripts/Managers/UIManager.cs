@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public MainUI mainLayer;
     public DevelopUI developLayer;
     public GameObject bottomTabs;
+    public TopPLPanelUI topPLPanel;
     public Transform dynamicContainer;//动态UI
     public GameObject CommonToastObj;
     private UILayer uiLayer = UILayer.NULL;
@@ -58,10 +59,12 @@ public class UIManager : MonoBehaviour
                 break;
             case UILayer.MAINLAYER:
                 SetBottomTabs(true);
+                SetTopPanels(true);
                 mainLayer.gameObject.SetActive(true);
                 mainLayer.Initialize();
                 break;
             case UILayer.DEVELOPLAYER:
+                SetTopPanels(true);
                 SetBottomTabs(true);
                 developLayer.gameObject.SetActive(true);
                 developLayer.Initialize();
@@ -81,6 +84,7 @@ public class UIManager : MonoBehaviour
         {
             case UILayer.BATTLELAYER:
                 SetBottomTabs(false);
+                SetTopPanels(false);
                 battleLayer.UnRegister();
                 break;
             case UILayer.MAINLAYER:
@@ -122,6 +126,10 @@ public class UIManager : MonoBehaviour
     void SetBottomTabs(bool _bool)
     {
         bottomTabs.SetActive(_bool);
+    }
+    void SetTopPanels(bool _bool)
+    {
+        topPLPanel.gameObject.SetActive(_bool);
     }
 
 
