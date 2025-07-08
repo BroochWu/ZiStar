@@ -13,6 +13,7 @@ public class BattleUI : MonoBehaviour
     public GameObject battleSuccess;
     public GameObject expProgressBar;//经验值进度条
     public Transform awardsContainer;//奖励列表
+    public Transform damageTextsContainer;//伤害数字
     public GameObject awardsEmpty;//奖励列表
     public Text expLvText;//当前等级
     public Dictionary<cfg.item.Item, int> awardsList = new();

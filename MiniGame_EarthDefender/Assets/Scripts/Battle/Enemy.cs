@@ -81,13 +81,22 @@ public class Enemy : MonoBehaviour
         _spriteMaterial.color = Color.white;
         hpBar.SetActive(false);
 
-        if (config == null) return;
+        if (config == null)
+        {
+            Debug.LogError("没找到config");
+            return;
+        }
 
         // 预计算属性
         var levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
-        InitHp = levelData.Hp;
+
+        //加成量：每5秒+5%
+        //攻击、血量 = 基础值 × （ 1 + 加成量 ）
+        float additionMulti = BattleManager.Instance.GameTime / 5 * 0.05f;
+        Damage = (int)(levelData.Damage * (1 + additionMulti));
+        InitHp = (int)(levelData.Hp * (1 + additionMulti));
+
         _currentHp = InitHp;
-        Damage = levelData.Damage;
     }
 
     void FixedUpdate()
@@ -145,6 +154,8 @@ public class Enemy : MonoBehaviour
     {
         if (config == null || isReleased) return;
 
+        var dtx = ObjectPoolManager.Instance.GetVFX(VFXType.DAMAGETEXT);
+        dtx.GetComponent<VFX>().Initialize(damage, transform.position);
         _currentHp = BattleManager.Instance.CalDamage(damage, _currentHp);
 
         if (_currentHp <= 0)
@@ -170,35 +181,35 @@ public class Enemy : MonoBehaviour
         BattleManager.Instance.UnregisterEnemy(this);
     }
 
-    /// <summary>
-    /// 优化的2D朝向方法
-    /// </summary>
-    private void LookTarget2D(bool _stopWhileLook)
-    {
-        // 计算方向向量（无平方根计算）
-        Vector3 direction = _earth.position - transform.position;
+    // /// <summary>
+    // /// 优化的2D朝向方法
+    // /// </summary>
+    // private void LookTarget2D(bool _stopWhileLook)
+    // {
+    //     // 计算方向向量（无平方根计算）
+    //     Vector3 direction = _earth.position - transform.position;
 
-        // 计算旋转角度（使用Atan2）
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+    //     // 计算旋转角度（使用Atan2）
+    //     float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        // 计算当前角度差异
-        float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
+    //     // 计算当前角度差异
+    //     float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
 
-        // 检查是否需要停止
-        if (_stopWhileLook && Mathf.Abs(angleDiff) <= 0.1f)
-        {
-            return;
-        }
+    //     // 检查是否需要停止
+    //     if (_stopWhileLook && Mathf.Abs(angleDiff) <= 0.1f)
+    //     {
+    //         return;
+    //     }
 
-        // 应用旋转（使用更高效的LerpAngle）
-        float newAngle = Mathf.LerpAngle(
-            transform.eulerAngles.z,
-            targetAngle,
-            _rotationSpeed * Time.fixedDeltaTime
-        );
+    //     // 应用旋转（使用更高效的LerpAngle）
+    //     float newAngle = Mathf.LerpAngle(
+    //         transform.eulerAngles.z,
+    //         targetAngle,
+    //         _rotationSpeed * Time.fixedDeltaTime
+    //     );
 
-        transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
-    }
+    //     transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+    // }
 
 
     IEnumerator OnHitEffect()

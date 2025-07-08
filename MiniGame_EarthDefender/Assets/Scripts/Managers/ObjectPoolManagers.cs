@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -12,13 +13,12 @@ public class ObjectPoolManager : MonoBehaviour
     private Dictionary<int, ObjectPool<GameObject>> enemyPools =
         new Dictionary<int, ObjectPool<GameObject>>();
 
+    private Dictionary<VFXType, ObjectPool<GameObject>> vfxPools =
+        new Dictionary<VFXType, ObjectPool<GameObject>>();
+
     // 预制体缓存
     private Dictionary<string, GameObject> prefabCache =
         new Dictionary<string, GameObject>();
-
-    // // 父物体容器
-    // public Transform bulletContainer { get; private set; }
-    // public Transform enemyContainer { get; private set; }
 
     void Awake()
     {
@@ -30,12 +30,6 @@ public class ObjectPoolManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        // // 创建容器
-        // bulletContainer = new GameObject("BulletPool").transform;
-        // enemyContainer = new GameObject("EnemyPool").transform;
-        // bulletContainer.SetParent(transform);
-        // enemyContainer.SetParent(transform);
     }
 
     void Start()
@@ -45,9 +39,7 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
 
-
-
-    // ================= 子弹池管理 =================
+    #region  ================= 子弹池管理 =================
 
     /// <summary>
     /// 预加载子弹类型
@@ -152,8 +144,9 @@ public class ObjectPoolManager : MonoBehaviour
             ReleaseBullet(bullet);
         }
     }
+    #endregion
 
-    // ================= 敌人池管理 =================
+    #region  ================= 敌人池管理 =================
 
     /// <summary>
     /// 预加载敌人类型
@@ -270,8 +263,121 @@ public class ObjectPoolManager : MonoBehaviour
             ReleaseEnemy(enemy);
         }
     }
+    #endregion
 
-    // ================= 通用方法 =================
+    #region  ================特效池管理=================
+
+    /// <summary>
+    /// 预加载特效类型
+    /// </summary>
+    public void PreloadVFXType(VFXType VFXtype, int prewarmCount)
+    {
+        if (!vfxPools.ContainsKey(VFXtype))
+        {
+            CreateVFXPool(VFXtype);
+            WarmUpVFXPool(VFXtype, prewarmCount);
+        }
+    }
+
+    /// <summary>
+    /// 获取特效
+    /// </summary>
+    public GameObject GetVFX(VFXType _type)
+    {
+        if (!vfxPools.ContainsKey(_type))
+        {
+            CreateVFXPool(_type);
+        }
+
+        return vfxPools[_type].Get();
+    }
+
+    /// <summary>
+    /// 回收特效
+    /// </summary>
+    public void ReleaseVFX(GameObject obj)
+    {
+        VFX component = obj.GetComponent<VFX>();
+
+        VFXType type = component.vFXType; // 假设Enemy类中有config
+
+        if (vfxPools.ContainsKey(type))
+        {
+            vfxPools[type].Release(obj);
+        }
+        else
+        {
+            Debug.LogWarning($"找不到类型 {type} 的对象池");
+            Destroy(obj);
+        }
+    }
+
+    // 创建敌人对象池
+    private void CreateVFXPool(VFXType _type)
+    {
+        var prefabPath = "";
+        switch (_type)
+        {
+            case VFXType.DAMAGETEXT:
+                prefabPath = "Prefabs/Common/DamageText";
+                break;
+        }
+        GameObject prefab = LoadPrefab(prefabPath);
+
+        if (prefab == null)
+        {
+            Debug.LogError($"无法创建: 预制体未找到");
+            return;
+        }
+
+        vfxPools[_type] = new ObjectPool<GameObject>(
+            createFunc: () => CreateVFXInstance(prefab, _type),
+            actionOnGet: (obj) => OnGetVFX(obj),
+            actionOnRelease: (obj) => OnReleaseEnemy(obj),
+            actionOnDestroy: (obj) => Destroy(obj),
+            collectionCheck: true,
+            defaultCapacity: 20,
+            maxSize: 150
+        );
+    }
+
+    // 创建特效实例
+    private GameObject CreateVFXInstance(GameObject prefab, VFXType _type)
+    {
+        Transform instantiateTrans = null;
+        switch (_type)
+        {
+            case VFXType.DAMAGETEXT:
+                instantiateTrans = UIManager.Instance.battleLayer.damageTextsContainer;
+                break;
+        }
+        GameObject VFXIns = Instantiate(prefab, instantiateTrans);
+        VFXIns.GetOrAddComponent<VFX>().vFXType = _type;
+        // 设置特效类型ID以便回收
+
+        return VFXIns;
+    }
+
+    // 预热敌人池
+    private void WarmUpVFXPool(VFXType vFXType, int count)
+    {
+        if (!vfxPools.ContainsKey(vFXType)) return;
+
+        List<GameObject> tempList = new List<GameObject>();
+
+        for (int i = 0; i < count; i++)
+        {
+            tempList.Add(GetVFX(vFXType));
+        }
+
+        foreach (GameObject obj in tempList)
+        {
+            ReleaseVFX(obj);
+        }
+    }
+    #endregion
+
+    #region  ================= 通用方法 =================
 
     // 加载预制体（带缓存）
     private GameObject LoadPrefab(string path)
@@ -338,6 +444,12 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
+    // 从池中获取时的操作（特效）
+    private void OnGetVFX(GameObject obj)
+    {
+
+    }
+
     // 释放回池时的操作（敌人）
     private void OnReleaseEnemy(GameObject enemy)
     {
@@ -374,4 +486,6 @@ public class ObjectPoolManager : MonoBehaviour
         // 清理预制体缓存
         prefabCache.Clear();
     }
+    #endregion
+
 }

@@ -295,7 +295,7 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
-    #region 局内成长
+    #region 玩家局内成长
 
     /// <summary>
     /// 获得经验
