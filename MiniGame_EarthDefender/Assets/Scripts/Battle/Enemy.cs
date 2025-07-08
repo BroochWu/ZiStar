@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     private static Transform _earth;
     private static int _enemyStopDisSqr; // 使用平方距离避免开方运算
     private static float _hitDuration = 0.1f;
-    private static WaitForSeconds attackSep = new WaitForSeconds(0.5f);
+    private static WaitForSeconds attackSep = new WaitForSeconds(0.5f);//怪物攻击间隔
 
     [Header("组件引用")]
     public GameObject hpBar;
@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     public bool isReleased;
     private EnemyState _state;
     private int _currentHp;
+    private cfg.Enums.Enemy.Type _enemyType;
     private float _moveSpeed;
     private float _rotationSpeed;
     private int _initOrder = 20;
@@ -62,11 +63,17 @@ public class Enemy : MonoBehaviour
         sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
 
+        //装配enemy静态数据
         config = enemy;
+
         this.enemyLevel = enemyLevel;
+
         enemyId = config.Id;
+
         bulletType = config.PrefabBullet;
-        enemyExp = cfg.Tables.tb.EnemyTypeIndex.Get(config.EnemyType).Exp;//击杀怪物获得的经验值
+
+        _enemyType = config.EnemyType;
+        enemyExp = cfg.Tables.tb.EnemyTypeIndex.Get(_enemyType).Exp;//击杀怪物获得的经验值
 
         // 预计算速度值
         _moveSpeed = config.MultiMoveSpeed * 0.0001f;
@@ -90,9 +97,17 @@ public class Enemy : MonoBehaviour
         // 预计算属性
         var levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
 
-        //加成量：每5秒+5%
+
+        float additionMulti = 0;
+        
+        //加成量：
+        //  - 如果是小怪，每5秒+5%
         //攻击、血量 = 基础值 × （ 1 + 加成量 ）
-        float additionMulti = BattleManager.Instance.GameTime / 5 * 0.05f;
+        if (_enemyType == cfg.Enums.Enemy.Type.TRASH)
+        {
+            additionMulti = BattleManager.Instance.GameTime / 5 * 0.05f;
+        }
+
         Damage = (int)(levelData.Damage * (1 + additionMulti));
         InitHp = (int)(levelData.Hp * (1 + additionMulti));
 
