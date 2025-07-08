@@ -483,6 +483,14 @@ public class ObjectPoolManager : MonoBehaviour
         }
         enemyPools.Clear();
 
+        // 清理特效池
+        foreach (var pool in vfxPools.Values)
+        {
+            pool.Clear();
+        }
+        vfxPools.Clear();
+
+
         // 清理预制体缓存
         prefabCache.Clear();
     }
