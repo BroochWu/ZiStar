@@ -19,6 +19,7 @@ public sealed partial class Weapon : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
         { if(!_buf["bullet_speed"].IsNumber) { throw new SerializationException(); }  BulletSpeed = _buf["bullet_speed"]; }
         { if(!_buf["max_lifetime"].IsNumber) { throw new SerializationException(); }  MaxLifetime = _buf["max_lifetime"]; }
@@ -44,6 +45,10 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 武器名称
     /// </summary>
     public readonly string TextName;
+    /// <summary>
+    /// 初始稀有度
+    /// </summary>
+    public readonly Enums.Com.Quality InitQuality;
     /// <summary>
     /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
     /// </summary>
@@ -97,6 +102,7 @@ public sealed partial class Weapon : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "initQuality:" + InitQuality + ","
         + "bulletPrefab:" + BulletPrefab + ","
         + "bulletSpeed:" + BulletSpeed + ","
         + "maxLifetime:" + MaxLifetime + ","
