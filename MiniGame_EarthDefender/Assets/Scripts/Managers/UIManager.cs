@@ -8,6 +8,7 @@ public enum UILayer
     BATTLELAYER,
     MAINLAYER,
     DEVELOPLAYER,
+    WEAPONSLAYER
 }
 
 
@@ -15,11 +16,15 @@ public class UIManager : MonoBehaviour
 {
 
     public static UIManager Instance;
+    [Header("=====各个基础层=====")]
     public BattleUI battleLayer;
     public MainUI mainLayer;
     public DevelopUI developLayer;
+    public WeaponsUI weaponsLayer;
+    [Header("=====更高的玩家层=====")]
     public GameObject bottomTabs;
     public TopPLPanelUI topPLPanel;
+    [Header("=====最高的动态层=====")]
     public Transform dynamicContainer;//动态UI
     public GameObject CommonToastObj;
     private UILayer uiLayer = UILayer.NULL;
@@ -69,6 +74,12 @@ public class UIManager : MonoBehaviour
                 developLayer.gameObject.SetActive(true);
                 developLayer.Initialize();
                 break;
+            case UILayer.WEAPONSLAYER:
+                SetTopPanels(true);
+                SetBottomTabs(true);
+                weaponsLayer.gameObject.SetActive(true);
+                weaponsLayer.Initialize();
+                break;
             default:
                 uiLayer = UILayer.NULL;
                 Debug.LogWarning("没找到UI层");
@@ -92,6 +103,9 @@ public class UIManager : MonoBehaviour
                 break;
             case UILayer.DEVELOPLAYER:
                 developLayer.gameObject.SetActive(false);
+                break;
+            case UILayer.WEAPONSLAYER:
+                weaponsLayer.gameObject.SetActive(false);
                 break;
             default:
                 Debug.LogWarning($"没找到 {uiLayer} 层");

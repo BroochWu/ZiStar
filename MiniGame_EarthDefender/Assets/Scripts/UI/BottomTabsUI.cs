@@ -33,6 +33,9 @@ public class BottomTabsUI : MonoBehaviour
             case UILayer.DEVELOPLAYER:
                 SetButtonActive(buttonDevelop, true);
                 break;
+            case UILayer.WEAPONSLAYER:
+                SetButtonActive(buttonWeapons, true);
+                break;
         }
     }
 
@@ -43,6 +46,7 @@ public class BottomTabsUI : MonoBehaviour
     {
         SetButtonActive(buttonCommand, false);
         SetButtonActive(buttonDevelop, false);
+        SetButtonActive(buttonWeapons, false);
     }
 
 
@@ -67,8 +71,8 @@ public class BottomTabsUI : MonoBehaviour
     }
     public void SwitchToWeapons()
     {
-        UIManager.Instance.CommonToast("暂未开发");
-        // UIManager.Instance.SwitchLayer(UILayer.DEVELOPLAYER);
-        // CheckNow();
+        // UIManager.Instance.CommonToast("暂未开发");
+        UIManager.Instance.SwitchLayer(UILayer.WEAPONSLAYER);
+        CheckNow();
     }
 }
