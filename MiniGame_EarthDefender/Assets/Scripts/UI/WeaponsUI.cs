@@ -1,14 +1,78 @@
 
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class WeaponsUI : MonoBehaviour
 {
     public List<GameObject> weaponsEquipped;
-    public Transform weaponsListContent;
-
-    public void Initialize()
+    public Transform weaponsListContainer;
+    public GameObject WeaponPrefab;
+    private cfg.Tbweapon.Weapon config;
+    public async Task Initialize()
     {
+        config = cfg.Tables.tb.Weapon;
 
+        // 装配已穿戴武器
+        int a = 0;
+        foreach (var equipped in weaponsEquipped)
+        {
+            a++;
+
+            equipped.GetComponentInChildren<WeaponCellUI>().Initialize(a == 4 ? null : config.Get(a));
+        }
+
+
+
+
+
+        // 获取武器列表并按品质降序排序
+        // 稀有度降序
+        // id降序
+        var sortedWeapons = config.DataList
+        .OrderByDescending(weapon => weapon.InitQuality)
+        .ThenBy(weapon => weapon.Id)
+        .ToList();
+
+
+
+        //装备列表
+        // //未避免反复销毁生成，这里先遍历现有的组件
+        // //如果<=列表数，则直接在现有的上面改
+        // //如果>，则再生成
+        // int count = 0;
+        // foreach (Transform child in weaponsListContainer)
+        // {
+        //     if (count >= sortedWeapons.Count)
+        //     {
+        //         Destroy(child.gameObject);
+        //         break;
+        //     }
+        //     // Debug.Log(count + " " + config.DataList[count]);
+        //     child.GetComponent<WeaponCellUI>().Initialize(sortedWeapons[count]);
+        //     count++;
+        //     await Task.Delay(50);
+        // }
+
+        // //如果格子不够再新增
+        // for (int j = count; j < sortedWeapons.Count; j++)
+        // {
+        //     // Debug.Log(count + " " + config.DataList[j]);
+        //     var weaponCell = Instantiate(WeaponPrefab, weaponsListContainer);
+        //     weaponCell.GetComponent<WeaponCellUI>().Initialize(sortedWeapons[j]);
+        //     await Task.Delay(50);
+        // }
+
+        foreach (Transform child in weaponsListContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (var i in sortedWeapons)
+        {
+            var weaponCell = Instantiate(WeaponPrefab, weaponsListContainer);
+            weaponCell.GetComponent<WeaponCellUI>().Initialize(i);
+            await Task.Delay(30);
+        }
     }
 }

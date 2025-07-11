@@ -21,7 +21,6 @@ public class MainUI : MonoBehaviour
             //如果没找到下一关的数据，则返回已通过的最高关卡
             nowChooseDungeonId = passedDungeonId;
         }
-        Debug.Log(dungeon);
 
 
         dungeonName.text = $"第{nowChooseDungeonId}关";
