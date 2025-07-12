@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -101,13 +100,17 @@ public class Player : MonoBehaviour
     /// </summary>
     public void BattleStart()
     {
-        AddWeapon(1);
+        foreach (var weaponId in DataManager.Instance.GetEquippedWeaponList())
+        {
+            if (weaponId == -1) continue;
+            AddWeaponInBattle(weaponId);
+        }
     }
 
     /// <summary>
     /// 添加武器
     /// </summary>
-    void AddWeapon(int weaponId)
+    void AddWeaponInBattle(int weaponId)
     {
         // 创建武器对象
         GameObject weaponObj = new GameObject($"Weapon_{weaponId}");

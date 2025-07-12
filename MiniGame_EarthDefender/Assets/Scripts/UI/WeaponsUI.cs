@@ -16,11 +16,12 @@ public class WeaponsUI : MonoBehaviour
 
         // 装配已穿戴武器
         int a = 0;
-        foreach (var equipped in weaponsEquipped)
+        foreach (var slot in weaponsEquipped)
         {
+            var weaponId = DataManager.Instance.GetEquippedWeaponList()[a];
+            if (weaponId == -1 || a >= DataManager.EQUIP_SLOT_COUNT) continue;
+            slot.GetComponentInChildren<WeaponCellUI>().Initialize(config.Get(weaponId));
             a++;
-
-            equipped.GetComponentInChildren<WeaponCellUI>().Initialize(a == 4 ? null : config.Get(a));
         }
 
 

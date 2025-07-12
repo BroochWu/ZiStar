@@ -1,17 +1,141 @@
 //专门管理玩家数据类
 
-using cfg.Beans;
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+    public const int EQUIP_SLOT_COUNT = 5;
+    private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
 
     void Awake()
     {
         if (Instance != null) return;
         Instance = this;
     }
+
+
+    void Start()
+    {
+        GetEquippedWeaponList();
+    }
+
+
+    #region 武器穿戴相关
+
+    public int[] GetEquippedWeaponList()
+    {
+        // 默认值：所有槽位为-1（未装备）
+        equippedWeapons = Enumerable.Repeat(-1, EQUIP_SLOT_COUNT).ToArray();
+
+        if (PlayerPrefs.HasKey("equipped_weapons"))
+        {
+            string[] weaponStrings = PlayerPrefs.GetString("equipped_weapons").Split(',');
+
+            // 只加载有效数据（最多5个）
+            for (int i = 0; i < Mathf.Min(weaponStrings.Length, EQUIP_SLOT_COUNT); i++)
+            {
+                if (int.TryParse(weaponStrings[i], out int weaponId))
+                {
+                    equippedWeapons[i] = weaponId;
+                }
+            }
+        }
+        Debug.Log(equippedWeapons);
+        return equippedWeapons;
+        // equippedWeaponsList = Array.ConvertAll(PlayerPrefs.GetString("equipped_weapons").Split(','), int.Parse).ToList();
+    }
+
+    public bool EquipWeapon(int slotIndex, int weaponId)
+    {
+        // GetEquippedWeaponList();
+        // equippedWeaponsList[equippedWeaponsList.FindIndex(which => which == _old)] = _new;
+        // SetEquippedWeaponList(equippedWeaponsList);
+        if (slotIndex < 0 || slotIndex >= EQUIP_SLOT_COUNT)
+        {
+            UIManager.Instance.CommonToast($"无效的槽位索引: {slotIndex}");
+            return false;
+        }
+
+        // 检查是否已装备
+        if (IsWeaponEquipped(weaponId))
+        {
+            UIManager.Instance.CommonToast($"武器 {weaponId} 已装备在其他槽位");
+            return false;
+        }
+
+        // 更新装备槽
+        equippedWeapons[slotIndex] = weaponId;
+        SaveEquippedWeapons();
+
+        Debug.Log($"槽位 {slotIndex} 装备武器: {weaponId}");
+        return true;
+    }
+    /// <summary>
+    /// 卸下指定槽位的武器
+    /// </summary>
+    public bool UnequipWeapon(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= EQUIP_SLOT_COUNT)
+        {
+            Debug.LogError($"无效的槽位索引: {slotIndex}");
+            return false;
+        }
+
+        if (equippedWeapons[slotIndex] == -1)
+        {
+            Debug.Log($"槽位 {slotIndex} 未装备武器");
+            return false;
+        }
+
+        int weaponId = equippedWeapons[slotIndex];
+        equippedWeapons[slotIndex] = -1;
+        SaveEquippedWeapons();
+
+        Debug.Log($"槽位 {slotIndex} 卸下武器: {weaponId}");
+        return true;
+    }
+
+    /// <summary>
+    /// 检查武器是否已装备
+    /// </summary>
+    public bool IsWeaponEquipped(int weaponId)
+    {
+        return equippedWeapons.Contains(weaponId);
+    }
+
+
+    /// <summary>
+    /// 获取第一个空闲槽位
+    /// </summary>
+    public int GetFirstEmptySlot()
+    {
+        for (int i = 0; i < EQUIP_SLOT_COUNT; i++)
+        {
+            if (equippedWeapons[i] == -1)
+            {
+                return i;
+            }
+        }
+        return -1; // 没有空闲槽位
+    }
+
+    /// <summary>
+    /// 保存已装备武器列表
+    /// </summary>
+    private void SaveEquippedWeapons()
+    {
+        string saveStr = string.Join(",", equippedWeapons);
+        PlayerPrefs.SetString("equipped_weapons", saveStr);
+        Debug.Log("保存装备武器: " + saveStr);
+    }
+
+    #endregion
+
+
+
 
 
     /// <summary>
