@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public GameObject bottomTabs;
     public TopPLPanelUI topPLPanel;
     [Header("=====最高的动态层=====")]
+    public Transform tipsContainer;//提示UI
     public Transform dynamicContainer;//动态UI
     public GameObject CommonToastObj;
     private UILayer uiLayer = UILayer.NULL;
@@ -159,7 +160,7 @@ public class UIManager : MonoBehaviour
 
     public void CommonToast(string desc)
     {
-        var a = Instantiate(CommonToastObj, dynamicContainer).GetComponent<CommonToast>();
+        var a = Instantiate(CommonToastObj, tipsContainer).GetComponent<CommonToast>();
         a.Initialize(desc);
 
     }

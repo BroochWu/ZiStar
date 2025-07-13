@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 public class WeaponCellUI : MonoBehaviour
 {
+    private cfg.weapon.Weapon weapon;
     public GameObject empty;
     public Image iconBg;
     public Text nameText;
     private int id;
     private cfg.Enums.Com.Quality quality;
-    private string name;
+    private string weaponName;
     private float initScale;
 
     public void Initialize(cfg.weapon.Weapon weapon)
@@ -21,15 +22,17 @@ public class WeaponCellUI : MonoBehaviour
             return;
         }
 
+
         initScale = 0.5f;
         Debug.Log("Start Init");
         StartCoroutine(SetInitAnim());
 
+        this.weapon = weapon;
         id = weapon.Id;
         quality = weapon.InitQuality;
-        name = weapon.TextName;
+        weaponName = weapon.TextName;
 
-        nameText.text = name;
+        nameText.text = weaponName;
 
         SetQualityUI();
 
@@ -69,6 +72,14 @@ public class WeaponCellUI : MonoBehaviour
             transform.localScale = Vector3.one * initScale;
             yield return null;
         }
+    }
+
+
+    public void OpenDetailInfo()
+    {
+        Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
+        .GetComponent<WeaponDetailInfo>().Initialize(weapon);
+
     }
 
 }

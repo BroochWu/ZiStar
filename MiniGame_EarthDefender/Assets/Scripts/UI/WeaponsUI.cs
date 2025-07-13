@@ -6,24 +6,19 @@ using UnityEngine;
 
 public class WeaponsUI : MonoBehaviour
 {
-    public List<GameObject> weaponsEquipped;
+    public List<GameObject> weaponsSlots;
     public Transform weaponsListContainer;
     public GameObject WeaponPrefab;
+    public GameObject WeaponDetailInfoPrefab;
     private cfg.Tbweapon.Weapon config;
+
+
     public async Task Initialize()
     {
         config = cfg.Tables.tb.Weapon;
 
         // 装配已穿戴武器
-        int a = 0;
-        foreach (var slot in weaponsEquipped)
-        {
-            var weaponId = DataManager.Instance.GetEquippedWeaponList()[a];
-            if (weaponId == -1 || a >= DataManager.EQUIP_SLOT_COUNT) continue;
-            slot.GetComponentInChildren<WeaponCellUI>().Initialize(config.Get(weaponId));
-            a++;
-        }
-
+        RefreshEquippedWeapons();
 
 
 
@@ -74,6 +69,22 @@ public class WeaponsUI : MonoBehaviour
             var weaponCell = Instantiate(WeaponPrefab, weaponsListContainer);
             weaponCell.GetComponent<WeaponCellUI>().Initialize(i);
             await Task.Delay(30);
+        }
+    }
+
+
+
+    public void RefreshEquippedWeapons()
+    {
+
+        int a = 0;
+        foreach (var slot in weaponsSlots)
+        {
+            var weaponId = DataManager.Instance.GetEquippedWeaponList()[a];
+            if (weaponId == -1 || a >= DataManager.EQUIP_SLOT_COUNT) continue;
+            slot.GetComponentInChildren<WeaponCellUI>().Initialize(config.Get(weaponId));
+            Debug.Log(config.Get(weaponId));
+            a++;
         }
     }
 }
