@@ -1,20 +1,23 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponCellUI : MonoBehaviour
 {
+
     private cfg.weapon.Weapon weapon;
     public GameObject empty;
     public Image iconBg;
     public Text nameText;
     private int id;
     private cfg.Enums.Com.Quality quality;
-    private string weaponName;
+    public string weaponName;
     private float initScale;
 
     public void Initialize(cfg.weapon.Weapon weapon)
     {
+        string aaa = DataManager.Instance.GetEquippedWeaponList().ToString();
         empty.SetActive(weapon == null);
         nameText.gameObject.SetActive(weapon != null);
         if (weapon == null)

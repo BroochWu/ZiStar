@@ -60,7 +60,7 @@ public class DataManager : MonoBehaviour
         }
 
         // 检查是否已装备
-        if (IsWeaponEquipped(weaponId))
+        if (IsWeaponEquipped(weaponId)>0)
         {
             UIManager.Instance.CommonToast($"武器 {weaponId} 已装备在其他槽位");
             return false;
@@ -76,7 +76,7 @@ public class DataManager : MonoBehaviour
     /// <summary>
     /// 卸下指定槽位的武器
     /// </summary>
-    public bool UnequipWeapon(int slotIndex)
+    public bool UnequipWeaponBySlot(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= EQUIP_SLOT_COUNT)
         {
@@ -99,11 +99,21 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 检查武器是否已装备
+    /// 检查武器是否已装备,并且返回对应的位置（slot）
     /// </summary>
-    public bool IsWeaponEquipped(int weaponId)
+    public int IsWeaponEquipped(int weaponId)
     {
-        return equippedWeapons.Contains(weaponId);
+        // 遍历所有装备槽位
+        for (int slotIndex = 0; slotIndex < EQUIP_SLOT_COUNT; slotIndex++)
+        {
+            // 检查当前槽位是否装备了指定武器
+            if (equippedWeapons[slotIndex] == weaponId)
+            {
+                return slotIndex; // 返回找到的槽位索引
+            }
+        }
+
+        return -1;
     }
 
 

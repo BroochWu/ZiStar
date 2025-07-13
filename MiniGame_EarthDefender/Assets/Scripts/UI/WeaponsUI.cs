@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WeaponsUI : MonoBehaviour
 {
-    public List<GameObject> weaponsSlots;
+    public List<GameObject> equippedWeaponsSlots;
     public Transform weaponsListContainer;
     public GameObject WeaponPrefab;
     public GameObject WeaponDetailInfoPrefab;
@@ -78,12 +78,12 @@ public class WeaponsUI : MonoBehaviour
     {
 
         int a = 0;
-        foreach (var slot in weaponsSlots)
+        foreach (var slot in equippedWeaponsSlots)
         {
             var weaponId = DataManager.Instance.GetEquippedWeaponList()[a];
-            if (weaponId == -1 || a >= DataManager.EQUIP_SLOT_COUNT) continue;
-            slot.GetComponentInChildren<WeaponCellUI>().Initialize(config.Get(weaponId));
-            Debug.Log(config.Get(weaponId));
+            if (a >= DataManager.EQUIP_SLOT_COUNT) break;
+            var maybeNull = config.GetOrDefault(weaponId);
+            slot.GetComponentInChildren<WeaponCellUI>().Initialize(maybeNull);
             a++;
         }
     }
