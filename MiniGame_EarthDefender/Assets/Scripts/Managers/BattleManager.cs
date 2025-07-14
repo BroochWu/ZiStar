@@ -78,7 +78,6 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator CInitialize(int dungeonId)
     {
-        yield return new WaitForSeconds(1);
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
         BattleObjectsPath = new GameObject("BattleObjects").transform;
@@ -92,7 +91,10 @@ public class BattleManager : MonoBehaviour
         EnemyPath = new GameObject("Enemys").transform;
         EnemyPath.SetParent(BattleObjectsPath);
 
+        //加载可以被抽取的所有卡组
+        TriCard.Initialize();
 
+        yield return new WaitForSeconds(1);
 
         //游戏开始
         BattleStart(dungeonId);
@@ -344,6 +346,8 @@ public class BattleManager : MonoBehaviour
     void LevelUp()
     {
         Debug.Log("升级成功");
+        //3选1
+        TriCard.GetTriCards();
 
         //判断连续升级（后面可能是选好卡牌以后判断？）
         CheckLevelUp();

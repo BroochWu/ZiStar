@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
+    [Header("=====装配脚本=====")]
+    public TriCardUI triCardUI;
+
+    [Header("=====具体内容=====")]
     public Text gameTimeUI;
     public Text earthHpText;
     public GameObject battleOver;
@@ -33,6 +37,7 @@ public class BattleUI : MonoBehaviour
 
         // battleStopWindow.SetActive(false);
         BattleStop(false);
+        triCardUI.gameObject.SetActive(false);
         battleOver.SetActive(false);
         battleFail.SetActive(false);
         battleSuccess.SetActive(false);

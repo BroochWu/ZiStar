@@ -19,8 +19,10 @@ public sealed partial class Card : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["text_desc"].IsString) { throw new SerializationException(); }  TextDesc = _buf["text_desc"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
+        { var __json0 = _buf["parameters"]; if(!__json0.IsArray) { throw new SerializationException(); } Parameters = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  Parameters.Add(__v0); }   }
         { if(!_buf["draw_count"].IsNumber) { throw new SerializationException(); }  DrawCount = _buf["draw_count"]; }
     }
 
@@ -38,6 +40,10 @@ public sealed partial class Card : Luban.BeanBase
     /// </summary>
     public readonly string TextName;
     /// <summary>
+    /// 描述
+    /// </summary>
+    public readonly string TextDesc;
+    /// <summary>
     /// 品质
     /// </summary>
     public readonly Enums.Com.Quality Quality;
@@ -45,6 +51,10 @@ public sealed partial class Card : Luban.BeanBase
     /// 抽取权重
     /// </summary>
     public readonly int Weight;
+    /// <summary>
+    /// 参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<string> Parameters;
     /// <summary>
     /// 单局可被抽取次数
     /// </summary>
@@ -62,8 +72,10 @@ public sealed partial class Card : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "textDesc:" + TextDesc + ","
         + "quality:" + Quality + ","
         + "weight:" + Weight + ","
+        + "parameters:" + Luban.StringUtil.CollectionToString(Parameters) + ","
         + "drawCount:" + DrawCount + ","
         + "}";
     }
