@@ -27,6 +27,6 @@
   {
     "data_str": "equipped_weapons",
     "param_type": 4,
-    "param_value_init": "1,-1"
+    "param_value_init": "1,-1,-1,-1,-1"
   }
 ]
