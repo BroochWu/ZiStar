@@ -60,7 +60,7 @@ public class DataManager : MonoBehaviour
         }
 
         // 检查是否已装备
-        if (IsWeaponEquipped(weaponId)>0)
+        if (IsWeaponEquipped(weaponId) > 0)
         {
             UIManager.Instance.CommonToast($"武器 {weaponId} 已装备在其他槽位");
             return false;
@@ -81,6 +81,13 @@ public class DataManager : MonoBehaviour
         if (slotIndex < 0 || slotIndex >= EQUIP_SLOT_COUNT)
         {
             Debug.LogError($"无效的槽位索引: {slotIndex}");
+            return false;
+        }
+
+        
+        if (slotIndex == 0)
+        {
+            UIManager.Instance.CommonToast($"下士！帝国派发的离子枪无法被卸载！");
             return false;
         }
 
