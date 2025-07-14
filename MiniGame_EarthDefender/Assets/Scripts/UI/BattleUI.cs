@@ -11,6 +11,7 @@ public class BattleUI : MonoBehaviour
     public GameObject backBattleUI;
     public GameObject battleFail;
     public GameObject battleSuccess;
+    public GameObject battleStopWindow;
     public GameObject expProgressBar;//经验值进度条
     public Transform awardsContainer;//奖励列表
     public Transform damageTextsContainer;//伤害数字
@@ -30,6 +31,8 @@ public class BattleUI : MonoBehaviour
             DestroyImmediate(child.gameObject);
         }
 
+        // battleStopWindow.SetActive(false);
+        BattleStop(false);
         battleOver.SetActive(false);
         battleFail.SetActive(false);
         battleSuccess.SetActive(false);
@@ -74,6 +77,7 @@ public class BattleUI : MonoBehaviour
     /// </summary>
     public void BattleFail()
     {
+        battleStopWindow.SetActive(false);
         battleOver.SetActive(true);
         battleFail.SetActive(true);
         AddAwardList();
@@ -135,5 +139,31 @@ public class BattleUI : MonoBehaviour
 
         }
     }
+
+
+    public void BattleStop(bool _is)
+    {
+        if (_is)
+        {
+            Time.timeScale = 0;
+            battleStopWindow.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            battleStopWindow.SetActive(false);
+        }
+    }
+
+    // public void CloseUI(GameObject name)
+    // {
+    //     // switch (name)
+    //     // {
+    //     //     case "BattleStop":
+    //     //         battleStopWindow.SetActive(false);
+    //     //         break;
+    //     // }
+    //     name.SetActive(false);
+    // }
 
 }

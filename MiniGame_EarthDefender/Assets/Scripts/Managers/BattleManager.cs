@@ -11,12 +11,19 @@ public enum BattleState
     BATTLEFAIL,
     BATTLESUCCESS
 }
+public enum BattleLoseReason
+{
+    NULL,
+    ACTIVEQUIT,//主动放弃
+    NORMAL,//空血死亡
+}
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
     public static int dungeonLevel;//关卡等级
     public BattleState battleState;
+    public BattleLoseReason battleLoseReason;
 
     [Header("资源索引")]
     public Transform BattleObjectsPath;
@@ -170,7 +177,11 @@ public class BattleManager : MonoBehaviour
         Player.instance.rotationTarget.transform.rotation = quaternion.identity;
     }
 
-
+    public void QuitGame()
+    {
+        battleLoseReason = BattleLoseReason.ACTIVEQUIT;
+        BattleFail();
+    }
 
 
     /// <summary>
@@ -251,11 +262,15 @@ public class BattleManager : MonoBehaviour
 
         currentEarthHp = CalDamage(_damage, currentEarthHp);
         UIManager.Instance.battleLayer.RefreshEarthHp();
-        if (currentEarthHp <= 0) BattleFail();
+        if (currentEarthHp <= 0)
+        {
+            battleLoseReason = BattleLoseReason.NORMAL;
+            BattleFail();
+        }
     }
 
 
-    #region "胜利条件相关信息注册"
+    #region 胜利条件相关信息注册(活跃的敌人、传送门)
     // 注册传送门
     public void RegisterPortal(Portal portal)
     {
@@ -348,7 +363,6 @@ public class BattleManager : MonoBehaviour
         //   - 20秒内主动退出将没有奖励
         //   - 20秒后主动退出只能获得10%
         //   - 存活小于40秒失败，获得30%；否则获得50%
-        //   - 存活60秒失败，获得50%
 
         var _awardPassed = cfg.Tables.tb.Dungeon.Get(dungeonId).PassAward;
         float _multi = 1;
@@ -358,17 +372,27 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleState == BattleState.BATTLEFAIL)
         {
-            if (GameTime <= 40)
+            if (battleLoseReason == BattleLoseReason.ACTIVEQUIT)
             {
-                _multi = 0.3f;
+                if (GameTime <= 20)
+                {
+                    _multi = 0;
+                }
+                else
+                {
+                    _multi = 0.1f;
+                }
             }
-            else if (GameTime > 40)
+            else if (battleLoseReason == BattleLoseReason.NORMAL)
             {
-                _multi = 0.5f;
-            }
-            else
-            {
-                return;
+                if (GameTime <= 40)
+                {
+                    _multi = 0.3f;
+                }
+                else if (GameTime > 40)
+                {
+                    _multi = 0.5f;
+                }
             }
         }
         else
