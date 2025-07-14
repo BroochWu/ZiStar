@@ -62,6 +62,10 @@ public partial class Tables
     /// 道具表
     /// </summary>
     public Tbitem.Item Item {get; }
+    /// <summary>
+    /// 3选1卡组表
+    /// </summary>
+    public Tbcard.Card Card {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -77,6 +81,7 @@ public partial class Tables
         PlayerAttrLevel = new Tbplayer.PlayerAttrLevel(loader("player_attr_level"));
         PlayerData = new Tbplayer.PlayerData(loader("player_data"));
         Item = new Tbitem.Item(loader("item"));
+        Card = new Tbcard.Card(loader("card"));
         ResolveRef();
     }
     
@@ -94,6 +99,7 @@ public partial class Tables
         PlayerAttrLevel.ResolveRef(this);
         PlayerData.ResolveRef(this);
         Item.ResolveRef(this);
+        Card.ResolveRef(this);
     }
 }
 

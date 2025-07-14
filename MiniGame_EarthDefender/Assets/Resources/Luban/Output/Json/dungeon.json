@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "text_name": "第一关",
+    "text_name": "第 1 关",
     "dungeon_level": 1,
     "portals": [
       {
@@ -32,7 +32,7 @@
   },
   {
     "id": 2,
-    "text_name": "第二关",
+    "text_name": "第 2 关",
     "dungeon_level": 2,
     "portals": [
       {
@@ -46,7 +46,7 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 11
       },
       {
         "id": 2,
@@ -56,7 +56,7 @@
   },
   {
     "id": 3,
-    "text_name": "第三关",
+    "text_name": "第 3 关",
     "dungeon_level": 3,
     "portals": [
       {
@@ -70,7 +70,7 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 12
       },
       {
         "id": 2,
@@ -80,7 +80,7 @@
   },
   {
     "id": 4,
-    "text_name": "第四关",
+    "text_name": "第 4 关",
     "dungeon_level": 4,
     "portals": [
       {
@@ -101,7 +101,7 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 13
       },
       {
         "id": 2,
@@ -111,7 +111,7 @@
   },
   {
     "id": 5,
-    "text_name": "第五关",
+    "text_name": "第 5 关",
     "dungeon_level": 5,
     "portals": [
       {
@@ -132,7 +132,7 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 14
       },
       {
         "id": 2,
@@ -142,7 +142,7 @@
   },
   {
     "id": 6,
-    "text_name": "第六关",
+    "text_name": "第 6 关",
     "dungeon_level": 6,
     "portals": [
       {
@@ -163,17 +163,17 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 15
       },
       {
         "id": 2,
-        "number": 5
+        "number": 6
       }
     ]
   },
   {
     "id": 7,
-    "text_name": "第七关",
+    "text_name": "第 7 关",
     "dungeon_level": 7,
     "portals": [
       {
@@ -194,17 +194,17 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 16
       },
       {
         "id": 2,
-        "number": 5
+        "number": 6
       }
     ]
   },
   {
     "id": 8,
-    "text_name": "第八关",
+    "text_name": "第 8 关",
     "dungeon_level": 8,
     "portals": [
       {
@@ -225,11 +225,3080 @@
     "pass_award": [
       {
         "id": 1,
-        "number": 10
+        "number": 17
       },
       {
         "id": 2,
-        "number": 5
+        "number": 6
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text_name": "第 9 关",
+    "dungeon_level": 9,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 18
+      },
+      {
+        "id": 2,
+        "number": 6
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "text_name": "第 10 关",
+    "dungeon_level": 10,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 19
+      },
+      {
+        "id": 2,
+        "number": 6
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "text_name": "第 11 关",
+    "dungeon_level": 11,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 20
+      },
+      {
+        "id": 2,
+        "number": 7
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "text_name": "第 12 关",
+    "dungeon_level": 12,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 21
+      },
+      {
+        "id": 2,
+        "number": 7
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "text_name": "第 13 关",
+    "dungeon_level": 13,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 22
+      },
+      {
+        "id": 2,
+        "number": 7
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "text_name": "第 14 关",
+    "dungeon_level": 14,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 23
+      },
+      {
+        "id": 2,
+        "number": 7
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "text_name": "第 15 关",
+    "dungeon_level": 15,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 24
+      },
+      {
+        "id": 2,
+        "number": 7
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "text_name": "第 16 关",
+    "dungeon_level": 16,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 25
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "text_name": "第 17 关",
+    "dungeon_level": 17,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 26
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "text_name": "第 18 关",
+    "dungeon_level": 18,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 27
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "text_name": "第 19 关",
+    "dungeon_level": 19,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 28
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "text_name": "第 20 关",
+    "dungeon_level": 20,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 29
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "text_name": "第 21 关",
+    "dungeon_level": 21,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 30
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "text_name": "第 22 关",
+    "dungeon_level": 22,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 31
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "text_name": "第 23 关",
+    "dungeon_level": 23,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 32
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "text_name": "第 24 关",
+    "dungeon_level": 24,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 33
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "text_name": "第 25 关",
+    "dungeon_level": 25,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 34
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "text_name": "第 26 关",
+    "dungeon_level": 26,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 35
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "text_name": "第 27 关",
+    "dungeon_level": 27,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 36
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "text_name": "第 28 关",
+    "dungeon_level": 28,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 37
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "text_name": "第 29 关",
+    "dungeon_level": 29,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 38
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "text_name": "第 30 关",
+    "dungeon_level": 30,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 39
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "text_name": "第 31 关",
+    "dungeon_level": 31,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 40
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "text_name": "第 32 关",
+    "dungeon_level": 32,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 41
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "text_name": "第 33 关",
+    "dungeon_level": 33,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 42
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "text_name": "第 34 关",
+    "dungeon_level": 34,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 43
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "text_name": "第 35 关",
+    "dungeon_level": 35,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 44
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "text_name": "第 36 关",
+    "dungeon_level": 36,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 45
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "text_name": "第 37 关",
+    "dungeon_level": 37,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 46
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "text_name": "第 38 关",
+    "dungeon_level": 38,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 47
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "text_name": "第 39 关",
+    "dungeon_level": 39,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 48
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "text_name": "第 40 关",
+    "dungeon_level": 40,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 49
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "text_name": "第 41 关",
+    "dungeon_level": 41,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 50
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "text_name": "第 42 关",
+    "dungeon_level": 42,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 51
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "text_name": "第 43 关",
+    "dungeon_level": 43,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 52
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "text_name": "第 44 关",
+    "dungeon_level": 44,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 53
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "text_name": "第 45 关",
+    "dungeon_level": 45,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 54
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "text_name": "第 46 关",
+    "dungeon_level": 46,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 55
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "text_name": "第 47 关",
+    "dungeon_level": 47,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 56
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "text_name": "第 48 关",
+    "dungeon_level": 48,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 57
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "text_name": "第 49 关",
+    "dungeon_level": 49,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 58
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "text_name": "第 50 关",
+    "dungeon_level": 50,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 59
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "text_name": "第 51 关",
+    "dungeon_level": 51,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 60
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "text_name": "第 52 关",
+    "dungeon_level": 52,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 61
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "text_name": "第 53 关",
+    "dungeon_level": 53,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 62
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "text_name": "第 54 关",
+    "dungeon_level": 54,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 63
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "text_name": "第 55 关",
+    "dungeon_level": 55,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 64
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "text_name": "第 56 关",
+    "dungeon_level": 56,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 65
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "text_name": "第 57 关",
+    "dungeon_level": 57,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 66
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "text_name": "第 58 关",
+    "dungeon_level": 58,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 67
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "text_name": "第 59 关",
+    "dungeon_level": 59,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 68
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "text_name": "第 60 关",
+    "dungeon_level": 60,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 69
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "text_name": "第 61 关",
+    "dungeon_level": 61,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 70
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "text_name": "第 62 关",
+    "dungeon_level": 62,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 71
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "text_name": "第 63 关",
+    "dungeon_level": 63,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 72
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "text_name": "第 64 关",
+    "dungeon_level": 64,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 73
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "text_name": "第 65 关",
+    "dungeon_level": 65,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 74
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "text_name": "第 66 关",
+    "dungeon_level": 66,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 75
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "text_name": "第 67 关",
+    "dungeon_level": 67,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 76
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "text_name": "第 68 关",
+    "dungeon_level": 68,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 77
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "text_name": "第 69 关",
+    "dungeon_level": 69,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 78
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "text_name": "第 70 关",
+    "dungeon_level": 70,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 79
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "text_name": "第 71 关",
+    "dungeon_level": 71,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 80
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "text_name": "第 72 关",
+    "dungeon_level": 72,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 81
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "text_name": "第 73 关",
+    "dungeon_level": 73,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 82
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "text_name": "第 74 关",
+    "dungeon_level": 74,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 83
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "text_name": "第 75 关",
+    "dungeon_level": 75,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 84
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "text_name": "第 76 关",
+    "dungeon_level": 76,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 85
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "text_name": "第 77 关",
+    "dungeon_level": 77,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 86
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "text_name": "第 78 关",
+    "dungeon_level": 78,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 87
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "text_name": "第 79 关",
+    "dungeon_level": 79,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 88
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "text_name": "第 80 关",
+    "dungeon_level": 80,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 89
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "text_name": "第 81 关",
+    "dungeon_level": 81,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 90
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "text_name": "第 82 关",
+    "dungeon_level": 82,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 91
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "text_name": "第 83 关",
+    "dungeon_level": 83,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 92
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "text_name": "第 84 关",
+    "dungeon_level": 84,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 93
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "text_name": "第 85 关",
+    "dungeon_level": 85,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 94
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "text_name": "第 86 关",
+    "dungeon_level": 86,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 95
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "text_name": "第 87 关",
+    "dungeon_level": 87,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 96
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "text_name": "第 88 关",
+    "dungeon_level": 88,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 97
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "text_name": "第 89 关",
+    "dungeon_level": 89,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 98
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "text_name": "第 90 关",
+    "dungeon_level": 90,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 99
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "text_name": "第 91 关",
+    "dungeon_level": 91,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 100
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "text_name": "第 92 关",
+    "dungeon_level": 92,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 101
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "text_name": "第 93 关",
+    "dungeon_level": 93,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 102
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "text_name": "第 94 关",
+    "dungeon_level": 94,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 103
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "text_name": "第 95 关",
+    "dungeon_level": 95,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 104
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "text_name": "第 96 关",
+    "dungeon_level": 96,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 105
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "text_name": "第 97 关",
+    "dungeon_level": 97,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 106
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "text_name": "第 98 关",
+    "dungeon_level": 98,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 107
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "text_name": "第 99 关",
+    "dungeon_level": 99,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 108
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "text_name": "第 100 关",
+    "dungeon_level": 100,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 109
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "text_name": "第 101 关",
+    "dungeon_level": 101,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 110
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "text_name": "第 102 关",
+    "dungeon_level": 102,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 111
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "text_name": "第 103 关",
+    "dungeon_level": 103,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 112
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "text_name": "第 104 关",
+    "dungeon_level": 104,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 113
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "text_name": "第 105 关",
+    "dungeon_level": 105,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 114
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "text_name": "第 106 关",
+    "dungeon_level": 106,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 115
+      },
+      {
+        "id": 2,
+        "number": 8
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "text_name": "第 107 关",
+    "dungeon_level": 107,
+    "portals": [
+      {
+        "position": {
+          "x": -1,
+          "y": 4.3
+        },
+        "wave_id": 1001
+      },
+      {
+        "position": {
+          "x": 1,
+          "y": 4.3
+        },
+        "wave_id": 1002
+      }
+    ],
+    "pass_award": [
+      {
+        "id": 1,
+        "number": 116
+      },
+      {
+        "id": 2,
+        "number": 8
       }
     ]
   }

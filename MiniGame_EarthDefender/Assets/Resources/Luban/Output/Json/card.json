@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "text_name": "增伤",
+    "quality": 1,
+    "weight": 5,
+    "draw_count": -1
+  },
+  {
+    "id": 2,
+    "text_name": "增伤",
+    "quality": 1,
+    "weight": 5,
+    "draw_count": -1
+  },
+  {
+    "id": 3,
+    "text_name": "增伤",
+    "quality": 1,
+    "weight": 5,
+    "draw_count": -1
+  },
+  {
+    "id": 4,
+    "text_name": "攻速",
+    "quality": 1,
+    "weight": 5,
+    "draw_count": -1
+  },
+  {
+    "id": 5,
+    "text_name": "回复城防",
+    "quality": 2,
+    "weight": 10,
+    "draw_count": 5
+  },
+  {
+    "id": 1001,
+    "text_name": "离子列",
+    "quality": 1,
+    "weight": 1000,
+    "draw_count": 5
+  },
+  {
+    "id": 1002,
+    "text_name": "离子行",
+    "quality": 1,
+    "weight": 1000,
+    "draw_count": 5
+  }
+]

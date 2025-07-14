@@ -22,6 +22,7 @@ public sealed partial class GlobalParam : Luban.BeanBase
         { if(!_buf["param_type"].IsNumber) { throw new SerializationException(); }  ParamType = (Enums.Com.ParamType)_buf["param_type"].AsInt; }
         { if(!_buf["int_value"].IsNumber) { throw new SerializationException(); }  IntValue = _buf["int_value"]; }
         { if(!_buf["str_value"].IsString) { throw new SerializationException(); }  StrValue = _buf["str_value"]; }
+        { var __json0 = _buf["int_list_value"]; if(!__json0.IsArray) { throw new SerializationException(); } IntListValue = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  IntListValue.Add(__v0); }   }
     }
 
     public static GlobalParam DeserializeGlobalParam(JSONNode _buf)
@@ -49,6 +50,10 @@ public sealed partial class GlobalParam : Luban.BeanBase
     /// 字符串值
     /// </summary>
     public readonly string StrValue;
+    /// <summary>
+    /// 整型列表值
+    /// </summary>
+    public readonly System.Collections.Generic.List<int> IntListValue;
    
     public const int __ID__ = -820012643;
     public override int GetTypeId() => __ID__;
@@ -65,6 +70,7 @@ public sealed partial class GlobalParam : Luban.BeanBase
         + "paramType:" + ParamType + ","
         + "intValue:" + IntValue + ","
         + "strValue:" + StrValue + ","
+        + "intListValue:" + Luban.StringUtil.CollectionToString(IntListValue) + ","
         + "}";
     }
 }

@@ -19,14 +19,14 @@
   {
     "level": 2,
     "basic_hp": {
-      "value": 1200,
+      "value": 1050,
       "item_require": {
         "id": 1,
         "number": 2
       }
     },
     "basic_atk": {
-      "value": 12,
+      "value": 11,
       "item_require": {
         "id": 1,
         "number": 2
@@ -36,14 +36,14 @@
   {
     "level": 3,
     "basic_hp": {
-      "value": 1400,
+      "value": 1100,
       "item_require": {
         "id": 1,
-        "number": 4
+        "number": 3
       }
     },
     "basic_atk": {
-      "value": 14,
+      "value": 12,
       "item_require": {
         "id": 1,
         "number": 4
@@ -53,14 +53,14 @@
   {
     "level": 4,
     "basic_hp": {
-      "value": 1600,
+      "value": 1150,
       "item_require": {
         "id": 1,
-        "number": 6
+        "number": 4
       }
     },
     "basic_atk": {
-      "value": 16,
+      "value": 13,
       "item_require": {
         "id": 1,
         "number": 6
@@ -70,14 +70,14 @@
   {
     "level": 5,
     "basic_hp": {
-      "value": 1800,
+      "value": 1200,
       "item_require": {
         "id": 1,
-        "number": 8
+        "number": 5
       }
     },
     "basic_atk": {
-      "value": 18,
+      "value": 14,
       "item_require": {
         "id": 1,
         "number": 8
@@ -87,17 +87,4590 @@
   {
     "level": 6,
     "basic_hp": {
-      "value": 2000,
+      "value": 1250,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    },
+    "basic_atk": {
+      "value": 15,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 7,
+    "basic_hp": {
+      "value": 1300,
+      "item_require": {
+        "id": 1,
+        "number": 7
+      }
+    },
+    "basic_atk": {
+      "value": 16,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 8,
+    "basic_hp": {
+      "value": 1350,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    },
+    "basic_atk": {
+      "value": 17,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 9,
+    "basic_hp": {
+      "value": 1400,
+      "item_require": {
+        "id": 1,
+        "number": 9
+      }
+    },
+    "basic_atk": {
+      "value": 18,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 10,
+    "basic_hp": {
+      "value": 1450,
       "item_require": {
         "id": 1,
         "number": 10
       }
     },
     "basic_atk": {
+      "value": 19,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 11,
+    "basic_hp": {
+      "value": 1500,
+      "item_require": {
+        "id": 1,
+        "number": 11
+      }
+    },
+    "basic_atk": {
       "value": 20,
       "item_require": {
         "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 12,
+    "basic_hp": {
+      "value": 1550,
+      "item_require": {
+        "id": 1,
+        "number": 12
+      }
+    },
+    "basic_atk": {
+      "value": 21,
+      "item_require": {
+        "id": 1,
         "number": 10
+      }
+    }
+  },
+  {
+    "level": 13,
+    "basic_hp": {
+      "value": 1600,
+      "item_require": {
+        "id": 1,
+        "number": 13
+      }
+    },
+    "basic_atk": {
+      "value": 22,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 14,
+    "basic_hp": {
+      "value": 1650,
+      "item_require": {
+        "id": 1,
+        "number": 14
+      }
+    },
+    "basic_atk": {
+      "value": 23,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 15,
+    "basic_hp": {
+      "value": 1700,
+      "item_require": {
+        "id": 1,
+        "number": 15
+      }
+    },
+    "basic_atk": {
+      "value": 24,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 16,
+    "basic_hp": {
+      "value": 1750,
+      "item_require": {
+        "id": 1,
+        "number": 16
+      }
+    },
+    "basic_atk": {
+      "value": 25,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 17,
+    "basic_hp": {
+      "value": 1800,
+      "item_require": {
+        "id": 1,
+        "number": 17
+      }
+    },
+    "basic_atk": {
+      "value": 26,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 18,
+    "basic_hp": {
+      "value": 1850,
+      "item_require": {
+        "id": 1,
+        "number": 18
+      }
+    },
+    "basic_atk": {
+      "value": 27,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 19,
+    "basic_hp": {
+      "value": 1900,
+      "item_require": {
+        "id": 1,
+        "number": 19
+      }
+    },
+    "basic_atk": {
+      "value": 28,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 20,
+    "basic_hp": {
+      "value": 1950,
+      "item_require": {
+        "id": 1,
+        "number": 20
+      }
+    },
+    "basic_atk": {
+      "value": 29,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 21,
+    "basic_hp": {
+      "value": 2000,
+      "item_require": {
+        "id": 1,
+        "number": 21
+      }
+    },
+    "basic_atk": {
+      "value": 30,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 22,
+    "basic_hp": {
+      "value": 2050,
+      "item_require": {
+        "id": 1,
+        "number": 22
+      }
+    },
+    "basic_atk": {
+      "value": 31,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 23,
+    "basic_hp": {
+      "value": 2100,
+      "item_require": {
+        "id": 1,
+        "number": 23
+      }
+    },
+    "basic_atk": {
+      "value": 32,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 24,
+    "basic_hp": {
+      "value": 2150,
+      "item_require": {
+        "id": 1,
+        "number": 24
+      }
+    },
+    "basic_atk": {
+      "value": 33,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 25,
+    "basic_hp": {
+      "value": 2200,
+      "item_require": {
+        "id": 1,
+        "number": 25
+      }
+    },
+    "basic_atk": {
+      "value": 34,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 26,
+    "basic_hp": {
+      "value": 2250,
+      "item_require": {
+        "id": 1,
+        "number": 26
+      }
+    },
+    "basic_atk": {
+      "value": 35,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 27,
+    "basic_hp": {
+      "value": 2300,
+      "item_require": {
+        "id": 1,
+        "number": 27
+      }
+    },
+    "basic_atk": {
+      "value": 36,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 28,
+    "basic_hp": {
+      "value": 2350,
+      "item_require": {
+        "id": 1,
+        "number": 28
+      }
+    },
+    "basic_atk": {
+      "value": 37,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 29,
+    "basic_hp": {
+      "value": 2400,
+      "item_require": {
+        "id": 1,
+        "number": 29
+      }
+    },
+    "basic_atk": {
+      "value": 38,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 30,
+    "basic_hp": {
+      "value": 2450,
+      "item_require": {
+        "id": 1,
+        "number": 30
+      }
+    },
+    "basic_atk": {
+      "value": 39,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 31,
+    "basic_hp": {
+      "value": 2500,
+      "item_require": {
+        "id": 1,
+        "number": 31
+      }
+    },
+    "basic_atk": {
+      "value": 40,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 32,
+    "basic_hp": {
+      "value": 2550,
+      "item_require": {
+        "id": 1,
+        "number": 32
+      }
+    },
+    "basic_atk": {
+      "value": 41,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 33,
+    "basic_hp": {
+      "value": 2600,
+      "item_require": {
+        "id": 1,
+        "number": 33
+      }
+    },
+    "basic_atk": {
+      "value": 42,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 34,
+    "basic_hp": {
+      "value": 2650,
+      "item_require": {
+        "id": 1,
+        "number": 34
+      }
+    },
+    "basic_atk": {
+      "value": 43,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 35,
+    "basic_hp": {
+      "value": 2700,
+      "item_require": {
+        "id": 1,
+        "number": 35
+      }
+    },
+    "basic_atk": {
+      "value": 44,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 36,
+    "basic_hp": {
+      "value": 2750,
+      "item_require": {
+        "id": 1,
+        "number": 36
+      }
+    },
+    "basic_atk": {
+      "value": 45,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 37,
+    "basic_hp": {
+      "value": 2800,
+      "item_require": {
+        "id": 1,
+        "number": 37
+      }
+    },
+    "basic_atk": {
+      "value": 46,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 38,
+    "basic_hp": {
+      "value": 2850,
+      "item_require": {
+        "id": 1,
+        "number": 38
+      }
+    },
+    "basic_atk": {
+      "value": 47,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 39,
+    "basic_hp": {
+      "value": 2900,
+      "item_require": {
+        "id": 1,
+        "number": 39
+      }
+    },
+    "basic_atk": {
+      "value": 48,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 40,
+    "basic_hp": {
+      "value": 2950,
+      "item_require": {
+        "id": 1,
+        "number": 40
+      }
+    },
+    "basic_atk": {
+      "value": 49,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 41,
+    "basic_hp": {
+      "value": 3000,
+      "item_require": {
+        "id": 1,
+        "number": 41
+      }
+    },
+    "basic_atk": {
+      "value": 50,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 42,
+    "basic_hp": {
+      "value": 3050,
+      "item_require": {
+        "id": 1,
+        "number": 42
+      }
+    },
+    "basic_atk": {
+      "value": 51,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 43,
+    "basic_hp": {
+      "value": 3100,
+      "item_require": {
+        "id": 1,
+        "number": 43
+      }
+    },
+    "basic_atk": {
+      "value": 52,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 44,
+    "basic_hp": {
+      "value": 3150,
+      "item_require": {
+        "id": 1,
+        "number": 44
+      }
+    },
+    "basic_atk": {
+      "value": 53,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 45,
+    "basic_hp": {
+      "value": 3200,
+      "item_require": {
+        "id": 1,
+        "number": 45
+      }
+    },
+    "basic_atk": {
+      "value": 54,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 46,
+    "basic_hp": {
+      "value": 3250,
+      "item_require": {
+        "id": 1,
+        "number": 46
+      }
+    },
+    "basic_atk": {
+      "value": 55,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 47,
+    "basic_hp": {
+      "value": 3300,
+      "item_require": {
+        "id": 1,
+        "number": 47
+      }
+    },
+    "basic_atk": {
+      "value": 56,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 48,
+    "basic_hp": {
+      "value": 3350,
+      "item_require": {
+        "id": 1,
+        "number": 48
+      }
+    },
+    "basic_atk": {
+      "value": 57,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 49,
+    "basic_hp": {
+      "value": 3400,
+      "item_require": {
+        "id": 1,
+        "number": 49
+      }
+    },
+    "basic_atk": {
+      "value": 58,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 50,
+    "basic_hp": {
+      "value": 3450,
+      "item_require": {
+        "id": 1,
+        "number": 50
+      }
+    },
+    "basic_atk": {
+      "value": 59,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 51,
+    "basic_hp": {
+      "value": 3500,
+      "item_require": {
+        "id": 1,
+        "number": 51
+      }
+    },
+    "basic_atk": {
+      "value": 60,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 52,
+    "basic_hp": {
+      "value": 3550,
+      "item_require": {
+        "id": 1,
+        "number": 52
+      }
+    },
+    "basic_atk": {
+      "value": 61,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 53,
+    "basic_hp": {
+      "value": 3600,
+      "item_require": {
+        "id": 1,
+        "number": 53
+      }
+    },
+    "basic_atk": {
+      "value": 62,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 54,
+    "basic_hp": {
+      "value": 3650,
+      "item_require": {
+        "id": 1,
+        "number": 54
+      }
+    },
+    "basic_atk": {
+      "value": 63,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 55,
+    "basic_hp": {
+      "value": 3700,
+      "item_require": {
+        "id": 1,
+        "number": 55
+      }
+    },
+    "basic_atk": {
+      "value": 64,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 56,
+    "basic_hp": {
+      "value": 3750,
+      "item_require": {
+        "id": 1,
+        "number": 56
+      }
+    },
+    "basic_atk": {
+      "value": 65,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 57,
+    "basic_hp": {
+      "value": 3800,
+      "item_require": {
+        "id": 1,
+        "number": 57
+      }
+    },
+    "basic_atk": {
+      "value": 66,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 58,
+    "basic_hp": {
+      "value": 3850,
+      "item_require": {
+        "id": 1,
+        "number": 58
+      }
+    },
+    "basic_atk": {
+      "value": 67,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 59,
+    "basic_hp": {
+      "value": 3900,
+      "item_require": {
+        "id": 1,
+        "number": 59
+      }
+    },
+    "basic_atk": {
+      "value": 68,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 60,
+    "basic_hp": {
+      "value": 3950,
+      "item_require": {
+        "id": 1,
+        "number": 60
+      }
+    },
+    "basic_atk": {
+      "value": 69,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 61,
+    "basic_hp": {
+      "value": 4000,
+      "item_require": {
+        "id": 1,
+        "number": 61
+      }
+    },
+    "basic_atk": {
+      "value": 70,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 62,
+    "basic_hp": {
+      "value": 4050,
+      "item_require": {
+        "id": 1,
+        "number": 62
+      }
+    },
+    "basic_atk": {
+      "value": 71,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 63,
+    "basic_hp": {
+      "value": 4100,
+      "item_require": {
+        "id": 1,
+        "number": 63
+      }
+    },
+    "basic_atk": {
+      "value": 72,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 64,
+    "basic_hp": {
+      "value": 4150,
+      "item_require": {
+        "id": 1,
+        "number": 64
+      }
+    },
+    "basic_atk": {
+      "value": 73,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 65,
+    "basic_hp": {
+      "value": 4200,
+      "item_require": {
+        "id": 1,
+        "number": 65
+      }
+    },
+    "basic_atk": {
+      "value": 74,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 66,
+    "basic_hp": {
+      "value": 4250,
+      "item_require": {
+        "id": 1,
+        "number": 66
+      }
+    },
+    "basic_atk": {
+      "value": 75,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 67,
+    "basic_hp": {
+      "value": 4300,
+      "item_require": {
+        "id": 1,
+        "number": 67
+      }
+    },
+    "basic_atk": {
+      "value": 76,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 68,
+    "basic_hp": {
+      "value": 4350,
+      "item_require": {
+        "id": 1,
+        "number": 68
+      }
+    },
+    "basic_atk": {
+      "value": 77,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 69,
+    "basic_hp": {
+      "value": 4400,
+      "item_require": {
+        "id": 1,
+        "number": 69
+      }
+    },
+    "basic_atk": {
+      "value": 78,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 70,
+    "basic_hp": {
+      "value": 4450,
+      "item_require": {
+        "id": 1,
+        "number": 70
+      }
+    },
+    "basic_atk": {
+      "value": 79,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 71,
+    "basic_hp": {
+      "value": 4500,
+      "item_require": {
+        "id": 1,
+        "number": 71
+      }
+    },
+    "basic_atk": {
+      "value": 80,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 72,
+    "basic_hp": {
+      "value": 4550,
+      "item_require": {
+        "id": 1,
+        "number": 72
+      }
+    },
+    "basic_atk": {
+      "value": 81,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 73,
+    "basic_hp": {
+      "value": 4600,
+      "item_require": {
+        "id": 1,
+        "number": 73
+      }
+    },
+    "basic_atk": {
+      "value": 82,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 74,
+    "basic_hp": {
+      "value": 4650,
+      "item_require": {
+        "id": 1,
+        "number": 74
+      }
+    },
+    "basic_atk": {
+      "value": 83,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 75,
+    "basic_hp": {
+      "value": 4700,
+      "item_require": {
+        "id": 1,
+        "number": 75
+      }
+    },
+    "basic_atk": {
+      "value": 84,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 76,
+    "basic_hp": {
+      "value": 4750,
+      "item_require": {
+        "id": 1,
+        "number": 76
+      }
+    },
+    "basic_atk": {
+      "value": 85,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 77,
+    "basic_hp": {
+      "value": 4800,
+      "item_require": {
+        "id": 1,
+        "number": 77
+      }
+    },
+    "basic_atk": {
+      "value": 86,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 78,
+    "basic_hp": {
+      "value": 4850,
+      "item_require": {
+        "id": 1,
+        "number": 78
+      }
+    },
+    "basic_atk": {
+      "value": 87,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 79,
+    "basic_hp": {
+      "value": 4900,
+      "item_require": {
+        "id": 1,
+        "number": 79
+      }
+    },
+    "basic_atk": {
+      "value": 88,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 80,
+    "basic_hp": {
+      "value": 4950,
+      "item_require": {
+        "id": 1,
+        "number": 80
+      }
+    },
+    "basic_atk": {
+      "value": 89,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 81,
+    "basic_hp": {
+      "value": 5000,
+      "item_require": {
+        "id": 1,
+        "number": 81
+      }
+    },
+    "basic_atk": {
+      "value": 90,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 82,
+    "basic_hp": {
+      "value": 5050,
+      "item_require": {
+        "id": 1,
+        "number": 82
+      }
+    },
+    "basic_atk": {
+      "value": 91,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 83,
+    "basic_hp": {
+      "value": 5100,
+      "item_require": {
+        "id": 1,
+        "number": 83
+      }
+    },
+    "basic_atk": {
+      "value": 92,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 84,
+    "basic_hp": {
+      "value": 5150,
+      "item_require": {
+        "id": 1,
+        "number": 84
+      }
+    },
+    "basic_atk": {
+      "value": 93,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 85,
+    "basic_hp": {
+      "value": 5200,
+      "item_require": {
+        "id": 1,
+        "number": 85
+      }
+    },
+    "basic_atk": {
+      "value": 94,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 86,
+    "basic_hp": {
+      "value": 5250,
+      "item_require": {
+        "id": 1,
+        "number": 86
+      }
+    },
+    "basic_atk": {
+      "value": 95,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 87,
+    "basic_hp": {
+      "value": 5300,
+      "item_require": {
+        "id": 1,
+        "number": 87
+      }
+    },
+    "basic_atk": {
+      "value": 96,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 88,
+    "basic_hp": {
+      "value": 5350,
+      "item_require": {
+        "id": 1,
+        "number": 88
+      }
+    },
+    "basic_atk": {
+      "value": 97,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 89,
+    "basic_hp": {
+      "value": 5400,
+      "item_require": {
+        "id": 1,
+        "number": 89
+      }
+    },
+    "basic_atk": {
+      "value": 98,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 90,
+    "basic_hp": {
+      "value": 5450,
+      "item_require": {
+        "id": 1,
+        "number": 90
+      }
+    },
+    "basic_atk": {
+      "value": 99,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 91,
+    "basic_hp": {
+      "value": 5500,
+      "item_require": {
+        "id": 1,
+        "number": 91
+      }
+    },
+    "basic_atk": {
+      "value": 100,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 92,
+    "basic_hp": {
+      "value": 5550,
+      "item_require": {
+        "id": 1,
+        "number": 92
+      }
+    },
+    "basic_atk": {
+      "value": 101,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 93,
+    "basic_hp": {
+      "value": 5600,
+      "item_require": {
+        "id": 1,
+        "number": 93
+      }
+    },
+    "basic_atk": {
+      "value": 102,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 94,
+    "basic_hp": {
+      "value": 5650,
+      "item_require": {
+        "id": 1,
+        "number": 94
+      }
+    },
+    "basic_atk": {
+      "value": 103,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 95,
+    "basic_hp": {
+      "value": 5700,
+      "item_require": {
+        "id": 1,
+        "number": 95
+      }
+    },
+    "basic_atk": {
+      "value": 104,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 96,
+    "basic_hp": {
+      "value": 5750,
+      "item_require": {
+        "id": 1,
+        "number": 96
+      }
+    },
+    "basic_atk": {
+      "value": 105,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 97,
+    "basic_hp": {
+      "value": 5800,
+      "item_require": {
+        "id": 1,
+        "number": 97
+      }
+    },
+    "basic_atk": {
+      "value": 106,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 98,
+    "basic_hp": {
+      "value": 5850,
+      "item_require": {
+        "id": 1,
+        "number": 98
+      }
+    },
+    "basic_atk": {
+      "value": 107,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 99,
+    "basic_hp": {
+      "value": 5900,
+      "item_require": {
+        "id": 1,
+        "number": 99
+      }
+    },
+    "basic_atk": {
+      "value": 108,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 100,
+    "basic_hp": {
+      "value": 5950,
+      "item_require": {
+        "id": 1,
+        "number": 100
+      }
+    },
+    "basic_atk": {
+      "value": 109,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 101,
+    "basic_hp": {
+      "value": 6000,
+      "item_require": {
+        "id": 1,
+        "number": 101
+      }
+    },
+    "basic_atk": {
+      "value": 110,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 102,
+    "basic_hp": {
+      "value": 6050,
+      "item_require": {
+        "id": 1,
+        "number": 102
+      }
+    },
+    "basic_atk": {
+      "value": 111,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 103,
+    "basic_hp": {
+      "value": 6100,
+      "item_require": {
+        "id": 1,
+        "number": 103
+      }
+    },
+    "basic_atk": {
+      "value": 112,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 104,
+    "basic_hp": {
+      "value": 6150,
+      "item_require": {
+        "id": 1,
+        "number": 104
+      }
+    },
+    "basic_atk": {
+      "value": 113,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 105,
+    "basic_hp": {
+      "value": 6200,
+      "item_require": {
+        "id": 1,
+        "number": 105
+      }
+    },
+    "basic_atk": {
+      "value": 114,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 106,
+    "basic_hp": {
+      "value": 6250,
+      "item_require": {
+        "id": 1,
+        "number": 106
+      }
+    },
+    "basic_atk": {
+      "value": 115,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 107,
+    "basic_hp": {
+      "value": 6300,
+      "item_require": {
+        "id": 1,
+        "number": 107
+      }
+    },
+    "basic_atk": {
+      "value": 116,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 108,
+    "basic_hp": {
+      "value": 6350,
+      "item_require": {
+        "id": 1,
+        "number": 108
+      }
+    },
+    "basic_atk": {
+      "value": 117,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 109,
+    "basic_hp": {
+      "value": 6400,
+      "item_require": {
+        "id": 1,
+        "number": 109
+      }
+    },
+    "basic_atk": {
+      "value": 118,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 110,
+    "basic_hp": {
+      "value": 6450,
+      "item_require": {
+        "id": 1,
+        "number": 110
+      }
+    },
+    "basic_atk": {
+      "value": 119,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 111,
+    "basic_hp": {
+      "value": 6500,
+      "item_require": {
+        "id": 1,
+        "number": 111
+      }
+    },
+    "basic_atk": {
+      "value": 120,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 112,
+    "basic_hp": {
+      "value": 6550,
+      "item_require": {
+        "id": 1,
+        "number": 112
+      }
+    },
+    "basic_atk": {
+      "value": 121,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 113,
+    "basic_hp": {
+      "value": 6600,
+      "item_require": {
+        "id": 1,
+        "number": 113
+      }
+    },
+    "basic_atk": {
+      "value": 122,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 114,
+    "basic_hp": {
+      "value": 6650,
+      "item_require": {
+        "id": 1,
+        "number": 114
+      }
+    },
+    "basic_atk": {
+      "value": 123,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 115,
+    "basic_hp": {
+      "value": 6700,
+      "item_require": {
+        "id": 1,
+        "number": 115
+      }
+    },
+    "basic_atk": {
+      "value": 124,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 116,
+    "basic_hp": {
+      "value": 6750,
+      "item_require": {
+        "id": 1,
+        "number": 116
+      }
+    },
+    "basic_atk": {
+      "value": 125,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 117,
+    "basic_hp": {
+      "value": 6800,
+      "item_require": {
+        "id": 1,
+        "number": 117
+      }
+    },
+    "basic_atk": {
+      "value": 126,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 118,
+    "basic_hp": {
+      "value": 6850,
+      "item_require": {
+        "id": 1,
+        "number": 118
+      }
+    },
+    "basic_atk": {
+      "value": 127,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 119,
+    "basic_hp": {
+      "value": 6900,
+      "item_require": {
+        "id": 1,
+        "number": 119
+      }
+    },
+    "basic_atk": {
+      "value": 128,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 120,
+    "basic_hp": {
+      "value": 6950,
+      "item_require": {
+        "id": 1,
+        "number": 120
+      }
+    },
+    "basic_atk": {
+      "value": 129,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 121,
+    "basic_hp": {
+      "value": 7000,
+      "item_require": {
+        "id": 1,
+        "number": 121
+      }
+    },
+    "basic_atk": {
+      "value": 130,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 122,
+    "basic_hp": {
+      "value": 7050,
+      "item_require": {
+        "id": 1,
+        "number": 122
+      }
+    },
+    "basic_atk": {
+      "value": 131,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 123,
+    "basic_hp": {
+      "value": 7100,
+      "item_require": {
+        "id": 1,
+        "number": 123
+      }
+    },
+    "basic_atk": {
+      "value": 132,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 124,
+    "basic_hp": {
+      "value": 7150,
+      "item_require": {
+        "id": 1,
+        "number": 124
+      }
+    },
+    "basic_atk": {
+      "value": 133,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 125,
+    "basic_hp": {
+      "value": 7200,
+      "item_require": {
+        "id": 1,
+        "number": 125
+      }
+    },
+    "basic_atk": {
+      "value": 134,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 126,
+    "basic_hp": {
+      "value": 7250,
+      "item_require": {
+        "id": 1,
+        "number": 126
+      }
+    },
+    "basic_atk": {
+      "value": 135,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 127,
+    "basic_hp": {
+      "value": 7300,
+      "item_require": {
+        "id": 1,
+        "number": 127
+      }
+    },
+    "basic_atk": {
+      "value": 136,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 128,
+    "basic_hp": {
+      "value": 7350,
+      "item_require": {
+        "id": 1,
+        "number": 128
+      }
+    },
+    "basic_atk": {
+      "value": 137,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 129,
+    "basic_hp": {
+      "value": 7400,
+      "item_require": {
+        "id": 1,
+        "number": 129
+      }
+    },
+    "basic_atk": {
+      "value": 138,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 130,
+    "basic_hp": {
+      "value": 7450,
+      "item_require": {
+        "id": 1,
+        "number": 130
+      }
+    },
+    "basic_atk": {
+      "value": 139,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 131,
+    "basic_hp": {
+      "value": 7500,
+      "item_require": {
+        "id": 1,
+        "number": 131
+      }
+    },
+    "basic_atk": {
+      "value": 140,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 132,
+    "basic_hp": {
+      "value": 7550,
+      "item_require": {
+        "id": 1,
+        "number": 132
+      }
+    },
+    "basic_atk": {
+      "value": 141,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 133,
+    "basic_hp": {
+      "value": 7600,
+      "item_require": {
+        "id": 1,
+        "number": 133
+      }
+    },
+    "basic_atk": {
+      "value": 142,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 134,
+    "basic_hp": {
+      "value": 7650,
+      "item_require": {
+        "id": 1,
+        "number": 134
+      }
+    },
+    "basic_atk": {
+      "value": 143,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 135,
+    "basic_hp": {
+      "value": 7700,
+      "item_require": {
+        "id": 1,
+        "number": 135
+      }
+    },
+    "basic_atk": {
+      "value": 144,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 136,
+    "basic_hp": {
+      "value": 7750,
+      "item_require": {
+        "id": 1,
+        "number": 136
+      }
+    },
+    "basic_atk": {
+      "value": 145,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 137,
+    "basic_hp": {
+      "value": 7800,
+      "item_require": {
+        "id": 1,
+        "number": 137
+      }
+    },
+    "basic_atk": {
+      "value": 146,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 138,
+    "basic_hp": {
+      "value": 7850,
+      "item_require": {
+        "id": 1,
+        "number": 138
+      }
+    },
+    "basic_atk": {
+      "value": 147,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 139,
+    "basic_hp": {
+      "value": 7900,
+      "item_require": {
+        "id": 1,
+        "number": 139
+      }
+    },
+    "basic_atk": {
+      "value": 148,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 140,
+    "basic_hp": {
+      "value": 7950,
+      "item_require": {
+        "id": 1,
+        "number": 140
+      }
+    },
+    "basic_atk": {
+      "value": 149,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 141,
+    "basic_hp": {
+      "value": 8000,
+      "item_require": {
+        "id": 1,
+        "number": 141
+      }
+    },
+    "basic_atk": {
+      "value": 150,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 142,
+    "basic_hp": {
+      "value": 8050,
+      "item_require": {
+        "id": 1,
+        "number": 142
+      }
+    },
+    "basic_atk": {
+      "value": 151,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 143,
+    "basic_hp": {
+      "value": 8100,
+      "item_require": {
+        "id": 1,
+        "number": 143
+      }
+    },
+    "basic_atk": {
+      "value": 152,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 144,
+    "basic_hp": {
+      "value": 8150,
+      "item_require": {
+        "id": 1,
+        "number": 144
+      }
+    },
+    "basic_atk": {
+      "value": 153,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 145,
+    "basic_hp": {
+      "value": 8200,
+      "item_require": {
+        "id": 1,
+        "number": 145
+      }
+    },
+    "basic_atk": {
+      "value": 154,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 146,
+    "basic_hp": {
+      "value": 8250,
+      "item_require": {
+        "id": 1,
+        "number": 146
+      }
+    },
+    "basic_atk": {
+      "value": 155,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 147,
+    "basic_hp": {
+      "value": 8300,
+      "item_require": {
+        "id": 1,
+        "number": 147
+      }
+    },
+    "basic_atk": {
+      "value": 156,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 148,
+    "basic_hp": {
+      "value": 8350,
+      "item_require": {
+        "id": 1,
+        "number": 148
+      }
+    },
+    "basic_atk": {
+      "value": 157,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 149,
+    "basic_hp": {
+      "value": 8400,
+      "item_require": {
+        "id": 1,
+        "number": 149
+      }
+    },
+    "basic_atk": {
+      "value": 158,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 150,
+    "basic_hp": {
+      "value": 8450,
+      "item_require": {
+        "id": 1,
+        "number": 150
+      }
+    },
+    "basic_atk": {
+      "value": 159,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 151,
+    "basic_hp": {
+      "value": 8500,
+      "item_require": {
+        "id": 1,
+        "number": 151
+      }
+    },
+    "basic_atk": {
+      "value": 160,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 152,
+    "basic_hp": {
+      "value": 8550,
+      "item_require": {
+        "id": 1,
+        "number": 152
+      }
+    },
+    "basic_atk": {
+      "value": 161,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 153,
+    "basic_hp": {
+      "value": 8600,
+      "item_require": {
+        "id": 1,
+        "number": 153
+      }
+    },
+    "basic_atk": {
+      "value": 162,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 154,
+    "basic_hp": {
+      "value": 8650,
+      "item_require": {
+        "id": 1,
+        "number": 154
+      }
+    },
+    "basic_atk": {
+      "value": 163,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 155,
+    "basic_hp": {
+      "value": 8700,
+      "item_require": {
+        "id": 1,
+        "number": 155
+      }
+    },
+    "basic_atk": {
+      "value": 164,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 156,
+    "basic_hp": {
+      "value": 8750,
+      "item_require": {
+        "id": 1,
+        "number": 156
+      }
+    },
+    "basic_atk": {
+      "value": 165,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 157,
+    "basic_hp": {
+      "value": 8800,
+      "item_require": {
+        "id": 1,
+        "number": 157
+      }
+    },
+    "basic_atk": {
+      "value": 166,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 158,
+    "basic_hp": {
+      "value": 8850,
+      "item_require": {
+        "id": 1,
+        "number": 158
+      }
+    },
+    "basic_atk": {
+      "value": 167,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 159,
+    "basic_hp": {
+      "value": 8900,
+      "item_require": {
+        "id": 1,
+        "number": 159
+      }
+    },
+    "basic_atk": {
+      "value": 168,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 160,
+    "basic_hp": {
+      "value": 8950,
+      "item_require": {
+        "id": 1,
+        "number": 160
+      }
+    },
+    "basic_atk": {
+      "value": 169,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 161,
+    "basic_hp": {
+      "value": 9000,
+      "item_require": {
+        "id": 1,
+        "number": 161
+      }
+    },
+    "basic_atk": {
+      "value": 170,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 162,
+    "basic_hp": {
+      "value": 9050,
+      "item_require": {
+        "id": 1,
+        "number": 162
+      }
+    },
+    "basic_atk": {
+      "value": 171,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 163,
+    "basic_hp": {
+      "value": 9100,
+      "item_require": {
+        "id": 1,
+        "number": 163
+      }
+    },
+    "basic_atk": {
+      "value": 172,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 164,
+    "basic_hp": {
+      "value": 9150,
+      "item_require": {
+        "id": 1,
+        "number": 164
+      }
+    },
+    "basic_atk": {
+      "value": 173,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 165,
+    "basic_hp": {
+      "value": 9200,
+      "item_require": {
+        "id": 1,
+        "number": 165
+      }
+    },
+    "basic_atk": {
+      "value": 174,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 166,
+    "basic_hp": {
+      "value": 9250,
+      "item_require": {
+        "id": 1,
+        "number": 166
+      }
+    },
+    "basic_atk": {
+      "value": 175,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 167,
+    "basic_hp": {
+      "value": 9300,
+      "item_require": {
+        "id": 1,
+        "number": 167
+      }
+    },
+    "basic_atk": {
+      "value": 176,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 168,
+    "basic_hp": {
+      "value": 9350,
+      "item_require": {
+        "id": 1,
+        "number": 168
+      }
+    },
+    "basic_atk": {
+      "value": 177,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 169,
+    "basic_hp": {
+      "value": 9400,
+      "item_require": {
+        "id": 1,
+        "number": 169
+      }
+    },
+    "basic_atk": {
+      "value": 178,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 170,
+    "basic_hp": {
+      "value": 9450,
+      "item_require": {
+        "id": 1,
+        "number": 170
+      }
+    },
+    "basic_atk": {
+      "value": 179,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 171,
+    "basic_hp": {
+      "value": 9500,
+      "item_require": {
+        "id": 1,
+        "number": 171
+      }
+    },
+    "basic_atk": {
+      "value": 180,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 172,
+    "basic_hp": {
+      "value": 9550,
+      "item_require": {
+        "id": 1,
+        "number": 172
+      }
+    },
+    "basic_atk": {
+      "value": 181,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 173,
+    "basic_hp": {
+      "value": 9600,
+      "item_require": {
+        "id": 1,
+        "number": 173
+      }
+    },
+    "basic_atk": {
+      "value": 182,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 174,
+    "basic_hp": {
+      "value": 9650,
+      "item_require": {
+        "id": 1,
+        "number": 174
+      }
+    },
+    "basic_atk": {
+      "value": 183,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 175,
+    "basic_hp": {
+      "value": 9700,
+      "item_require": {
+        "id": 1,
+        "number": 175
+      }
+    },
+    "basic_atk": {
+      "value": 184,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 176,
+    "basic_hp": {
+      "value": 9750,
+      "item_require": {
+        "id": 1,
+        "number": 176
+      }
+    },
+    "basic_atk": {
+      "value": 185,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 177,
+    "basic_hp": {
+      "value": 9800,
+      "item_require": {
+        "id": 1,
+        "number": 177
+      }
+    },
+    "basic_atk": {
+      "value": 186,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 178,
+    "basic_hp": {
+      "value": 9850,
+      "item_require": {
+        "id": 1,
+        "number": 178
+      }
+    },
+    "basic_atk": {
+      "value": 187,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 179,
+    "basic_hp": {
+      "value": 9900,
+      "item_require": {
+        "id": 1,
+        "number": 179
+      }
+    },
+    "basic_atk": {
+      "value": 188,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 180,
+    "basic_hp": {
+      "value": 9950,
+      "item_require": {
+        "id": 1,
+        "number": 180
+      }
+    },
+    "basic_atk": {
+      "value": 189,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 181,
+    "basic_hp": {
+      "value": 10000,
+      "item_require": {
+        "id": 1,
+        "number": 181
+      }
+    },
+    "basic_atk": {
+      "value": 190,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 182,
+    "basic_hp": {
+      "value": 10050,
+      "item_require": {
+        "id": 1,
+        "number": 182
+      }
+    },
+    "basic_atk": {
+      "value": 191,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 183,
+    "basic_hp": {
+      "value": 10100,
+      "item_require": {
+        "id": 1,
+        "number": 183
+      }
+    },
+    "basic_atk": {
+      "value": 192,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 184,
+    "basic_hp": {
+      "value": 10150,
+      "item_require": {
+        "id": 1,
+        "number": 184
+      }
+    },
+    "basic_atk": {
+      "value": 193,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 185,
+    "basic_hp": {
+      "value": 10200,
+      "item_require": {
+        "id": 1,
+        "number": 185
+      }
+    },
+    "basic_atk": {
+      "value": 194,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 186,
+    "basic_hp": {
+      "value": 10250,
+      "item_require": {
+        "id": 1,
+        "number": 186
+      }
+    },
+    "basic_atk": {
+      "value": 195,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 187,
+    "basic_hp": {
+      "value": 10300,
+      "item_require": {
+        "id": 1,
+        "number": 187
+      }
+    },
+    "basic_atk": {
+      "value": 196,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 188,
+    "basic_hp": {
+      "value": 10350,
+      "item_require": {
+        "id": 1,
+        "number": 188
+      }
+    },
+    "basic_atk": {
+      "value": 197,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 189,
+    "basic_hp": {
+      "value": 10400,
+      "item_require": {
+        "id": 1,
+        "number": 189
+      }
+    },
+    "basic_atk": {
+      "value": 198,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 190,
+    "basic_hp": {
+      "value": 10450,
+      "item_require": {
+        "id": 1,
+        "number": 190
+      }
+    },
+    "basic_atk": {
+      "value": 199,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 191,
+    "basic_hp": {
+      "value": 10500,
+      "item_require": {
+        "id": 1,
+        "number": 191
+      }
+    },
+    "basic_atk": {
+      "value": 200,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 192,
+    "basic_hp": {
+      "value": 10550,
+      "item_require": {
+        "id": 1,
+        "number": 192
+      }
+    },
+    "basic_atk": {
+      "value": 201,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 193,
+    "basic_hp": {
+      "value": 10600,
+      "item_require": {
+        "id": 1,
+        "number": 193
+      }
+    },
+    "basic_atk": {
+      "value": 202,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 194,
+    "basic_hp": {
+      "value": 10650,
+      "item_require": {
+        "id": 1,
+        "number": 194
+      }
+    },
+    "basic_atk": {
+      "value": 203,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 195,
+    "basic_hp": {
+      "value": 10700,
+      "item_require": {
+        "id": 1,
+        "number": 195
+      }
+    },
+    "basic_atk": {
+      "value": 204,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 196,
+    "basic_hp": {
+      "value": 10750,
+      "item_require": {
+        "id": 1,
+        "number": 196
+      }
+    },
+    "basic_atk": {
+      "value": 205,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 197,
+    "basic_hp": {
+      "value": 10800,
+      "item_require": {
+        "id": 1,
+        "number": 197
+      }
+    },
+    "basic_atk": {
+      "value": 206,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 198,
+    "basic_hp": {
+      "value": 10850,
+      "item_require": {
+        "id": 1,
+        "number": 198
+      }
+    },
+    "basic_atk": {
+      "value": 207,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 199,
+    "basic_hp": {
+      "value": 10900,
+      "item_require": {
+        "id": 1,
+        "number": 199
+      }
+    },
+    "basic_atk": {
+      "value": 208,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 200,
+    "basic_hp": {
+      "value": 10950,
+      "item_require": {
+        "id": 1,
+        "number": 200
+      }
+    },
+    "basic_atk": {
+      "value": 209,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 201,
+    "basic_hp": {
+      "value": 11000,
+      "item_require": {
+        "id": 1,
+        "number": 201
+      }
+    },
+    "basic_atk": {
+      "value": 210,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 202,
+    "basic_hp": {
+      "value": 11050,
+      "item_require": {
+        "id": 1,
+        "number": 202
+      }
+    },
+    "basic_atk": {
+      "value": 211,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 203,
+    "basic_hp": {
+      "value": 11100,
+      "item_require": {
+        "id": 1,
+        "number": 203
+      }
+    },
+    "basic_atk": {
+      "value": 212,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 204,
+    "basic_hp": {
+      "value": 11150,
+      "item_require": {
+        "id": 1,
+        "number": 204
+      }
+    },
+    "basic_atk": {
+      "value": 213,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 205,
+    "basic_hp": {
+      "value": 11200,
+      "item_require": {
+        "id": 1,
+        "number": 205
+      }
+    },
+    "basic_atk": {
+      "value": 214,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 206,
+    "basic_hp": {
+      "value": 11250,
+      "item_require": {
+        "id": 1,
+        "number": 206
+      }
+    },
+    "basic_atk": {
+      "value": 215,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 207,
+    "basic_hp": {
+      "value": 11300,
+      "item_require": {
+        "id": 1,
+        "number": 207
+      }
+    },
+    "basic_atk": {
+      "value": 216,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 208,
+    "basic_hp": {
+      "value": 11350,
+      "item_require": {
+        "id": 1,
+        "number": 208
+      }
+    },
+    "basic_atk": {
+      "value": 217,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 209,
+    "basic_hp": {
+      "value": 11400,
+      "item_require": {
+        "id": 1,
+        "number": 209
+      }
+    },
+    "basic_atk": {
+      "value": 218,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 210,
+    "basic_hp": {
+      "value": 11450,
+      "item_require": {
+        "id": 1,
+        "number": 210
+      }
+    },
+    "basic_atk": {
+      "value": 219,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 211,
+    "basic_hp": {
+      "value": 11500,
+      "item_require": {
+        "id": 1,
+        "number": 211
+      }
+    },
+    "basic_atk": {
+      "value": 220,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 212,
+    "basic_hp": {
+      "value": 11550,
+      "item_require": {
+        "id": 1,
+        "number": 212
+      }
+    },
+    "basic_atk": {
+      "value": 221,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 213,
+    "basic_hp": {
+      "value": 11600,
+      "item_require": {
+        "id": 1,
+        "number": 213
+      }
+    },
+    "basic_atk": {
+      "value": 222,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 214,
+    "basic_hp": {
+      "value": 11650,
+      "item_require": {
+        "id": 1,
+        "number": 214
+      }
+    },
+    "basic_atk": {
+      "value": 223,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 215,
+    "basic_hp": {
+      "value": 11700,
+      "item_require": {
+        "id": 1,
+        "number": 215
+      }
+    },
+    "basic_atk": {
+      "value": 224,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 216,
+    "basic_hp": {
+      "value": 11750,
+      "item_require": {
+        "id": 1,
+        "number": 216
+      }
+    },
+    "basic_atk": {
+      "value": 225,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 217,
+    "basic_hp": {
+      "value": 11800,
+      "item_require": {
+        "id": 1,
+        "number": 217
+      }
+    },
+    "basic_atk": {
+      "value": 226,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 218,
+    "basic_hp": {
+      "value": 11850,
+      "item_require": {
+        "id": 1,
+        "number": 218
+      }
+    },
+    "basic_atk": {
+      "value": 227,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 219,
+    "basic_hp": {
+      "value": 11900,
+      "item_require": {
+        "id": 1,
+        "number": 219
+      }
+    },
+    "basic_atk": {
+      "value": 228,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 220,
+    "basic_hp": {
+      "value": 11950,
+      "item_require": {
+        "id": 1,
+        "number": 220
+      }
+    },
+    "basic_atk": {
+      "value": 229,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 221,
+    "basic_hp": {
+      "value": 12000,
+      "item_require": {
+        "id": 1,
+        "number": 221
+      }
+    },
+    "basic_atk": {
+      "value": 230,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 222,
+    "basic_hp": {
+      "value": 12050,
+      "item_require": {
+        "id": 1,
+        "number": 222
+      }
+    },
+    "basic_atk": {
+      "value": 231,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 223,
+    "basic_hp": {
+      "value": 12100,
+      "item_require": {
+        "id": 1,
+        "number": 223
+      }
+    },
+    "basic_atk": {
+      "value": 232,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 224,
+    "basic_hp": {
+      "value": 12150,
+      "item_require": {
+        "id": 1,
+        "number": 224
+      }
+    },
+    "basic_atk": {
+      "value": 233,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 225,
+    "basic_hp": {
+      "value": 12200,
+      "item_require": {
+        "id": 1,
+        "number": 225
+      }
+    },
+    "basic_atk": {
+      "value": 234,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 226,
+    "basic_hp": {
+      "value": 12250,
+      "item_require": {
+        "id": 1,
+        "number": 226
+      }
+    },
+    "basic_atk": {
+      "value": 235,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 227,
+    "basic_hp": {
+      "value": 12300,
+      "item_require": {
+        "id": 1,
+        "number": 227
+      }
+    },
+    "basic_atk": {
+      "value": 236,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 228,
+    "basic_hp": {
+      "value": 12350,
+      "item_require": {
+        "id": 1,
+        "number": 228
+      }
+    },
+    "basic_atk": {
+      "value": 237,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 229,
+    "basic_hp": {
+      "value": 12400,
+      "item_require": {
+        "id": 1,
+        "number": 229
+      }
+    },
+    "basic_atk": {
+      "value": 238,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 230,
+    "basic_hp": {
+      "value": 12450,
+      "item_require": {
+        "id": 1,
+        "number": 230
+      }
+    },
+    "basic_atk": {
+      "value": 239,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 231,
+    "basic_hp": {
+      "value": 12500,
+      "item_require": {
+        "id": 1,
+        "number": 231
+      }
+    },
+    "basic_atk": {
+      "value": 240,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 232,
+    "basic_hp": {
+      "value": 12550,
+      "item_require": {
+        "id": 1,
+        "number": 232
+      }
+    },
+    "basic_atk": {
+      "value": 241,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 233,
+    "basic_hp": {
+      "value": 12600,
+      "item_require": {
+        "id": 1,
+        "number": 233
+      }
+    },
+    "basic_atk": {
+      "value": 242,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 234,
+    "basic_hp": {
+      "value": 12650,
+      "item_require": {
+        "id": 1,
+        "number": 234
+      }
+    },
+    "basic_atk": {
+      "value": 243,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 235,
+    "basic_hp": {
+      "value": 12700,
+      "item_require": {
+        "id": 1,
+        "number": 235
+      }
+    },
+    "basic_atk": {
+      "value": 244,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 236,
+    "basic_hp": {
+      "value": 12750,
+      "item_require": {
+        "id": 1,
+        "number": 236
+      }
+    },
+    "basic_atk": {
+      "value": 245,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 237,
+    "basic_hp": {
+      "value": 12800,
+      "item_require": {
+        "id": 1,
+        "number": 237
+      }
+    },
+    "basic_atk": {
+      "value": 246,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 238,
+    "basic_hp": {
+      "value": 12850,
+      "item_require": {
+        "id": 1,
+        "number": 238
+      }
+    },
+    "basic_atk": {
+      "value": 247,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 239,
+    "basic_hp": {
+      "value": 12900,
+      "item_require": {
+        "id": 1,
+        "number": 239
+      }
+    },
+    "basic_atk": {
+      "value": 248,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 240,
+    "basic_hp": {
+      "value": 12950,
+      "item_require": {
+        "id": 1,
+        "number": 240
+      }
+    },
+    "basic_atk": {
+      "value": 249,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 241,
+    "basic_hp": {
+      "value": 13000,
+      "item_require": {
+        "id": 1,
+        "number": 241
+      }
+    },
+    "basic_atk": {
+      "value": 250,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 242,
+    "basic_hp": {
+      "value": 13050,
+      "item_require": {
+        "id": 1,
+        "number": 242
+      }
+    },
+    "basic_atk": {
+      "value": 251,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 243,
+    "basic_hp": {
+      "value": 13100,
+      "item_require": {
+        "id": 1,
+        "number": 243
+      }
+    },
+    "basic_atk": {
+      "value": 252,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 244,
+    "basic_hp": {
+      "value": 13150,
+      "item_require": {
+        "id": 1,
+        "number": 244
+      }
+    },
+    "basic_atk": {
+      "value": 253,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 245,
+    "basic_hp": {
+      "value": 13200,
+      "item_require": {
+        "id": 1,
+        "number": 245
+      }
+    },
+    "basic_atk": {
+      "value": 254,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 246,
+    "basic_hp": {
+      "value": 13250,
+      "item_require": {
+        "id": 1,
+        "number": 246
+      }
+    },
+    "basic_atk": {
+      "value": 255,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 247,
+    "basic_hp": {
+      "value": 13300,
+      "item_require": {
+        "id": 1,
+        "number": 247
+      }
+    },
+    "basic_atk": {
+      "value": 256,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 248,
+    "basic_hp": {
+      "value": 13350,
+      "item_require": {
+        "id": 1,
+        "number": 248
+      }
+    },
+    "basic_atk": {
+      "value": 257,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 249,
+    "basic_hp": {
+      "value": 13400,
+      "item_require": {
+        "id": 1,
+        "number": 249
+      }
+    },
+    "basic_atk": {
+      "value": 258,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 250,
+    "basic_hp": {
+      "value": 13450,
+      "item_require": {
+        "id": 1,
+        "number": 250
+      }
+    },
+    "basic_atk": {
+      "value": 259,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 251,
+    "basic_hp": {
+      "value": 13500,
+      "item_require": {
+        "id": 1,
+        "number": 251
+      }
+    },
+    "basic_atk": {
+      "value": 260,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 252,
+    "basic_hp": {
+      "value": 13550,
+      "item_require": {
+        "id": 1,
+        "number": 252
+      }
+    },
+    "basic_atk": {
+      "value": 261,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 253,
+    "basic_hp": {
+      "value": 13600,
+      "item_require": {
+        "id": 1,
+        "number": 253
+      }
+    },
+    "basic_atk": {
+      "value": 262,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 254,
+    "basic_hp": {
+      "value": 13650,
+      "item_require": {
+        "id": 1,
+        "number": 254
+      }
+    },
+    "basic_atk": {
+      "value": 263,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 255,
+    "basic_hp": {
+      "value": 13700,
+      "item_require": {
+        "id": 1,
+        "number": 255
+      }
+    },
+    "basic_atk": {
+      "value": 264,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 256,
+    "basic_hp": {
+      "value": 13750,
+      "item_require": {
+        "id": 1,
+        "number": 256
+      }
+    },
+    "basic_atk": {
+      "value": 265,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 257,
+    "basic_hp": {
+      "value": 13800,
+      "item_require": {
+        "id": 1,
+        "number": 257
+      }
+    },
+    "basic_atk": {
+      "value": 266,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 258,
+    "basic_hp": {
+      "value": 13850,
+      "item_require": {
+        "id": 1,
+        "number": 258
+      }
+    },
+    "basic_atk": {
+      "value": 267,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 259,
+    "basic_hp": {
+      "value": 13900,
+      "item_require": {
+        "id": 1,
+        "number": 259
+      }
+    },
+    "basic_atk": {
+      "value": 268,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 260,
+    "basic_hp": {
+      "value": 13950,
+      "item_require": {
+        "id": 1,
+        "number": 260
+      }
+    },
+    "basic_atk": {
+      "value": 269,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 261,
+    "basic_hp": {
+      "value": 14000,
+      "item_require": {
+        "id": 1,
+        "number": 261
+      }
+    },
+    "basic_atk": {
+      "value": 270,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 262,
+    "basic_hp": {
+      "value": 14050,
+      "item_require": {
+        "id": 1,
+        "number": 262
+      }
+    },
+    "basic_atk": {
+      "value": 271,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 263,
+    "basic_hp": {
+      "value": 14100,
+      "item_require": {
+        "id": 1,
+        "number": 263
+      }
+    },
+    "basic_atk": {
+      "value": 272,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 264,
+    "basic_hp": {
+      "value": 14150,
+      "item_require": {
+        "id": 1,
+        "number": 264
+      }
+    },
+    "basic_atk": {
+      "value": 273,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 265,
+    "basic_hp": {
+      "value": 14200,
+      "item_require": {
+        "id": 1,
+        "number": 265
+      }
+    },
+    "basic_atk": {
+      "value": 274,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 266,
+    "basic_hp": {
+      "value": 14250,
+      "item_require": {
+        "id": 1,
+        "number": 266
+      }
+    },
+    "basic_atk": {
+      "value": 275,
+      "item_require": {
+        "id": 1,
+        "number": 8
+      }
+    }
+  },
+  {
+    "level": 267,
+    "basic_hp": {
+      "value": 14300,
+      "item_require": {
+        "id": 1,
+        "number": 267
+      }
+    },
+    "basic_atk": {
+      "value": 276,
+      "item_require": {
+        "id": 1,
+        "number": 10
+      }
+    }
+  },
+  {
+    "level": 268,
+    "basic_hp": {
+      "value": 14350,
+      "item_require": {
+        "id": 1,
+        "number": 268
+      }
+    },
+    "basic_atk": {
+      "value": 277,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 269,
+    "basic_hp": {
+      "value": 14400,
+      "item_require": {
+        "id": 1,
+        "number": 269
+      }
+    },
+    "basic_atk": {
+      "value": 278,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 270,
+    "basic_hp": {
+      "value": 14450,
+      "item_require": {
+        "id": 1,
+        "number": 270
+      }
+    },
+    "basic_atk": {
+      "value": 279,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 271,
+    "basic_hp": {
+      "value": 14500,
+      "item_require": {
+        "id": 1,
+        "number": 271
+      }
+    },
+    "basic_atk": {
+      "value": 280,
+      "item_require": {
+        "id": 1,
+        "number": 1
+      }
+    }
+  },
+  {
+    "level": 272,
+    "basic_hp": {
+      "value": 14550,
+      "item_require": {
+        "id": 1,
+        "number": 272
+      }
+    },
+    "basic_atk": {
+      "value": 281,
+      "item_require": {
+        "id": 1,
+        "number": 2
+      }
+    }
+  },
+  {
+    "level": 273,
+    "basic_hp": {
+      "value": 14600,
+      "item_require": {
+        "id": 1,
+        "number": 273
+      }
+    },
+    "basic_atk": {
+      "value": 282,
+      "item_require": {
+        "id": 1,
+        "number": 4
+      }
+    }
+  },
+  {
+    "level": 274,
+    "basic_hp": {
+      "value": 14650,
+      "item_require": {
+        "id": 1,
+        "number": 274
+      }
+    },
+    "basic_atk": {
+      "value": 283,
+      "item_require": {
+        "id": 1,
+        "number": 6
+      }
+    }
+  },
+  {
+    "level": 275,
+    "basic_hp": {
+      "value": 14700,
+      "item_require": {
+        "id": 1,
+        "number": 275
+      }
+    },
+    "basic_atk": {
+      "value": 284,
+      "item_require": {
+        "id": 1,
+        "number": 8
       }
     }
   }
