@@ -21,9 +21,13 @@ namespace cfg.Enums.Com
         /// </summary>
         NULL = 0,
         /// <summary>
-        /// 武器
+        /// 解锁武器（战斗中）
         /// </summary>
-        WEAPON = 1,
+        WEAPONUNLOCK = 1,
+        /// <summary>
+        /// 武器等级（战斗前）
+        /// </summary>
+        WEAPONLEVEL = 2,
     }
 
 } 

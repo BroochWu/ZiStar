@@ -17,11 +17,14 @@ public class TriCard
         //获取可抽取的卡牌列表
         listCardsAvailable.Clear();
         totalWeight = 0;
-        foreach (var card in cfg.Tables.tb.Card.DataMap)
+        foreach (var card in cfg.Tables.tb.Card.DataList)
         {
             //if条件
-            listCardsAvailable.Add(card.Value, card.Value.DrawCount);
-            totalWeight += card.Value.Weight;
+            if (!CheckCardBeforeBattle(card))
+                continue;
+                
+            listCardsAvailable.Add(card, card.DrawCount);
+            totalWeight += card.Weight;
         }
     }
 
@@ -67,7 +70,7 @@ public class TriCard
                 finalNum -= cardAndDrawCount.Key.Weight;
                 if (finalNum <= 0)
                 {
-                    if (CheckCardCond(cardAndDrawCount.Key))
+                    if (CheckCardCondInBattle(cardAndDrawCount.Key))
                     {
                         //如果条件满足就添加并抽下一个(返回该道具)
                         return cardAndDrawCount.Key;
@@ -140,22 +143,65 @@ public class TriCard
     }
 
     /// <summary>
-    /// 检测卡牌是否可用
+    /// 战斗中检测卡牌是否可用
     /// </summary>
-    bool CheckCardCond(cfg.card.Card card)
+    bool CheckCardCondInBattle(cfg.card.Card card)
     {
-        foreach (var cond in card.UnlockConds)
+        if (card.UnlockCondsInbattle.Count == 0) return true;
+        foreach (var cond in card.UnlockCondsInbattle)
         {
             switch (cond.CondType)
             {
                 case cfg.Enums.Com.CondType.NULL:
-                    return true;
-                case cfg.Enums.Com.CondType.WEAPON:
-                    var _weaponLv = DataManager.Instance.GetWeaponLevel(cond.IntParams[0]);
-                    return _weaponLv >= cond.IntParams[1];
+                    break;
+                case cfg.Enums.Com.CondType.WEAPONUNLOCK:
+                    if (DataManager.Instance.IsWeaponEquipped(cond.IntParams[0]) >= 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    Debug.LogError($"配错表了，卡牌{card.Id}战斗中的解锁条件配了{cond.CondType}");
+                    return false;
             }
         }
         return true;
     }
+
+    /// <summary>
+    /// 战斗前检测卡牌是否可用
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    bool CheckCardBeforeBattle(cfg.card.Card card)
+    {
+        if (card.UnlockCondsBfbattle.Count == 0) return true;
+        //后面可能配全局表里，现在就算了
+        foreach (var cond in card.UnlockCondsBfbattle)
+        {
+            switch (cond.CondType)
+            {
+                case cfg.Enums.Com.CondType.NULL:
+                    break;
+                case cfg.Enums.Com.CondType.WEAPONLEVEL:
+                    if (DataManager.Instance.GetWeaponLevel(cond.IntParams[0]) >= cond.IntParams[1])
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    Debug.LogError($"配错表了，卡牌{card.Id}战斗前的加载条件配了{cond.CondType}");
+                    return false;
+            }
+        }
+        return true;
+    }
+
 
 }

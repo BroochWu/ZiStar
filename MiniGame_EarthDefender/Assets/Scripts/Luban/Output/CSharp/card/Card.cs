@@ -18,7 +18,8 @@ public sealed partial class Card : Luban.BeanBase
     public Card(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { var __json0 = _buf["unlock_conds"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockConds = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockConds.Add(__v0); }   }
+        { var __json0 = _buf["unlock_conds_bfbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsBfbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsBfbattle.Add(__v0); }   }
+        { var __json0 = _buf["unlock_conds_inbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsInbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsInbattle.Add(__v0); }   }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["text_desc"].IsString) { throw new SerializationException(); }  TextDesc = _buf["text_desc"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
@@ -37,9 +38,13 @@ public sealed partial class Card : Luban.BeanBase
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 解锁条件<br/>（多个之间取并集&amp;&amp;）
+    /// 战斗前加载的条件<br/>（多个之间取并集&amp;&amp;）
     /// </summary>
-    public readonly System.Collections.Generic.List<Beans.Com_UnlockConds> UnlockConds;
+    public readonly System.Collections.Generic.List<Beans.Com_UnlockConds> UnlockCondsBfbattle;
+    /// <summary>
+    /// 战斗中抽取的条件<br/>（多个之间取并集&amp;&amp;）
+    /// </summary>
+    public readonly System.Collections.Generic.List<Beans.Com_UnlockConds> UnlockCondsInbattle;
     /// <summary>
     /// 名称
     /// </summary>
@@ -70,14 +75,16 @@ public sealed partial class Card : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
-        foreach (var _e in UnlockConds) { _e?.ResolveRef(tables); }
+        foreach (var _e in UnlockCondsBfbattle) { _e?.ResolveRef(tables); }
+        foreach (var _e in UnlockCondsInbattle) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
     {
         return "{ "
         + "id:" + Id + ","
-        + "unlockConds:" + Luban.StringUtil.CollectionToString(UnlockConds) + ","
+        + "unlockCondsBfbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsBfbattle) + ","
+        + "unlockCondsInbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsInbattle) + ","
         + "textName:" + TextName + ","
         + "textDesc:" + TextDesc + ","
         + "quality:" + Quality + ","
