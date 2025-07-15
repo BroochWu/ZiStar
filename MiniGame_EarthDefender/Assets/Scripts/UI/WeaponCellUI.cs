@@ -112,9 +112,9 @@ public class WeaponCellUI : MonoBehaviour
             Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
             .GetComponent<WeaponDetailInfo>().Initialize(weapon);
         }
-        else
+        else if (weaponCellState == CellState.LOCK)
         {
-            UIManager.Instance.CommonToast("武器未解锁，请继续推关吧");
+            UIManager.Instance.CommonToast($"<color=#02E600>【{weaponName}】</color>未解锁，收集碎片以解锁武器");
         }
 
     }
