@@ -2,7 +2,7 @@
   {
     "id": 1,
     "color_lightbg": "#ffffff",
-    "color_darkbg": "#ffffff"
+    "color_darkbg": "#02E600"
   },
   {
     "id": 2,
@@ -11,17 +11,17 @@
   },
   {
     "id": 101,
-    "color_lightbg": "#ffffff",
+    "color_lightbg": "#3EBFF6",
     "color_darkbg": "#ffffff"
   },
   {
     "id": 102,
-    "color_lightbg": "#ffffff",
+    "color_lightbg": "#BC3EF6",
     "color_darkbg": "#ffffff"
   },
   {
     "id": 103,
-    "color_lightbg": "#ffffff",
+    "color_lightbg": "#F6B63E",
     "color_darkbg": "#ffffff"
   }
 ]

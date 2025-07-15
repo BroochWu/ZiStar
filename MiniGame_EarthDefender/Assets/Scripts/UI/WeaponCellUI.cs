@@ -53,7 +53,7 @@ public class WeaponCellUI : MonoBehaviour
     /// </summary>
     void SetQualityUI()
     {
-        string qualityColorStr = "#000000";
+        int qualityid = 1;
         Color qualityColor;
 
         var config = cfg.Tables.tb.Color;
@@ -61,16 +61,17 @@ public class WeaponCellUI : MonoBehaviour
         switch (quality)
         {
             case cfg.Enums.Com.Quality.BLUE:
-                qualityColorStr = config.Get(101).ColorLightbg;
+                qualityid = 101;
                 break;
             case cfg.Enums.Com.Quality.PURPLE:
-                qualityColorStr = config.Get(102).ColorLightbg;
+                qualityid = 102;
                 break;
             case cfg.Enums.Com.Quality.ORANGE:
-                qualityColorStr = config.Get(103).ColorLightbg;
+                qualityid = 103;
                 break;
         }
-        ColorUtility.TryParseHtmlString(qualityColorStr, out qualityColor);
+        Debug.Log(config.Get(qualityid).ColorLightbg);
+        ColorUtility.TryParseHtmlString(config.Get(qualityid).ColorLightbg, out qualityColor);
         nameText.color = qualityColor;
         iconBg.color = qualityColor;
 
