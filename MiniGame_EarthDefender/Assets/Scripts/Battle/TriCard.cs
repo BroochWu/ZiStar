@@ -22,7 +22,7 @@ public class TriCard
             //if条件
             if (!CheckCardBeforeBattle(card))
                 continue;
-                
+
             listCardsAvailable.Add(card, card.DrawCount);
             totalWeight += card.Weight;
         }
@@ -40,7 +40,13 @@ public class TriCard
 
         while (listCardsThree.Count <= 3)
         {
-            listCardsThree.Add(DrawOneCard());
+            //抽3张，并且3张卡牌绝对不一样
+            var cardResult = DrawOneCard();
+
+            listCardsThree.Add(cardResult);
+            totalWeight -= cardResult.Weight;
+            listTempRemove.Add(cardResult, listCardsAvailable[cardResult]);
+            listCardsAvailable.Remove(cardResult);
         }
 
         _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);

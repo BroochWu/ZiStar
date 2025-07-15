@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textName: {fileID: 1322952812538470941}
   textDesc: {fileID: 6842270358200124166}
+  textSpecial: {fileID: 5068788246393575304}
   icon: {fileID: 561041777388087742}
 --- !u!114 &5955177047142725324
 MonoBehaviour:
