@@ -19,6 +19,10 @@ public partial class Tables
     /// </summary>
     public Tbcom.GlobalParam GlobalParam {get; }
     /// <summary>
+    /// 颜色表
+    /// </summary>
+    public Tbcom.Color Color {get; }
+    /// <summary>
     /// 武器表
     /// </summary>
     public Tbweapon.Weapon Weapon {get; }
@@ -70,6 +74,7 @@ public partial class Tables
     public Tables(System.Func<string, JSONNode> loader)
     {
         GlobalParam = new Tbcom.GlobalParam(loader("com_global_param"));
+        Color = new Tbcom.Color(loader("com_color"));
         Weapon = new Tbweapon.Weapon(loader("weapon"));
         WeaponLevel = new Tbweapon.WeaponLevel(loader("weapon_level"));
         Dungeon = new Tbdungeon.Dungeon(loader("dungeon"));
@@ -88,6 +93,7 @@ public partial class Tables
     private void ResolveRef()
     {
         GlobalParam.ResolveRef(this);
+        Color.ResolveRef(this);
         Weapon.ResolveRef(this);
         WeaponLevel.ResolveRef(this);
         Dungeon.ResolveRef(this);
