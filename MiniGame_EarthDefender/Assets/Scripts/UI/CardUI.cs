@@ -4,9 +4,11 @@ using UnityEngine.UI;
 public class CardUI : MonoBehaviour
 {
     private cfg.card.Card me;
+    private cfg.Enums.Com.Quality quality;
     public Text textName;
     public Text textDesc;
     public Text textSpecial;
+    public Image qualityBg;
     public Image icon;
 
     public void Initialize(cfg.card.Card card)
@@ -14,6 +16,10 @@ public class CardUI : MonoBehaviour
         me = card;
         textName.text = card.TextName;
         textDesc.text = card.TextDesc;
+        quality = card.Quality;
+
+
+        SetQualityUI();
         textSpecial.gameObject.SetActive(card.UnlockCondsInbattle.Count == 2);
         //icon
 
@@ -23,5 +29,34 @@ public class CardUI : MonoBehaviour
     void ChooseMe()
     {
         TriCard.Instance.SetCardEffect(me);
+    }
+
+
+    /// <summary>
+    /// 根据品质改UI
+    /// </summary>
+    void SetQualityUI()
+    {
+        int qualityid = 1;
+        Color qualityColor;
+
+        var config = cfg.Tables.tb.Color;
+
+        switch (quality)
+        {
+            case cfg.Enums.Com.Quality.BLUE:
+                qualityid = 101;
+                break;
+            case cfg.Enums.Com.Quality.PURPLE:
+                qualityid = 102;
+                break;
+            case cfg.Enums.Com.Quality.ORANGE:
+                qualityid = 103;
+                break;
+        }
+        Debug.Log(config.Get(qualityid).ColorLightbg);
+        ColorUtility.TryParseHtmlString(config.Get(qualityid).ColorLightbg, out qualityColor);
+        qualityBg.color = qualityColor;
+
     }
 }

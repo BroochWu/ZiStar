@@ -131,7 +131,7 @@
     ],
     "text_name": "离子列",
     "text_desc": "离子枪列数+1",
-    "quality": 1,
+    "quality": 3,
     "weight": 1000,
     "parameters": [
       "weaponId:1001",
