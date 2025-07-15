@@ -56,16 +56,18 @@ public class WeaponCellUI : MonoBehaviour
         string qualityColorStr = "#000000";
         Color qualityColor;
 
+        var config = cfg.Tables.tb.Color;
+
         switch (quality)
         {
             case cfg.Enums.Com.Quality.BLUE:
-                qualityColorStr = "#3EBFF6";
+                qualityColorStr = config.Get(101).ColorLightbg;
                 break;
             case cfg.Enums.Com.Quality.PURPLE:
-                qualityColorStr = "#BC3EF6";
+                qualityColorStr = config.Get(102).ColorLightbg;
                 break;
             case cfg.Enums.Com.Quality.ORANGE:
-                qualityColorStr = "#F6B63E";
+                qualityColorStr = config.Get(103).ColorLightbg;
                 break;
         }
         ColorUtility.TryParseHtmlString(qualityColorStr, out qualityColor);
@@ -114,7 +116,7 @@ public class WeaponCellUI : MonoBehaviour
         }
         else if (weaponCellState == CellState.LOCK)
         {
-            UIManager.Instance.CommonToast($"<color=#02E600>【{weaponName}】</color>未解锁，收集碎片以解锁武器");
+            UIManager.Instance.CommonToast($"<color={cfg.Tables.tb.Color.Get(1).ColorDarkbg}>【{weaponName}】</color>未解锁，收集碎片以解锁武器");
         }
 
     }
