@@ -7,10 +7,9 @@ public class TriCardUI : MonoBehaviour
     public List<GameObject> cardSlots;
 
 
-    public void Initialize()
+    public void Initialize(List<cfg.card.Card> cards)
     {
         // gameObject.GetComponent<Animator>().Play("Appear");
-        gameObject.SetActive(true);
 
         if (cardSlots == null)
         {
@@ -21,12 +20,12 @@ public class TriCardUI : MonoBehaviour
             }
         }
 
-        var card1 = cfg.Tables.tb.Card.Get(1);
-        var card2 = cfg.Tables.tb.Card.Get(2);
-        var card3 = cfg.Tables.tb.Card.Get(5);
-        Debug.Log(card1 + "  " + card2 + "  " + card3);
-        cardSlots[0].GetComponentInChildren<CardUI>().Initialize(card1);
-        cardSlots[1].GetComponentInChildren<CardUI>().Initialize(card2);
-        cardSlots[2].GetComponentInChildren<CardUI>().Initialize(card3);
+        Debug.Log(cards[0] + "  " + cards[1] + "  " + cards[2]);
+        cardSlots[0].GetComponentInChildren<CardUI>().Initialize(cards[0]);
+        cardSlots[1].GetComponentInChildren<CardUI>().Initialize(cards[1]);
+        cardSlots[2].GetComponentInChildren<CardUI>().Initialize(cards[2]);
+        // await Task.Delay(100);
+        GetComponent<Animator>().Update(0f);
+        gameObject.SetActive(true);
     }
 }

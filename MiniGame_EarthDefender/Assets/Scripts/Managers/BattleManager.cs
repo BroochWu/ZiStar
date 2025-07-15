@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour
         EnemyPath.SetParent(BattleObjectsPath);
 
         //加载可以被抽取的所有卡组
-        TriCard.Initialize();
+        TriCard.Instance.Initialize();
 
         yield return new WaitForSeconds(1);
 
@@ -347,10 +347,10 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("升级成功");
         //3选1
-        TriCard.GetTriCards();
+        StartTri();
 
         //判断连续升级（后面可能是选好卡牌以后判断？）
-        CheckLevelUp();
+        // CheckLevelUp();
     }
 
 
@@ -417,5 +417,21 @@ public class BattleManager : MonoBehaviour
 
     }
 
+
+    void StartTri()
+    {
+        Time.timeScale = 0;
+        TriCard.Instance.GetTriCards();
+    }
+
+    public void EndTri()
+    {
+        //生效成功，关闭窗口们
+        UIManager.Instance.battleLayer.triCardUI.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        //再判断是否连续升级
+        CheckLevelUp();
+
+    }
 
 }
