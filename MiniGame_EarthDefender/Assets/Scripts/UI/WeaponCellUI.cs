@@ -1,13 +1,19 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponCellUI : MonoBehaviour
 {
+    enum CellState
+    {
+        NORMAL,
+        LOCK,//未解锁
+    }
 
+    private CellState weaponCellState;
     private cfg.weapon.Weapon weapon;
     public GameObject empty;
+    public GameObject lockUI;
     public Image iconBg;
     public Text nameText;
     private int id;
@@ -17,7 +23,6 @@ public class WeaponCellUI : MonoBehaviour
 
     public void Initialize(cfg.weapon.Weapon weapon)
     {
-        string aaa = DataManager.Instance.GetEquippedWeaponList().ToString();
         empty.SetActive(weapon == null);
         nameText.gameObject.SetActive(weapon != null);
         if (weapon == null)
@@ -36,6 +41,8 @@ public class WeaponCellUI : MonoBehaviour
         weaponName = weapon.TextName;
 
         nameText.text = weaponName;
+
+        CheckCellState();
 
         SetQualityUI();
 
@@ -77,11 +84,38 @@ public class WeaponCellUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 检查格子状态
+    /// </summary>
+    void CheckCellState()
+    {
+        var _isLock = DataManager.Instance.GetWeaponLevel(id) <= 0;
+        if (_isLock)
+        {
+            weaponCellState = CellState.LOCK;
+            lockUI.SetActive(true);
+        }
+        else
+        {
+            weaponCellState = CellState.NORMAL;
+            lockUI.SetActive(false);
+        }
+
+
+    }
+
 
     public void OpenDetailInfo()
     {
-        Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
-        .GetComponent<WeaponDetailInfo>().Initialize(weapon);
+        if (weaponCellState == CellState.NORMAL)
+        {
+            Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
+            .GetComponent<WeaponDetailInfo>().Initialize(weapon);
+        }
+        else
+        {
+            UIManager.Instance.CommonToast("武器未解锁，请继续推关吧");
+        }
 
     }
 

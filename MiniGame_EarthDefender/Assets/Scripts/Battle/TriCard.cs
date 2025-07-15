@@ -144,13 +144,16 @@ public class TriCard
     /// </summary>
     bool CheckCardCond(cfg.card.Card card)
     {
-        switch (card.UnlockConds.CondType)
+        foreach (var cond in card.UnlockConds)
         {
-            case cfg.Enums.Com.CondType.NULL:
-                return true;
-            case cfg.Enums.Com.CondType.WEAPON:
-                var _weaponLv = DataManager.Instance.GetWeaponLevel(card.UnlockConds.IntParams[0]);
-                return _weaponLv >= card.UnlockConds.IntParams[1];
+            switch (cond.CondType)
+            {
+                case cfg.Enums.Com.CondType.NULL:
+                    return true;
+                case cfg.Enums.Com.CondType.WEAPON:
+                    var _weaponLv = DataManager.Instance.GetWeaponLevel(cond.IntParams[0]);
+                    return _weaponLv >= cond.IntParams[1];
+            }
         }
         return true;
     }
