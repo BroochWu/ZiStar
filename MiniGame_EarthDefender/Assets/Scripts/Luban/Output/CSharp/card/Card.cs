@@ -18,6 +18,7 @@ public sealed partial class Card : Luban.BeanBase
     public Card(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
+        { if(!_buf["unlock_conds"].IsObject) { throw new SerializationException(); }  UnlockConds = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_conds"]);  }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["text_desc"].IsString) { throw new SerializationException(); }  TextDesc = _buf["text_desc"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
@@ -35,6 +36,10 @@ public sealed partial class Card : Luban.BeanBase
     /// id
     /// </summary>
     public readonly int Id;
+    /// <summary>
+    /// 解锁条件
+    /// </summary>
+    public readonly Beans.Com_UnlockConds UnlockConds;
     /// <summary>
     /// 名称
     /// </summary>
@@ -65,12 +70,14 @@ public sealed partial class Card : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
+        UnlockConds?.ResolveRef(tables);
     }
 
     public override string ToString()
     {
         return "{ "
         + "id:" + Id + ","
+        + "unlockConds:" + UnlockConds + ","
         + "textName:" + TextName + ","
         + "textDesc:" + TextDesc + ","
         + "quality:" + Quality + ","

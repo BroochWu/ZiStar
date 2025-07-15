@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TriCardUI : MonoBehaviour
@@ -7,7 +8,7 @@ public class TriCardUI : MonoBehaviour
     public List<GameObject> cardSlots;
 
 
-    public void Initialize(List<cfg.card.Card> cards)
+    public async Task Initialize(List<cfg.card.Card> cards)
     {
         // gameObject.GetComponent<Animator>().Play("Appear");
 
@@ -24,8 +25,8 @@ public class TriCardUI : MonoBehaviour
         cardSlots[0].GetComponentInChildren<CardUI>().Initialize(cards[0]);
         cardSlots[1].GetComponentInChildren<CardUI>().Initialize(cards[1]);
         cardSlots[2].GetComponentInChildren<CardUI>().Initialize(cards[2]);
-        // await Task.Delay(100);
-        GetComponent<Animator>().Update(0f);
+        // GetComponent<Animator>().Update(0f);
+        await Task.Delay(100);
         gameObject.SetActive(true);
     }
 }

@@ -84,7 +84,7 @@ public class DataManager : MonoBehaviour
             return false;
         }
 
-        
+
         if (slotIndex == 0)
         {
             UIManager.Instance.CommonToast($"下士！帝国派发的离子枪无法被卸载！");
@@ -243,6 +243,12 @@ public class DataManager : MonoBehaviour
     {
         var playerConfig = cfg.Tables.tb.PlayerAttrLevel;
         return playerConfig.Get(PlayerPrefs.GetInt("playerData_atk_level")).BasicAtk.Value;
+    }
+    public int GetWeaponLevel(int weaponId)
+    {
+        // return PlayerPrefs.HasKey($"weapon_level_{weaponId}") ?
+        // PlayerPrefs.GetInt($"weapon_level_{weaponId}") : 0;
+        return PlayerPrefs.GetInt($"weapon_level_{weaponId}");
     }
 
     public bool CheckOrSetPLBasicHpLevel(int newLv, bool wantToLevelUp)

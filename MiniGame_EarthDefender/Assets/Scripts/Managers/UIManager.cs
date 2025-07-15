@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
                 SetTopPanels(true);
                 SetBottomTabs(true);
                 weaponsLayer.gameObject.SetActive(true);
-                weaponsLayer.Initialize();
+                _ = weaponsLayer.Initialize();
                 break;
             default:
                 uiLayer = UILayer.NULL;

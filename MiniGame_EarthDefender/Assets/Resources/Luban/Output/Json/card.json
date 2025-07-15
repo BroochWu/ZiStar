@@ -1,6 +1,10 @@
 [
   {
     "id": 1,
+    "unlock_conds": {
+      "cond_type": 0,
+      "int_params": []
+    },
     "text_name": "增伤",
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
@@ -10,6 +14,10 @@
   },
   {
     "id": 2,
+    "unlock_conds": {
+      "cond_type": 0,
+      "int_params": []
+    },
     "text_name": "增伤",
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
@@ -19,6 +27,10 @@
   },
   {
     "id": 3,
+    "unlock_conds": {
+      "cond_type": 0,
+      "int_params": []
+    },
     "text_name": "增伤",
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
@@ -28,6 +40,10 @@
   },
   {
     "id": 4,
+    "unlock_conds": {
+      "cond_type": 0,
+      "int_params": []
+    },
     "text_name": "攻速",
     "text_desc": "武器射击冷却-5%",
     "quality": 1,
@@ -37,6 +53,10 @@
   },
   {
     "id": 5,
+    "unlock_conds": {
+      "cond_type": 0,
+      "int_params": []
+    },
     "text_name": "回复城防",
     "text_desc": "地球护盾值+30%\n（可以突破上限）",
     "quality": 2,
@@ -46,6 +66,13 @@
   },
   {
     "id": 1001,
+    "unlock_conds": {
+      "cond_type": 1,
+      "int_params": [
+        1001,
+        1
+      ]
+    },
     "text_name": "离子列",
     "text_desc": "离子枪列数+1",
     "quality": 1,
@@ -58,6 +85,13 @@
   },
   {
     "id": 1002,
+    "unlock_conds": {
+      "cond_type": 1,
+      "int_params": [
+        1001,
+        1
+      ]
+    },
     "text_name": "离子行",
     "text_desc": "离子枪连射+1",
     "quality": 1,
