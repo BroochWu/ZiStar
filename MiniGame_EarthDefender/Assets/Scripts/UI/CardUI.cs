@@ -14,7 +14,7 @@ public class CardUI : MonoBehaviour
         me = card;
         textName.text = card.TextName;
         textDesc.text = card.TextDesc;
-        textSpecial.gameObject.SetActive(card.UnlockConds.Count == 2);
+        textSpecial.gameObject.SetActive(card.UnlockCondsInbattle.Count == 2);
         //icon
 
         GetComponent<Button>().onClick.AddListener(ChooseMe);
