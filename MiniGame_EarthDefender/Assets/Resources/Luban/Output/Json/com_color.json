@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "color_lightbg": "#ffffff",
+    "color_lightbg": "#000000",
     "color_darkbg": "#02E600"
   },
   {
     "id": 2,
-    "color_lightbg": "#ffffff",
+    "color_lightbg": "#000000",
     "color_darkbg": "#ffffff"
   },
   {
