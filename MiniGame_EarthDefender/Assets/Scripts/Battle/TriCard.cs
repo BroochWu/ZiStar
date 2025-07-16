@@ -8,11 +8,12 @@ public class TriCard
     public Dictionary<cfg.card.Card, int> listTempRemove = new();//不放回重抽时临时去除的列表
     public List<cfg.card.Card> listCardsThree = new();//最后抽到的三张牌
     public int totalWeight;
+    public bool canChooseCard;
 
     const int MAX_DRAW_COUNT = 10; //每张卡牌有10次重抽次数
     int nowReDrawCount = 0;//当前重抽次数，重抽每一张的时候重置
 
-    public void Initialize()
+    public void InitializeBeforeBattle()
     {
         //获取可抽取的卡牌列表
         listCardsAvailable.Clear();

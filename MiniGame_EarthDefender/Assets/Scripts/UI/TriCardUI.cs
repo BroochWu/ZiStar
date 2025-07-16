@@ -27,6 +27,7 @@ public class TriCardUI : MonoBehaviour
         cardSlots[2].GetComponentInChildren<CardUI>().Initialize(cards[2]);
         // GetComponent<Animator>().Update(0f);
         await Task.Delay(100);
+        TriCard.Instance.canChooseCard = true;
         gameObject.SetActive(true);
     }
 }

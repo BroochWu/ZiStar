@@ -1,6 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
+
+namespace cfg.weapon
+{
+    public partial class Weapon : Luban.BeanBase
+    {
+        //补充武器的解锁状态
+        public enum CellState
+        {
+            NORMAL = 1,
+            LOCK = 2,//未解锁
+        }
+        public CellState weaponState
+        {
+            get
+            {
+                if (DataManager.Instance.GetWeaponLevel(Id) <= 0)
+                    return CellState.LOCK;
+                return CellState.NORMAL;
+
+            }
+        }
+
+    }
+
+}
+
+
+
 public class Weapon : MonoBehaviour
 {
     private int rowCount;

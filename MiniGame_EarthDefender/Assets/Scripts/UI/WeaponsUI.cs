@@ -23,12 +23,15 @@ public class WeaponsUI : MonoBehaviour
 
 
 
-        // 获取武器列表并按品质降序排序
+        // 获取武器列表
+        // 排序：
+        // 已解锁>未解锁
         // 稀有度降序
         // id降序
         var sortedWeapons = config.DataList
-        .OrderByDescending(weapon => weapon.InitQuality)
-        .ThenBy(weapon => weapon.Id)
+        .OrderBy(weapon => weapon.weaponState)
+        .ThenByDescending(weapon => weapon.InitQuality)
+        .ThenByDescending(weapon => weapon.Id)
         .ToList();
 
 

@@ -141,7 +141,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7542689695333357947}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6282759174473265556}
+        m_TargetAssemblyTypeName: CardUI, Assembly-CSharp
+        m_MethodName: ChooseMe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3430632433478273244
 GameObject:
   m_ObjectHideFlags: 0

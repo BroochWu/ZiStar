@@ -22,13 +22,18 @@ public class CardUI : MonoBehaviour
         SetQualityUI();
         textSpecial.gameObject.SetActive(card.UnlockCondsInbattle.Count == 2);
         //icon
-
-        GetComponent<Button>().onClick.AddListener(ChooseMe);
     }
 
-    void ChooseMe()
+    public void ChooseMe()
     {
-        TriCard.Instance.SetCardEffect(me);
+        if (TriCard.Instance.canChooseCard)
+        {
+            TriCard.Instance.SetCardEffect(me);
+        }
+        else
+        {
+            Debug.LogWarning("canChooseCard:" + TriCard.Instance.canChooseCard);
+        }
     }
 
 
@@ -54,7 +59,6 @@ public class CardUI : MonoBehaviour
                 qualityid = 103;
                 break;
         }
-        Debug.Log(config.Get(qualityid).ColorLightbg);
         ColorUtility.TryParseHtmlString(config.Get(qualityid).ColorLightbg, out qualityColor);
         qualityBg.color = qualityColor;
 

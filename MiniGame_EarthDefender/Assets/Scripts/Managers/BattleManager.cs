@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleState
 {
@@ -92,7 +93,7 @@ public class BattleManager : MonoBehaviour
         EnemyPath.SetParent(BattleObjectsPath);
 
         //加载可以被抽取的所有卡组
-        TriCard.Instance.Initialize();
+        TriCard.Instance.InitializeBeforeBattle();
 
         yield return new WaitForSeconds(1);
 
@@ -421,12 +422,14 @@ public class BattleManager : MonoBehaviour
     void StartTri()
     {
         Time.timeScale = 0;
+        
         TriCard.Instance.GetTriCards();
     }
 
     public void EndTri()
     {
         //生效成功，关闭窗口们
+        TriCard.Instance.canChooseCard = false;
         UIManager.Instance.battleLayer.triCardUI.gameObject.SetActive(false);
         Time.timeScale = 1;
         //再判断是否连续升级

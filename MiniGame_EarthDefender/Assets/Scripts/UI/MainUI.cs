@@ -8,7 +8,6 @@ public class MainUI : MonoBehaviour
     public void Initialize()
     {
         var passedDungeonId = PlayerPrefs.GetInt("dungeon_passed_level");
-        Debug.Log(passedDungeonId);
 
         var dungeon = cfg.Tables.tb.Dungeon.GetOrDefault(passedDungeonId + 1);
         if (dungeon != null)

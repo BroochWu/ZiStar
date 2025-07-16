@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public Transform tipsContainer;//提示UI
     public Transform dynamicContainer;//动态UI
     public GameObject CommonToastObj;
-    private UILayer uiLayer = UILayer.NULL;
+    public UILayer uiLayer { get; private set; } = UILayer.NULL;
 
     void Awake()
     {

@@ -22,6 +22,7 @@ public class WeaponDetailInfo : MonoBehaviour
 
     public void CloseThisWindow()
     {
+        UIManager.Instance.weaponsLayer.RefreshEquippedWeapons();
         Destroy(this.gameObject);
     }
 
@@ -36,6 +37,7 @@ public class WeaponDetailInfo : MonoBehaviour
             {
                 DataManager.Instance.EquipWeapon(fistSlot, weapon.Id);
                 UIManager.Instance.CommonToast("装备成功");
+                CloseThisWindow();
             }
             else
             {
@@ -45,11 +47,11 @@ public class WeaponDetailInfo : MonoBehaviour
         else
         {
             var slotId = DataManager.Instance.IsWeaponEquipped(weapon.Id);
-            DataManager.Instance.UnequipWeaponBySlot(slotId);
-            Debug.Log("slot:" + slotId);
+            if (DataManager.Instance.UnequipWeaponBySlot(slotId))
+            {
+                CloseThisWindow();
+            }
         }
-        UIManager.Instance.weaponsLayer.RefreshEquippedWeapons();
-        CloseThisWindow();
     }
 
 

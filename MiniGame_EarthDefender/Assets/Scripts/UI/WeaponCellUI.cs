@@ -4,13 +4,7 @@ using UnityEngine.UI;
 
 public class WeaponCellUI : MonoBehaviour
 {
-    enum CellState
-    {
-        NORMAL,
-        LOCK,//未解锁
-    }
 
-    private CellState weaponCellState;
     private cfg.weapon.Weapon weapon;
     public GameObject empty;
     public GameObject lockUI;
@@ -33,7 +27,9 @@ public class WeaponCellUI : MonoBehaviour
 
         initScale = 0.5f;
         Debug.Log("Start Init");
-        StartCoroutine(SetInitAnim());
+
+        if (UIManager.Instance.uiLayer == UILayer.WEAPONSLAYER)
+            StartCoroutine(SetInitAnim());
 
         this.weapon = weapon;
         id = weapon.Id;
@@ -42,7 +38,7 @@ public class WeaponCellUI : MonoBehaviour
 
         nameText.text = weaponName;
 
-        CheckCellState();
+        lockUI.SetActive(weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK);
 
         SetQualityUI();
 
@@ -87,35 +83,16 @@ public class WeaponCellUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 检查格子状态
-    /// </summary>
-    void CheckCellState()
-    {
-        var _isLock = DataManager.Instance.GetWeaponLevel(id) <= 0;
-        if (_isLock)
-        {
-            weaponCellState = CellState.LOCK;
-            lockUI.SetActive(true);
-        }
-        else
-        {
-            weaponCellState = CellState.NORMAL;
-            lockUI.SetActive(false);
-        }
-
-
-    }
 
 
     public void OpenDetailInfo()
     {
-        if (weaponCellState == CellState.NORMAL)
+        if (weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
         {
             Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
             .GetComponent<WeaponDetailInfo>().Initialize(weapon);
         }
-        else if (weaponCellState == CellState.LOCK)
+        else if (weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
         {
             UIManager.Instance.CommonToast($"<color={cfg.Tables.tb.Color.Get(1).ColorDarkbg}>【{weaponName}】</color>未解锁，收集碎片以解锁武器");
         }

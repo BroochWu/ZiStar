@@ -43,7 +43,6 @@ public class DataManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log(equippedWeapons);
         return equippedWeapons;
         // equippedWeaponsList = Array.ConvertAll(PlayerPrefs.GetString("equipped_weapons").Split(','), int.Parse).ToList();
     }
