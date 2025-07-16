@@ -32,9 +32,9 @@ public class ObjectPoolManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    public void Initialize()
     {
-
+        PreloadEnemyType(1001, 40);
 
     }
 
@@ -185,7 +185,7 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
 
-        int enemyId = enemyComponent.config.Id; // 假设Enemy类中有config
+        int enemyId = enemyComponent.enemyId; // 假设Enemy类中有config
 
         if (enemyPools.ContainsKey(enemyId))
         {
@@ -238,6 +238,8 @@ public class ObjectPoolManager : MonoBehaviour
         {
             // 设置敌人ID以便回收
             enemyComponent.enemyId = enemyId;
+            enemyComponent.SetEnemyBasicEssentials(cfg.Tables.tb.Enemy.Get(enemyId));
+            Debug.Log($"CreateEnemyInstance");
         }
         else
         {
@@ -249,18 +251,19 @@ public class ObjectPoolManager : MonoBehaviour
     // 预热敌人池
     private void WarmUpEnemyPool(int enemyId, int count)
     {
-        if (!enemyPools.ContainsKey(enemyId)) return;
-
-        List<GameObject> tempList = new List<GameObject>();
-
+        if (!enemyPools.ContainsKey(enemyId))
+        {
+            Debug.Log("releasenemy fail");
+            return;
+        }
+        List<GameObject> tempList = new();
         for (int i = 0; i < count; i++)
         {
             tempList.Add(GetEnemy(enemyId));
         }
-
-        foreach (GameObject enemy in tempList)
+        foreach (var a in tempList)
         {
-            ReleaseEnemy(enemy);
+            ReleaseEnemy(a);
         }
     }
     #endregion
@@ -312,7 +315,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    // 创建敌人对象池
+    // 创建特效对象池
     private void CreateVFXPool(VFXType _type)
     {
         var prefabPath = "";
@@ -333,7 +336,7 @@ public class ObjectPoolManager : MonoBehaviour
         vfxPools[_type] = new ObjectPool<GameObject>(
             createFunc: () => CreateVFXInstance(prefab, _type),
             actionOnGet: (obj) => OnGetVFX(obj),
-            actionOnRelease: (obj) => OnReleaseEnemy(obj),
+            actionOnRelease: (obj) => OnReleaseVFX(obj),
             actionOnDestroy: (obj) => Destroy(obj),
             collectionCheck: true,
             defaultCapacity: 20,
@@ -358,7 +361,7 @@ public class ObjectPoolManager : MonoBehaviour
         return VFXIns;
     }
 
-    // 预热敌人池
+    // 预热特效池
     private void WarmUpVFXPool(VFXType vFXType, int count)
     {
         if (!vfxPools.ContainsKey(vFXType)) return;
@@ -436,16 +439,21 @@ public class ObjectPoolManager : MonoBehaviour
     {
         enemy.SetActive(true);
 
-        // 重置敌人状态
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
-        if (enemyComponent != null)
-        {
-            enemyComponent.ResetState();
-        }
+        // 重置敌人状态（别搞了，预热的时候可能没有）
+        // if (enemyComponent != null)
+        // {
+        //     enemyComponent.ResetAttr();
+        // }
     }
 
     // 从池中获取时的操作（特效）
     private void OnGetVFX(GameObject obj)
+    {
+
+    }
+
+    // 从池中获取时的操作（特效）
+    private void OnReleaseVFX(GameObject obj)
     {
 
     }

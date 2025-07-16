@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     [Header("敌人属性")]
     public int enemyId;
     public cfg.enemy.Enemy config;
+    private cfg.enemy.EnemyLevel levelData;
     private int enemyLevel;
     private string bulletType;
     public int enemyExp;
@@ -60,29 +61,41 @@ public class Enemy : MonoBehaviour
     public void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
     {
         isReleased = false;
+        BattleManager.Instance.RegisterEnemy(this);
         sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
-
-        //装配enemy静态数据
-        config = enemy;
-
         this.enemyLevel = enemyLevel;
 
+        // //装配enemy静态数据(如果预热的时候装配过就算了)
+        // if (config != enemy)
+        // {
+        //     SetEnemyBasicEssentials(enemy);
+        // }
+
+        ResetAttr();
+    }
+
+    /// <summary>
+    /// 预热或者怪物池生成的时候装备基础数据
+    /// </summary>
+    /// <param name="enemyBasic"></param>
+    public void SetEnemyBasicEssentials(cfg.enemy.Enemy enemyBasic)
+    {
+        config = enemyBasic;
+
         enemyId = config.Id;
-
         bulletType = config.PrefabBullet;
-
         _enemyType = config.EnemyType;
+        
         enemyExp = cfg.Tables.tb.EnemyTypeIndex.Get(_enemyType).Exp;//击杀怪物获得的经验值
 
         // 预计算速度值
         _moveSpeed = config.MultiMoveSpeed * 0.0001f;
-        _rotationSpeed = enemy.MultiAngle * 0.0001f;
+        _rotationSpeed = enemyBasic.MultiAngle * 0.0001f;
 
-        ResetState();
     }
 
-    public void ResetState()
+    public void ResetAttr()
     {
         _state = EnemyState.MOVE;
         _spriteMaterial.color = Color.white;
@@ -90,22 +103,22 @@ public class Enemy : MonoBehaviour
 
         if (config == null)
         {
-            Debug.LogError("没找到config");
-            return;
+            config = cfg.Tables.tb.Enemy.Get(enemyId);
         }
 
+
         // 预计算属性
-        var levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
+        // 这里预热的可能是没有enemyLevel的
 
-
-        float additionMulti = 0;
-        
         //加成量：
         //  - 如果是小怪，每5秒+5%
         //攻击、血量 = 基础值 × （ 1 + 加成量 ）
+        float additionMulti = 0;
+        levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
+
         if (_enemyType == cfg.Enums.Enemy.Type.TRASH)
         {
-            additionMulti = BattleManager.Instance.GameTime / 5 * 0.05f;
+            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 0.05f;
         }
 
         Damage = (int)(levelData.Damage * (1 + additionMulti));

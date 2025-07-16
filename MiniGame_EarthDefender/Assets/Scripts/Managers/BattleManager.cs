@@ -73,12 +73,7 @@ public class BattleManager : MonoBehaviour
         // if (bulletPath == null) bulletPath = GameObject.Find("Bullets").transform;
         // if (PortalsPath == null) PortalsPath = GameObject.Find("Portals").transform;
         // if (EnemysPath == null) EnemysPath = GameObject.Find("Enemys").transform;
-        StartCoroutine(CInitialize(dungeonId));
 
-    }
-
-    IEnumerator CInitialize(int dungeonId)
-    {
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
         BattleObjectsPath = new GameObject("BattleObjects").transform;
@@ -91,6 +86,14 @@ public class BattleManager : MonoBehaviour
 
         EnemyPath = new GameObject("Enemys").transform;
         EnemyPath.SetParent(BattleObjectsPath);
+        ObjectPoolManager.Instance.Initialize();
+
+        StartCoroutine(CInitialize(dungeonId));
+
+    }
+
+    IEnumerator CInitialize(int dungeonId)
+    {
 
         //加载可以被抽取的所有卡组
         TriCard.Instance.InitializeBeforeBattle();
@@ -289,6 +292,7 @@ public class BattleManager : MonoBehaviour
         if (activePortals.Contains(portal))
         {
             activePortals.Remove(portal);
+            portal.gameObject.SetActive(false);
         }
     }
 
@@ -422,7 +426,7 @@ public class BattleManager : MonoBehaviour
     void StartTri()
     {
         Time.timeScale = 0;
-        
+
         TriCard.Instance.GetTriCards();
     }
 
