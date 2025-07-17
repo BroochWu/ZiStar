@@ -139,10 +139,11 @@ public class GameManager : MonoBehaviour
 
 
 
-
+#if UNITY_EDITOR
     [MenuItem("微信小游戏 / 清除存档")]
     public static void DeleteAllPrefs()
     {
         PlayerPrefs.DeleteAll();
     }
+#endif
 }

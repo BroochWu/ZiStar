@@ -455,7 +455,7 @@ public class ObjectPoolManager : MonoBehaviour
     // 从池中获取时的操作（特效）
     private void OnReleaseVFX(GameObject obj)
     {
-
+        obj.SetActive(false);
     }
 
     // 释放回池时的操作（敌人）
