@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -19,6 +20,8 @@ public class ObjectPoolManager : MonoBehaviour
     // 预制体缓存
     private Dictionary<string, GameObject> prefabCache =
         new Dictionary<string, GameObject>();
+
+    private static cfg.enemy.Enemy enemyCache;
 
     void Awake()
     {
@@ -237,8 +240,12 @@ public class ObjectPoolManager : MonoBehaviour
         if (enemyComponent != null)
         {
             // 设置敌人ID以便回收
-            enemyComponent.enemyId = enemyId;
-            enemyComponent.SetEnemyBasicEssentials(cfg.Tables.tb.Enemy.Get(enemyId));
+            if (enemyCache?.Id != enemyId)
+            {
+                enemyCache = cfg.Tables.tb.Enemy.Get(enemyId);
+            }
+            // enemyComponent.enemyId = enemyId;
+            enemyComponent.SetEnemyBasicEssentials(enemyCache);
             Debug.Log($"CreateEnemyInstance");
         }
         else
@@ -257,8 +264,11 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
         List<GameObject> tempList = new();
+        //Warm将在0.5秒内结束
+        int wait = 500 / count;
         for (int i = 0; i < count; i++)
         {
+
             tempList.Add(GetEnemy(enemyId));
         }
         foreach (var a in tempList)

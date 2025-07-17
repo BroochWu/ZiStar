@@ -2,6 +2,14 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 
+namespace cfg.enemy
+{
+    public partial class Enemy
+    {
+        public int exp { get { return Tables.tb.EnemyTypeIndex.Get(EnemyType).Exp; } }
+    }
+}
+
 public class Enemy : MonoBehaviour
 {
     enum EnemyState { MOVE, ATTACK }
@@ -19,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     [Header("敌人属性")]
     public int enemyId;
-    public cfg.enemy.Enemy config;
+    public static cfg.enemy.Enemy dynamicConfig;
     private cfg.enemy.EnemyLevel levelData;
     private int enemyLevel;
     private string bulletType;
@@ -81,16 +89,19 @@ public class Enemy : MonoBehaviour
     /// <param name="enemyBasic"></param>
     public void SetEnemyBasicEssentials(cfg.enemy.Enemy enemyBasic)
     {
-        config = enemyBasic;
+        //加载同一批怪物的时候只有第一下需要装配这个静态的config
+        if (dynamicConfig == enemyBasic) return;
 
-        enemyId = config.Id;
-        bulletType = config.PrefabBullet;
-        _enemyType = config.EnemyType;
-        
-        enemyExp = cfg.Tables.tb.EnemyTypeIndex.Get(_enemyType).Exp;//击杀怪物获得的经验值
+        dynamicConfig = enemyBasic;
+
+        enemyId = dynamicConfig.Id;
+        bulletType = dynamicConfig.PrefabBullet;
+        _enemyType = dynamicConfig.EnemyType;
+
+        enemyExp = enemyBasic.exp;//击杀怪物获得的经验值
 
         // 预计算速度值
-        _moveSpeed = config.MultiMoveSpeed * 0.0001f;
+        _moveSpeed = dynamicConfig.MultiMoveSpeed * 0.0001f;
         _rotationSpeed = enemyBasic.MultiAngle * 0.0001f;
 
     }
@@ -101,9 +112,9 @@ public class Enemy : MonoBehaviour
         _spriteMaterial.color = Color.white;
         hpBar.SetActive(false);
 
-        if (config == null)
+        if (dynamicConfig == null)
         {
-            config = cfg.Tables.tb.Enemy.Get(enemyId);
+            dynamicConfig = cfg.Tables.tb.Enemy.Get(enemyId);
         }
 
 
@@ -111,14 +122,14 @@ public class Enemy : MonoBehaviour
         // 这里预热的可能是没有enemyLevel的
 
         //加成量：
-        //  - 如果是小怪，每5秒+5%
+        //  - 如果是小怪，每5秒+10%
         //攻击、血量 = 基础值 × （ 1 + 加成量 ）
         float additionMulti = 0;
-        levelData = cfg.Tables.tb.EnemyLevel.Get(config.LevelId, enemyLevel);
+        levelData = cfg.Tables.tb.EnemyLevel.Get(dynamicConfig.LevelId, enemyLevel);
 
         if (_enemyType == cfg.Enums.Enemy.Type.TRASH)
         {
-            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 0.05f;
+            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 0.1f;
         }
 
         Damage = (int)(levelData.Damage * (1 + additionMulti));
@@ -180,7 +191,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (config == null || isReleased) return;
+        if (dynamicConfig == null || isReleased) return;
 
         var dtx = ObjectPoolManager.Instance.GetVFX(VFXType.DAMAGETEXT);
         dtx.GetComponent<VFX>().Initialize(damage, transform.position);
