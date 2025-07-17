@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         {
             dynamicConfig = enemyBasic;
         }
-        
+
         enemyId = dynamicConfig.Id;
         bulletType = dynamicConfig.PrefabBullet;
         _enemyType = dynamicConfig.EnemyType;
@@ -123,14 +123,14 @@ public class Enemy : MonoBehaviour
         // 这里预热的可能是没有enemyLevel的
 
         //加成量：
-        //  - 如果是小怪，每5秒+10%
+        //  - 如果是小怪，每5秒+100%（测试数据）
         //攻击、血量 = 基础值 × （ 1 + 加成量 ）
         float additionMulti = 0;
         levelData = cfg.Tables.tb.EnemyLevel.Get(dynamicConfig.LevelId, enemyLevel);
 
         if (_enemyType == cfg.Enums.Enemy.Type.TRASH)
         {
-            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 0.1f;
+            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 1f;
         }
 
         Damage = (int)(levelData.Damage * (1 + additionMulti));

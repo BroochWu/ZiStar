@@ -5,12 +5,20 @@ public class TriCardEffect
 {
     public static bool TakeEffect(cfg.card.Card card)
     {
-        foreach (var effect in card.CardEffects)
+        try
         {
-            CheckEffect(effect.EffectType, effect.IntParams);
+
+            foreach (var effect in card.CardEffects)
+            {
+                CheckEffect(effect.EffectType, effect.IntParams);
+            }
             return true;
         }
-        return false;
+        catch
+        {
+            UIManager.Instance.CommonToast("未知错误！选择失败！");
+            return false;
+        }
     }
 
     static void CheckEffect(cfg.Enums.Card.EffectsType _effectsType, List<int> _params)
