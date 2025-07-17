@@ -24,7 +24,7 @@ public sealed partial class Card : Luban.BeanBase
         { if(!_buf["text_desc"].IsString) { throw new SerializationException(); }  TextDesc = _buf["text_desc"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
-        { var __json0 = _buf["parameters"]; if(!__json0.IsArray) { throw new SerializationException(); } Parameters = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  Parameters.Add(__v0); }   }
+        { var __json0 = _buf["card_effects"]; if(!__json0.IsArray) { throw new SerializationException(); } CardEffects = new System.Collections.Generic.List<Beans.card_Effects>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.card_Effects __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.card_Effects.Deserializecard_Effects(__e0);  }  CardEffects.Add(__v0); }   }
         { if(!_buf["draw_count"].IsNumber) { throw new SerializationException(); }  DrawCount = _buf["draw_count"]; }
     }
 
@@ -61,10 +61,7 @@ public sealed partial class Card : Luban.BeanBase
     /// 抽取权重
     /// </summary>
     public readonly int Weight;
-    /// <summary>
-    /// 参数
-    /// </summary>
-    public readonly System.Collections.Generic.List<string> Parameters;
+    public readonly System.Collections.Generic.List<Beans.card_Effects> CardEffects;
     /// <summary>
     /// 单局可被抽取次数
     /// </summary>
@@ -77,6 +74,7 @@ public sealed partial class Card : Luban.BeanBase
     {
         foreach (var _e in UnlockCondsBfbattle) { _e?.ResolveRef(tables); }
         foreach (var _e in UnlockCondsInbattle) { _e?.ResolveRef(tables); }
+        foreach (var _e in CardEffects) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
@@ -89,7 +87,7 @@ public sealed partial class Card : Luban.BeanBase
         + "textDesc:" + TextDesc + ","
         + "quality:" + Quality + ","
         + "weight:" + Weight + ","
-        + "parameters:" + Luban.StringUtil.CollectionToString(Parameters) + ","
+        + "cardEffects:" + Luban.StringUtil.CollectionToString(CardEffects) + ","
         + "drawCount:" + DrawCount + ","
         + "}";
     }

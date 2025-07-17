@@ -17,7 +17,15 @@
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
     "weight": 5,
-    "parameters": [],
+    "card_effects": [
+      {
+        "effect_type": 3,
+        "int_params": [
+          -1,
+          10
+        ]
+      }
+    ],
     "draw_count": -1
   },
   {
@@ -38,7 +46,15 @@
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
     "weight": 5,
-    "parameters": [],
+    "card_effects": [
+      {
+        "effect_type": 3,
+        "int_params": [
+          -1,
+          10
+        ]
+      }
+    ],
     "draw_count": -1
   },
   {
@@ -59,7 +75,15 @@
     "text_desc": "造成的所有伤害+10%",
     "quality": 1,
     "weight": 5,
-    "parameters": [],
+    "card_effects": [
+      {
+        "effect_type": 3,
+        "int_params": [
+          -1,
+          10
+        ]
+      }
+    ],
     "draw_count": -1
   },
   {
@@ -80,7 +104,15 @@
     "text_desc": "武器射击冷却-5%",
     "quality": 1,
     "weight": 5,
-    "parameters": [],
+    "card_effects": [
+      {
+        "effect_type": 4,
+        "int_params": [
+          -1,
+          5
+        ]
+      }
+    ],
     "draw_count": -1
   },
   {
@@ -101,7 +133,14 @@
     "text_desc": "地球护盾值+30%\n（可突破上限）",
     "quality": 2,
     "weight": 10,
-    "parameters": [],
+    "card_effects": [
+      {
+        "effect_type": 5,
+        "int_params": [
+          30
+        ]
+      }
+    ],
     "draw_count": 5
   },
   {
@@ -130,12 +169,17 @@
       }
     ],
     "text_name": "离子列",
-    "text_desc": "离子枪列数+1",
+    "text_desc": "离子枪列数+1\n伤害+30%",
     "quality": 3,
     "weight": 1000,
-    "parameters": [
-      "weaponId:1001",
-      "num:1"
+    "card_effects": [
+      {
+        "effect_type": 1,
+        "int_params": [
+          1001,
+          1
+        ]
+      }
     ],
     "draw_count": 5
   },
@@ -162,9 +206,14 @@
     "text_desc": "离子枪连射+1",
     "quality": 1,
     "weight": 1000,
-    "parameters": [
-      "weaponId:1001",
-      "num:1"
+    "card_effects": [
+      {
+        "effect_type": 2,
+        "int_params": [
+          1001,
+          1
+        ]
+      }
     ],
     "draw_count": 5
   }
