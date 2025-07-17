@@ -22,7 +22,7 @@
         "effect_type": 3,
         "int_params": [
           -1,
-          10
+          1000
         ]
       }
     ],
@@ -51,7 +51,7 @@
         "effect_type": 3,
         "int_params": [
           -1,
-          10
+          1000
         ]
       }
     ],
@@ -80,7 +80,7 @@
         "effect_type": 3,
         "int_params": [
           -1,
-          10
+          1000
         ]
       }
     ],
@@ -109,7 +109,7 @@
         "effect_type": 4,
         "int_params": [
           -1,
-          5
+          500
         ]
       }
     ],
@@ -137,7 +137,7 @@
       {
         "effect_type": 5,
         "int_params": [
-          30
+          3000
         ]
       }
     ],
@@ -176,8 +176,15 @@
       {
         "effect_type": 1,
         "int_params": [
-          1001,
+          1,
           1
+        ]
+      },
+      {
+        "effect_type": 3,
+        "int_params": [
+          1,
+          3000
         ]
       }
     ],
@@ -210,7 +217,7 @@
       {
         "effect_type": 2,
         "int_params": [
-          1001,
+          1,
           1
         ]
       }

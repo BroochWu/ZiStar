@@ -48,6 +48,7 @@ public class BattleManager : MonoBehaviour
     public int currentExp;//玩家当前经验值
     public int nextExp;//玩家当前经验值
     public int currentLv;//玩家当前等级
+    public int globalDamageMultiInOneBattle;//当前所有武器的总伤害
     List<Portal> activePortals = new();//活跃的传送门
     List<Enemy> activeEnemys = new();//活跃的敌人
     public int activeEnemysCount { get { return activeEnemys.Count; } }
@@ -86,6 +87,10 @@ public class BattleManager : MonoBehaviour
 
         EnemyPath = new GameObject("Enemys").transform;
         EnemyPath.SetParent(BattleObjectsPath);
+
+        globalDamageMultiInOneBattle = 0;
+
+
         ObjectPoolManager.Instance.Initialize();
 
         StartCoroutine(CInitialize(dungeonId));
@@ -440,5 +445,18 @@ public class BattleManager : MonoBehaviour
         CheckLevelUp();
 
     }
+
+
+
+    public void PlusGlobalDamageMultiInOneBattle(int number)
+    {
+        globalDamageMultiInOneBattle += number;
+        Debug.Log("当前全局伤害加成：" + globalDamageMultiInOneBattle);
+        foreach (var weapon in Player.instance.equipedWeapon)
+        {
+            weapon.GetAndSetWeaponAttack();
+        }
+    }
+
 
 }

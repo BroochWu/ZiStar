@@ -179,21 +179,14 @@ public class ObjectPoolManager : MonoBehaviour
     /// <summary>
     /// 回收敌人
     /// </summary>
-    public void ReleaseEnemy(GameObject enemy)
+    public void ReleaseEnemy(Enemy enemy)
     {
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
-        if (enemyComponent == null)
-        {
-            Debug.LogWarning("尝试回收非敌人对象");
-            return;
-        }
-
-        int enemyId = enemyComponent.enemyId; // 假设Enemy类中有config
+        int enemyId = enemy.enemyId; // 假设Enemy类中有config
 
         if (enemyPools.ContainsKey(enemyId))
         {
-            enemyPools[enemyId].Release(enemy);
-            enemyComponent.isReleased = true;
+            enemyPools[enemyId].Release(enemy.gameObject);
+            enemy.isReleased = true;
         }
         else
         {
@@ -273,7 +266,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
         foreach (var a in tempList)
         {
-            ReleaseEnemy(a);
+            ReleaseEnemy(a.GetComponent<Enemy>());
         }
     }
     #endregion

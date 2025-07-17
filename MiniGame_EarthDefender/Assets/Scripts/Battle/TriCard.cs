@@ -109,7 +109,14 @@ public class TriCard
 
     public void SetCardEffect(cfg.card.Card card)
     {
-        UIManager.Instance.CommonToast($"假装生效成功 {card.TextName}");
+        // UIManager.Instance.CommonToast($"假装生效成功 {card.TextName}");
+        if (!TriCardEffect.TakeEffect(card))
+        {
+            Debug.LogError("生效失败！");
+            return;
+        }
+
+
         MinusCardDrawCount(card);
         BattleManager.Instance.EndTri();
     }

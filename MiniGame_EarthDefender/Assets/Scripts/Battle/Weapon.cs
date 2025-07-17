@@ -31,6 +31,8 @@ namespace cfg.weapon
 
 public class Weapon : MonoBehaviour
 {
+    // public static int globalDamageMultiInOneBattle { get; private set; }//所有武器共同生效的，单局游戏全局伤害加成
+    private int localDamageMultiInOneBattle; //仅这个武器生效
     private int rowCount;
     private float rowSpace;
     private int columnCount;
@@ -38,10 +40,11 @@ public class Weapon : MonoBehaviour
     private Transform bulletInitTransform;
     private Coroutine corShootBullet;
     private WaitForSeconds rateOfFire;
-    public int attack;
     private int weaponLevel;
 
 
+    public int weaponId;
+    public int attack;
     public float bulletSpeed { get; private set; }
     public int bulletScale { get; private set; }
     public float bulletReleaseTime { get; private set; }
@@ -52,11 +55,12 @@ public class Weapon : MonoBehaviour
     {
 
         // 加载配置
+        weaponId = weapon.Id;
         this.thisWeapon = weapon;
         this.bulletInitTransform = bulletInitTransform;
         this.weaponLevel = weaponLevel;
         //初始化武器伤害
-        this.attack = GetWeaponAttack();
+        // this.attack = GetWeaponAttack();
 
         if (thisWeapon == null)
         {
@@ -72,15 +76,23 @@ public class Weapon : MonoBehaviour
     /// 获取武器伤害
     /// </summary>
     /// <returns></returns>
-    int GetWeaponAttack()
+    public int GetAndSetWeaponAttack()
     {
+        //武器伤害=基础值（来源于账号养成）×（1+武器升级加成+全局伤害加成+单体伤害加成）
         var atkLv = PlayerPrefs.GetInt("playerData_atk_level");
         var basicValue = cfg.Tables.tb.PlayerAttrLevel.Get(atkLv).BasicAtk.Value;
         var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
 
-        float final = basicValue * (1 + additionValue);
+        int final = (int)(
+            basicValue *
+            (1 + additionValue
+            + BattleManager.Instance.globalDamageMultiInOneBattle / 10000f
+            + localDamageMultiInOneBattle / 10000f
+            )
+            );
+        attack = final;
 
-        return (int)final;
+        return final;
     }
 
     /// <summary>
@@ -98,7 +110,7 @@ public class Weapon : MonoBehaviour
         bulletSpeed = thisWeapon.BulletSpeed;
         bulletScale = thisWeapon.BulletScale;
         bulletType = thisWeapon.BulletPrefab;
-        attack = GetWeaponAttack();
+        GetAndSetWeaponAttack();
 
         // 预热对象池（可选）
         // BattleManager.Instance?.poolBullet.WarmUpPool(bulletType, rowCount * 5);
@@ -181,5 +193,21 @@ public class Weapon : MonoBehaviour
             StopCoroutine(corShootBullet);
             corShootBullet = null;
         }
+    }
+
+    public void PlusLocalDamageMultiInOneBattle(int number)
+    {
+        localDamageMultiInOneBattle += number;
+        Debug.Log($"当前 {thisWeapon.TextName} 基础伤害加成：" + localDamageMultiInOneBattle);
+        GetAndSetWeaponAttack();
+    }
+
+    public void PlusRowCount(int num)
+    {
+        rowCount += num;
+    }
+    public void PlusColumnCount(int num)
+    {
+        columnCount += num;
     }
 }

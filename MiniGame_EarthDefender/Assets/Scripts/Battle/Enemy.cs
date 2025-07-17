@@ -74,11 +74,11 @@ public class Enemy : MonoBehaviour
         transform.SetPositionAndRotation(parent.transform.position, initDir);
         this.enemyLevel = enemyLevel;
 
-        // //装配enemy静态数据(如果预热的时候装配过就算了)
-        // if (config != enemy)
-        // {
-        //     SetEnemyBasicEssentials(enemy);
-        // }
+        //装配enemy静态数据(如果预热的时候装配过就算了)
+        if (enemyId != enemy.Id)
+        {
+            SetEnemyBasicEssentials(enemy);
+        }
 
         ResetAttr();
     }
@@ -90,10 +90,11 @@ public class Enemy : MonoBehaviour
     public void SetEnemyBasicEssentials(cfg.enemy.Enemy enemyBasic)
     {
         //加载同一批怪物的时候只有第一下需要装配这个静态的config
-        if (dynamicConfig == enemyBasic) return;
-
-        dynamicConfig = enemyBasic;
-
+        if (dynamicConfig != enemyBasic)
+        {
+            dynamicConfig = enemyBasic;
+        }
+        
         enemyId = dynamicConfig.Id;
         bulletType = dynamicConfig.PrefabBullet;
         _enemyType = dynamicConfig.EnemyType;
@@ -216,7 +217,7 @@ public class Enemy : MonoBehaviour
     void OnDie()
     {
         hpBar.SetActive(false);
-        ObjectPoolManager.Instance.ReleaseEnemy(gameObject);
+        ObjectPoolManager.Instance.ReleaseEnemy(this);
         BattleManager.Instance.UnregisterEnemy(this);
     }
 

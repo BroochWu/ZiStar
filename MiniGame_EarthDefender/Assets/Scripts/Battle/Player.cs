@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public List<Weapon> equipedWeapon;
 
 
-
     Camera mainCam;
     Vector2 targetTransform;
     float angle;
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        
+
         earthSprite.transform.Rotate(Vector3.back * Time.deltaTime * EARTH_ROTATE_SPEED);
 
         //如果不是正在战斗，就不要进行后面的判断了
