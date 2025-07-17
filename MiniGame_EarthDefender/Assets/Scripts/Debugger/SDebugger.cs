@@ -57,7 +57,7 @@ namespace SFramework
         void LoadChineseFont()
         {
             // 尝试从 Resources 文件夹加载字体
-            _chineseFont = Resources.Load<Font>("Fonts/msyh"); // 替换为你的中文字体名称
+            _chineseFont = Resources.Load<Font>("Fonts/simhei"); // 替换为你的中文字体名称
 
             // 如果找不到字体，尝试使用系统默认中文字体
             if (_chineseFont == null)

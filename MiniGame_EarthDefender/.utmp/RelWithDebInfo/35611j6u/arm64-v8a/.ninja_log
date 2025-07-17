@@ -1,0 +1,23 @@
+# ninja log v5
+576	8657	7744383643680054	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a3ff1bdfd25308cc
+885	2590	7744383583086041	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	c71ce764cff07e76
+2590	3621	7744383593753837	D:/Mine/Project/MiniGame_EarthDefender/MiniGame_EarthDefender/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/35611j6u/obj/arm64-v8a/libswappywrapper.so	3150e34658e9e796
+746	8187	7744383635052241	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	b87f854d1f445071
+440	8207	7744383635061993	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	dc3e0f6950df0160
+688	8110	7744383630686426	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	30afe25a7f77d376
+518	7913	7744383631488235	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	100e6b18922096a4
+481	8157	7744383632367501	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	31d451b73050595e
+821	8190	7744383634895661	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d33fd30e975c1042
+635	8608	7744383641874962	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b422086843b88565
+8657	9232	7744383649862049	D:/Mine/Project/MiniGame_EarthDefender/MiniGame_EarthDefender/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/35611j6u/obj/arm64-v8a/libgame.so	ef9311fac671641b
+2070	3960	7744398818013377	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	c71ce764cff07e76
+3961	6173	7744398841684821	D:/Mine/Project/MiniGame_EarthDefender/MiniGame_EarthDefender/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/35611j6u/obj/arm64-v8a/libswappywrapper.so	3150e34658e9e796
+1467	16772	7744398943501403	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	30afe25a7f77d376
+1317	16861	7744398944869087	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	100e6b18922096a4
+603	16953	7744398944746882	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	31d451b73050595e
+1877	16976	7744398948609246	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d33fd30e975c1042
+1396	17037	7744398947548158	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	dc3e0f6950df0160
+1715	17145	7744398945855363	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	b87f854d1f445071
+1584	17469	7744398954719542	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b422086843b88565
+18	17759	7744398957633497	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a3ff1bdfd25308cc
+17759	18998	7744398970034340	D:/Mine/Project/MiniGame_EarthDefender/MiniGame_EarthDefender/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/35611j6u/obj/arm64-v8a/libgame.so	ef9311fac671641b

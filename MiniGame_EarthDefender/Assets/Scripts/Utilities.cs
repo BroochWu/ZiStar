@@ -11,21 +11,28 @@ namespace cfg
         {
             get
             {
-                //                 #if UNITY_ANDROID && !UNITY_EDITOR
-                //                 return new Tables(file=>Json.Parse(File.ReadAllText()))
-                // #endif
-                return new cfg.Tables(file =>
-                JSON.Parse(File.ReadAllText(
-                    Application.dataPath + $"/Resources/Luban/Output/Json/{file}.json")
+#if UNITY_ANDROID && !UNITY_EDITOR
+                // Android平台（非编辑器）使用Resources.Load
+                return new Tables(file => 
+                {
+                    // 注意：Resources.Load的路径是相对于Resources文件夹的，不需要扩展名
+                    TextAsset textAsset = Resources.Load<TextAsset>($"Luban/Output/Json/{file}");
+                    if (textAsset == null)
+                    {
+                        throw new System.Exception($"Load config file failed: {file}");
+                    }
+                    return JSON.Parse(textAsset.text);
+                });
+#else
+                // 其他平台（包括编辑器）使用原来的文件读取方式
+                return new Tables(file =>
+                    JSON.Parse(File.ReadAllText(
+                        Application.dataPath + $"/Resources/Luban/Output/Json/{file}.json")
                     )
-                    );
+                );
+#endif
             }
-
         }
-
-
-
-
     }
 }
 
@@ -96,7 +103,7 @@ public static class Utility
     //     Debug.Log($"协程 LookTarget2D 已停止");
     // }
 
-    
+
     /// <summary>
     /// 优化的2D朝向方法
     /// </summary>
@@ -121,7 +128,7 @@ public static class Utility
         float newAngle = Mathf.LerpAngle(
             whom.eulerAngles.z,
             targetAngle,
-            _rotationSpeed 
+            _rotationSpeed
         );
 
         whom.rotation = Quaternion.Euler(0f, 0f, newAngle);

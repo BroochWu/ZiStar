@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.code-philosophy.luban": "https://gitee.com/focus-creative-games/luban_unity.git",
+    "com.unity.adaptiveperformance.google.android": "5.1.4",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.feature.mobile": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.22",

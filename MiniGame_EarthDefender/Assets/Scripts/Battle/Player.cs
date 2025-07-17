@@ -49,6 +49,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null) return;
+
+        
         earthSprite.transform.Rotate(Vector3.back * Time.deltaTime * EARTH_ROTATE_SPEED);
 
         //如果不是正在战斗，就不要进行后面的判断了

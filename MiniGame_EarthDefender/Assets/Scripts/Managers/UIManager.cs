@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour
                 Debug.LogWarning("没找到UI层");
                 break;
         }
+        Debug.Log("当前UI：" + uiLayer);
 
     }
 

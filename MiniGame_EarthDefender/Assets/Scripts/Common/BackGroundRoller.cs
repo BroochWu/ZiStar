@@ -11,6 +11,8 @@ public class BackGroundRoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null) return;
+
         mat.mainTextureOffset += Time.deltaTime * (Vector2.right + Vector2.up) * multi;
         if (GameManager.Instance.gameState == GameManager.GameState.BATTLE)
         {

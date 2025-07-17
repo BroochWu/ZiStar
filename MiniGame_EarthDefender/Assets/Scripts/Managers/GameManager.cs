@@ -22,12 +22,24 @@ public class GameManager : MonoBehaviour
     private int mainCamMainViewSize;
     private Coroutine CorCameraMove;
 
-
-
     void Awake()
     {
-        if (Instance != null) return;
+        if (Instance != null)
+        {
+            Debug.Log("GM实例已存在");
+            return;
+        }
         Instance = this;
+    }
+    
+
+    void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
 
         BasicSetting();
 
@@ -37,14 +49,12 @@ public class GameManager : MonoBehaviour
         mainCamBattleSize = 5.8f;
         mainCamMainViewSize = 30;
 
-
-    }
-
-    void Start()
-    {
         CheckIfFirstLoad();
         SwitchGameStateToMainView();
+        Debug.Log("GameManager is Initialize");
+
     }
+
 
 
     /// <summary>
