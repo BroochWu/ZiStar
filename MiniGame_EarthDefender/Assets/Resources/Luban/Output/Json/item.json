@@ -2,11 +2,22 @@
   {
     "id": 1,
     "text_name": "金币",
+    "quality": 2,
+    "item_type": 1,
     "image_path": "Items/item_gold"
   },
   {
     "id": 2,
     "text_name": "钻石",
+    "quality": 2,
+    "item_type": 1,
     "image_path": "Items/item_diamond"
+  },
+  {
+    "id": 2001,
+    "text_name": "离子枪碎片",
+    "quality": 0,
+    "item_type": 2,
+    "image_path": "Items/item_gold"
   }
 ]

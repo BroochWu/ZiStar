@@ -14,5 +14,16 @@
     "int_value": 5,
     "str_value": "",
     "int_list_value": []
+  },
+  {
+    "key": "weaponpiece_purple",
+    "desc": "武器碎片变为紫色、橙色的数量",
+    "param_type": 11,
+    "int_value": 0,
+    "str_value": "",
+    "int_list_value": [
+      10,
+      50
+    ]
   }
 ]

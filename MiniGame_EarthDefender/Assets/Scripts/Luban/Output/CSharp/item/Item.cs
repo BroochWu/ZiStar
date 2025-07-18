@@ -19,6 +19,8 @@ public sealed partial class Item : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
+        { if(!_buf["item_type"].IsNumber) { throw new SerializationException(); }  ItemType = (Enums.Item.ItemType)_buf["item_type"].AsInt; }
         { if(!_buf["image_path"].IsString) { throw new SerializationException(); }  ImagePath = _buf["image_path"]; }
     }
 
@@ -36,6 +38,14 @@ public sealed partial class Item : Luban.BeanBase
     /// </summary>
     public readonly string TextName;
     /// <summary>
+    /// 稀有度
+    /// </summary>
+    public readonly Enums.Com.Quality Quality;
+    /// <summary>
+    /// 道具类型
+    /// </summary>
+    public readonly Enums.Item.ItemType ItemType;
+    /// <summary>
     /// 图片地址
     /// </summary>
     public readonly string ImagePath;
@@ -52,6 +62,8 @@ public sealed partial class Item : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "quality:" + Quality + ","
+        + "itemType:" + ItemType + ","
         + "imagePath:" + ImagePath + ","
         + "}";
     }

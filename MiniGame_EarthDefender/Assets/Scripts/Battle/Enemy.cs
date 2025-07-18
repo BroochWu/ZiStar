@@ -263,4 +263,9 @@ public class Enemy : MonoBehaviour
         sprite.sortingOrder = _initOrder;
         _spriteMaterial.color = Color.white;
     }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
