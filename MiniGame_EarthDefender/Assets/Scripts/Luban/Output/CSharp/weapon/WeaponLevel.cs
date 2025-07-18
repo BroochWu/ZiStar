@@ -20,6 +20,8 @@ public sealed partial class WeaponLevel : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["level"].IsNumber) { throw new SerializationException(); }  Level = _buf["level"]; }
         { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
+        { var _j = _buf["levelup_unlock_card"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  LevelupUnlockCard = _j; } } else { LevelupUnlockCard = null; } }
+        LevelupUnlockCard_Ref = null;
     }
 
     public static WeaponLevel DeserializeWeaponLevel(JSONNode _buf)
@@ -39,12 +41,18 @@ public sealed partial class WeaponLevel : Luban.BeanBase
     /// 伤害加成率（万分数）
     /// </summary>
     public readonly int DamageMulti;
+    /// <summary>
+    /// 解锁卡牌<br/>（只用于显示升级的钩子，1级的不显示）<br/>（实际解锁还是由card表管理）
+    /// </summary>
+    public readonly int? LevelupUnlockCard;
+    public card.Card LevelupUnlockCard_Ref;
    
     public const int __ID__ = 327594454;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        LevelupUnlockCard_Ref = LevelupUnlockCard!= null ? tables.Card.GetOrDefault(LevelupUnlockCard.Value) : null;
     }
 
     public override string ToString()
@@ -53,6 +61,7 @@ public sealed partial class WeaponLevel : Luban.BeanBase
         + "id:" + Id + ","
         + "level:" + Level + ","
         + "damageMulti:" + DamageMulti + ","
+        + "levelupUnlockCard:" + LevelupUnlockCard + ","
         + "}";
     }
 }

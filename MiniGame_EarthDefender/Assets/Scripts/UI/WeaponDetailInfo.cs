@@ -1,4 +1,3 @@
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +10,46 @@ public class WeaponDetailInfo : MonoBehaviour
     }
     private cfg.weapon.Weapon weapon;
 
+    public GameObject levelUpCardPanelPrefab;
 
 
     public Button buttonEquip;
+    public Transform levelUpContainer;
 
 
     private ButtonState buttonState;
 
+
+    public void Initialize(cfg.weapon.Weapon weapon)
+    {
+        this.weapon = weapon;
+        // var slotId = DataManager.Instance.IsWeaponEquipped(weapon.Id);
+        // DataManager.Instance.UnequipWeaponBySlot(slotId);
+
+
+
+
+
+        if (DataManager.Instance.IsWeaponEquipped(weapon.Id) != -1)
+        {
+            buttonState = ButtonState.UNEQUIP;
+            buttonEquip.GetComponentInChildren<Text>().text = "卸下";
+        }
+        else
+        {
+            buttonState = ButtonState.EQUIP;
+            buttonEquip.GetComponentInChildren<Text>().text = "装备";
+        }
+        buttonEquip.onClick.AddListener(OnEquipButtonClicked);
+
+
+
+        var levelConfig = cfg.Tables.tb.WeaponLevel;
+        for (int i = 2; i <= levelConfig.DataList[weapon.LevelId].LevelupUnlockCard; i++)
+        {
+            
+        }
+    }
 
 
     public void CloseThisWindow()
@@ -55,25 +87,6 @@ public class WeaponDetailInfo : MonoBehaviour
     }
 
 
-    public void Initialize(cfg.weapon.Weapon weapon)
-    {
-        this.weapon = weapon;
-        // var slotId = DataManager.Instance.IsWeaponEquipped(weapon.Id);
-        // DataManager.Instance.UnequipWeaponBySlot(slotId);
-
-        if (DataManager.Instance.IsWeaponEquipped(weapon.Id) != -1)
-        {
-            buttonState = ButtonState.UNEQUIP;
-            buttonEquip.GetComponentInChildren<Text>().text = "卸下";
-        }
-        else
-        {
-            buttonState = ButtonState.EQUIP;
-            buttonEquip.GetComponentInChildren<Text>().text = "装备";
-        }
-        buttonEquip.onClick.AddListener(OnEquipButtonClicked);
-
-    }
 
 
     private void OnEquipButtonClicked()
