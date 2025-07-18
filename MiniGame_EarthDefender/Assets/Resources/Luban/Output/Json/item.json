@@ -16,7 +16,7 @@
   {
     "id": 2001,
     "text_name": "离子枪碎片",
-    "quality": 0,
+    "quality": 1,
     "item_type": 2,
     "image_path": "Items/item_gold"
   }
