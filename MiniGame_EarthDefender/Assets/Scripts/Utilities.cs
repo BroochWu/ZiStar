@@ -133,4 +133,33 @@ public static class Utility
 
         whom.rotation = Quaternion.Euler(0f, 0f, newAngle);
     }
+
+
+    public static Color SetQualityColor(cfg.Enums.Com.Quality _quality, bool _isLight)
+    {
+        int qualityid = 1;
+        Color qualityColor;
+
+        var config = cfg.Tables.tb.Color;
+
+        switch (_quality)
+        {
+            case cfg.Enums.Com.Quality.BLUE:
+                qualityid = 101;
+                break;
+            case cfg.Enums.Com.Quality.PURPLE:
+                qualityid = 102;
+                break;
+            case cfg.Enums.Com.Quality.ORANGE:
+                qualityid = 103;
+                break;
+        }
+        ColorUtility.TryParseHtmlString(
+            _isLight ?
+            config.Get(qualityid).ColorLightbg : config.Get(qualityid).ColorDarkbg
+            , out qualityColor);
+            
+        return qualityColor;
+
+    }
 }

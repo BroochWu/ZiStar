@@ -12,6 +12,14 @@ namespace cfg.weapon
             NORMAL = 1,
             LOCK = 2,//未解锁
         }
+        public int currentLevel
+        {
+            get
+            {
+                return DataManager.Instance.GetWeaponLevel(Id);
+            }
+        }
+
         public CellState weaponState
         {
             get

@@ -817,7 +817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed32a6d012602a4788c1370e4bba1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUpCardPanelPrefab: {fileID: 8124439118900844404, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
   buttonEquip: {fileID: 1802654304427144395}
+  levelUpContainer: {fileID: 9153680126585346835}
 --- !u!1001 &2677735367902010911
 PrefabInstance:
   m_ObjectHideFlags: 0

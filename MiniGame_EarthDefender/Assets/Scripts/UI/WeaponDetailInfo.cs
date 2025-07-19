@@ -27,6 +27,7 @@ public class WeaponDetailInfo : MonoBehaviour
         // DataManager.Instance.UnequipWeaponBySlot(slotId);
 
 
+        GenerateLevelCards();
 
 
 
@@ -43,12 +44,33 @@ public class WeaponDetailInfo : MonoBehaviour
         buttonEquip.onClick.AddListener(OnEquipButtonClicked);
 
 
+    }
+
+    /// <summary>
+    /// 生成底板上的X级解锁X技能
+    /// </summary>
+    void GenerateLevelCards()
+    {
+        foreach (Transform child in levelUpContainer)
+        {
+            Destroy(child.gameObject);
+        }
 
         var levelConfig = cfg.Tables.tb.WeaponLevel;
-        for (int i = 2; i <= levelConfig.DataList[weapon.LevelId].LevelupUnlockCard; i++)
+        foreach (var level in levelConfig.DataList)
         {
-            
+            if (level.Id == weapon.LevelId)
+            {
+                if (level.LevelupUnlockCard == null)
+                {
+                    continue;
+                }
+                Instantiate(levelUpCardPanelPrefab, levelUpContainer)
+                .GetComponent<WeaponDetailInfoLvupCardPanelUI>()
+                .Initialize(level);
+            }
         }
+
     }
 
 

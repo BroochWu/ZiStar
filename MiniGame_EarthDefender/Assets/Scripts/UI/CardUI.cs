@@ -42,25 +42,25 @@ public class CardUI : MonoBehaviour
     /// </summary>
     void SetQualityUI()
     {
-        int qualityid = 1;
-        Color qualityColor;
+        // int qualityid = 1;
+        // Color qualityColor;
 
-        var config = cfg.Tables.tb.Color;
+        // var config = cfg.Tables.tb.Color;
 
-        switch (quality)
-        {
-            case cfg.Enums.Com.Quality.BLUE:
-                qualityid = 101;
-                break;
-            case cfg.Enums.Com.Quality.PURPLE:
-                qualityid = 102;
-                break;
-            case cfg.Enums.Com.Quality.ORANGE:
-                qualityid = 103;
-                break;
-        }
-        ColorUtility.TryParseHtmlString(config.Get(qualityid).ColorLightbg, out qualityColor);
-        qualityBg.color = qualityColor;
+        // switch (quality)
+        // {
+        //     case cfg.Enums.Com.Quality.BLUE:
+        //         qualityid = 101;
+        //         break;
+        //     case cfg.Enums.Com.Quality.PURPLE:
+        //         qualityid = 102;
+        //         break;
+        //     case cfg.Enums.Com.Quality.ORANGE:
+        //         qualityid = 103;
+        //         break;
+        // }
+        // ColorUtility.TryParseHtmlString(config.Get(qualityid).ColorLightbg, out qualityColor);
+        qualityBg.color = Utility.SetQualityColor(quality,true);
 
     }
 }
