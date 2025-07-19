@@ -21,6 +21,7 @@ public sealed partial class Item : Luban.BeanBase
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
         { if(!_buf["item_type"].IsNumber) { throw new SerializationException(); }  ItemType = (Enums.Item.ItemType)_buf["item_type"].AsInt; }
+        { var __json0 = _buf["use_change"]; if(!__json0.IsArray) { throw new SerializationException(); } UseChange = new System.Collections.Generic.List<Beans.Item_Draw>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Item_Draw __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Item_Draw.DeserializeItem_Draw(__e0);  }  UseChange.Add(__v0); }   }
         { if(!_buf["image_path"].IsString) { throw new SerializationException(); }  ImagePath = _buf["image_path"]; }
     }
 
@@ -46,6 +47,10 @@ public sealed partial class Item : Luban.BeanBase
     /// </summary>
     public readonly Enums.Item.ItemType ItemType;
     /// <summary>
+    /// 使用后自动转换为
+    /// </summary>
+    public readonly System.Collections.Generic.List<Beans.Item_Draw> UseChange;
+    /// <summary>
     /// 图片地址
     /// </summary>
     public readonly string ImagePath;
@@ -55,6 +60,7 @@ public sealed partial class Item : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
+        foreach (var _e in UseChange) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
@@ -64,6 +70,7 @@ public sealed partial class Item : Luban.BeanBase
         + "textName:" + TextName + ","
         + "quality:" + Quality + ","
         + "itemType:" + ItemType + ","
+        + "useChange:" + Luban.StringUtil.CollectionToString(UseChange) + ","
         + "imagePath:" + ImagePath + ","
         + "}";
     }
