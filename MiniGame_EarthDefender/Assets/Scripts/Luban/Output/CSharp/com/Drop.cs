@@ -18,6 +18,7 @@ public sealed partial class Drop : Luban.BeanBase
     public Drop(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
+        { if(!_buf["drop_type"].IsNumber) { throw new SerializationException(); }  DropType = (Enums.Drop.DropType)_buf["drop_type"].AsInt; }
         { var __json0 = _buf["drop_list"]; if(!__json0.IsArray) { throw new SerializationException(); } DropList = new System.Collections.Generic.List<Beans.Item_Draw>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Item_Draw __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Item_Draw.DeserializeItem_Draw(__e0);  }  DropList.Add(__v0); }   }
     }
 
@@ -26,7 +27,17 @@ public sealed partial class Drop : Luban.BeanBase
         return new com.Drop(_buf);
     }
 
+    /// <summary>
+    /// id
+    /// </summary>
     public readonly int Id;
+    /// <summary>
+    /// 掉落类型或说方式
+    /// </summary>
+    public readonly Enums.Drop.DropType DropType;
+    /// <summary>
+    /// 掉落物品列表<br/>（道具id,概率/权重）
+    /// </summary>
     public readonly System.Collections.Generic.List<Beans.Item_Draw> DropList;
    
     public const int __ID__ = -661576868;
@@ -41,6 +52,7 @@ public sealed partial class Drop : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
+        + "dropType:" + DropType + ","
         + "dropList:" + Luban.StringUtil.CollectionToString(DropList) + ","
         + "}";
     }

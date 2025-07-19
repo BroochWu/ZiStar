@@ -22,7 +22,6 @@ public sealed partial class Item_Draw : Luban.BeanBase
     {
         { if(!_buf["res_type"].IsNumber) { throw new SerializationException(); }  ResType = (Enums.Com.ResourceType)_buf["res_type"].AsInt; }
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        Id_Ref = null;
         { if(!_buf["number"].IsNumber) { throw new SerializationException(); }  Number = _buf["number"]; }
         { if(!_buf["prop"].IsNumber) { throw new SerializationException(); }  Prop = _buf["prop"]; }
     }
@@ -37,10 +36,9 @@ public sealed partial class Item_Draw : Luban.BeanBase
     /// </summary>
     public readonly Enums.Com.ResourceType ResType;
     /// <summary>
-    /// 道具id
+    /// 资源id
     /// </summary>
     public readonly int Id;
-    public item.Item Id_Ref;
     /// <summary>
     /// 数量
     /// </summary>
@@ -48,14 +46,13 @@ public sealed partial class Item_Draw : Luban.BeanBase
     /// <summary>
     /// 概率/权重
     /// </summary>
-    public readonly float Prop;
+    public readonly int Prop;
    
     public const int __ID__ = -1263007387;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        Id_Ref = tables.Item.GetOrDefault(Id);
     }
 
     public override string ToString()
