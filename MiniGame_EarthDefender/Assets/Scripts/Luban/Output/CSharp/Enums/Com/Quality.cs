@@ -21,17 +21,25 @@ namespace cfg.Enums.Com
         /// </summary>
         NULL = 0,
         /// <summary>
+        /// 普通
+        /// </summary>
+        GREEN = 1,
+        /// <summary>
         /// 民用
         /// </summary>
-        BLUE = 1,
+        BLUE = 2,
         /// <summary>
         /// 军用
         /// </summary>
-        PURPLE = 2,
+        PURPLE = 3,
         /// <summary>
         /// 机密
         /// </summary>
-        ORANGE = 3,
+        ORANGE = 4,
+        /// <summary>
+        /// 绝密
+        /// </summary>
+        RED = 5,
     }
 
 } 

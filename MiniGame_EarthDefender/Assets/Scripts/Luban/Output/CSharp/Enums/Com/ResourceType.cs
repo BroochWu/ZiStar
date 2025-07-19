@@ -9,29 +9,25 @@
 
 
 
-namespace cfg.Enums.Item
+namespace cfg.Enums.Com
 { 
     /// <summary>
     /// ,
     /// </summary>
-    public enum ItemType
+    public enum ResourceType
     {
         /// <summary>
         /// 空
         /// </summary>
         NULL = 0,
         /// <summary>
-        /// 正常无逻辑
+        /// 道具
         /// </summary>
-        NORMAL = 1,
+        ITEM = 1,
         /// <summary>
-        /// 武器碎片会根据数量动态改变稀有度
+        /// 掉落包
         /// </summary>
-        WEAPONPIECE = 2,
-        /// <summary>
-        /// 宝箱会开出随机数量的随机道具
-        /// </summary>
-        CHEST = 3,
+        DROP = 2,
     }
 
 } 

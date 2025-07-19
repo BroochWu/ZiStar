@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "drop_list": [
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 1,
+        "prop": 100
+      },
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 2,
+        "prop": 100
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "drop_list": [
+      {
+        "res_type": 1,
+        "id": 1,
+        "number": 50,
+        "prop": 100
+      },
+      {
+        "res_type": 1,
+        "id": 1,
+        "number": 100,
+        "prop": 100
+      }
+    ]
+  }
+]

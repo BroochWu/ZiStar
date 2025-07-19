@@ -14,22 +14,28 @@ using SimpleJSON;
 namespace cfg.Beans
 {
 /// <summary>
-/// 简单道具要求
+/// 投放道具要求（带概率）
 /// </summary>
-public sealed partial class Item_Require : Luban.BeanBase
+public sealed partial class Item_Draw : Luban.BeanBase
 {
-    public Item_Require(JSONNode _buf) 
+    public Item_Draw(JSONNode _buf) 
     {
+        { if(!_buf["res_type"].IsNumber) { throw new SerializationException(); }  ResType = (Enums.Com.ResourceType)_buf["res_type"].AsInt; }
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         Id_Ref = null;
         { if(!_buf["number"].IsNumber) { throw new SerializationException(); }  Number = _buf["number"]; }
+        { if(!_buf["prop"].IsNumber) { throw new SerializationException(); }  Prop = _buf["prop"]; }
     }
 
-    public static Item_Require DeserializeItem_Require(JSONNode _buf)
+    public static Item_Draw DeserializeItem_Draw(JSONNode _buf)
     {
-        return new Beans.Item_Require(_buf);
+        return new Beans.Item_Draw(_buf);
     }
 
+    /// <summary>
+    /// 资源类型
+    /// </summary>
+    public readonly Enums.Com.ResourceType ResType;
     /// <summary>
     /// 道具id
     /// </summary>
@@ -39,8 +45,12 @@ public sealed partial class Item_Require : Luban.BeanBase
     /// 数量
     /// </summary>
     public readonly int Number;
+    /// <summary>
+    /// 概率/权重
+    /// </summary>
+    public readonly float Prop;
    
-    public const int __ID__ = 1138206116;
+    public const int __ID__ = -1263007387;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
@@ -51,8 +61,10 @@ public sealed partial class Item_Require : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
+        + "resType:" + ResType + ","
         + "id:" + Id + ","
         + "number:" + Number + ","
+        + "prop:" + Prop + ","
         + "}";
     }
 }

@@ -23,6 +23,10 @@ public partial class Tables
     /// </summary>
     public Tbcom.Color Color {get; }
     /// <summary>
+    /// 掉落表
+    /// </summary>
+    public Tbcom.Drop Drop {get; }
+    /// <summary>
     /// 武器表
     /// </summary>
     public Tbweapon.Weapon Weapon {get; }
@@ -75,6 +79,7 @@ public partial class Tables
     {
         GlobalParam = new Tbcom.GlobalParam(loader("com_global_param"));
         Color = new Tbcom.Color(loader("com_color"));
+        Drop = new Tbcom.Drop(loader("com_drop"));
         Weapon = new Tbweapon.Weapon(loader("weapon"));
         WeaponLevel = new Tbweapon.WeaponLevel(loader("weapon_level"));
         Dungeon = new Tbdungeon.Dungeon(loader("dungeon"));
@@ -94,6 +99,7 @@ public partial class Tables
     {
         GlobalParam.ResolveRef(this);
         Color.ResolveRef(this);
+        Drop.ResolveRef(this);
         Weapon.ResolveRef(this);
         WeaponLevel.ResolveRef(this);
         Dungeon.ResolveRef(this);
