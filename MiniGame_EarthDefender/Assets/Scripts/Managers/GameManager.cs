@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
     }
-    
+
 
     void Start()
     {
@@ -49,8 +49,20 @@ public class GameManager : MonoBehaviour
         mainCamBattleSize = 5.8f;
         mainCamMainViewSize = 30;
 
+        //检查是否第一次登录
         CheckIfFirstLoad();
+
+        //切换到主界面
         SwitchGameStateToMainView();
+
+        //统计并更新一次登录时间
+        DataManager.Instance.SetLastLoadTime();
+
+        //在线自动发箱子
+        Instance.StartCoroutine(ChestsRewardSystem.OnlineSendChests());
+
+
+
         Debug.Log("GameManager is Initialize");
 
     }

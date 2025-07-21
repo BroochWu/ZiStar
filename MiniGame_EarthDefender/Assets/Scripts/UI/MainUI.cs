@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
     public Text dungeonName;
+    public Text textChestButtonRemainTime;
     private int nowChooseDungeonId;
+
+
     public void Initialize()
     {
         var passedDungeonId = PlayerPrefs.GetInt("dungeon_passed_level");
@@ -32,5 +36,11 @@ public class MainUI : MonoBehaviour
     public void BattleStart()
     {
         GameManager.Instance.SwitchGameStateToBattle(nowChooseDungeonId);
+    }
+
+    void Update()
+    {
+        var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds).ToString(@"mm\:ss");
+        textChestButtonRemainTime.text = $"在线宝箱\n{str}";
     }
 }

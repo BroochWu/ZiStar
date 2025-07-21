@@ -345,8 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 0, g: 0, b: 1, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
 --- !u!1 &2406604732263886976
@@ -638,8 +636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 0, g: 0, b: 1, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
 --- !u!1 &3727401252025657301
@@ -1304,8 +1300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 0, g: 0, b: 1, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
 --- !u!1 &6620467630868651589
@@ -1445,8 +1439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 0, g: 0, b: 1, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
 --- !u!1 &6790817300104755112
@@ -1742,8 +1734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 0, g: 0, b: 1, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
 --- !u!1 &7719478459506155302
@@ -1873,6 +1863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de55016569d3ea4ba33ad1b5748e987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textRemainTime: {fileID: 8367648849758395585}
 --- !u!1 &8511465204072380101
 GameObject:
   m_ObjectHideFlags: 0

@@ -301,6 +301,19 @@ public class DataManager : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// 设置最后一次登录时间
+    /// </summary>
+    public void SetLastLoadTime()
+    {
+        var current = DateTime.Now;
+        var lastStr = PlayerPrefs.GetString("rewardchest_last_load_time");
+        if (lastStr != "")
+        {
+            DateTime.TryParse(lastStr, out var last);
+            ChestsRewardSystem.SetChestRewardsOnLoad(last, current);
+        }
+        PlayerPrefs.SetString("rewardchest_last_load_time", current.ToString());
+    }
 
 }

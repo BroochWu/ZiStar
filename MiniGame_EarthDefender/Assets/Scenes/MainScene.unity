@@ -9222,6 +9222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonName: {fileID: 2071727347}
+  textChestButtonRemainTime: {fileID: 11894780}
 --- !u!224 &1887893610
 RectTransform:
   m_ObjectHideFlags: 0

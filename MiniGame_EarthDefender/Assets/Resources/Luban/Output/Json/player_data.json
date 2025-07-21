@@ -33,5 +33,10 @@
     "data_str": "weapon_level_1",
     "param_type": 1,
     "param_value_init": "1"
+  },
+  {
+    "data_str": "rewardchest_last_load_time",
+    "param_type": 4,
+    "param_value_init": ""
   }
 ]
