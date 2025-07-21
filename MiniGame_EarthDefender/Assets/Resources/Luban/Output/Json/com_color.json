@@ -11,17 +11,27 @@
   },
   {
     "id": 101,
-    "color_lightbg": "#3EBFF6",
-    "color_darkbg": "#ffffff"
+    "color_lightbg": "#679069",
+    "color_darkbg": "#5bc562"
   },
   {
     "id": 102,
-    "color_lightbg": "#BC3EF6",
-    "color_darkbg": "#ffffff"
+    "color_lightbg": "#476ca4",
+    "color_darkbg": "#75a9f8"
   },
   {
     "id": 103,
-    "color_lightbg": "#F6B63E",
-    "color_darkbg": "#ffffff"
+    "color_lightbg": "#7947a4",
+    "color_darkbg": "#ca78e2"
+  },
+  {
+    "id": 104,
+    "color_lightbg": "#c16830",
+    "color_darkbg": "#e79e57"
+  },
+  {
+    "id": 105,
+    "color_lightbg": "#b93b3c",
+    "color_darkbg": "#fe5152"
   }
 ]

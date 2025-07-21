@@ -144,21 +144,27 @@ public static class Utility
 
         switch (_quality)
         {
-            case cfg.Enums.Com.Quality.BLUE:
+            case cfg.Enums.Com.Quality.GREEN:
                 qualityid = 101;
                 break;
-            case cfg.Enums.Com.Quality.PURPLE:
+            case cfg.Enums.Com.Quality.BLUE:
                 qualityid = 102;
                 break;
-            case cfg.Enums.Com.Quality.ORANGE:
+            case cfg.Enums.Com.Quality.PURPLE:
                 qualityid = 103;
+                break;
+            case cfg.Enums.Com.Quality.ORANGE:
+                qualityid = 104;
+                break;
+            case cfg.Enums.Com.Quality.RED:
+                qualityid = 105;
                 break;
         }
         ColorUtility.TryParseHtmlString(
             _isLight ?
             config.Get(qualityid).ColorLightbg : config.Get(qualityid).ColorDarkbg
             , out qualityColor);
-            
+
         return qualityColor;
 
     }

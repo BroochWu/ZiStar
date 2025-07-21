@@ -43,7 +43,14 @@
     "text_name": "蓝色箱子",
     "quality": 2,
     "item_type": 3,
-    "use_change": [],
+    "use_change": [
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 1,
+        "prop": 100
+      }
+    ],
     "image_path": ""
   },
   {
@@ -51,7 +58,14 @@
     "text_name": "紫色箱子",
     "quality": 3,
     "item_type": 3,
-    "use_change": [],
+    "use_change": [
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 1,
+        "prop": 100
+      }
+    ],
     "image_path": ""
   },
   {
@@ -59,7 +73,14 @@
     "text_name": "橙色箱子",
     "quality": 4,
     "item_type": 3,
-    "use_change": [],
+    "use_change": [
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 1,
+        "prop": 100
+      }
+    ],
     "image_path": ""
   },
   {
@@ -67,7 +88,14 @@
     "text_name": "红色箱子",
     "quality": 5,
     "item_type": 3,
-    "use_change": [],
+    "use_change": [
+      {
+        "res_type": 2,
+        "id": 1,
+        "number": 1,
+        "prop": 100
+      }
+    ],
     "image_path": ""
   }
 ]
