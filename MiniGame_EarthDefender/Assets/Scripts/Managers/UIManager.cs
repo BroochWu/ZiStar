@@ -166,4 +166,9 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void OpenInDynamic(GameObject _uiPrefab)
+    {
+        Instantiate(_uiPrefab, dynamicContainer);
+    }
+
 }
