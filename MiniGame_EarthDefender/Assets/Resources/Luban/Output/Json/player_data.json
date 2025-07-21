@@ -38,5 +38,10 @@
     "data_str": "rewardchest_last_load_time",
     "param_type": 4,
     "param_value_init": ""
+  },
+  {
+    "data_str": "rewardchest_receive_chests_count",
+    "param_type": 1,
+    "param_value_init": "0"
   }
 ]
