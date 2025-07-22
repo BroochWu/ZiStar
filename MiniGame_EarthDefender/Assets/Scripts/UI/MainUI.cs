@@ -43,11 +43,22 @@ public class MainUI : MonoBehaviour
 
     void Update()
     {
+        //每30帧检测一次
+        if (Time.frameCount % 30 != 0)
+            return;
+
         var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds).ToString(@"mm\:ss");
         var count = ChestsRewardSystem.nowRemainChests;
 
-        textChestButtonRemainTime.text = $"在线宝箱\n{str}";
         objChestButtonRedPoint.SetActive(count != 0);
         textChestButtonRedPoint.text = count.ToString();
+        if (count < ChestsRewardSystem.MAX_CHESTS)
+        {
+            textChestButtonRemainTime.text = $"在线宝箱\n{str}";
+        }
+        else
+        {
+            textChestButtonRemainTime.text = $"在线宝箱\n<color = {cfg.Tables.tb.Color.Get(1).ColorDarkbg}>点击领奖</color>";
+        }
     }
 }
