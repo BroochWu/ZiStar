@@ -59,9 +59,14 @@ public static class ChestsRewardSystem
         UIManager.Instance.CommonToast("嗯？你是不是偷偷改数据啦（盯）");
     }
 
-    static void SendChestsRewardAction(int count, TimeSpan initRemain)
+    /// <summary>
+    /// 领取箱子
+    /// </summary>
+    public static void GainAndResetChestsRewardAction()
     {
-
+        var greenChest = cfg.Tables.tb.Item.Get(3001);
+        DataManager.Instance.GainResource(greenChest, nowRemainChests);
+        nowRemainChests = 0;
     }
 
     // public static void SetChestCounts(int newChestCount)

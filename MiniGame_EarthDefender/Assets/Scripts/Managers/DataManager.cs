@@ -170,6 +170,11 @@ public class DataManager : MonoBehaviour
         RefreshTopPLPanel(item.Id);
     }
 
+    public int GetItemCount(cfg.item.Item item)
+    {
+        return PlayerPrefs.GetInt($"item_{item.Id}");
+    }
+
 
     /// <summary>
     /// 刷新顶部资源栏

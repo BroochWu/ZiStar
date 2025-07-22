@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class TreasureDetailUI : MonoBehaviour
 {
     public Text textRemainTime;//剩余时间
     public Text textRemainChestCount;//剩余可领箱子
+    public List<TreasureChest> treasureChests;
 
     // void Start()
     // {
@@ -15,6 +17,11 @@ public class TreasureDetailUI : MonoBehaviour
     public void CloseThisPage()
     {
         Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        RefreshAllChests();
     }
 
     void Update()
@@ -27,5 +34,19 @@ public class TreasureDetailUI : MonoBehaviour
     // public void RefreshUI()
     // {
     // }
+
+    public void GainChest()
+    {
+        ChestsRewardSystem.GainAndResetChestsRewardAction();
+        RefreshAllChests();
+    }
+
+    void RefreshAllChests()
+    {
+        foreach (var a in treasureChests)
+        {
+            a.RefreshUI();
+        }
+    }
 
 }
