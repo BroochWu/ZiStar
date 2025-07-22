@@ -23,7 +23,7 @@ public sealed partial class Item_Draw : Luban.BeanBase
         { if(!_buf["res_type"].IsNumber) { throw new SerializationException(); }  ResType = (Enums.Com.ResourceType)_buf["res_type"].AsInt; }
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["number"].IsNumber) { throw new SerializationException(); }  Number = _buf["number"]; }
-        { if(!_buf["prop"].IsNumber) { throw new SerializationException(); }  Prop = _buf["prop"]; }
+        { var _j = _buf["prop"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  Prop = _j; } } else { Prop = null; } }
     }
 
     public static Item_Draw DeserializeItem_Draw(JSONNode _buf)
@@ -46,7 +46,7 @@ public sealed partial class Item_Draw : Luban.BeanBase
     /// <summary>
     /// 概率/权重
     /// </summary>
-    public readonly int Prop;
+    public readonly int? Prop;
    
     public const int __ID__ = -1263007387;
     public override int GetTypeId() => __ID__;

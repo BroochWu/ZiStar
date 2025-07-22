@@ -33,7 +33,7 @@
         "res_type": 2,
         "id": 1,
         "number": 1,
-        "prop": 100
+        "prop": 10000
       }
     ],
     "image_path": "Items/item_chest"
@@ -48,7 +48,7 @@
         "res_type": 2,
         "id": 1,
         "number": 1,
-        "prop": 100
+        "prop": 10000
       }
     ],
     "image_path": "Items/item_chest"
@@ -63,7 +63,7 @@
         "res_type": 2,
         "id": 1,
         "number": 1,
-        "prop": 100
+        "prop": 10000
       }
     ],
     "image_path": "Items/item_chest"
@@ -78,7 +78,7 @@
         "res_type": 2,
         "id": 1,
         "number": 1,
-        "prop": 100
+        "prop": 10000
       }
     ],
     "image_path": "Items/item_chest"
@@ -93,7 +93,7 @@
         "res_type": 2,
         "id": 1,
         "number": 1,
-        "prop": 100
+        "prop": 10000
       }
     ],
     "image_path": "Items/item_chest"

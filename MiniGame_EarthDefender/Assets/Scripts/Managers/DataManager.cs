@@ -162,12 +162,54 @@ public class DataManager : MonoBehaviour
     public void GainResource(cfg.item.Item item, int count)
     {
         var nowHas = 0;
+
         if (PlayerPrefs.HasKey($"item_{item.Id}"))
         {
             nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         }
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
         RefreshTopPLPanel(item.Id);
+
+
+    }
+
+    /// <summary>
+    /// 在道具结构体内管理道具使用和掉落
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="count"></param>
+    public void UseItemInItemStruct(cfg.item.Item item, int count)
+    {
+        if (item.UseChange.Count == 0)
+        {
+            Debug.LogError("并不存在使用参数 " + item.Id);
+        }
+
+        foreach (var draw in item.UseChange)
+        {
+
+            if (draw.Prop != 10000 && UnityEngine.Random.Range(0, 10000) > draw.Prop)
+            {
+                return;
+            }
+            //如果概率失败就直接返回(Item表里一定是概率)
+            //否则如果是掉道具，直接发放
+            //如果是掉掉落包，由掉落包系统接手管理
+            switch (draw.ResType)
+            {
+                case cfg.Enums.Com.ResourceType.ITEM:
+                    GainResource(item, count);
+                    break;
+                case cfg.Enums.Com.ResourceType.DROP:
+                    var drop = cfg.Tables.tb.Drop.Get(draw.Id);
+                    DropSystem.LetsDrop(drop, count);
+                    break;
+                default:
+                    Debug.LogError("报错了");
+                    break;
+            }
+
+        }
     }
 
     public int GetItemCount(cfg.item.Item item)

@@ -16,30 +16,30 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
     {
         _toggle = GetComponent<Toggle>();
         _group = _toggle.group;
-        normalSprite ??= Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
+        // normalSprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
 
         // 确保初始状态正确
         UpdateVisualState();
     }
 
-    void OnEnable()
-    {
-        // 订阅Toggle值变化事件
-        _toggle.onValueChanged.AddListener(OnToggleValueChanged);
+    // void OnEnable()
+    // {
+    //     // 订阅Toggle值变化事件
+    //     _toggle.onValueChanged.AddListener(OnToggleValueChanged);
 
-        // 如果组内没有选中的Toggle，强制选中当前
-        if (_group != null && !_group.AnyTogglesOn())
-        {
-            _toggle.isOn = true;
-        }
-    }
+    //     // 如果组内没有选中的Toggle，强制选中当前
+    //     if (_group != null && !_group.AnyTogglesOn())
+    //     {
+    //         _toggle.isOn = true;
+    //     }
+    // }
 
-    void OnDisable()
-    {
-        _toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
-    }
+    // void OnDisable()
+    // {
+    //     _toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
+    // }
 
-    private void OnToggleValueChanged(bool isOn)
+    public void OnToggleValueChanged(bool isOn)
     {
         UpdateVisualState();
     }

@@ -8,7 +8,7 @@ public class TreasureDetailUI : MonoBehaviour
     public Text textRemainTime;//剩余时间
     public Text textRemainChestCount;//剩余可领箱子
     public List<TreasureChest> treasureChests;
-
+    public TreasureChest nowLookChest;
     // void Start()
     // {
     //     RefreshUI();
@@ -17,6 +17,17 @@ public class TreasureDetailUI : MonoBehaviour
     public void CloseThisPage()
     {
         Destroy(gameObject);
+    }
+
+    public void SetNowLookChest(TreasureChest treasureChest)
+    {
+
+        nowLookChest.itemId = treasureChest.itemId;
+        nowLookChest.score = treasureChest.score;
+        //nowLookChest.RefreshImage();
+
+        Debug.Log("当前正在选择：" + nowLookChest);
+
     }
 
     void Start()
@@ -39,6 +50,15 @@ public class TreasureDetailUI : MonoBehaviour
     {
         ChestsRewardSystem.GainAndResetChestsRewardAction();
         RefreshAllChests();
+    }
+
+    public void UseChest()
+    {
+        var item = cfg.Tables.tb.Item.Get(nowLookChest.itemId);
+        var count = DataManager.Instance.GetResourceCount(nowLookChest.itemId);
+        DataManager.Instance.UseItemInItemStruct(item, count);
+        
+        UIManager.Instance.CommonCongra(items);
     }
 
     void RefreshAllChests()
