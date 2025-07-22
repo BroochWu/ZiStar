@@ -6,7 +6,10 @@ public class MainUI : MonoBehaviour
 {
     public Text dungeonName;
     public Text textChestButtonRemainTime;
+    public GameObject objChestButtonRedPoint;
+
     private int nowChooseDungeonId;
+    private Text textChestButtonRedPoint => objChestButtonRedPoint.GetComponentInChildren<Text>();
 
 
     public void Initialize()
@@ -41,6 +44,10 @@ public class MainUI : MonoBehaviour
     void Update()
     {
         var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds).ToString(@"mm\:ss");
+        var count = ChestsRewardSystem.nowRemainChests;
+
         textChestButtonRemainTime.text = $"在线宝箱\n{str}";
+        objChestButtonRedPoint.SetActive(count != 0);
+        textChestButtonRedPoint.text = count.ToString();
     }
 }

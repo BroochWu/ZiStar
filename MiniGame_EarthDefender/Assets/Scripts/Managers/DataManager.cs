@@ -8,6 +8,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public const int EQUIP_SLOT_COUNT = 5;
+    const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
     private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
 
     void Awake()
@@ -307,13 +308,14 @@ public class DataManager : MonoBehaviour
     public void SetLastLoadTime()
     {
         var current = DateTime.Now;
-        var lastStr = PlayerPrefs.GetString("rewardchest_last_load_time");
+        var lastStr = PlayerPrefs.GetString(PLAYERPREFS_KEY_LAST_LOAD_TIME);
+        Debug.Log(current + "\n" + lastStr);
         if (lastStr != "")
         {
             DateTime.TryParse(lastStr, out var last);
             ChestsRewardSystem.SetChestRewardsOnLoad(last, current);
         }
-        PlayerPrefs.SetString("rewardchest_last_load_time", current.ToString());
+        PlayerPrefs.SetString(PLAYERPREFS_KEY_LAST_LOAD_TIME, current.ToString());
     }
 
 }

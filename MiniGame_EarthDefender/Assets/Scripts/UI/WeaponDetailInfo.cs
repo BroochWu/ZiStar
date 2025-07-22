@@ -74,9 +74,9 @@ public class WeaponDetailInfo : MonoBehaviour
     }
 
 
-    public void CloseThisWindow()
+    public void CloseThisWindow(bool _needRefresh)
     {
-        UIManager.Instance.weaponsLayer.RefreshEquippedWeapons();
+        if (_needRefresh) UIManager.Instance.weaponsLayer.RefreshEquippedWeapons();
         Destroy(this.gameObject);
     }
 
@@ -91,7 +91,7 @@ public class WeaponDetailInfo : MonoBehaviour
             {
                 DataManager.Instance.EquipWeapon(fistSlot, weapon.Id);
                 UIManager.Instance.CommonToast("装备成功");
-                CloseThisWindow();
+                CloseThisWindow(true);
             }
             else
             {
@@ -103,7 +103,7 @@ public class WeaponDetailInfo : MonoBehaviour
             var slotId = DataManager.Instance.IsWeaponEquipped(weapon.Id);
             if (DataManager.Instance.UnequipWeaponBySlot(slotId))
             {
-                CloseThisWindow();
+                CloseThisWindow(true);
             }
         }
     }
