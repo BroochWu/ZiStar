@@ -2336,6 +2336,8 @@ MonoBehaviour:
   tipsContainer: {fileID: 749994794}
   dynamicContainer: {fileID: 302933684}
   CommonToastObj: {fileID: 4812233874897851087, guid: 25529d0dd95ab134091eac22994774bc, type: 3}
+  commonCongraGainObj: {fileID: 6169552472251491891, guid: 91c3337b745210c469c05d7f7529bcfe, type: 3}
+  itemObj: {fileID: 812964568280915216, guid: 450bd1f32ec9d6046810dc18772b30a5, type: 3}
 --- !u!1 &531587552
 GameObject:
   m_ObjectHideFlags: 0

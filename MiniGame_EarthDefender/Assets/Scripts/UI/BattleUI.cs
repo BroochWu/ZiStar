@@ -134,7 +134,8 @@ public class BattleUI : MonoBehaviour
 
     IEnumerator CorAddAwardList()
     {
-        var itemObj = Resources.Load<GameObject>("Prefabs/Common/Item");
+        // var itemObj = Resources.Load<GameObject>("Prefabs/Common/Item");
+        var itemObj = UIManager.Instance.itemObj;
         var wait = new WaitForSecondsRealtime(0.5f);
         foreach (var award in awardsList)
         {

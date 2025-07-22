@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class ChestsRewardSystem
@@ -65,7 +66,14 @@ public static class ChestsRewardSystem
     public static void GainAndResetChestsRewardAction()
     {
         var greenChest = cfg.Tables.tb.Item.Get(3001);
+        
+        Dictionary<cfg.item.Item, int> items = new()
+        {
+            { greenChest, nowRemainChests }
+        };
+
         DataManager.Instance.GainResource(greenChest, nowRemainChests);
+        UIManager.Instance.CommonCongra(items);
         nowRemainChests = 0;
     }
 

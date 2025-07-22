@@ -16,7 +16,7 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
     {
         _toggle = GetComponent<Toggle>();
         _group = _toggle.group;
-        if (normalSprite == null) normalSprite = GetComponent<Image>().sprite;
+        normalSprite ??= Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
 
         // 确保初始状态正确
         UpdateVisualState();

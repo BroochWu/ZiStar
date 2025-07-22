@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
@@ -27,7 +29,15 @@ public class UIManager : MonoBehaviour
     [Header("=====最高的动态层=====")]
     public Transform tipsContainer;//提示UI
     public Transform dynamicContainer;//动态UI
+
+
     public GameObject CommonToastObj;
+    public GameObject commonCongraGainObj;
+    public GameObject itemObj;
+
+
+
+
     public UILayer uiLayer { get; private set; } = UILayer.NULL;
 
     void Awake()
@@ -165,6 +175,14 @@ public class UIManager : MonoBehaviour
         a.Initialize(desc);
 
     }
+
+    public void CommonCongra(Dictionary<cfg.item.Item, int> items)
+    {
+        var a = Instantiate(commonCongraGainObj, dynamicContainer).GetComponent<CommonCongra>();
+
+        a.StartAddItemList(items);
+    }
+
 
     public void OpenInDynamic(GameObject _uiPrefab)
     {

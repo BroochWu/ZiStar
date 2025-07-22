@@ -36,7 +36,7 @@
         "prop": 100
       }
     ],
-    "image_path": ""
+    "image_path": "Items/item_chest"
   },
   {
     "id": 3002,
@@ -51,7 +51,7 @@
         "prop": 100
       }
     ],
-    "image_path": ""
+    "image_path": "Items/item_chest"
   },
   {
     "id": 3003,
@@ -66,7 +66,7 @@
         "prop": 100
       }
     ],
-    "image_path": ""
+    "image_path": "Items/item_chest"
   },
   {
     "id": 3004,
@@ -81,7 +81,7 @@
         "prop": 100
       }
     ],
-    "image_path": ""
+    "image_path": "Items/item_chest"
   },
   {
     "id": 3005,
@@ -96,6 +96,6 @@
         "prop": 100
       }
     ],
-    "image_path": ""
+    "image_path": "Items/item_chest"
   }
 ]
