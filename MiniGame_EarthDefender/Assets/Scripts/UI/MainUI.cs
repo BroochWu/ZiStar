@@ -58,7 +58,7 @@ public class MainUI : MonoBehaviour
         }
         else
         {
-            textChestButtonRemainTime.text = $"在线宝箱\n<color = {cfg.Tables.tb.Color.Get(1).ColorDarkbg}>点击领奖</color>";
+            textChestButtonRemainTime.text = $"在线宝箱\n<color = {cfg.Tables.tb.Color.Get(1).ColorDarkbg}>满</color>";
         }
     }
 }
