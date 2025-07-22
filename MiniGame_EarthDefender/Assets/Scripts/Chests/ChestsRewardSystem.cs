@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ChestsRewardSystem
 {
-    const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
+    const int PENDING_TIME = 5;//投放间隔（秒、9分钟）
     public const int MAX_CHESTS = 20;//最多积累多少个箱子
     public const string PLAYERPREFS_KEY_CHEST_COUNT = "rewardchest_receive_chests_count";
 
@@ -12,7 +12,12 @@ public static class ChestsRewardSystem
     public static int nowRemainChests//当前未领取的箱子
     {
         get { return PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_COUNT); }
-        set { SaveChestsCount(); }
+        private set
+        {
+            if (value > MAX_CHESTS)
+                value = MAX_CHESTS;
+            PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_COUNT, value);
+        }
     }
 
 
@@ -40,7 +45,7 @@ public static class ChestsRewardSystem
 
         // initRemainSecond = PENDING_TIME - timePend % PENDING_TIME;
 
-        SetChestCounts(chestCount);
+        nowRemainChests = chestCount;
 
 
         //每一次登录都按照9分钟开始倒计时
@@ -59,17 +64,16 @@ public static class ChestsRewardSystem
 
     }
 
-    public static void SetChestCounts(int newChestCount)
-    {
+    // public static void SetChestCounts(int newChestCount)
+    // {
 
-        if (newChestCount > MAX_CHESTS)
-        {
-            nowRemainChests = MAX_CHESTS;
-        }
-        nowRemainChests = newChestCount;
-        SaveChestsCount();
-        Debug.Log("当前剩余箱子数量：" + nowRemainChests);
-    }
+    //     if (newChestCount > MAX_CHESTS)
+    //     {
+    //         nowRemainChests = MAX_CHESTS;
+    //     }
+    //     nowRemainChests = newChestCount;
+    //     Debug.Log("当前剩余箱子数量：" + nowRemainChests);
+    // }
 
 
     /// <summary>
@@ -78,13 +82,13 @@ public static class ChestsRewardSystem
     public static IEnumerator OnlineSendChests()
     {
         var newWait = new WaitForSecondsRealtime(1);
-        while (true)
+        while (nowRemainChests < MAX_CHESTS)
         {
 
             currentRemainSeconds -= 1;
             if (currentRemainSeconds <= 0)
             {
-                SetChestCounts(nowRemainChests + 1);
+                nowRemainChests += 1;
                 currentRemainSeconds = PENDING_TIME;
             }
 
@@ -92,8 +96,4 @@ public static class ChestsRewardSystem
         }
     }
 
-    static void SaveChestsCount()
-    {
-        PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_COUNT, nowRemainChests);
-    }
 }

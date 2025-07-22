@@ -30,7 +30,7 @@ public class MainUI : MonoBehaviour
 
 
         dungeonName.text = $"第{nowChooseDungeonId}关";
-
+        SetChestsUI();
     }
 
     /// <summary>
@@ -46,7 +46,11 @@ public class MainUI : MonoBehaviour
         //每30帧检测一次
         if (Time.frameCount % 30 != 0)
             return;
+        SetChestsUI();
+    }
 
+    void SetChestsUI()
+    {
         var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds).ToString(@"mm\:ss");
         var count = ChestsRewardSystem.nowRemainChests;
 
@@ -58,7 +62,8 @@ public class MainUI : MonoBehaviour
         }
         else
         {
-            textChestButtonRemainTime.text = $"在线宝箱\n<color = {cfg.Tables.tb.Color.Get(1).ColorDarkbg}>满</color>";
+            textChestButtonRemainTime.text = $"在线宝箱\n<color={cfg.Tables.tb.Color.Get(1).ColorDarkbg}>满</color>";
         }
+
     }
 }
