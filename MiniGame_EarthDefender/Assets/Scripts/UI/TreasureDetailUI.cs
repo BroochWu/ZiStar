@@ -24,9 +24,9 @@ public class TreasureDetailUI : MonoBehaviour
 
         nowLookChest.itemId = treasureChest.itemId;
         nowLookChest.score = treasureChest.score;
-        //nowLookChest.RefreshImage();
+        nowLookChest.RefreshImage();
 
-        Debug.Log("当前正在选择：" + nowLookChest);
+        Debug.Log("当前正在选择：" + nowLookChest.itemId);
 
     }
 
@@ -54,19 +54,17 @@ public class TreasureDetailUI : MonoBehaviour
 
     public void UseChest()
     {
-        var item = cfg.Tables.tb.Item.Get(nowLookChest.itemId);
-        var count = DataManager.Instance.GetResourceCount(nowLookChest.itemId);
-        DataManager.Instance.UseItemInItemStruct(item, count);
-        
-        UIManager.Instance.CommonCongra(items);
+        //使用当前正在看的
+        nowLookChest.UseChest();
     }
 
-    void RefreshAllChests()
+    public void RefreshAllChests()
     {
         foreach (var a in treasureChests)
         {
             a.RefreshUI();
         }
+        nowLookChest.RefreshImage();
     }
 
 }

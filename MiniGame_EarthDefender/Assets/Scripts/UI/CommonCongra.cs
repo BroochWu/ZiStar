@@ -19,14 +19,16 @@ public class CommonCongra : MonoBehaviour
 
     IEnumerator AddItemList(Dictionary<cfg.item.Item, int> items)
     {
-        var wait = new WaitForSecondsRealtime(0.3f);
+        var wait = new WaitForSecondsRealtime(0.1f);
         foreach (var item in items)
         {
             Instantiate(UIManager.Instance.itemObj, itemsContainer)
             .GetComponent<ItemUI>()
             .Initialize(item.Key, item.Value);
+            yield return wait;
         }
-        yield return wait;
+        DataManager.Instance.rewardList.Clear();
+        Debug.Log("奖励列表已清除！");
     }
 
     public void CloseWindow()

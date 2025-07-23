@@ -19,7 +19,7 @@ public static class DropSystem
     static void ConfirmCheckResType(cfg.Beans.Item_Draw _dropDraw)
     {
         var num = _dropDraw.Number;
-        
+
         switch (_dropDraw.ResType)
         {
             case cfg.Enums.Com.ResourceType.ITEM:
@@ -49,7 +49,7 @@ public static class DropSystem
             case cfg.Enums.Drop.DropType.PROP:
                 foreach (var a in drop.DropList)
                 {
-                    if (a.Prop == 10000 && UnityEngine.Random.Range(0, 10000) <= a.Prop)
+                    if (a.Prop == 10000 || UnityEngine.Random.Range(0, 10000) <= a.Prop)
                     {
                         ConfirmCheckResType(a);
                     }

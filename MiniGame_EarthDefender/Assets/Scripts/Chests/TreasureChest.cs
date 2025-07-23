@@ -11,9 +11,22 @@ public class TreasureChest : MonoBehaviour
 
     void Awake()
     {
+        //正在看的可能没有
         TryGetComponent(out _toggle);
-        TryGetComponent<PersistentSelectedToggle>(out var persist);
-        if (persist != null) persist.normalSprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
+        if (TryGetComponent<PersistentSelectedToggle>(out var persist))
+        {
+            var sprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
+            persist.normalSprite = sprite;
+            if (persist.isON)
+            {
+                GetComponentInParent<TreasureDetailUI>().SetNowLookChest(this);
+            }
+            else
+            {
+                GetComponent<Image>().sprite = sprite;
+            }
+
+        }
     }
     void OnEnable()
     {
@@ -24,6 +37,13 @@ public class TreasureChest : MonoBehaviour
     {
         // 订阅Toggle值变化事件
         _toggle?.onValueChanged.RemoveListener(OnToggleValueChanged);
+    }
+    void OnToggleValueChanged(bool _isOn)
+    {
+        if (_isOn)
+        {
+            GetComponentInParent<TreasureDetailUI>().SetNowLookChest(this);
+        }
     }
 
     public void RefreshUI()
@@ -36,13 +56,20 @@ public class TreasureChest : MonoBehaviour
         GetComponent<Image>().sprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
     }
 
-    void OnToggleValueChanged(bool _isOn)
+
+
+    public void UseChest()
     {
-        if (_isOn)
+        var count = DataManager.Instance.GetResourceCount(itemId);
+        if (DataManager.Instance.UseItemInItemStruct(item, count))
         {
-            GetComponentInParent<TreasureDetailUI>().SetNowLookChest(this);
+            GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
+            UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
+            Debug.Log($"使用了{itemId}");
         }
+
     }
+
 
 
 }

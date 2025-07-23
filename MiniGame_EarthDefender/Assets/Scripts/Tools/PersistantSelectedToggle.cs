@@ -7,6 +7,7 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
 {
     private Toggle _toggle;
     private ToggleGroup _group;
+    public bool isON { get { return _toggle.isOn; } }
 
     // 选中的sprite
     public Sprite selectedSprite;
@@ -18,26 +19,29 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
         _group = _toggle.group;
         // normalSprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
 
+        // 如果组内没有选中的Toggle，强制选中当前
+        if (!_group.AnyTogglesOn())
+        {
+            _toggle.isOn = true;
+            Debug.Log("已强制选中当前");
+        }
+
         // 确保初始状态正确
         UpdateVisualState();
     }
 
-    // void OnEnable()
-    // {
-    //     // 订阅Toggle值变化事件
-    //     _toggle.onValueChanged.AddListener(OnToggleValueChanged);
+    void OnEnable()
+    {
 
-    //     // 如果组内没有选中的Toggle，强制选中当前
-    //     if (_group != null && !_group.AnyTogglesOn())
-    //     {
-    //         _toggle.isOn = true;
-    //     }
-    // }
+        // 订阅Toggle值变化事件
+        _toggle.onValueChanged.AddListener(OnToggleValueChanged);
 
-    // void OnDisable()
-    // {
-    //     _toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
-    // }
+    }
+
+    void OnDisable()
+    {
+        _toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
+    }
 
     public void OnToggleValueChanged(bool isOn)
     {
@@ -47,7 +51,11 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
     // 手动更新视觉状态
     public void UpdateVisualState()
     {
-        if (_toggle == null) return;
+        if (_toggle == null)
+        {
+            Debug.LogWarning("toggle is null");
+            return;
+        }
 
         // 根据是否选中更新视觉
         if (_toggle.isOn)

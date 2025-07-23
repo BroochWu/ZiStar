@@ -1,6 +1,7 @@
 //专门管理玩家数据类
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class DataManager : MonoBehaviour
     public const int EQUIP_SLOT_COUNT = 5;
     const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
     private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
+
+    public Dictionary<cfg.item.Item, int> rewardList { get; private set; } = new();//奖励列表
 
     void Awake()
     {
@@ -168,48 +171,93 @@ public class DataManager : MonoBehaviour
             nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         }
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
+
+        //加入临时的奖励列表，以便恭喜获得
+        rewardList.Add(item, count);
+
+        //刷新顶栏
         RefreshTopPLPanel(item.Id);
 
-
     }
+
+
+    /// <summary>
+    /// 当玩家要消耗资源时进行检测
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="count"></param>
+    public bool CheckOrCostResource(cfg.item.Item item, int count, bool wantToCost)
+    {
+        var nowHas = GetResourceCount(item);
+        if (count > nowHas)
+        {
+            UIManager.Instance.CommonToast("消耗大于剩余量，资源消耗失败！");
+            return false;
+        }
+
+        if (wantToCost)
+        {
+            var newValue = nowHas - count;
+            PlayerPrefs.SetInt($"item_{item.Id}", newValue);
+            Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+        }
+
+        RefreshTopPLPanel(item.Id);
+        return true;
+    }
+
 
     /// <summary>
     /// 在道具结构体内管理道具使用和掉落
     /// </summary>
-    /// <param name="item"></param>
-    /// <param name="count"></param>
-    public void UseItemInItemStruct(cfg.item.Item item, int count)
+    /// <param name="_item"></param>
+    /// <param name="_useNum"></param>
+    public bool UseItemInItemStruct(cfg.item.Item _item, int _useNum)
     {
-        if (item.UseChange.Count == 0)
+        //清理临时的奖励列表，以便之后恭喜获得的奖励
+        //不过这里应该是已经清掉的状态
+        rewardList.Clear();
+
+        if (_item.UseChange.Count == 0)
         {
-            Debug.LogError("并不存在使用参数 " + item.Id);
+            Debug.LogError("并不存在使用参数，无法使用：" + _item.Id);
+            return false;
         }
 
-        foreach (var draw in item.UseChange)
+        //使用道具
+        for (int i = 1; i <= _useNum; i++)
         {
+            //扣除道具(获得奖励后再扣除?)
+            CheckOrCostResource(_item, 1, true);
 
-            if (draw.Prop != 10000 && UnityEngine.Random.Range(0, 10000) > draw.Prop)
+            foreach (var draw in _item.UseChange)
             {
-                return;
+                //开始计算所得
+                //如果概率失败就直接返回(Item表里一定是概率)
+                if (draw.Prop != 10000 && UnityEngine.Random.Range(0, 10000) > draw.Prop)
+                {
+                    return false;
+                }
+                //否则如果是掉道具，直接发放
+                //如果是掉掉落包，由掉落包系统接手管理
+                switch (draw.ResType)
+                {
+                    case cfg.Enums.Com.ResourceType.ITEM:
+                        GainResource(_item, draw.Number);
+                        break;
+                    case cfg.Enums.Com.ResourceType.DROP:
+                        var _drop = cfg.Tables.tb.Drop.Get(draw.Id);
+                        DropSystem.LetsDrop(_drop, draw.Number);
+                        break;
+                    default:
+                        Debug.LogError("报错了");
+                        break;
+                }
             }
-            //如果概率失败就直接返回(Item表里一定是概率)
-            //否则如果是掉道具，直接发放
-            //如果是掉掉落包，由掉落包系统接手管理
-            switch (draw.ResType)
-            {
-                case cfg.Enums.Com.ResourceType.ITEM:
-                    GainResource(item, count);
-                    break;
-                case cfg.Enums.Com.ResourceType.DROP:
-                    var drop = cfg.Tables.tb.Drop.Get(draw.Id);
-                    DropSystem.LetsDrop(drop, count);
-                    break;
-                default:
-                    Debug.LogError("报错了");
-                    break;
-            }
-
         }
+
+        return true;
+
     }
 
     public int GetItemCount(cfg.item.Item item)
@@ -227,29 +275,6 @@ public class DataManager : MonoBehaviour
         if (itemId == 1 || itemId == 2) UIManager.Instance.topPLPanel.Refresh();
     }
 
-    /// <summary>
-    /// 当玩家要消耗资源时进行检测
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="count"></param>
-    public bool CheckOrCostResource(cfg.item.Item item, int count, bool wantToCost)
-    {
-        var nowHas = GetResourceCount(item);
-        if (count > nowHas)
-        {
-            return false;
-        }
-
-        if (wantToCost)
-        {
-            var newValue = nowHas - count;
-            PlayerPrefs.SetInt($"item_{item.Id}", newValue);
-            Debug.Log($"{item.TextName} 剩余数量 {newValue}");
-        }
-
-        RefreshTopPLPanel(item.Id);
-        return true;
-    }
 
     /// <summary>
     /// 获取指定道具id的数量
