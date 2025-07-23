@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -86,7 +88,13 @@ public class TreasureChest : MonoBehaviour
 
         ChestsRewardSystem.PlusChestScore(score * _useNum);
 
-        UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
+        var sortedList = DataManager.Instance.rewardList.OrderByDescending(key => key.Key.Quality);
+        Dictionary<cfg.item.Item, int> tempDict = new();
+        foreach (var i in sortedList)
+        {
+            tempDict.Add(i.Key, i.Value);
+        }
+        UIManager.Instance.CommonCongra(tempDict);
         GetComponentInParent<TreasureDetailUI>().RefreshAll();
 
     }

@@ -21,6 +21,7 @@ public class ItemUI : MonoBehaviour
 {
     public Text numberText;
     public Image image;
+    public Image imageQualityBg;
 
 
 
@@ -32,5 +33,6 @@ public class ItemUI : MonoBehaviour
     {
         numberText.text = number.ToString();
         image.sprite = _item.Image;
+        imageQualityBg.color = Utility.SetQualityColor(_item.Quality, false);
     }
 }

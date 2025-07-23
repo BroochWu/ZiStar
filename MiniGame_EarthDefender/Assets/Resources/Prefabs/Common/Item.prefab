@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberText: {fileID: 7796118286696382286}
   image: {fileID: 2826062276876919769}
+  imageQualityBg: {fileID: 4839316251777483259}
 --- !u!1 &3337808996990192753
 GameObject:
   m_ObjectHideFlags: 0
