@@ -21,6 +21,8 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
+        { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
+        Piece_Ref = null;
         { if(!_buf["bullet_speed"].IsNumber) { throw new SerializationException(); }  BulletSpeed = _buf["bullet_speed"]; }
         { if(!_buf["max_lifetime"].IsNumber) { throw new SerializationException(); }  MaxLifetime = _buf["max_lifetime"]; }
         { if(!_buf["rate_of_fire"].IsNumber) { throw new SerializationException(); }  RateOfFire = _buf["rate_of_fire"]; }
@@ -53,6 +55,11 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
     /// </summary>
     public readonly string BulletPrefab;
+    /// <summary>
+    /// 绑定的碎片ID
+    /// </summary>
+    public readonly int Piece;
+    public item.Item Piece_Ref;
     /// <summary>
     /// 子弹飞行速度
     /// </summary>
@@ -95,6 +102,7 @@ public sealed partial class Weapon : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
+        Piece_Ref = tables.Item.GetOrDefault(Piece);
     }
 
     public override string ToString()
@@ -104,6 +112,7 @@ public sealed partial class Weapon : Luban.BeanBase
         + "textName:" + TextName + ","
         + "initQuality:" + InitQuality + ","
         + "bulletPrefab:" + BulletPrefab + ","
+        + "piece:" + Piece + ","
         + "bulletSpeed:" + BulletSpeed + ","
         + "maxLifetime:" + MaxLifetime + ","
         + "rateOfFire:" + RateOfFire + ","

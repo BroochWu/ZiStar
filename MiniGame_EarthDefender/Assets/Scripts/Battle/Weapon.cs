@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -28,6 +29,18 @@ namespace cfg.weapon
                     return CellState.LOCK;
                 return CellState.NORMAL;
 
+            }
+        }
+        public Dictionary<item.Item, int> levelUpConsumes
+        {
+            get
+            {
+                Dictionary<item.Item, int> tempDic = new()
+                {
+                    { Tables.tb.Item.Get(1), Mathf.Min(5000,currentLevel*5) },//金币 - 等级*5，最高5000
+                    { Piece_Ref, 3 + 2 * (currentLevel-1) } //碎片 - 3+2*（等级-1）
+                };
+                return tempDic;
             }
         }
 
@@ -89,7 +102,11 @@ public class Weapon : MonoBehaviour
         //武器伤害=基础值（来源于账号养成）×（1+武器升级加成+全局伤害加成+单体伤害加成）
         var atkLv = PlayerPrefs.GetInt("playerData_atk_level");
         var basicValue = cfg.Tables.tb.PlayerAttrLevel.Get(atkLv).BasicAtk.Value;
-        var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
+
+        //伤害加成率 = 武器等级 × 3%
+        // var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
+        var additionValue = weaponLevel * 0.05f;
+
 
         int final = (int)(
             basicValue *

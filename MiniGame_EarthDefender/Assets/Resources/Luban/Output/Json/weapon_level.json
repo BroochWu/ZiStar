@@ -1,28 +1,23 @@
 [
   {
     "id": 1001,
-    "level": 1,
-    "damage_multi": 0
+    "level": 1
   },
   {
     "id": 1001,
     "level": 2,
-    "damage_multi": 500,
     "levelup_unlock_card": 1002
   },
   {
     "id": 1001,
-    "level": 3,
-    "damage_multi": 1000
+    "level": 3
   },
   {
     "id": 1002,
-    "level": 1,
-    "damage_multi": 0
+    "level": 1
   },
   {
     "id": 1002,
-    "level": 2,
-    "damage_multi": 500
+    "level": 2
   }
 ]
