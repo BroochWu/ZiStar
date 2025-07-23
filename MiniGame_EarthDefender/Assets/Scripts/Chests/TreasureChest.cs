@@ -68,10 +68,9 @@ public class TreasureChest : MonoBehaviour
         }
 
         //使用道具
-        if (DataManager.Instance.UseItemInItemStruct(item, count))
+        if (DataManager.Instance.UseItemInItemStruct(item, count,true))
         {
             GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
-            UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
             Debug.Log($"使用了{itemId}");
         }
 

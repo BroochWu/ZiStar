@@ -212,7 +212,7 @@ public class DataManager : MonoBehaviour
     /// </summary>
     /// <param name="_item"></param>
     /// <param name="_useNum"></param>
-    public bool UseItemInItemStruct(cfg.item.Item _item, int _useNum)
+    public bool UseItemInItemStruct(cfg.item.Item _item, int _useNum, bool _commonCongra)
     {
         //清理临时的奖励列表，以便之后恭喜获得的奖励
         //不过这里应该是已经清掉的状态
@@ -255,6 +255,7 @@ public class DataManager : MonoBehaviour
                 }
             }
         }
+        if (_commonCongra) UIManager.Instance.CommonCongra(rewardList);
 
         return true;
 
