@@ -19,7 +19,7 @@ public class CommonCongra : MonoBehaviour
 
     IEnumerator AddItemList(Dictionary<cfg.item.Item, int> items)
     {
-        var wait = new WaitForSecondsRealtime(0.1f);
+        var wait = new WaitForSecondsRealtime(0.05f);
         foreach (var item in items)
         {
             if (item.Value == 0) continue;

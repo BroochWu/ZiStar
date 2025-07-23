@@ -65,7 +65,7 @@ public class DevelopUI : MonoBehaviour
     void RefreshAtkResCost(bool cost)
     {
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowAtkLevel).BasicAtk.ItemRequire;
-        atkLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
+        atkLevelUpCostImg.sprite = item.Id_Ref.Image;
         //需要消耗资源，并且成功升级了
         var isRed = true;
         // nowAtkLevel += 1;
@@ -99,7 +99,7 @@ public class DevelopUI : MonoBehaviour
     void RefreshHpResCost(bool cost)
     {
         var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowHpLevel).BasicHp.ItemRequire;
-        hpLevelUpCostImg.sprite = Resources.Load<Sprite>("Images/" + item.Id_Ref.ImagePath);
+        hpLevelUpCostImg.sprite = item.Id_Ref.Image;
         var isRed = true;
 
         //需要消耗资源、未满级、资源足够，则消耗资源并成功升级

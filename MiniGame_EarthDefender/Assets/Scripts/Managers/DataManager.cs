@@ -164,12 +164,7 @@ public class DataManager : MonoBehaviour
     /// <param name="count"></param>
     public void GainResource(cfg.item.Item item, int count)
     {
-        var nowHas = 0;
-
-        if (PlayerPrefs.HasKey($"item_{item.Id}"))
-        {
-            nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
-        }
+        var nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
 
         //加入临时的奖励列表，以便恭喜获得

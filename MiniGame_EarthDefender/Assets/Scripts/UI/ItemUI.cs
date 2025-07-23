@@ -1,6 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+namespace cfg.item
+{
+    public partial class Item
+    {
+        public Sprite Image
+        {
+            get
+            {
+                return Resources.Load<Sprite>("Images/" + ImagePath);
+            }
+        }
+    }
+}
+
+
 public class ItemUI : MonoBehaviour
 {
     public Text numberText;
@@ -15,6 +31,6 @@ public class ItemUI : MonoBehaviour
     public void Initialize(cfg.item.Item _item, int number)
     {
         numberText.text = number.ToString();
-        image.sprite = Resources.Load<Sprite>("Images/" + _item.ImagePath);
+        image.sprite = _item.Image;
     }
 }

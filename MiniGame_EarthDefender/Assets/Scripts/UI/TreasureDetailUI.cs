@@ -7,7 +7,9 @@ public class TreasureDetailUI : MonoBehaviour
 {
     public Text textRemainTime;//剩余时间
     public Text textRemainChestCount;//剩余可领箱子
-    public GameObject progressRemainTime;
+    public Text textChestScore;//宝箱积分
+    public Image ImgNextChest;//下一个积分宝箱的图片
+    public GameObject progressRemainTime;//剩余时间进度条
     public List<TreasureChest> treasureChests;
     public TreasureChest nowLookChest;
     // void Start()
@@ -33,7 +35,7 @@ public class TreasureDetailUI : MonoBehaviour
 
     void Start()
     {
-        RefreshAllChests();
+        RefreshAll();
     }
 
     void Update()
@@ -41,6 +43,7 @@ public class TreasureDetailUI : MonoBehaviour
         if (ChestsRewardSystem.nowRemainChests >= ChestsRewardSystem.MAX_CHESTS)
         {
             textRemainTime.text = "已满！请领取奖励！";
+            progressRemainTime.transform.localScale = Vector3.one;
         }
         else
         {
@@ -59,7 +62,7 @@ public class TreasureDetailUI : MonoBehaviour
     public void GainChest()
     {
         ChestsRewardSystem.GainAndResetChestsRewardAction();
-        RefreshAllChests();
+        RefreshAll();
     }
 
     public void UseChest()
@@ -68,13 +71,30 @@ public class TreasureDetailUI : MonoBehaviour
         nowLookChest.UseChest();
     }
 
-    public void RefreshAllChests()
+    public void RefreshAll()
     {
         foreach (var a in treasureChests)
         {
             a.RefreshUI();
         }
         nowLookChest.RefreshImage();
+        RefreshChestScore();
+    }
+
+    public void RefreshChestScore()
+    {
+        var current = ChestsRewardSystem.currentChestScore;
+        var next = ChestsRewardSystem.nextChest.Score;
+        var colorStr = cfg.Tables.tb.Color.Get(current < next ? 3 : 1).ColorDarkbg;
+        var numerator = $"<color={colorStr}>{current}</color>";
+        textChestScore.text = $"{numerator} / {next}";
+        ImgNextChest.sprite = ChestsRewardSystem.nextChest.Reward_Ref.Image;
+    }
+
+    public void GetChestLoop()
+    {
+        ChestsRewardSystem.UseChestScore();
+        RefreshAll();
     }
 
 }

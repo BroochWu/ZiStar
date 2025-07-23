@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public static class ChestsRewardSystem
 {
+    public const string PLAYERPREFS_KEY_CHEST_COUNT = "rewardchest_receive_chests_count";
+    public const string PLAYERPREFS_KEY_CHEST_SCORE_COUNT = "rewardchest_current_score";
+    public const string PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT = "rewardchest_score_next_sort";
+
     public const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
     public const int MAX_CHESTS = 20;//最多积累多少个箱子
-    public const string PLAYERPREFS_KEY_CHEST_COUNT = "rewardchest_receive_chests_count";
+
 
     public static int currentRemainSeconds;//当前距离下一次领奖的剩余时间(秒)
     public static int nowRemainChests//当前未领取的箱子
@@ -18,6 +23,23 @@ public static class ChestsRewardSystem
             if (value > MAX_CHESTS)
                 value = MAX_CHESTS;
             PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_COUNT, value);
+        }
+    }
+    public static int currentChestScore//当前连续发箱子积分
+    {
+        get { return PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_COUNT); }
+        private set
+        {
+            PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_SCORE_COUNT, value);
+        }
+    }
+    public static cfg.chest.ChestLoop nextChest
+    {
+        get
+        {
+            Debug.Log(PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT));
+            Debug.Log(cfg.Tables.tb.ChestLoop.DataList[PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)]);
+            return cfg.Tables.tb.ChestLoop.DataList[PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)];
         }
     }
 
@@ -55,6 +77,9 @@ public static class ChestsRewardSystem
         // SendChestsRewardAction(chestCount, remainTime);
     }
 
+    /// <summary>
+    /// 幽默作弊检测
+    /// </summary>
     static void CheaterInChestsReward()
     {
         UIManager.Instance.CommonToast("嗯？你是不是偷偷改数据啦（盯）");
@@ -79,36 +104,57 @@ public static class ChestsRewardSystem
         nowRemainChests = 0;
     }
 
-    // public static void SetChestCounts(int newChestCount)
-    // {
-
-    //     if (newChestCount > MAX_CHESTS)
-    //     {
-    //         nowRemainChests = MAX_CHESTS;
-    //     }
-    //     nowRemainChests = newChestCount;
-    //     Debug.Log("当前剩余箱子数量：" + nowRemainChests);
-    // }
-
-
     /// <summary>
     /// 在线期间（尤其是停留在主界面）每隔一段时间就发箱子
     /// </summary>
     public static IEnumerator OnlineSendChests()
     {
         var newWait = new WaitForSecondsRealtime(1);
-        while (nowRemainChests < MAX_CHESTS)
+        while (true)
         {
-
-            currentRemainSeconds -= 1;
-            if (currentRemainSeconds <= 0)
+            //永远在循环判断是否可以
+            while (nowRemainChests < MAX_CHESTS)
             {
-                nowRemainChests += 1;
-                currentRemainSeconds = PENDING_TIME;
-            }
+                //如果没满就循环读时间
 
+                currentRemainSeconds -= 1;
+                if (currentRemainSeconds <= 0)
+                {
+                    nowRemainChests += 1;
+                    currentRemainSeconds = PENDING_TIME;
+                }
+
+                yield return newWait;
+            }
             yield return newWait;
         }
     }
+
+
+    public static void PlusChestScore(int score)
+    {
+        currentChestScore += score;
+    }
+
+    public static void UseChestScore()
+    {
+        if (currentChestScore < nextChest.Score)
+        {
+            UIManager.Instance.CommonToast("积分不足，请继续开箱获取");
+            return;
+        }
+
+        currentChestScore -= nextChest.Score;
+        DataManager.Instance.rewardList.Clear();
+        DataManager.Instance.GainResource(nextChest.Reward_Ref, 1);//暂时固定一次领1个，回头我看看指尖无双的
+        UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
+
+        PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT
+        , (PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT) + 1) % cfg.Tables.tb.ChestLoop.DataList.Count);
+
+        Debug.Log($"下一个宝箱位次：{PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)}");
+    }
+
+
 
 }

@@ -74,6 +74,10 @@ public partial class Tables
     /// 3选1卡组表
     /// </summary>
     public Tbcard.Card Card {get; }
+    /// <summary>
+    /// 循环宝箱
+    /// </summary>
+    public Tbchest.ChestLoop ChestLoop {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -92,6 +96,7 @@ public partial class Tables
         PlayerData = new Tbplayer.PlayerData(loader("player_data"));
         Item = new Tbitem.Item(loader("item"));
         Card = new Tbcard.Card(loader("card"));
+        ChestLoop = new Tbchest.ChestLoop(loader("chest_loop"));
         ResolveRef();
     }
     
@@ -112,6 +117,7 @@ public partial class Tables
         PlayerData.ResolveRef(this);
         Item.ResolveRef(this);
         Card.ResolveRef(this);
+        ChestLoop.ResolveRef(this);
     }
 }
 

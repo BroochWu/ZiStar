@@ -10,6 +10,11 @@
     "color_darkbg": "#ffffff"
   },
   {
+    "id": 3,
+    "color_lightbg": "#000000",
+    "color_darkbg": "#ff7d7d"
+  },
+  {
     "id": 101,
     "color_lightbg": "#679069",
     "color_darkbg": "#5bc562"

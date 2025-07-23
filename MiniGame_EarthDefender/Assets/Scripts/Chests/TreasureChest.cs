@@ -16,7 +16,7 @@ public class TreasureChest : MonoBehaviour
         TryGetComponent(out _toggle);
         if (TryGetComponent<PersistentSelectedToggle>(out var persist))
         {
-            var sprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
+            var sprite = GetComponent<TreasureChest>().item.Image;
             persist.normalSprite = sprite;
             if (persist.isON)
             {
@@ -54,28 +54,28 @@ public class TreasureChest : MonoBehaviour
 
     public void RefreshImage()
     {
-        GetComponent<Image>().sprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
+        GetComponent<Image>().sprite = GetComponent<TreasureChest>().item.Image;
     }
 
 
 
     public void UseChest()
     {
-        var count = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 1, 20);
-        if (count == 0)
+        var _useNum = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 1, 20);
+        if (_useNum == 0)
         {
             UIManager.Instance.CommonToast("？这不是啥也没有吗");
             return;
         }
-        StartCoroutine(UseChest(count));
+        StartCoroutine(UseChest(_useNum));
     }
-    IEnumerator UseChest(int count)
+    IEnumerator UseChest(int _useNum)
     {
 
         DataManager.Instance.rewardList.Clear();
-        var wait = new WaitForSeconds(0.05f);
+        var wait = new WaitForSeconds(0.02f);
         //使用道具
-        for (int i = 1; i <= count; i++)
+        for (int i = 1; i <= _useNum; i++)
         {
             if (DataManager.Instance.UseItemInItemStruct(item, 1))
             {
@@ -83,8 +83,11 @@ public class TreasureChest : MonoBehaviour
             }
             yield return wait;
         }
+
+        ChestsRewardSystem.PlusChestScore(score * _useNum);
+
         UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
-        GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
+        GetComponentInParent<TreasureDetailUI>().RefreshAll();
 
     }
 

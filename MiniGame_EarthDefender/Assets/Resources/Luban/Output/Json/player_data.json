@@ -43,5 +43,15 @@
     "data_str": "rewardchest_receive_chests_count",
     "param_type": 1,
     "param_value_init": "0"
+  },
+  {
+    "data_str": "rewardchest_current_score",
+    "param_type": 1,
+    "param_value_init": "0"
+  },
+  {
+    "data_str": "rewardchest_score_next_sort",
+    "param_type": 1,
+    "param_value_init": "0"
   }
 ]
