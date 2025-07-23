@@ -2,7 +2,7 @@
   {
     "id": 1,
     "text_name": "金币",
-    "quality": 3,
+    "quality": 1,
     "item_type": 1,
     "use_change": [],
     "image_path": "Items/item_gold"
