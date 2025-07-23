@@ -60,7 +60,14 @@ public class TreasureChest : MonoBehaviour
 
     public void UseChest()
     {
-        var count = DataManager.Instance.GetResourceCount(itemId);
+        var count = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 1, 20);
+        if (count == 0)
+        {
+            UIManager.Instance.CommonToast("？这不是啥也没有吗");
+            return;
+        }
+
+        //使用道具
         if (DataManager.Instance.UseItemInItemStruct(item, count))
         {
             GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
