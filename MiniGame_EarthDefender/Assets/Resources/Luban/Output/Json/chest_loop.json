@@ -1,22 +1,30 @@
 [
   {
-    "score": 5,
+    "score": 2,
     "reward": 3001
   },
   {
-    "score": 20,
+    "score": 5,
     "reward": 3002
   },
   {
-    "score": 40,
+    "score": 10,
     "reward": 3003
   },
   {
-    "score": 80,
+    "score": 2,
+    "reward": 3001
+  },
+  {
+    "score": 10,
+    "reward": 3003
+  },
+  {
+    "score": 30,
     "reward": 3004
   },
   {
-    "score": 100,
+    "score": 50,
     "reward": 3005
   }
 ]

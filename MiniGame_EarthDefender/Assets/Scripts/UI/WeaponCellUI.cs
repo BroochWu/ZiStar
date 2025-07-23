@@ -70,6 +70,13 @@ public class WeaponCellUI : MonoBehaviour
 
     public void OpenDetailInfo()
     {
+        string str = "";
+        foreach (var a in weapon.levelUpConsumes)
+        {
+            str += a.ToString();
+        }
+        Debug.Log(str);
+        
         if (weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
         {
             Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)

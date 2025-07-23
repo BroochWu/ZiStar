@@ -18,12 +18,11 @@ namespace cfg.Tbchest
 /// </summary>
 public partial class ChestLoop
 {
-    private readonly System.Collections.Generic.Dictionary<int, chest.ChestLoop> _dataMap;
     private readonly System.Collections.Generic.List<chest.ChestLoop> _dataList;
-    
+
+
     public ChestLoop(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, chest.ChestLoop>();
         _dataList = new System.Collections.Generic.List<chest.ChestLoop>();
         
         foreach(JSONNode _ele in _buf.Children)
@@ -31,17 +30,12 @@ public partial class ChestLoop
             chest.ChestLoop _v;
             { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.chest.ChestLoop.DeserializeChestLoop(_ele);  }
             _dataList.Add(_v);
-            _dataMap.Add(_v.Score, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, chest.ChestLoop> DataMap => _dataMap;
     public System.Collections.Generic.List<chest.ChestLoop> DataList => _dataList;
 
-    public chest.ChestLoop GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public chest.ChestLoop Get(int key) => _dataMap[key];
-    public chest.ChestLoop this[int key] => _dataMap[key];
-
+    
     public void ResolveRef(Tables tables)
     {
         foreach(var _v in _dataList)
@@ -49,7 +43,6 @@ public partial class ChestLoop
             _v.ResolveRef(tables);
         }
     }
-
 }
 
 }

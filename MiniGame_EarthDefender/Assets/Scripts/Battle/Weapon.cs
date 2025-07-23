@@ -38,7 +38,7 @@ namespace cfg.weapon
                 Dictionary<item.Item, int> tempDic = new()
                 {
                     { Tables.tb.Item.Get(1), Mathf.Min(5000,currentLevel*5) },//金币 - 等级*5，最高5000
-                    { Piece_Ref, 3 + 2 * (currentLevel-1) } //碎片 - 3+2*（等级-1）
+                    { Piece_Ref, 3 + 2 * currentLevel } //碎片 - 3+2*（等级-1）
                 };
                 return tempDic;
             }

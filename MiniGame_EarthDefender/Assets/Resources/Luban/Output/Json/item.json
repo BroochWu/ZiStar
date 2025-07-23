@@ -24,6 +24,94 @@
     "image_path": "Items/item_gold"
   },
   {
+    "id": 2002,
+    "text_name": "磁轨炮碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2003,
+    "text_name": "自爆虫碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2004,
+    "text_name": "朗基努斯之枪碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2005,
+    "text_name": "星链计划碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2006,
+    "text_name": "长镰碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2007,
+    "text_name": "辐射碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2008,
+    "text_name": "抱脸虫碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2009,
+    "text_name": "曼陀罗碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2010,
+    "text_name": "水滴碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2011,
+    "text_name": "自动卫星碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
+    "id": 2012,
+    "text_name": "黑鱼碎片",
+    "quality": 2,
+    "item_type": 2,
+    "use_change": [],
+    "image_path": "Items/item_gold"
+  },
+  {
     "id": 3001,
     "text_name": "绿色箱子",
     "quality": 1,
@@ -31,7 +119,7 @@
     "use_change": [
       {
         "res_type": 2,
-        "id": 1,
+        "id": 101,
         "number": 1,
         "prop": 10000
       }
@@ -46,7 +134,7 @@
     "use_change": [
       {
         "res_type": 2,
-        "id": 1,
+        "id": 102,
         "number": 1,
         "prop": 10000
       }
@@ -61,7 +149,7 @@
     "use_change": [
       {
         "res_type": 2,
-        "id": 1,
+        "id": 103,
         "number": 1,
         "prop": 10000
       }
@@ -76,7 +164,7 @@
     "use_change": [
       {
         "res_type": 2,
-        "id": 1,
+        "id": 104,
         "number": 1,
         "prop": 10000
       }
@@ -91,7 +179,7 @@
     "use_change": [
       {
         "res_type": 2,
-        "id": 1,
+        "id": 105,
         "number": 1,
         "prop": 10000
       }
