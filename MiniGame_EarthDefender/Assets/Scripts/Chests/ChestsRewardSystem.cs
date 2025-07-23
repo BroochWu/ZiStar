@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ChestsRewardSystem
 {
-    const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
+    public const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
     public const int MAX_CHESTS = 20;//最多积累多少个箱子
     public const string PLAYERPREFS_KEY_CHEST_COUNT = "rewardchest_receive_chests_count";
 
@@ -66,7 +66,9 @@ public static class ChestsRewardSystem
     public static void GainAndResetChestsRewardAction()
     {
         var greenChest = cfg.Tables.tb.Item.Get(3001);
-        
+
+        if (nowRemainChests <= 0) return;
+
         Dictionary<cfg.item.Item, int> items = new()
         {
             { greenChest, nowRemainChests }

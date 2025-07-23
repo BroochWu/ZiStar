@@ -212,11 +212,8 @@ public class DataManager : MonoBehaviour
     /// </summary>
     /// <param name="_item"></param>
     /// <param name="_useNum"></param>
-    public bool UseItemInItemStruct(cfg.item.Item _item, int _useNum, bool _commonCongra)
+    public bool UseItemInItemStruct(cfg.item.Item _item, int _useNum)
     {
-        //清理临时的奖励列表，以便之后恭喜获得的奖励
-        //不过这里应该是已经清掉的状态
-        rewardList.Clear();
 
         if (_item.UseChange.Count == 0)
         {
@@ -228,34 +225,35 @@ public class DataManager : MonoBehaviour
         for (int i = 1; i <= _useNum; i++)
         {
             //扣除道具(获得奖励后再扣除?)
-            CheckOrCostResource(_item, 1, true);
-
-            foreach (var draw in _item.UseChange)
+            if (CheckOrCostResource(_item, 1, true))
             {
-                //开始计算所得
-                //如果概率失败就直接返回(Item表里一定是概率)
-                if (draw.Prop != 10000 && UnityEngine.Random.Range(0, 10000) > draw.Prop)
+
+                foreach (var draw in _item.UseChange)
                 {
-                    return false;
-                }
-                //否则如果是掉道具，直接发放
-                //如果是掉掉落包，由掉落包系统接手管理
-                switch (draw.ResType)
-                {
-                    case cfg.Enums.Com.ResourceType.ITEM:
-                        GainResource(_item, draw.Number);
-                        break;
-                    case cfg.Enums.Com.ResourceType.DROP:
-                        var _drop = cfg.Tables.tb.Drop.Get(draw.Id);
-                        DropSystem.LetsDrop(_drop, draw.Number);
-                        break;
-                    default:
-                        Debug.LogError("报错了");
-                        break;
+                    //开始计算所得
+                    //如果概率失败就直接返回(Item表里一定是概率)
+                    if (draw.Prop != 10000 && UnityEngine.Random.Range(0, 10000) > draw.Prop)
+                    {
+                        return false;
+                    }
+                    //否则如果是掉道具，直接发放
+                    //如果是掉掉落包，由掉落包系统接手管理
+                    switch (draw.ResType)
+                    {
+                        case cfg.Enums.Com.ResourceType.ITEM:
+                            GainResource(_item, draw.Number);
+                            break;
+                        case cfg.Enums.Com.ResourceType.DROP:
+                            var _drop = cfg.Tables.tb.Drop.Get(draw.Id);
+                            DropSystem.LetsDrop(_drop, draw.Number);
+                            break;
+                        default:
+                            Debug.LogError("报错了");
+                            break;
+                    }
                 }
             }
         }
-        if (_commonCongra) UIManager.Instance.CommonCongra(rewardList);
 
         return true;
 

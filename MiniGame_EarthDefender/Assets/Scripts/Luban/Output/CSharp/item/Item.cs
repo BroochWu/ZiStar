@@ -47,7 +47,7 @@ public sealed partial class Item : Luban.BeanBase
     /// </summary>
     public readonly Enums.Item.ItemType ItemType;
     /// <summary>
-    /// 使用后转换为
+    /// 使用后转换为<br/>（此处第四个参数一定是概率万分数）
     /// </summary>
     public readonly System.Collections.Generic.List<Beans.Item_Draw> UseChange;
     /// <summary>

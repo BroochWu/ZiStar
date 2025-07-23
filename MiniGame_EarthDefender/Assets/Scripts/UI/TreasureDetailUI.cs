@@ -7,6 +7,7 @@ public class TreasureDetailUI : MonoBehaviour
 {
     public Text textRemainTime;//剩余时间
     public Text textRemainChestCount;//剩余可领箱子
+    public GameObject progressRemainTime;
     public List<TreasureChest> treasureChests;
     public TreasureChest nowLookChest;
     // void Start()
@@ -37,8 +38,17 @@ public class TreasureDetailUI : MonoBehaviour
 
     void Update()
     {
-        var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds).ToString(@"mm\:ss");
-        textRemainTime.text = $"距离下次发放剩余  {str}";
+        if (ChestsRewardSystem.nowRemainChests >= ChestsRewardSystem.MAX_CHESTS)
+        {
+            textRemainTime.text = "已满！请领取奖励！";
+        }
+        else
+        {
+            var str = TimeSpan.FromSeconds(ChestsRewardSystem.currentRemainSeconds);
+            textRemainTime.text = $"距离下次发放剩余  {str:mm\\:ss}";
+            progressRemainTime.transform.localScale =
+             new Vector3((ChestsRewardSystem.PENDING_TIME - ChestsRewardSystem.currentRemainSeconds) * 1f / ChestsRewardSystem.PENDING_TIME, 1, 1);
+        }
         textRemainChestCount.text = $"当前可领：<size=40> {ChestsRewardSystem.nowRemainChests} /{ChestsRewardSystem.MAX_CHESTS} </size>";
     }
 

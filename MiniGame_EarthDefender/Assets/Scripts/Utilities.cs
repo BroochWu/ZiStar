@@ -1,4 +1,3 @@
-using System.Collections;
 using System.IO;
 using SimpleJSON;
 using UnityEngine;
@@ -167,5 +166,13 @@ public static class Utility
 
         return qualityColor;
 
+    }
+
+    public static string BigNumber(int number)
+    {
+        string str = number.ToString();
+        if (number >= 10000) str = string.Format("{0:0.00}", number / 10000f) + "万";
+
+        return str;
     }
 }

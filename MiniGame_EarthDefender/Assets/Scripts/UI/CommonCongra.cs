@@ -22,6 +22,7 @@ public class CommonCongra : MonoBehaviour
         var wait = new WaitForSecondsRealtime(0.1f);
         foreach (var item in items)
         {
+            if (item.Value == 0) continue;
             Instantiate(UIManager.Instance.itemObj, itemsContainer)
             .GetComponent<ItemUI>()
             .Initialize(item.Key, item.Value);

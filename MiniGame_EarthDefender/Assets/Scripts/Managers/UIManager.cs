@@ -178,6 +178,9 @@ public class UIManager : MonoBehaviour
 
     public void CommonCongra(Dictionary<cfg.item.Item, int> items)
     {
+        if (items.Count == 0)
+            return;
+
         var a = Instantiate(commonCongraGainObj, dynamicContainer).GetComponent<CommonCongra>();
         a.StartAddItemList(items);
     }

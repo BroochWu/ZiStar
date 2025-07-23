@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,13 +67,24 @@ public class TreasureChest : MonoBehaviour
             UIManager.Instance.CommonToast("？这不是啥也没有吗");
             return;
         }
+        StartCoroutine(UseChest(count));
+    }
+    IEnumerator UseChest(int count)
+    {
 
+        DataManager.Instance.rewardList.Clear();
+        var wait = new WaitForSeconds(0.05f);
         //使用道具
-        if (DataManager.Instance.UseItemInItemStruct(item, count,true))
+        for (int i = 1; i <= count; i++)
         {
-            GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
-            Debug.Log($"使用了{itemId}");
+            if (DataManager.Instance.UseItemInItemStruct(item, 1))
+            {
+                Debug.Log($"使用了{itemId}");
+            }
+            yield return wait;
         }
+        UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
+        GetComponentInParent<TreasureDetailUI>().RefreshAllChests();
 
     }
 

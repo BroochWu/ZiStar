@@ -14,7 +14,7 @@ public class TopPLPanelUI : MonoBehaviour
     // Update is called once per frame
     public void Refresh()
     {
-        goldCount.text = DataManager.Instance.GetResourceCount(1).ToString();
-        diamondCount.text = DataManager.Instance.GetResourceCount(2).ToString();
+        goldCount.text = Utility.BigNumber(DataManager.Instance.GetResourceCount(1));
+        diamondCount.text = Utility.BigNumber(DataManager.Instance.GetResourceCount(2));
     }
 }
