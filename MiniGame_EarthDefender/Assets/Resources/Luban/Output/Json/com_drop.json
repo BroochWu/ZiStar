@@ -17,8 +17,8 @@
       },
       {
         "res_type": 1,
-        "id": 1,
-        "number": 2003,
+        "id": 2003,
+        "number": 1,
         "prop": 100
       }
     ]
@@ -107,9 +107,9 @@
       },
       {
         "res_type": 1,
-        "id": 1,
-        "number": 2003,
-        "prop": 500
+        "id": 2003,
+        "number": 1,
+        "prop": 100
       },
       {
         "res_type": 1,
