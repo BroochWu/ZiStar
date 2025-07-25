@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public static class ChestsRewardSystem
@@ -10,7 +9,7 @@ public static class ChestsRewardSystem
     public const string PLAYERPREFS_KEY_CHEST_SCORE_COUNT = "rewardchest_current_score";
     public const string PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT = "rewardchest_score_next_sort";
 
-    public const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
+    public const int PENDING_TIME = 1;//投放间隔（秒、9分钟）
     public const int MAX_CHESTS = 20;//最多积累多少个箱子
 
 
@@ -94,13 +93,13 @@ public static class ChestsRewardSystem
 
         if (nowRemainChests <= 0) return;
 
-        Dictionary<cfg.item.Item, int> items = new()
-        {
-            { greenChest, nowRemainChests }
-        };
+        // Dictionary<cfg.item.Item, int> items = new()
+        // {
+        //     { greenChest, nowRemainChests }
+        // };
 
         DataManager.Instance.GainResource(greenChest, nowRemainChests);
-        UIManager.Instance.CommonCongra(items);
+        UIManager.Instance.CommonCongra(new List<Rewards>() { { new Rewards() { rewardItem = greenChest, gainNumber = nowRemainChests } } });
         nowRemainChests = 0;
     }
 

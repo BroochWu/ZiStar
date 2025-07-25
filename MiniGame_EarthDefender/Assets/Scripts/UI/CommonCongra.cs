@@ -6,7 +6,7 @@ public class CommonCongra : MonoBehaviour
 {
     public Transform itemsContainer;
 
-    public void StartAddItemList(Dictionary<cfg.item.Item, int> items)
+    public void StartAddItemList(List<Rewards> items)
     {
 
         foreach (Transform child in itemsContainer)
@@ -17,15 +17,15 @@ public class CommonCongra : MonoBehaviour
         StartCoroutine(AddItemList(items));
     }
 
-    IEnumerator AddItemList(Dictionary<cfg.item.Item, int> items)
+    IEnumerator AddItemList(List<Rewards> items)
     {
         var wait = new WaitForSecondsRealtime(0.05f);
         foreach (var item in items)
         {
-            if (item.Value == 0) continue;
+            if (item.gainNumber == 0) continue;
             Instantiate(UIManager.Instance.itemObj, itemsContainer)
             .GetComponent<ItemUI>()
-            .Initialize(item.Key, item.Value);
+            .Initialize(item.rewardItem, item.gainNumber);
             yield return wait;
         }
         DataManager.Instance.rewardList.Clear();

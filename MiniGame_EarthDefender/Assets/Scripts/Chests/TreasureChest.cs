@@ -69,13 +69,13 @@ public class TreasureChest : MonoBehaviour
             UIManager.Instance.CommonToast("？这不是啥也没有吗");
             return;
         }
-        StartCoroutine(UseChest(_useNum));
+        UseChest(_useNum);
     }
-    IEnumerator UseChest(int _useNum)
+    void UseChest(int _useNum)
     {
 
         DataManager.Instance.rewardList.Clear();
-        var wait = new WaitForSecondsRealtime(0.02f);
+        // var wait = new WaitForSecondsRealtime(0.02f);
         //使用道具
         for (int i = 1; i <= _useNum; i++)
         {
@@ -83,33 +83,20 @@ public class TreasureChest : MonoBehaviour
             {
                 Debug.Log($"使用了{itemId}");
             }
-            yield return wait;
+            // yield return wait;
         }
 
         ChestsRewardSystem.PlusChestScore(score * _useNum);
 
         var sortedDict =
         DataManager.Instance.rewardList
-        .OrderByDescending(key => key.Key.Quality)
-        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        .OrderByDescending(reward => reward.rewardItem.Quality)
+        .ToList();
 
-        // Dictionary<cfg.item.Item, int> tempDict = new();
-        // foreach (var i in sortedList)
-        // {
-        //     tempDict.Add(i.Key, i.Value);
-        // }
         UIManager.Instance.CommonCongra(sortedDict);
+        
         GetComponentInParent<TreasureDetailUI>().RefreshAll();
 
-        // Dictionary<int, string> dict = new Dictionary<int, string>
-        // {
-        //     { 3, "C" }, // 假设这里的值（"C"）可以被某种方式转换为可比较的顺序类型，比如长度或字典序等。这里仅为示例。
-        //     { 1, "A" }, // 例如，我们可以基于字符串长度来排序。
-        //     { 2, "BB" } // 较长的字符串排在前面。
-        // };
-
-        // // 按Value排序（例如，按字符串长度）
-        // var sortedDict = dict.OrderBy(kvp => kvp.Value.Length).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
 

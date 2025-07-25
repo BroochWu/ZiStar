@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void CommonCongra(Dictionary<cfg.item.Item, int> items)
+    public void CommonCongra(List<Rewards> items)
     {
         if (items.Count == 0)
             return;

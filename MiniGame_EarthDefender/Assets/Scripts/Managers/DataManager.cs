@@ -3,7 +3,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public struct Rewards
+{
+    public cfg.item.Item rewardItem;
+    public int gainNumber;
+}
 
 public class DataManager : MonoBehaviour
 {
@@ -12,7 +19,7 @@ public class DataManager : MonoBehaviour
     const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
     private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
 
-    public Dictionary<cfg.item.Item, int> rewardList { get; private set; } = new();//奖励列表
+    public List<Rewards> rewardList { get; private set; } = new();//奖励列表
 
     void Awake()
     {
@@ -167,8 +174,8 @@ public class DataManager : MonoBehaviour
         var nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
 
-        //加入临时的奖励列表，以便恭喜获得
-        rewardList.Add(item, count);
+        // //加入临时的奖励列表，以便恭喜获得
+        // rewardList.Add(new Rewards() { rewardItem = item, gainNumber = count });
 
         //刷新顶栏
         RefreshTopPLPanel(item.Id);
@@ -216,9 +223,12 @@ public class DataManager : MonoBehaviour
             return false;
         }
 
+        //记录道具每一次使用的产出
+        Dictionary<cfg.item.Item, int> sessionRewards = new();
         //使用道具
         for (int i = 1; i <= _useNum; i++)
         {
+            sessionRewards.Clear();
             //扣除道具(获得奖励后再扣除?)
             if (CheckOrCostResource(_item, 1, true))
             {
@@ -237,10 +247,11 @@ public class DataManager : MonoBehaviour
                     {
                         case cfg.Enums.Com.ResourceType.ITEM:
                             GainResource(_item, draw.Number);
+                            sessionRewards.Add(_item, draw.Number);
                             break;
                         case cfg.Enums.Com.ResourceType.DROP:
                             var _drop = cfg.Tables.tb.Drop.Get(draw.Id);
-                            DropSystem.LetsDrop(_drop, draw.Number);
+                            DropSystem.LetsDrop(_drop, draw.Number, ref sessionRewards);
                             break;
                         default:
                             Debug.LogError("报错了");
@@ -248,6 +259,12 @@ public class DataManager : MonoBehaviour
                     }
                 }
             }
+
+            foreach (var reward in sessionRewards)
+            {
+                rewardList.Add(new Rewards() { rewardItem = reward.Key, gainNumber = reward.Value });
+            }
+
         }
 
         return true;
