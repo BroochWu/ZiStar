@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c8a616be9e3b2164ba5a8fa5e99e956b
+guid: 2f0a5ac888b71f84d9ca4dcf66ea1289
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6371662170502007185
-    second: earth_weapon_show_0
+      213: 638502029035555543
+    second: dec_3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: earth_weapon_show_0
+      name: dec_3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 182
-        height: 108
+        width: 750
+        height: 340
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f66fe62b30f4397a0800000000000000
-      internalID: -6371662170502007185
+      spriteID: 7dac705663a6cd800800000000000000
+      internalID: 638502029035555543
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      earth_weapon_show_0: -6371662170502007185
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

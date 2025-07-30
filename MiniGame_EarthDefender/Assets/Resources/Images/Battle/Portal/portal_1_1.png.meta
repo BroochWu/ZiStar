@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: c8a616be9e3b2164ba5a8fa5e99e956b
+guid: af5f008836006a24c85eb4ee2a64f74c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6371662170502007185
-    second: earth_weapon_show_0
+      213: 5087336048065832557
+    second: portal_1_1_0
+  - first:
+      213: -737730519004668126
+    second: portal_1_1_1
+  - first:
+      213: -5248870519802108350
+    second: portal_1_1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +54,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: earth_weapon_show_0
+      name: portal_1_1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 182
-        height: 108
+        y: 45
+        width: 97
+        height: 119
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f66fe62b30f4397a0800000000000000
-      internalID: -6371662170502007185
+      spriteID: d66e00e8e29d99640800000000000000
+      internalID: 5087336048065832557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_1_1_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 337
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22f13ca600e03c5f0800000000000000
+      internalID: -737730519004668126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_1_1_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 34
+        width: 356
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 246ec2b62144827b0800000000000000
+      internalID: -5248870519802108350
       vertices: []
       indices: 
       edges: []
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      earth_weapon_show_0: -6371662170502007185
+      portal_1_1_0: 5087336048065832557
+      portal_1_1_1: -737730519004668126
+      portal_1_1_2: -5248870519802108350
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
