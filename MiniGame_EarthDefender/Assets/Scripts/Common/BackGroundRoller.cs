@@ -47,7 +47,7 @@ public class BackGroundRoller : MonoBehaviour
         transform.localScale = Vector3.one * randomScale;
 
         //随机位置
-        initPos = new Vector3(Random.Range(0, 1) > 0.5f ? 20 : -20, 0, 0);
+        initPos = new Vector3(Random.Range(0, 1) > 0.5f ? 20 : -20, Random.Range(-10, 0), 0);
         transform.position = initPos;
 
         //随机自转角度
