@@ -257,8 +257,6 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
         List<GameObject> tempList = new();
-        //Warm将在0.5秒内结束
-        int wait = 500 / count;
         for (int i = 0; i < count; i++)
         {
 

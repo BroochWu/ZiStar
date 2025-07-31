@@ -297,7 +297,7 @@ public class BattleManager : MonoBehaviour
         if (activePortals.Contains(portal))
         {
             activePortals.Remove(portal);
-            portal.gameObject.SetActive(false);
+            portal.GetComponent<Animator>().Play("PortalDisappear");
         }
     }
 

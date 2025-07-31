@@ -30,7 +30,6 @@ public class BackGroundRoller : MonoBehaviour
     const float MULTI_SPEED = 0.1f;
     const float RANDOM_SCALE_RANGE_MIN = 0.5f;//随机缩放最小值
     const float RANDOM_SCALE_RANGE_MAX = 1f;//随机缩放最大值
-    const float MOVE_TIME = 30f;//移动时间
     float randomScale;
     Quaternion randomRotate;
     Vector3 initPos;
@@ -47,8 +46,10 @@ public class BackGroundRoller : MonoBehaviour
         transform.localScale = Vector3.one * randomScale;
 
         //随机位置
-        initPos = new Vector3(Random.Range(0, 1) > 0.5f ? 20 : -20, Random.Range(-10, 0), 0);
+        initPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0f, 1f) > 0.5f ? 1.1f : -0.1f, Random.Range(0.4f, 0.6f)));
+        initPos.z = 0;
         transform.position = initPos;
+        Debug.Log($"ip:{initPos},tp:{transform.position}");
 
         //随机自转角度
         randomRotate = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
@@ -61,11 +62,11 @@ public class BackGroundRoller : MonoBehaviour
 
     IEnumerator Moving()
     {
-        var releaseTime = 0f;
-        var multi = new Vector3(MULTI_SPEED * initPos.x > 0 ? -1 : 1, 0, 0);
-        while (releaseTime <= MOVE_TIME)
+        var multi = new Vector3(MULTI_SPEED * (initPos.x > 0 ? -1 : 1), 0, 0);
+        while (
+            (transform.position.x <= Camera.main.ViewportToWorldPoint(new Vector2(1.4f, 0.5f)).x)
+            && (transform.position.x >= Camera.main.ViewportToWorldPoint(new Vector2(-0.4f, 0.5f)).x))
         {
-            releaseTime += Time.deltaTime;
             transform.position += multi * Time.deltaTime;
             yield return null;
         }
