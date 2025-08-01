@@ -273,6 +273,7 @@ public class BattleManager : MonoBehaviour
 
         currentEarthHp = CalDamage(_damage, currentEarthHp);
         UIManager.Instance.battleLayer.RefreshEarthHp();
+        UIManager.Instance.backbattleLayer.GrilleHit();
         if (currentEarthHp <= 0)
         {
             battleLoseReason = BattleLoseReason.NORMAL;

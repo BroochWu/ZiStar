@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     [Header("=====各个基础层=====")]
     public BattleUI battleLayer;
+    public BackBattleUI backbattleLayer;
     public MainUI mainLayer;
     public DevelopUI developLayer;
     public WeaponsUI weaponsLayer;

@@ -201,7 +201,7 @@ public class DataManager : MonoBehaviour
         {
             var newValue = nowHas - count;
             PlayerPrefs.SetInt($"item_{item.Id}", newValue);
-            Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+            //Debug.Log($"{item.TextName} 剩余数量 {newValue}");
         }
 
         RefreshTopPLPanel(item.Id);

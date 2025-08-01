@@ -1,25 +1,53 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackBattleUI : MonoBehaviour
 {
+
+    // private static BackBattleUI _instance;
+    // public static BackBattleUI Instance => _instance ??= new BackBattleUI();
+
+    public Animator grilleAnim;
+    public GameObject grille;
     public GameObject grilleMask;
-    Vector3 initScale = new Vector3(400, 400, 400);
-    void Awake()
+
+    Coroutine grilleHit;
+
+
+
+    /// <summary>
+    /// 外部调用-受击变红
+    /// </summary>
+    public void GrilleHit()
     {
-        grilleMask.transform.localScale = initScale;
-    }
-    void Start()
-    {
-        StartCoroutine(ScaleMask());
+        // if (grilleHit != null) StopCoroutine(grilleHit);
+        // grilleHit = StartCoroutine(CorGrilleHit());
+        grilleAnim.Play("GrilleHit");
     }
 
-    IEnumerator ScaleMask()
+    /// <summary>
+    /// 受击变红
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator CorGrilleHit()
     {
-        while (grilleMask.transform.localScale.x > 0.5f)
+        var elapsedTime = 0f;
+        while (elapsedTime <= 0.2f)
         {
-            grilleMask.transform.localScale -= Vector3.one * Time.deltaTime * 300f;
+            elapsedTime += Time.deltaTime;
+            grille.GetComponent<RawImage>().color = Color.Lerp(Color.white, Color.red, 0.2f);
+            yield return null;
+        }
+        elapsedTime = 0;
+        while (elapsedTime <= 0.2f)
+        {
+            elapsedTime += Time.deltaTime;
+            grille.GetComponent<RawImage>().color = Color.Lerp(Color.red, Color.white, 0.2f);
             yield return null;
         }
     }
+
+
+
 }
