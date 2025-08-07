@@ -77,7 +77,6 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent.isReleased) return;
 
-        bulletComponent.isReleased = true;
         string bulletType = bulletComponent.bulletType;
         // if (bulletPools.ContainsKey(bulletType))
         // {
@@ -432,6 +431,7 @@ public class ObjectPoolManager : MonoBehaviour
     private void OnReleaseBullet(GameObject bullet)
     {
         bullet.SetActive(false);
+        bullet.GetComponent<Bullet>().isReleased = true;
         bullet.transform.position = Vector3.zero;
     }
 
@@ -453,7 +453,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     }
 
-    // 从池中获取时的操作（特效）
+    // 从池中移除时的操作（特效）
     private void OnReleaseVFX(GameObject obj)
     {
         obj.SetActive(false);
@@ -470,6 +470,33 @@ public class ObjectPoolManager : MonoBehaviour
         if (enemyComponent != null)
         {
             enemyComponent.hpBar.SetActive(false);
+        }
+    }
+
+
+
+    /// <summary>
+    /// 重置
+    /// </summary>
+    public void Reset()
+    {
+        // 清理子弹池
+        foreach (var pool in bulletPools.Values)
+        {
+            pool.Clear();
+        }
+        bulletPools.Clear();
+
+        // 清理特效池
+        foreach (var pool in vfxPools.Values)
+        {
+            pool.Clear();
+        }
+        vfxPools.Clear();
+
+        foreach (var enemy in BattleManager.Instance.activeEnemys)
+        {
+            ReleaseEnemy(enemy);
         }
     }
 

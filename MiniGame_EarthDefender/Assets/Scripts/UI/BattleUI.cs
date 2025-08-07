@@ -105,6 +105,12 @@ public class BattleUI : MonoBehaviour
     {
         Debug.Log("BackToMain");
         GameManager.Instance.SwitchGameStateToMainView();
+
+        //删除所有特效字体
+        foreach (Transform dtx in damageTextsContainer)
+        {
+            Destroy(dtx.gameObject);
+        }
     }
 
 

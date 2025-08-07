@@ -63,7 +63,8 @@ public class TreasureChest : MonoBehaviour
 
     public void UseChest()
     {
-        var _useNum = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 1, 20);
+        var _useNum = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 0, 20);
+        Debug.Log("useNum：" + _useNum);
         if (_useNum == 0)
         {
             UIManager.Instance.CommonToast("？这不是啥也没有吗");
@@ -76,6 +77,8 @@ public class TreasureChest : MonoBehaviour
 
         DataManager.Instance.rewardList.Clear();
         // var wait = new WaitForSecondsRealtime(0.02f);
+
+        //后面可能要改，反复跨脚本调用
         //使用道具
         for (int i = 1; i <= _useNum; i++)
         {
@@ -94,7 +97,7 @@ public class TreasureChest : MonoBehaviour
         .ToList();
 
         UIManager.Instance.CommonCongra(sortedDict);
-        
+
         GetComponentInParent<TreasureDetailUI>().RefreshAll();
 
     }

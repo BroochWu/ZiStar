@@ -50,7 +50,7 @@ public class BattleManager : MonoBehaviour
     public int currentLv;//玩家当前等级
     public int globalDamageMultiInOneBattle;//当前所有武器的总伤害
     List<Portal> activePortals = new();//活跃的传送门
-    List<Enemy> activeEnemys = new();//活跃的敌人
+    public List<Enemy> activeEnemys = new();//活跃的敌人
     public int activeEnemysCount { get { return activeEnemys.Count; } }
 
 
@@ -77,16 +77,19 @@ public class BattleManager : MonoBehaviour
 
         if (PortalPrefab == null) PortalPrefab = Resources.Load<GameObject>("Prefabs/Portals/Portal");
 
-        BattleObjectsPath = new GameObject("BattleObjects").transform;
+        if (BattleObjectsPath == null)
+        {
+            BattleObjectsPath = new GameObject("BattleObjects").transform;
 
-        PortalsPath = new GameObject("Portals").transform;
-        PortalsPath.SetParent(BattleObjectsPath);
+            PortalsPath = new GameObject("Portals").transform;
+            PortalsPath.SetParent(BattleObjectsPath);
 
-        BulletsPath = new GameObject("Bullets").transform;
-        BulletsPath.SetParent(BattleObjectsPath);
+            BulletsPath = new GameObject("Bullets").transform;
+            BulletsPath.SetParent(BattleObjectsPath);
 
-        EnemyPath = new GameObject("Enemys").transform;
-        EnemyPath.SetParent(BattleObjectsPath);
+            EnemyPath = new GameObject("Enemys").transform;
+            EnemyPath.SetParent(BattleObjectsPath);
+        }
 
         globalDamageMultiInOneBattle = 0;
 
@@ -180,11 +183,32 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void ResetDungeon()
     {
-        if (BattleObjectsPath != null) Destroy(BattleObjectsPath.gameObject);
 
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
-        ObjectPoolManager.Instance.ClearAllPools();
+
+        //移除所有传送门
+        var tempList = new List<Portal>();
+        tempList.AddRange(activePortals);
+        foreach (var portal in tempList)
+        {
+            UnregisterPortal(portal);
+        }
+
+        if (BulletsPath != null)
+        {
+            Destroy(BulletsPath.gameObject);
+            BulletsPath = new GameObject("Bullets").transform;
+            BulletsPath.SetParent(BattleObjectsPath);
+        }
+
+
+        //重置战斗对象池
+        ObjectPoolManager.Instance.Reset();
+
+
+        //if (BattleObjectsPath != null) Destroy(BattleObjectsPath.gameObject);
+        //ObjectPoolManager.Instance.ClearAllPools();
         Player.instance.rotationTarget.transform.rotation = quaternion.identity;
     }
 
