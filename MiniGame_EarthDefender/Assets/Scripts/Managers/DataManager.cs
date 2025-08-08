@@ -193,7 +193,7 @@ public class DataManager : MonoBehaviour
         var nowHas = GetResourceCount(item);
         if (count > nowHas)
         {
-            UIManager.Instance.CommonToast("消耗大于剩余量，资源消耗失败！");
+            UIManager.Instance.CommonToast("数量不足，使用失败！");
             return false;
         }
 
@@ -207,6 +207,8 @@ public class DataManager : MonoBehaviour
         RefreshTopPLPanel(item.Id);
         return true;
     }
+
+
 
 
     /// <summary>

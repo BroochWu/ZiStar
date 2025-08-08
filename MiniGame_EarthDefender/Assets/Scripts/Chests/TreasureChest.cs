@@ -80,15 +80,19 @@ public class TreasureChest : MonoBehaviour
 
         //后面可能要改，反复跨脚本调用
         //使用道具
-        for (int i = 1; i <= _useNum; i++)
-        {
-            if (DataManager.Instance.UseItemInItemStruct(item, 1))
-            {
-                Debug.Log($"使用了{itemId}");
-            }
-            // yield return wait;
-        }
+        // for (int i = 1; i <= _useNum; i++)
+        // {
+        //     if (DataManager.Instance.UseItemInItemStruct(item, 1))
+        //     {
+        //         Debug.Log($"使用了{itemId}");
+        //     }
+        //     // yield return wait;
+        // }
 
+        //使用宝箱
+        DataManager.Instance.UseItemInItemStruct(item, _useNum);
+
+        //增加宝箱积分
         ChestsRewardSystem.PlusChestScore(score * _useNum);
 
         var sortedDict =

@@ -21,7 +21,7 @@ namespace cfg.weapon
             }
         }
 
-        public CellState weaponState
+        public CellState weaponState //武器当前是否解锁
         {
             get
             {
@@ -31,7 +31,7 @@ namespace cfg.weapon
 
             }
         }
-        public Dictionary<item.Item, int> levelUpConsumes
+        public Dictionary<item.Item, int> levelUpConsumes //武器升级消耗
         {
             get
             {
@@ -220,6 +220,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 本次作战增加伤害加成倍率
+    /// </summary>
+    /// <param name="number"></param>
     public void PlusLocalDamageMultiInOneBattle(int number)
     {
         localDamageMultiInOneBattle += number;
@@ -227,10 +231,19 @@ public class Weapon : MonoBehaviour
         GetAndSetWeaponAttack();
     }
 
+    /// <summary>
+    /// 增加武器行数
+    /// </summary>
+    /// <param name="num"></param>
     public void PlusRowCount(int num)
     {
         rowCount += num;
     }
+
+    /// <summary>
+    /// 增加武器列数
+    /// </summary>
+    /// <param name="num"></param>
     public void PlusColumnCount(int num)
     {
         columnCount += num;

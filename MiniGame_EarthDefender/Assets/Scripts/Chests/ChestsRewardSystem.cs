@@ -9,7 +9,7 @@ public static class ChestsRewardSystem
     public const string PLAYERPREFS_KEY_CHEST_SCORE_COUNT = "rewardchest_current_score";
     public const string PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT = "rewardchest_score_next_sort";
 
-    public const int PENDING_TIME = 1;//投放间隔（秒、9分钟）
+    public const int PENDING_TIME = 540;//投放间隔（秒、9分钟）
     public const int MAX_CHESTS = 20;//最多积累多少个箱子
 
 
@@ -91,7 +91,11 @@ public static class ChestsRewardSystem
     {
         var greenChest = cfg.Tables.tb.Item.Get(3001);
 
-        if (nowRemainChests <= 0) return;
+        if (nowRemainChests <= 0)
+        {
+            UIManager.Instance.CommonToast("宝箱还未产出~请耐心等待！");
+            return;
+        }
 
         // Dictionary<cfg.item.Item, int> items = new()
         // {
@@ -135,6 +139,9 @@ public static class ChestsRewardSystem
         currentChestScore += score;
     }
 
+    /// <summary>
+    /// 消耗积分获得箱子
+    /// </summary>
     public static void UseChestScore()
     {
         if (currentChestScore < nextChest.Score)
@@ -143,15 +150,23 @@ public static class ChestsRewardSystem
             return;
         }
 
+        //扣除积分
         currentChestScore -= nextChest.Score;
+
+        //获得道具
+        var next = nextChest.Reward_Ref;
+        DataManager.Instance.GainResource(next, 1);//暂时固定一次领1个，回头我看看指尖无双的
+
+        //显示恭喜获得
         DataManager.Instance.rewardList.Clear();
-        DataManager.Instance.GainResource(nextChest.Reward_Ref, 1);//暂时固定一次领1个，回头我看看指尖无双的
+        DataManager.Instance.rewardList.Add(new Rewards() { rewardItem = next, gainNumber = 1 });
         UIManager.Instance.CommonCongra(DataManager.Instance.rewardList);
 
+        //标记移动新的下一档
         PlayerPrefs.SetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT
         , (PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT) + 1) % cfg.Tables.tb.ChestLoop.DataList.Count);
 
-        Debug.Log($"下一个宝箱位次：{PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)}");
+        // Debug.Log($"下一个宝箱位次：{PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)}");
     }
 
 
