@@ -5,10 +5,20 @@ using UnityEngine.UI;
 //每一个武器格子的UI
 public class WeaponCellUI : MonoBehaviour
 {
-
+    private static bool isNext = false;
     private cfg.weapon.Weapon weapon;
     public GameObject empty;
+    [Header("=====锁定的内容=====")]
     public GameObject lockUI;
+    public Image lockBg;
+    public Text lockText;
+    public Image lockImg;
+
+
+    public Sprite lockImgRes1;
+    public Sprite lockImgRes2;
+
+    public Text weaponLevelText;
     public Image iconBg;
     public Text nameText;
     private int id;
@@ -40,7 +50,35 @@ public class WeaponCellUI : MonoBehaviour
         nameText.text = weaponName;
 
         //未解锁时显示未解锁UI
-        lockUI.SetActive(weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK);
+        if (weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
+        {
+            weaponLevelText.gameObject.SetActive(false);
+
+            if (isNext == false)
+            {
+                //下一个要解锁的
+                //只能看到未解锁的武器中，下一个的名称和解锁条件
+                lockText.text = $"通过\n<size=40> 第{weapon.UnlockCond.IntParams[0]}关 </size>";
+                lockUI.SetActive(true);
+                lockImg.sprite = lockImgRes2;
+                isNext = true;
+            }
+            else
+            {
+                //否则全黑
+                lockBg.color = Color.black;
+                lockImg.sprite = lockImgRes1;
+                nameText.gameObject.SetActive(false);
+                lockText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            weaponLevelText.text = $"等级 {weapon.currentLevel}";
+            weaponLevelText.gameObject.SetActive(true);
+            lockUI.SetActive(false);
+        }
+
 
         SetQualityUI();
 
@@ -86,8 +124,11 @@ public class WeaponCellUI : MonoBehaviour
         }
         else if (weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
         {
-            string colorStr = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
-            UIManager.Instance.CommonToast($"通过第<color={colorStr}>【{weapon.UnlockCond.IntParams[0]}】</color>关可解锁 <color={colorStr}>【{weaponName}】</color>");
+            string toastStr;
+            Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.IntParams, out toastStr);
+            UIManager.Instance.CommonToast(toastStr);
+            // string colorStr = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
+            //UIManager.Instance.CommonToast($"通过第<color={colorStr}>【{weapon.UnlockCond.IntParams[0]}】</color>关可解锁 <color={colorStr}>【{weaponName}】</color>");
         }
 
     }

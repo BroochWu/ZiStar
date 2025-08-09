@@ -28,14 +28,23 @@ public class WeaponsUI : MonoBehaviour
         // 已解锁>未解锁
         // 稀有度降序
         // id降序
-        var sortedWeapons = config.DataList
-        .OrderBy(weapon => weapon.weaponState)
-        .ThenByDescending(weapon => weapon.InitQuality)
-        .ThenByDescending(weapon => weapon.Id)
-        .ToList();
+        // var sortedWeapons = config.DataList
+        // .OrderBy(weapon => weapon.weaponState)
+        // .ThenByDescending(weapon => weapon.InitQuality)
+        // .ThenByDescending(weapon => weapon.Id)
+        // .ToList();
 
+        //新排序如下：
+        //已解锁>未解锁
+        //未解锁按照配表顺序
+        //已解锁按照稀有度降序
+        var unlockedWeapons = config.DataList.Where(weapon => weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
+        .OrderByDescending(weapon => weapon.InitQuality);
 
+        var lockedWeapons = config.DataList.Where(weapon => weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
+        .OrderBy(weapon => weapon.Id);
 
+        var sortedWeapons = unlockedWeapons.Concat(lockedWeapons);
         //装备列表
         // //未避免反复销毁生成，这里先遍历现有的组件
         // //如果<=列表数，则直接在现有的上面改
