@@ -41,8 +41,11 @@ public class WeaponsUI : MonoBehaviour
         var unlockedWeapons = config.DataList.Where(weapon => weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
         .OrderByDescending(weapon => weapon.InitQuality);
 
-        var lockedWeapons = config.DataList.Where(weapon => weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
-        .OrderBy(weapon => weapon.Id);
+
+
+        var lockedWeapons = config.DataList.Where(weapon => weapon.weaponState >= cfg.weapon.Weapon.CellState.LOCK)
+        .OrderByDescending(weapon => weapon.weaponState)
+        .ThenBy(weapon => weapon.Id);
 
         var sortedWeapons = unlockedWeapons.Concat(lockedWeapons);
         //装备列表

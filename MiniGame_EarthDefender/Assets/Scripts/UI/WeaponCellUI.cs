@@ -56,6 +56,7 @@ public class WeaponCellUI : MonoBehaviour
 
         nameText.text = weaponName;
 
+        Debug.Log("weaponstate:" + weapon.Id + "  " + weapon.weaponState);
         //判断格子状态
         switch (weapon.weaponState)
         {
@@ -75,6 +76,7 @@ public class WeaponCellUI : MonoBehaviour
                 //即将解锁
                 //下一个要解锁的
                 //只能看到未解锁的武器中，下一个的名称和解锁条件
+                Debug.Log("this is next unlock  " + weapon.Id);
 
                 weaponLevelText.gameObject.SetActive(false);
                 weaponPieceObj.SetActive(false);
@@ -175,18 +177,22 @@ public class WeaponCellUI : MonoBehaviour
         }
         Debug.Log(str);
 
-        if (weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
+
+
+        switch (weapon.weaponState)
         {
-            Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
-            .GetComponent<WeaponDetailInfo>().Initialize(weapon);
-        }
-        else if (weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
-        {
-            string toastStr;
-            Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.IntParams, out toastStr);
-            UIManager.Instance.CommonToast(toastStr);
-            // string colorStr = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
-            //UIManager.Instance.CommonToast($"通过第<color={colorStr}>【{weapon.UnlockCond.IntParams[0]}】</color>关可解锁 <color={colorStr}>【{weaponName}】</color>");
+            case cfg.weapon.Weapon.CellState.NORMAL:
+
+                Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
+                .GetComponent<WeaponDetailInfo>().Initialize(weapon);
+                break;
+            case cfg.weapon.Weapon.CellState.LOCK:
+            case cfg.weapon.Weapon.CellState.NEXTUNLOCK:
+                string toastStr;
+                Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.IntParams, out toastStr);
+                UIManager.Instance.CommonToast(toastStr);
+                break;
+
         }
 
     }

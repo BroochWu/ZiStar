@@ -113,11 +113,12 @@ public class TriCard
         if (!TriCardEffect.TakeEffect(card))
         {
             Debug.LogError("生效失败！");
-            return;
+        }
+        else
+        {
+            MinusCardDrawCount(card);
         }
 
-
-        MinusCardDrawCount(card);
         BattleManager.Instance.EndTri();
     }
 
