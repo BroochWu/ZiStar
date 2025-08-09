@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+//每一个武器格子的UI
 public class WeaponCellUI : MonoBehaviour
 {
 
@@ -38,6 +39,7 @@ public class WeaponCellUI : MonoBehaviour
 
         nameText.text = weaponName;
 
+        //未解锁时显示未解锁UI
         lockUI.SetActive(weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK);
 
         SetQualityUI();
@@ -76,7 +78,7 @@ public class WeaponCellUI : MonoBehaviour
             str += a.ToString();
         }
         Debug.Log(str);
-        
+
         if (weapon.weaponState == cfg.weapon.Weapon.CellState.NORMAL)
         {
             Instantiate(UIManager.Instance.weaponsLayer.WeaponDetailInfoPrefab, UIManager.Instance.dynamicContainer)
@@ -84,7 +86,8 @@ public class WeaponCellUI : MonoBehaviour
         }
         else if (weapon.weaponState == cfg.weapon.Weapon.CellState.LOCK)
         {
-            UIManager.Instance.CommonToast($"<color={cfg.Tables.tb.Color.Get(1).ColorDarkbg}>【{weaponName}】</color>未解锁，收集碎片以解锁武器");
+            string colorStr = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
+            UIManager.Instance.CommonToast($"通过第<color={colorStr}>【{weapon.UnlockCond.IntParams[0]}】</color>关可解锁 <color={colorStr}>【{weaponName}】</color>");
         }
 
     }

@@ -25,7 +25,7 @@ namespace cfg.weapon
         {
             get
             {
-                if (DataManager.Instance.GetWeaponLevel(Id) <= 0)
+                if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.IntParams))
                     return CellState.LOCK;
                 return CellState.NORMAL;
 

@@ -203,4 +203,26 @@ public static class Utility
         Debug.LogError("这是什么解锁条件？");
         return false;
     }
+    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<int> _intParams, out string _lockStr)
+    {
+        _lockStr = "";
+        switch (condType)
+        {
+            case cfg.Enums.Com.CondType.NULL:
+                return true;
+            case cfg.Enums.Com.CondType.WEAPONUNLOCK:
+                _lockStr = $"需要穿戴武器{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName}！";
+                return DataManager.Instance.IsWeaponEquipped(_intParams[0]) >= 0;
+            case cfg.Enums.Com.CondType.WEAPONLEVEL:
+                _lockStr = $"{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName} 等级需要达到 {_intParams[1]}！";
+                return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];
+            case cfg.Enums.Com.CondType.DUNGEON_PASS:
+                _lockStr = $"请先通过第 {_intParams[0]} 关！";
+                return DataManager.Instance.dungeonPassedLevel >= _intParams[0];
+        }
+        Debug.LogError("这是什么解锁条件？");
+        return false;
+    }
+
+
 }
