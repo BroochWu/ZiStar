@@ -56,7 +56,7 @@ public class WeaponCellUI : MonoBehaviour
 
         nameText.text = weaponName;
 
-        //未解锁时显示未解锁UI
+        //判断格子状态
         switch (weapon.weaponState)
         {
             case cfg.weapon.Weapon.CellState.LOCK:

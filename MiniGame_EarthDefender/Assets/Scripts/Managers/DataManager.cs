@@ -34,26 +34,7 @@ public class DataManager : MonoBehaviour
     }
     public int nextUnlockDungeonPassedWeapon //下一个用已通关关卡解锁的主线武器
     {
-        get
-        {
-            foreach (var a in cfg.Tables.tb.Weapon.DataList)
-            {
-                var unlock = a.UnlockCond;
-                if (unlock.CondType == cfg.Enums.Com.CondType.DUNGEON_PASS)
-                {
-                    if (dungeonPassedLevel >= unlock.IntParams[0])
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        return a.Id;
-                    }
-                }
-            }
-            //如果全都已解锁，就是不存在下一个已解锁的武器
-            return -1;
-        }
+        get; private set;
     }
 
 
@@ -439,6 +420,31 @@ public class DataManager : MonoBehaviour
             ChestsRewardSystem.SetChestRewardsOnLoad(last, current);
         }
         PlayerPrefs.SetString(PLAYERPREFS_KEY_LAST_LOAD_TIME, current.ToString());
+    }
+
+
+
+    public void RefreshNextUnlockDungeonPassedWeapon()
+    {
+
+        foreach (var a in cfg.Tables.tb.Weapon.DataList)
+        {
+            var unlock = a.UnlockCond;
+            if (unlock.CondType == cfg.Enums.Com.CondType.DUNGEON_PASS)
+            {
+                if (dungeonPassedLevel >= unlock.IntParams[0])
+                {
+                    continue;
+                }
+                else
+                {
+                    nextUnlockDungeonPassedWeapon = a.Id;
+                    return;
+                }
+            }
+        }
+        //如果全都已解锁，就是不存在下一个已解锁的武器
+        nextUnlockDungeonPassedWeapon = -1;
     }
 
 }

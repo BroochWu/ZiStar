@@ -29,7 +29,10 @@ namespace cfg.weapon
                 if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.IntParams))
                 {
                     if (Id == DataManager.Instance.nextUnlockDungeonPassedWeapon)
+                    {
+                        Debug.Log("下一个要解锁的是：" + Id);
                         return CellState.NEXTUNLOCK;
+                    }
                     else
                         return CellState.LOCK;
                 }

@@ -76,7 +76,9 @@ public class WeaponsUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        
+
+        //更新下一个要解锁的武器
+        DataManager.Instance.RefreshNextUnlockDungeonPassedWeapon();
         foreach (var i in sortedWeapons)
         {
             var weaponCell = Instantiate(WeaponPrefab, weaponsListContainer);
