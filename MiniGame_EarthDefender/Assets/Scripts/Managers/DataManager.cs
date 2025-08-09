@@ -32,6 +32,29 @@ public class DataManager : MonoBehaviour
                 PlayerPrefs.SetInt(PLAYERPREFS_KEY_MAX_DUNGEON, value);
         }
     }
+    public int nextUnlockDungeonPassedWeapon //下一个用已通关关卡解锁的主线武器
+    {
+        get
+        {
+            foreach (var a in cfg.Tables.tb.Weapon.DataList)
+            {
+                var unlock = a.UnlockCond;
+                if (unlock.CondType == cfg.Enums.Com.CondType.DUNGEON_PASS)
+                {
+                    if (dungeonPassedLevel >= unlock.IntParams[0])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return a.Id;
+                    }
+                }
+            }
+            //如果全都已解锁，就是不存在下一个已解锁的武器
+            return -1;
+        }
+    }
 
 
     public List<Rewards> rewardList { get; private set; } = new();//奖励列表

@@ -12,6 +12,7 @@ namespace cfg.weapon
         {
             NORMAL = 1,
             LOCK = 2,//未解锁
+            NEXTUNLOCK = 3 //下一个即将解锁
         }
         public int currentLevel
         {
@@ -26,7 +27,12 @@ namespace cfg.weapon
             get
             {
                 if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.IntParams))
-                    return CellState.LOCK;
+                {
+                    if (Id == DataManager.Instance.nextUnlockDungeonPassedWeapon)
+                        return CellState.NEXTUNLOCK;
+                    else
+                        return CellState.LOCK;
+                }
                 return CellState.NORMAL;
 
             }

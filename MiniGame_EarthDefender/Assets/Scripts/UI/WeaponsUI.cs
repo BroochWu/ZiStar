@@ -76,6 +76,7 @@ public class WeaponsUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        
         foreach (var i in sortedWeapons)
         {
             var weaponCell = Instantiate(WeaponPrefab, weaponsListContainer);
