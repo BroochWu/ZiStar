@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using SimpleJSON;
 using UnityEngine;
@@ -168,11 +169,38 @@ public static class Utility
 
     }
 
+    /// <summary>
+    /// 大数字转换
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns></returns>
     public static string BigNumber(int number)
     {
         string str = number.ToString();
         if (number >= 10000) str = string.Format("{0:0.00}", number / 10000f) + "万";
 
         return str;
+    }
+
+
+    /// <summary>
+    /// 通用条件判断
+    /// </summary>
+    /// <returns></returns>
+    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<int> _intParams)
+    {
+        switch (condType)
+        {
+            case cfg.Enums.Com.CondType.NULL:
+                return true;
+            case cfg.Enums.Com.CondType.WEAPONUNLOCK:
+                return DataManager.Instance.IsWeaponEquipped(_intParams[0]) >= 0;
+            case cfg.Enums.Com.CondType.WEAPONLEVEL:
+                return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];
+            case cfg.Enums.Com.CondType.DUNGEON_PASS:
+                return DataManager.Instance.dungeonPassedLevel >= _intParams[0];
+        }
+        Debug.LogError("这是什么解锁条件？");
+        return false;
     }
 }

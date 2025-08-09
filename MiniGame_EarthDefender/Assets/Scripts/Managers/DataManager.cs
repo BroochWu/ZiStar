@@ -17,7 +17,22 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance;
     public const int EQUIP_SLOT_COUNT = 5;
     const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
+    const string PLAYERPREFS_KEY_MAX_DUNGEON = "dungeon_passed_level";
     private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
+    public int dungeonPassedLevel //已通关的最大等级
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(PLAYERPREFS_KEY_MAX_DUNGEON);
+        }
+        set
+        {
+            //这是最大等级，仅当更大时才记录
+            if (value > PlayerPrefs.GetInt(PLAYERPREFS_KEY_MAX_DUNGEON))
+                PlayerPrefs.SetInt(PLAYERPREFS_KEY_MAX_DUNGEON, value);
+        }
+    }
+
 
     public List<Rewards> rewardList { get; private set; } = new();//奖励列表
 

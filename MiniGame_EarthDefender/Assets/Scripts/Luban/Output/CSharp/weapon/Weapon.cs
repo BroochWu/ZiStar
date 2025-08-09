@@ -19,6 +19,7 @@ public sealed partial class Weapon : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
+        { if(!_buf["unlock_cond"].IsObject) { throw new SerializationException(); }  UnlockCond = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_cond"]);  }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
         { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
@@ -47,6 +48,10 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 武器名称
     /// </summary>
     public readonly string TextName;
+    /// <summary>
+    /// 解锁条件
+    /// </summary>
+    public readonly Beans.Com_UnlockConds UnlockCond;
     /// <summary>
     /// 初始稀有度
     /// </summary>
@@ -102,6 +107,7 @@ public sealed partial class Weapon : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
+        UnlockCond?.ResolveRef(tables);
         Piece_Ref = tables.Item.GetOrDefault(Piece);
     }
 
@@ -110,6 +116,7 @@ public sealed partial class Weapon : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textName:" + TextName + ","
+        + "unlockCond:" + UnlockCond + ","
         + "initQuality:" + InitQuality + ","
         + "bulletPrefab:" + BulletPrefab + ","
         + "piece:" + Piece + ","

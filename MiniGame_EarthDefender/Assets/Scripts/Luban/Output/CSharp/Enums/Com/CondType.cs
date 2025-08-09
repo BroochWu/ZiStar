@@ -28,6 +28,10 @@ namespace cfg.Enums.Com
         /// 武器等级（战斗前）
         /// </summary>
         WEAPONLEVEL = 2,
+        /// <summary>
+        /// 关卡等级
+        /// </summary>
+        DUNGEON_PASS = 3,
     }
 
 } 

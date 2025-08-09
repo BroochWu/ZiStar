@@ -243,7 +243,8 @@ public class BattleManager : MonoBehaviour
         battleState = BattleState.BATTLESUCCESS;
         //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
         AwardDungeon();
-        PlayerPrefs.SetInt("dungeon_passed_level", dungeonId);
+        // PlayerPrefs.SetInt("dungeon_passed_level", dungeonId);
+        DataManager.Instance.dungeonPassedLevel = dungeonId;
 
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
