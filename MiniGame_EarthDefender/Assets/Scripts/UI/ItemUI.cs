@@ -19,6 +19,10 @@ namespace cfg.item
 
 public class ItemUI : MonoBehaviour
 {
+    private cfg.item.Item item;
+
+    public ItemInfoUI prefabItemInfo;
+    [Header("=====内部组件=====")]
     public Text numberText;
     public Image image;
     public Image imageQualityBg;
@@ -31,8 +35,16 @@ public class ItemUI : MonoBehaviour
 
     public void Initialize(cfg.item.Item _item, int number)
     {
+        item = _item;
+
         numberText.text = number.ToString();
         image.sprite = _item.Image;
         imageQualityBg.color = Utility.SetQualityColor(_item.Quality, false);
+    }
+
+    public void OpenItemInfoUI()
+    {
+        Instantiate(prefabItemInfo, UIManager.Instance.dynamicContainer)
+        .Initialize(item);
     }
 }
