@@ -24,7 +24,7 @@
     "quality": 2,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2002,
@@ -33,7 +33,7 @@
     "quality": 2,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2003,
@@ -42,7 +42,7 @@
     "quality": 2,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2004,
@@ -51,7 +51,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2005,
@@ -60,7 +60,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2006,
@@ -69,7 +69,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2007,
@@ -78,7 +78,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2008,
@@ -87,7 +87,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2009,
@@ -96,7 +96,7 @@
     "quality": 3,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2010,
@@ -105,7 +105,7 @@
     "quality": 4,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2011,
@@ -114,7 +114,7 @@
     "quality": 4,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 2012,
@@ -123,7 +123,7 @@
     "quality": 4,
     "item_type": 2,
     "use_change": [],
-    "image_path": "Items/item_gold"
+    "image_path": "UI/Weapon/weapon_piece"
   },
   {
     "id": 3001,
