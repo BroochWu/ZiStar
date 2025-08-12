@@ -7,6 +7,7 @@
       "int_params": []
     },
     "init_quality": 2,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2001,
     "bullet_speed": 6,
@@ -29,6 +30,7 @@
       ]
     },
     "init_quality": 2,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2002,
     "bullet_speed": 10,
@@ -51,6 +53,7 @@
       ]
     },
     "init_quality": 2,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2003,
     "bullet_speed": 10,
@@ -73,6 +76,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2004,
     "bullet_speed": 10,
@@ -95,6 +99,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2005,
     "bullet_speed": 10,
@@ -117,6 +122,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2006,
     "bullet_speed": 10,
@@ -139,6 +145,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2007,
     "bullet_speed": 10,
@@ -161,6 +168,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2008,
     "bullet_speed": 10,
@@ -183,6 +191,7 @@
       ]
     },
     "init_quality": 3,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2009,
     "bullet_speed": 10,
@@ -205,6 +214,7 @@
       ]
     },
     "init_quality": 4,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2010,
     "bullet_speed": 10,
@@ -227,6 +237,7 @@
       ]
     },
     "init_quality": 4,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2011,
     "bullet_speed": 10,
@@ -249,6 +260,7 @@
       ]
     },
     "init_quality": 4,
+    "image_icon_path": "Items/item_gold",
     "bullet_prefab": "Bullet_Player_1",
     "piece": 2012,
     "bullet_speed": 10,

@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2433839742739467180}
+  - component: {fileID: 6596756809923648436}
   m_Layer: 5
   m_Name: NeedConsumes
   m_TagString: Untagged
@@ -116,6 +117,20 @@ RectTransform:
   m_AnchoredPosition: {x: 13.0897, y: 0}
   m_SizeDelta: {x: 178.1997, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6596756809923648436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5722332436254612673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b548a7243f02306468b407f04705afbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageIcon: {fileID: 2586198659282379718}
+  textCurAndNeed: {fileID: 6794534489207097135}
 --- !u!1 &8549863710476922968
 GameObject:
   m_ObjectHideFlags: 0

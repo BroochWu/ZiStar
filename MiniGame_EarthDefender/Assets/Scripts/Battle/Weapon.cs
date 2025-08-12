@@ -14,11 +14,31 @@ namespace cfg.weapon
             LOCK = 2,//未解锁
             NEXTUNLOCK = 3 //下一个即将解锁
         }
-        public int currentLevel
+
+        public Sprite ImageIcon//道具图标
+        {
+            get
+            {
+                return Resources.Load<Sprite>("Images/" + ImageIconPath);
+            }
+        }
+        public int currentLevel//当前等级
         {
             get
             {
                 return DataManager.Instance.GetWeaponLevel(Id);
+            }
+            set
+            {
+                PlayerPrefs.SetInt($"weapon_level_{Id}", value);
+            }
+        }
+
+        public float basicAdditionAtk //基础的武器伤害倍率
+        {
+            get
+            {
+                return currentLevel * 0.05f;
             }
         }
 
@@ -114,12 +134,12 @@ public class Weapon : MonoBehaviour
 
         //伤害加成率 = 武器等级 × 3%
         // var additionValue = cfg.Tables.tb.WeaponLevel.Get(thisWeapon.LevelId, weaponLevel).DamageMulti / 10000f;
-        var additionValue = weaponLevel * 0.05f;
+
 
 
         int final = (int)(
             basicValue *
-            (1 + additionValue
+            (1 + thisWeapon.basicAdditionAtk
             + BattleManager.Instance.globalDamageMultiInOneBattle / 10000f
             + localDamageMultiInOneBattle / 10000f
             )

@@ -182,7 +182,7 @@ public class DataManager : MonoBehaviour
 
 
 
-
+    #region 资源的获取和消耗
     /// <summary>
     /// 获取奖励
     /// </summary>
@@ -332,8 +332,12 @@ public class DataManager : MonoBehaviour
         return PlayerPrefs.GetInt($"item_{itemId}");
     }
 
+    #endregion
+
+    #region 养成相关
 
 
+    #region 地球养成
     /// <summary>
     /// 这里只记具体值
     /// </summary>
@@ -382,6 +386,46 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetInt("playerData_atk_level", newLv);
         return true;
     }
+    #endregion
+
+    #region 武器养成
+
+    public bool TryWeaponLevelUp(cfg.weapon.Weapon _weapon)
+    {
+        //首先判断资源是否满足
+        //如果满足就成功升级并消耗资源（需要注意等都满足了再执行扣除）
+        //否则就返回失败
+        foreach (var consumeKV in _weapon.levelUpConsumes)
+        {
+            if (!CheckOrCostResource(consumeKV.Key, consumeKV.Value, false))
+            {
+                return false;
+            }
+        }
+
+        //资源都满足，开始扣除
+        foreach (var consumeKV in _weapon.levelUpConsumes)
+        {
+            CheckOrCostResource(consumeKV.Key, consumeKV.Value, true);
+        }
+
+        //生效效果
+        WeaponLevelUp(_weapon);
+        return true;
+
+
+    }
+    private void WeaponLevelUp(cfg.weapon.Weapon weapon)
+    {
+        weapon.currentLevel += 1;
+    }
+
+    #endregion
+
+    #endregion
+
+
+    #region  其他数据加载
 
     /// <summary>
     /// 首次加载的内容
@@ -447,4 +491,5 @@ public class DataManager : MonoBehaviour
         nextUnlockDungeonPassedWeapon = -1;
     }
 
+    #endregion
 }
