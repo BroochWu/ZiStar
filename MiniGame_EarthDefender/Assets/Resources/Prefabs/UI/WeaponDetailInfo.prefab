@@ -4306,6 +4306,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9153680126585346835}
     m_Modifications:
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6492772
+      objectReference: {fileID: 0}
+    - target: {fileID: 565389599254081049, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1823475525126213827, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4432,6 +4448,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9153680126585346835}
     m_Modifications:
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 1823475525126213827, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4762,6 +4786,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9153680126585346835}
     m_Modifications:
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1823475525126213827, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4888,6 +4920,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9153680126585346835}
     m_Modifications:
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.g
+      value: 0.14357352
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 565389599254081049, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1823475525126213827, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -5140,6 +5188,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9153680126585346835}
     m_Modifications:
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.g
+      value: 0.64744824
+      objectReference: {fileID: 0}
+    - target: {fileID: 561479245192530580, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1823475525126213827, guid: 2570b9eaac213c24fba54e3c28addaca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
