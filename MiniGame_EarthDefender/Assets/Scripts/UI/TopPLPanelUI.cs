@@ -22,7 +22,6 @@ public class TopPLPanelUI : TopPLPanelGroupUI
 
     void Awake()
     {
-        RefreshChild();
     }
 
     protected override void Start()
@@ -49,6 +48,7 @@ public class TopPLPanelUI : TopPLPanelGroupUI
     // 实现具体刷新逻辑
     public override void RefreshChild()
     {
+        Debug.Log("RefreshTopPanel");
         // 获取当前道具数量并更新UI
         int count = DataManager.Instance.GetResourceCount(_item.Id);
         textCount.text = count.ToString();
@@ -79,6 +79,7 @@ public class TopPLPanelUI : TopPLPanelGroupUI
     // 添加道具数量变化的监听
     private void OnEnable()
     {
+        RefreshChild();
         DataManager.OnItemCountChanged += OnItemCountChanged;
     }
 
