@@ -12,9 +12,6 @@ public class DevelopUI : MonoBehaviour
     public Text hpLevelUpCostText;
     public Image hpLevelUpCostImg;
 
-    private int nowHpLevel;
-    private int nowAtkLevel;
-
     public void Initialize()
     {
         RefreshAll();
@@ -29,66 +26,46 @@ public class DevelopUI : MonoBehaviour
 
     void RefreshPlayerAtk()
     {
-        //当前等级
-        nowAtkLevel = PlayerPrefs.GetInt("playerData_atk_level");
         //消耗资源
-        RefreshAtkResCost(false);
+        RefreshAtkResCost();
         //数据
-        atkLevelText.text = $"等级：{nowAtkLevel}";
+        atkLevelText.text = $"等级：{DataManager.Instance.nowAtkLevel}";
         atkValueText.text = DataManager.Instance.GetPlayerBasicAtk().ToString();
 
     }
     void RefreshPlayerHp()
     {
-        nowHpLevel = PlayerPrefs.GetInt("playerData_hp_level");
-        RefreshHpResCost(false);
-        hpLevelText.text = $"等级：{nowHpLevel}";
+        RefreshHpResCost();
+        hpLevelText.text = $"等级：{DataManager.Instance.nowHpLevel}";
         hpValueText.text = DataManager.Instance.GetPlayerBasicHp().ToString();
 
     }
 
     public void TryLevelUpAtk()
     {
-        nowAtkLevel = PlayerPrefs.GetInt("playerData_atk_level");
-        RefreshAtkResCost(true);
-        RefreshPlayerAtk();
+        //尝试升级，成功后刷新UI
+        if (DataManager.Instance.PLBasicAtkLevelUp(DataManager.Instance.nowAtkLevel + 1))
+        {
+            RefreshAll();
+        }
 
     }
     public void TryLevelUpHp()
     {
-        nowHpLevel = PlayerPrefs.GetInt("playerData_hp_level");
-        RefreshHpResCost(true);
-        RefreshPlayerHp();
+        //尝试升级，成功后刷新UI
+        if (DataManager.Instance.PLBasicHpLevelUp(DataManager.Instance.nowHpLevel + 1))
+        {
+            RefreshAll();
+        }
 
     }
 
-    void RefreshAtkResCost(bool cost)
+    void RefreshAtkResCost()
     {
-        var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowAtkLevel).BasicAtk.ItemRequire;
+        var item = cfg.Tables.tb.PlayerAttrLevel.Get(DataManager.Instance.nowAtkLevel).BasicAtk.ItemRequire;
         atkLevelUpCostImg.sprite = item.Id_Ref.Image;
-        //需要消耗资源，并且成功升级了
-        var isRed = true;
-        // nowAtkLevel += 1;
-        if (DataManager.Instance.CheckOrSetPLBasicAtkLevel(nowAtkLevel + 1, false))
-        {
-            if (DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, false))
-            {
-                isRed = false;
-                if (cost)
-                {
-                    DataManager.Instance.CheckOrSetPLBasicAtkLevel(nowAtkLevel + 1, true);
-                    DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, true);
-                }
-            }
-            else
-            {
-                if (cost) UIManager.Instance.CommonToast("资源不足！");
-            }
-        }
-        else
-        {
-            if (cost) UIManager.Instance.CommonToast("已满级！");
-        }
+
+        var isRed = !DataManager.Instance.CheckRes(item.Id_Ref, item.Number);
 
         SetRequireResText(
             atkLevelUpCostText,
@@ -96,34 +73,14 @@ public class DevelopUI : MonoBehaviour
             DataManager.Instance.GetResourceCount(item.Id_Ref),
             isRed);
     }
-    void RefreshHpResCost(bool cost)
+
+
+    void RefreshHpResCost()
     {
-        var item = cfg.Tables.tb.PlayerAttrLevel.Get(nowHpLevel).BasicHp.ItemRequire;
+        var item = cfg.Tables.tb.PlayerAttrLevel.Get(DataManager.Instance.nowHpLevel).BasicHp.ItemRequire;
         hpLevelUpCostImg.sprite = item.Id_Ref.Image;
-        var isRed = true;
 
-        //需要消耗资源、未满级、资源足够，则消耗资源并成功升级
-        if (DataManager.Instance.CheckOrSetPLBasicHpLevel(nowHpLevel + 1, false))
-        {
-            if (DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, false))
-            {
-                isRed = false;
-                if (cost)
-                {
-                    DataManager.Instance.CheckOrSetPLBasicHpLevel(nowHpLevel + 1, true);
-                    DataManager.Instance.CheckOrCostResource(item.Id_Ref, item.Number, true);
-
-                }
-            }
-            else
-            {
-                if (cost) UIManager.Instance.CommonToast("资源不足！");
-            }
-        }
-        else
-        {
-            if (cost) UIManager.Instance.CommonToast("已满级！");
-        }
+        var isRed = !DataManager.Instance.CheckRes(item.Id_Ref, item.Number);
 
         SetRequireResText(
             hpLevelUpCostText,

@@ -61,8 +61,10 @@ public class TreasureDetailUI : MonoBehaviour
 
     public void GainChest()
     {
-        ChestsRewardSystem.GainAndResetChestsRewardAction();
-        RefreshAll();
+        if (ChestsRewardSystem.GainAndResetChestsRewardAction())
+        {
+            RefreshAll();
+        }
     }
 
     public void UseChest()
@@ -93,8 +95,10 @@ public class TreasureDetailUI : MonoBehaviour
 
     public void GetChestLoop()
     {
-        ChestsRewardSystem.UseChestScore();
-        RefreshAll();
+        if (ChestsRewardSystem.UseChestScore())
+        {
+            RefreshAll();
+        }
     }
 
 }

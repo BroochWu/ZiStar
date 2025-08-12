@@ -55,7 +55,11 @@ public class Player : MonoBehaviour
 
         //如果不是正在战斗，就不要进行后面的判断了
         if ((GameManager.Instance.gameState != GameManager.GameState.BATTLE) || (BattleManager.Instance.battleState != BattleState.ISBATTLEING))
+        {
+            if (guideLine.activeInHierarchy)
+                guideLine.SetActive(false);
             return;
+        }
 
         //鼠标摁下、游戏没结束、没点到UI，就可以更换镜头
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())

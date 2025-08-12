@@ -15,9 +15,18 @@ public struct Rewards
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+
+
     public const int EQUIP_SLOT_COUNT = 5;
     const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
     const string PLAYERPREFS_KEY_MAX_DUNGEON = "dungeon_passed_level";
+
+
+
+    // 道具数量变化事件
+    public static event Action<int> OnItemCountChanged;
+
+
     private int[] equippedWeapons = new int[EQUIP_SLOT_COUNT];
     public int dungeonPassedLevel //已通关的最大等级
     {
@@ -35,6 +44,29 @@ public class DataManager : MonoBehaviour
     public int nextUnlockDungeonPassedWeapon //下一个用已通关关卡解锁的主线武器
     {
         get; private set;
+    }
+
+    public int nowAtkLevel
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("playerData_atk_level");
+        }
+        set
+        {
+            PlayerPrefs.SetInt("playerData_atk_level", value);
+        }
+    }
+    public int nowHpLevel
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("playerData_hp_level");
+        }
+        set
+        {
+            PlayerPrefs.SetInt("playerData_hp_level", value);
+        }
     }
 
 
@@ -193,42 +225,100 @@ public class DataManager : MonoBehaviour
         var nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
 
-        // //加入临时的奖励列表，以便恭喜获得
-        // rewardList.Add(new Rewards() { rewardItem = item, gainNumber = count });
-
         //刷新顶栏
-        RefreshTopPLPanel(item.Id);
+        // RefreshTopPLPanel(item.Id);
+        OnItemCountChanged?.Invoke(item.Id);
 
     }
 
+
+
+    public bool CheckRes(cfg.item.Item _item, int count)
+    {
+        var nowHas = GetResourceCount(_item);
+
+        return nowHas >= count;
+
+    }
 
     /// <summary>
     /// 当玩家要消耗资源时进行检测
     /// </summary>
     /// <param name="item"></param>
     /// <param name="count"></param>
-    public bool CheckOrCostResource(cfg.item.Item item, int count, bool wantToCost)
+    public bool CostResource(cfg.item.Item item, int count)
     {
         var nowHas = GetResourceCount(item);
-        if (count > nowHas)
+
+        if (CheckRes(item, count))
+        {
+            var newValue = nowHas - count;
+            PlayerPrefs.SetInt($"item_{item.Id}", newValue);
+            OnItemCountChanged?.Invoke(item.Id);
+            return true;
+        }
+        //Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+        else
         {
             UIManager.Instance.CommonToast("数量不足，使用失败！");
             return false;
         }
 
-        if (wantToCost)
+    }
+
+    public bool CostResource(Dictionary<cfg.item.Item, int> _kv)
+    {
+        //组，如果任意一个不满足则返回false并提示
+        foreach (var k in _kv)
         {
-            var newValue = nowHas - count;
-            PlayerPrefs.SetInt($"item_{item.Id}", newValue);
-            //Debug.Log($"{item.TextName} 剩余数量 {newValue}");
+            var nowHas = GetResourceCount(k.Key);
+            if (!CheckRes(k.Key, k.Value))
+            {
+                UIManager.Instance.CommonToast("数量不足，使用失败！");
+                return false;
+            }
         }
 
-        RefreshTopPLPanel(item.Id);
+        //如果都满足则进入扣除环节
+        foreach (var k in _kv)
+        {
+            var nowHas = GetResourceCount(k.Key);
+
+            var newValue = nowHas - k.Value;
+            PlayerPrefs.SetInt($"item_{k.Key.Id}", newValue);
+            OnItemCountChanged?.Invoke(k.Key.Id);
+        }
         return true;
+
     }
 
 
+    public bool CostResource(List<cfg.Beans.Item_Require> _requires)
+    {
+        //组，如果任意一个不满足则返回false并提示
+        foreach (var k in _requires)
+        {
+            var nowHas = GetResourceCount(k.Id_Ref);
+            if (!CheckRes(k.Id_Ref, k.Number))
+            {
+                UIManager.Instance.CommonToast("数量不足，使用失败！");
+                return false;
+            }
+        }
 
+        //如果都满足则进入扣除环节
+        foreach (var k in _requires)
+        {
+            var nowHas = GetResourceCount(k.Id);
+
+            var newValue = nowHas - k.Number;
+            PlayerPrefs.SetInt($"item_{k.Id}", newValue);
+            OnItemCountChanged?.Invoke(k.Id);
+        }
+
+        return true;
+
+    }
 
     /// <summary>
     /// 在道具结构体内管理道具使用和掉落
@@ -251,7 +341,7 @@ public class DataManager : MonoBehaviour
         {
             sessionRewards.Clear();
             //扣除道具(获得奖励后再扣除?)
-            if (CheckOrCostResource(_item, 1, true))
+            if (CostResource(_item, 1))
             {
 
                 foreach (var draw in _item.UseChange)
@@ -359,33 +449,56 @@ public class DataManager : MonoBehaviour
         return PlayerPrefs.GetInt($"weapon_level_{weaponId}");
     }
 
-    public bool CheckOrSetPLBasicHpLevel(int newLv, bool wantToLevelUp)
+
+    public bool PLBasicAtkLevelUp(int newLv)
     {
-        if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicHp == null)
+        //是否满级
+        var levelConfig = cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicAtk;
+        if (levelConfig == null)
+        {
+            UIManager.Instance.CommonToast("已满级！");
+            return false;
+        }
+
+        if (CostResource(new List<cfg.Beans.Item_Require> { levelConfig.ItemRequire }))
+        {
+            nowAtkLevel = newLv;
+            return true;
+        }
+        else
         {
             return false;
         }
 
-        if (!wantToLevelUp) return true;
-
-        PlayerPrefs.SetInt("playerData_hp_level", newLv);
-
-        return true;
     }
 
-    public bool CheckOrSetPLBasicAtkLevel(int newLv, bool wantToLevelUp)
+    public bool PLBasicHpLevelUp(int newLv)
     {
-        if (cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicAtk == null)
+        //是否满级
+        var levelConfig = cfg.Tables.tb.PlayerAttrLevel.GetOrDefault(newLv)?.BasicHp;
+        if (levelConfig == null)
         {
-            if (wantToLevelUp) UIManager.Instance.CommonToast("已满级！");
+            UIManager.Instance.CommonToast("已满级！");
             return false;
         }
 
-        if (!wantToLevelUp) return true;
+        if (CostResource(new List<cfg.Beans.Item_Require> { levelConfig.ItemRequire }))
+        {
+            nowHpLevel = newLv;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
-        PlayerPrefs.SetInt("playerData_atk_level", newLv);
-        return true;
     }
+
+
+
+
+
+
     #endregion
 
     #region 武器养成
@@ -395,23 +508,30 @@ public class DataManager : MonoBehaviour
         //首先判断资源是否满足
         //如果满足就成功升级并消耗资源（需要注意等都满足了再执行扣除）
         //否则就返回失败
-        foreach (var consumeKV in _weapon.levelUpConsumes)
-        {
-            if (!CheckOrCostResource(consumeKV.Key, consumeKV.Value, false))
-            {
-                return false;
-            }
-        }
+        // foreach (var consumeKV in _weapon.levelUpConsumes)
+        // {
+        //     if (!CheckRes(consumeKV.Key, consumeKV.Value))
+        //     {
+        //         return false;
+        //     }
+        // }
 
-        //资源都满足，开始扣除
-        foreach (var consumeKV in _weapon.levelUpConsumes)
-        {
-            CheckOrCostResource(consumeKV.Key, consumeKV.Value, true);
-        }
+        // //资源都满足，开始扣除
+        // foreach (var consumeKV in _weapon.levelUpConsumes)
+        // {
+        //     CostResource(consumeKV.Key, consumeKV.Value);
+        // }
 
         //生效效果
-        WeaponLevelUp(_weapon);
-        return true;
+        if (CostResource(_weapon.levelUpConsumes))
+        {
+            WeaponLevelUp(_weapon);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
 
     }

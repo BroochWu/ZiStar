@@ -44,7 +44,8 @@ public class ItemUI : MonoBehaviour
 
     public void OpenItemInfoUI()
     {
-        Instantiate(prefabItemInfo, UIManager.Instance.dynamicContainer)
-        .Initialize(item);
+        // Instantiate(prefabItemInfo, UIManager.Instance.dynamicContainer)
+        // .Initialize(item);
+        UIManager.Instance.OpenItemInfoUI(item);
     }
 }

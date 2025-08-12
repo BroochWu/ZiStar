@@ -87,14 +87,14 @@ public static class ChestsRewardSystem
     /// <summary>
     /// 领取箱子
     /// </summary>
-    public static void GainAndResetChestsRewardAction()
+    public static bool GainAndResetChestsRewardAction()
     {
         var greenChest = cfg.Tables.tb.Item.Get(3001);
 
         if (nowRemainChests <= 0)
         {
             UIManager.Instance.CommonToast("宝箱还未产出~请耐心等待！");
-            return;
+            return false;
         }
 
         // Dictionary<cfg.item.Item, int> items = new()
@@ -105,6 +105,8 @@ public static class ChestsRewardSystem
         DataManager.Instance.GainResource(greenChest, nowRemainChests);
         UIManager.Instance.CommonCongra(new List<Rewards>() { { new Rewards() { rewardItem = greenChest, gainNumber = nowRemainChests } } });
         nowRemainChests = 0;
+        
+        return true;
     }
 
     /// <summary>
@@ -142,12 +144,12 @@ public static class ChestsRewardSystem
     /// <summary>
     /// 消耗积分获得箱子
     /// </summary>
-    public static void UseChestScore()
+    public static bool UseChestScore()
     {
         if (currentChestScore < nextChest.Score)
         {
             UIManager.Instance.CommonToast("积分不足，请继续开箱获取");
-            return;
+            return false;
         }
 
         //扣除积分
@@ -167,6 +169,7 @@ public static class ChestsRewardSystem
         , (PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT) + 1) % cfg.Tables.tb.ChestLoop.DataList.Count);
 
         // Debug.Log($"下一个宝箱位次：{PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)}");
+        return true;
     }
 
 

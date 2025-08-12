@@ -9,7 +9,11 @@ public class ItemInfoUI : MonoBehaviour
     public void Initialize(cfg.item.Item item)
     {
         transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GetComponent<RectTransform>().pivot = Camera.main.ScreenToViewportPoint(Input.mousePosition).x >= 0.5f ? Vector2.right * 0.9f : Vector2.right * 0.1f;
+
+        var mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        GetComponent<RectTransform>().pivot =
+        (mousePos.x >= 0.5f ? Vector2.right * 0.9f : Vector2.right * 0.1f)
+        + (mousePos.y >= 0.5f ? Vector2.up * 0.9f : Vector2.up * 0.1f);
 
 
         TextName.text = item.TextName;

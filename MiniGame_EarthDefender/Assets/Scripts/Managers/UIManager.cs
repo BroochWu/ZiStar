@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     public WeaponsUI weaponsLayer;
     [Header("=====更高的玩家层=====")]
     public GameObject bottomTabs;
-    public TopPLPanelUI topPLPanel;
+    public TopPLPanelGroupUI topPLPanel;
     [Header("=====最高的动态层=====")]
     public Transform tipsContainer;//提示UI
     public Transform dynamicContainer;//动态UI
@@ -35,8 +35,11 @@ public class UIManager : MonoBehaviour
     public GameObject CommonToastObj;
     public GameObject commonCongraGainObj;
     public GameObject itemObj;
+    public ItemInfoUI itemInfoObj;
 
 
+    // 注册的面板组
+    private List<TopPLPanelGroupUI> topPanelGroups = new List<TopPLPanelGroupUI>();
 
 
     public UILayer uiLayer { get; private set; } = UILayer.NULL;
@@ -191,5 +194,44 @@ public class UIManager : MonoBehaviour
     {
         Instantiate(_uiPrefab, dynamicContainer);
     }
+
+
+
+    public void OpenItemInfoUI(cfg.item.Item _item)
+    {
+        Instantiate(itemInfoObj, dynamicContainer)
+        .Initialize(_item);
+    }
+    #region  顶层相关面板组
+
+    // 注册面板组
+    public void RegisterTopPanelGroup(TopPLPanelGroupUI panelGroup)
+    {
+        if (!topPanelGroups.Contains(panelGroup))
+        {
+            topPanelGroups.Add(panelGroup);
+        }
+    }
+
+    // 取消注册面板组
+    public void UnregisterTopPanelGroup(TopPLPanelGroupUI panelGroup)
+    {
+        if (topPanelGroups.Contains(panelGroup))
+        {
+            topPanelGroups.Remove(panelGroup);
+        }
+    }
+
+    // 刷新所有顶部面板
+    public void RefreshAllTopPanels()
+    {
+        foreach (var panelGroup in topPanelGroups)
+        {
+            panelGroup.Refresh();
+        }
+    }
+    #endregion
+
+
 
 }

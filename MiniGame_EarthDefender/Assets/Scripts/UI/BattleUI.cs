@@ -66,7 +66,11 @@ public class BattleUI : MonoBehaviour
             updateFpsTimer = 0;
             fpsCounter = 0;
         }
+#if UNITY_EDITOR
         gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.activeEnemysCount}";
+#else
+        gameTimeUI.gameObject.SetActive(false);
+#endif
     }
 
     /// <summary>
