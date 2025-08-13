@@ -51,7 +51,7 @@ public class TopPLPanelUI : TopPLPanelGroupUI
         Debug.Log("RefreshTopPanel");
         // 获取当前道具数量并更新UI
         int count = DataManager.Instance.GetResourceCount(_item.Id);
-        textCount.text = count.ToString();
+        textCount.text = Utility.BigNumber(count).ToString();
 
         // 根据数量设置不同颜色
         if (count <= 0)
