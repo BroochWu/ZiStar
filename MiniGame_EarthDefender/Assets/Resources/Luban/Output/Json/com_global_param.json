@@ -25,5 +25,13 @@
       10,
       50
     ]
+  },
+  {
+    "key": "weapon_global_bonus_atk_per_level",
+    "desc": "每升5级给多少百分比的全局攻击",
+    "param_type": 1,
+    "int_value": 3,
+    "str_value": "",
+    "int_list_value": []
   }
 ]

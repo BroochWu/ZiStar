@@ -73,6 +73,28 @@ namespace cfg.weapon
             }
         }
 
+        private int curGlobalBonusLv//当前全局奖励等级
+        {
+            get
+            { return currentLevel / 5; }
+        }
+
+        public int curGlobalBonusNum //当前全局奖励数额（暂定每5级送3%）
+        {
+            get
+            {
+                return curGlobalBonusLv * 3;
+            }
+        }
+
+        // public int nextGlobalBonusNum//下一档奖励
+        // {
+        //     get
+        //     {
+        //         return (currentLevel + 1) / 5 * 3;
+        //     }
+        // }
+
     }
 
 }

@@ -1,9 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponDetailInfo : MonoBehaviour
 {
+    public float speedColorChange = 0.05f;
+    public float timeColorChange = 0.5f;
+
     enum ButtonState
     {
         EQUIP,
@@ -12,6 +16,7 @@ public class WeaponDetailInfo : MonoBehaviour
     private cfg.weapon.Weapon weapon;
     private ButtonState buttonState;
     private List<WeaponAttr> weaponAttrs = new();//属性组
+    private Coroutine CorBonusPointBreathe;
 
 
     [Header("=====预制体=====")]
@@ -28,6 +33,11 @@ public class WeaponDetailInfo : MonoBehaviour
     public Text textLvUpNextLevel;//下一级
     public Transform levelUpContainer;//升级内容
     public Transform levelUpConsumesContainer;//升级消耗资源内容
+
+    public Text textCurBonus;
+    public Text textNextBonus;
+    public Transform BonusGroupContainer;
+    private List<Image> BonusGroup = new();
 
     public Button buttonLvUp;//升级按钮
     public Button buttonEquip;//穿戴/卸下按钮
@@ -48,6 +58,9 @@ public class WeaponDetailInfo : MonoBehaviour
         // GenerateLevelCards();
         imageWeaponIcon.sprite = weapon.ImageIcon;
 
+
+
+
         RefreshLevel();
 
         InitWeaponAttrs();
@@ -55,6 +68,8 @@ public class WeaponDetailInfo : MonoBehaviour
         GenerateLevelCards();
 
         RefreshLevelUpConsumes();
+
+        InitBonus();
 
         if (DataManager.Instance.IsWeaponEquipped(weapon.Id) != -1)
         {
@@ -164,6 +179,18 @@ public class WeaponDetailInfo : MonoBehaviour
 
     }
 
+    void InitBonus()
+    {
+        BonusGroup.Clear();
+        foreach (Transform p in BonusGroupContainer)
+        {
+            BonusGroup.Add(p.GetComponent<Image>());
+        }
+
+        RefreshBonus();
+    }
+
+
     /// <summary>
     /// 刷新武器属性
     /// </summary>
@@ -189,6 +216,7 @@ public class WeaponDetailInfo : MonoBehaviour
 
         RefreshLevelUpConsumes();
 
+        RefreshBonus();
 
     }
 
@@ -202,6 +230,71 @@ public class WeaponDetailInfo : MonoBehaviour
         textLvUpCurLevel.text = weapon.currentLevel.ToString();
         textLvUpNextLevel.text = (weapon.currentLevel + 1).ToString();
     }
+
+    /// <summary>
+    /// 刷新全局加成奖励
+    /// </summary>
+    private void RefreshBonus()
+    {
+        if (CorBonusPointBreathe != null) StopCoroutine(CorBonusPointBreathe);
+
+
+        textCurBonus.text = weapon.curGlobalBonusNum.ToString() + '%';
+        textNextBonus.text = (weapon.curGlobalBonusNum + cfg.Tables.tb.GlobalParam.Get("weapon_global_bonus_atk_per_level").IntValue).ToString() + '%';
+
+        //亮灯
+        foreach (var p in BonusGroup)
+        {
+            p.color = Color.grey;
+        }
+        var curBonusPointIdx = weapon.currentLevel % 5;
+        for (int i = 0; i <= curBonusPointIdx; i++)
+        {
+            BonusGroup[i].color = Color.green;
+            //最后一个呼吸闪烁
+            if (i == curBonusPointIdx) CorBonusPointBreathe = StartCoroutine(BonusPointBreathe(BonusGroup[i]));
+        }
+    }
+
+    IEnumerator BonusPointBreathe(Image _image)
+    {
+        var colorTransparentMin = 0f;
+        var colorTransparentMax = 0.6f;
+
+        // Color baseColor = _image.color;
+        Color targetColor = _image.color;
+        // baseColor.a = 1;
+
+        //设置初始颜色
+        targetColor.a = colorTransparentMax;
+        _image.color = targetColor;
+
+
+        targetColor.a = colorTransparentMin;
+
+        var elapsedTime = 0f;
+
+        // _image.color = baseColor;
+
+        //每2秒变一次目标颜色的不透明度
+        while (true)
+        {
+            if (elapsedTime <= timeColorChange)
+            {
+                elapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                targetColor.a = targetColor.a == colorTransparentMin ? colorTransparentMax : colorTransparentMin;
+                // baseColor.a = baseColor.a == 0 ? 1 : 0;
+                elapsedTime = 0;
+            }
+
+            _image.color = Color.Lerp(_image.color, targetColor, speedColorChange);
+            yield return null;
+        }
+    }
+
 
 
     #region 按钮组交互
