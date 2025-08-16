@@ -69,8 +69,30 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public int TotalWeaponsGlobalAtkBonus//武器总额外全局攻击加成
+    {
+        get
+        {
+            int a = 0;
+            foreach (var weapon in cfg.Tables.tb.Weapon.DataList)
+            {
+                a += weapon.curGlobalBonusNum;
+            }
+            return a;
+        }
+    }
+
 
     public List<Rewards> rewardList { get; private set; } = new();//奖励列表
+
+
+
+
+
+
+
+
+
 
     void Awake()
     {

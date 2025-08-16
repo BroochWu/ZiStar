@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponsUI : MonoBehaviour
 {
@@ -10,12 +11,19 @@ public class WeaponsUI : MonoBehaviour
     public Transform weaponsListContainer;
     public GameObject WeaponPrefab;
     public GameObject WeaponDetailInfoPrefab;
+    public Text textTotalGlobalAtkBonus;
     private cfg.Tbweapon.Weapon config;
 
 
     public async Task Initialize()
     {
         config = cfg.Tables.tb.Weapon;
+
+        var colorStr = cfg.Tables.tb.Color.Get(1).ColorLightbg;
+        textTotalGlobalAtkBonus.text =
+        $"总伤害加成：<color={colorStr}>+"
+        + DataManager.Instance.TotalWeaponsGlobalAtkBonus.ToString()
+        + "%</color>";
 
         // 装配已穿戴武器
         RefreshEquippedWeapons();
