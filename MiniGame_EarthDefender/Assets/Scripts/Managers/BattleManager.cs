@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour
     public int currentExp;//玩家当前经验值
     public int nextExp;//玩家当前经验值
     public int currentLv;//玩家当前等级
-    public int globalDamageMultiInOneBattle;//当前所有武器的总伤害
+    public int globalDamageMultiInOneBattle;//当局所有武器的总伤害加成
     List<Portal> activePortals = new();//活跃的传送门
     public List<Enemy> activeEnemys = new();//活跃的敌人
     public int activeEnemysCount { get { return activeEnemys.Count; } }
@@ -91,7 +91,8 @@ public class BattleManager : MonoBehaviour
             EnemyPath.SetParent(BattleObjectsPath);
         }
 
-        globalDamageMultiInOneBattle = 0;
+        //令单局的全局攻击加成初始值为局外的全局加成总值
+        globalDamageMultiInOneBattle = DataManager.Instance.TotalWeaponsGlobalAtkBonus;
 
 
         ObjectPoolManager.Instance.Initialize();
