@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public TopPLPanelGroupUI topPLPanel;
     [Header("=====最高的动态层=====")]
     public Transform tipsContainer;//提示UI
+    public Transform avgContainer;//剧情UI
     public Transform dynamicContainer;//动态UI
 
 
