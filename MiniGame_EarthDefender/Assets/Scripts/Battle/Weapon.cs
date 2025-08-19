@@ -73,17 +73,17 @@ namespace cfg.weapon
             }
         }
 
-        private int curGlobalBonusLv//当前全局奖励等级
+        private int curGlobalBonusLv//当前全局奖励等级(武器每5级提升1档)
         {
             get
             { return currentLevel / 5; }
         }
 
-        public int curGlobalBonusNum //当前全局奖励数额（暂定每5级送3%）
+        public int curGlobalBonusNum //当前全局奖励数额（暂定每5档送3%）
         {
             get
             {
-                return curGlobalBonusLv * 300;
+                return curGlobalBonusLv * Tables.tb.GlobalParam.Get("weapon_global_bonus_atk_per_level").IntValue;
             }
         }
 
