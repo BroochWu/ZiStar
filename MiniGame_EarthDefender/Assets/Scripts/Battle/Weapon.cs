@@ -83,7 +83,7 @@ namespace cfg.weapon
         {
             get
             {
-                return curGlobalBonusLv * 3;
+                return curGlobalBonusLv * 300;
             }
         }
 

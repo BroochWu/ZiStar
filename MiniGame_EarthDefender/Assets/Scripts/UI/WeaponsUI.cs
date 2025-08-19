@@ -22,7 +22,7 @@ public class WeaponsUI : MonoBehaviour
         var colorStr = cfg.Tables.tb.Color.Get(1).ColorLightbg;
         textTotalGlobalAtkBonus.text =
         $"总伤害加成：<color={colorStr}>+"
-        + DataManager.Instance.TotalWeaponsGlobalAtkBonus.ToString()
+        + (DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100).ToString()
         + "%</color>";
 
         // 装配已穿戴武器

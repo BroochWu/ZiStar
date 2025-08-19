@@ -239,8 +239,8 @@ public class WeaponDetailInfo : MonoBehaviour
         if (CorBonusPointBreathe != null) StopCoroutine(CorBonusPointBreathe);
 
 
-        textCurBonus.text = weapon.curGlobalBonusNum.ToString() + '%';
-        textNextBonus.text = (weapon.curGlobalBonusNum + cfg.Tables.tb.GlobalParam.Get("weapon_global_bonus_atk_per_level").IntValue).ToString() + '%';
+        textCurBonus.text = (weapon.curGlobalBonusNum / 100).ToString() + '%';
+        textNextBonus.text = ((weapon.curGlobalBonusNum + cfg.Tables.tb.GlobalParam.Get("weapon_global_bonus_atk_per_level").IntValue) / 100).ToString() + '%';
 
         //亮灯
         foreach (var p in BonusGroup)
