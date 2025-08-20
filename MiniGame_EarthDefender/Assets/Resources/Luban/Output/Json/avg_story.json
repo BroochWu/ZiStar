@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "trigger": {
+      "trigger_type": 1,
+      "int_params": [
+        1
+      ]
+    },
+    "unlock_conds": [],
+    "id_start": 1001,
+    "id_end": 1999
+  }
+]

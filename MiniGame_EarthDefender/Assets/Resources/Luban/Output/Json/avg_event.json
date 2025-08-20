@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1001,
+    "text_color": 2,
+    "time_duration": 5,
+    "text_str": "是的是的"
+  },
+  {
+    "id": 1002,
+    "text_color": 3,
+    "time_duration": 5,
+    "text_str": "好的好的"
+  }
+]

@@ -78,6 +78,14 @@ public partial class Tables
     /// 循环宝箱
     /// </summary>
     public Tbchest.ChestLoop ChestLoop {get; }
+    /// <summary>
+    /// AVG事件
+    /// </summary>
+    public Tbavg.AvgEvent AvgEvent {get; }
+    /// <summary>
+    /// AVG事件组
+    /// </summary>
+    public Tbavg.AvgStory AvgStory {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -97,6 +105,8 @@ public partial class Tables
         Item = new Tbitem.Item(loader("item"));
         Card = new Tbcard.Card(loader("card"));
         ChestLoop = new Tbchest.ChestLoop(loader("chest_loop"));
+        AvgEvent = new Tbavg.AvgEvent(loader("avg_event"));
+        AvgStory = new Tbavg.AvgStory(loader("avg_story"));
         ResolveRef();
     }
     
@@ -118,6 +128,8 @@ public partial class Tables
         Item.ResolveRef(this);
         Card.ResolveRef(this);
         ChestLoop.ResolveRef(this);
+        AvgEvent.ResolveRef(this);
+        AvgStory.ResolveRef(this);
     }
 }
 

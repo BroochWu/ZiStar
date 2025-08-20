@@ -14,31 +14,31 @@ using SimpleJSON;
 namespace cfg.Beans
 {
 /// <summary>
-/// 解锁条件组
+/// 触发时点
 /// </summary>
-public sealed partial class Com_UnlockConds : Luban.BeanBase
+public sealed partial class Com_Trigger : Luban.BeanBase
 {
-    public Com_UnlockConds(JSONNode _buf) 
+    public Com_Trigger(JSONNode _buf) 
     {
-        { if(!_buf["cond_type"].IsNumber) { throw new SerializationException(); }  CondType = (Enums.Com.CondType)_buf["cond_type"].AsInt; }
+        { if(!_buf["trigger_type"].IsNumber) { throw new SerializationException(); }  TriggerType = (Enums.Com.TriggerType)_buf["trigger_type"].AsInt; }
         { var __json0 = _buf["int_params"]; if(!__json0.IsArray) { throw new SerializationException(); } IntParams = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  IntParams.Add(__v0); }   }
     }
 
-    public static Com_UnlockConds DeserializeCom_UnlockConds(JSONNode _buf)
+    public static Com_Trigger DeserializeCom_Trigger(JSONNode _buf)
     {
-        return new Beans.Com_UnlockConds(_buf);
+        return new Beans.Com_Trigger(_buf);
     }
 
     /// <summary>
-    /// 整型类型
+    /// 时点类型
     /// </summary>
-    public readonly Enums.Com.CondType CondType;
+    public readonly Enums.Com.TriggerType TriggerType;
     /// <summary>
-    /// 整型参数
+    /// 参数
     /// </summary>
     public readonly System.Collections.Generic.List<int> IntParams;
    
-    public const int __ID__ = -707002012;
+    public const int __ID__ = 536934895;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
@@ -48,7 +48,7 @@ public sealed partial class Com_UnlockConds : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "condType:" + CondType + ","
+        + "triggerType:" + TriggerType + ","
         + "intParams:" + Luban.StringUtil.CollectionToString(IntParams) + ","
         + "}";
     }

@@ -14,28 +14,24 @@ namespace cfg.Enums.Com
     /// <summary>
     /// ,
     /// </summary>
-    public enum CondType
+    public enum TriggerType
     {
         /// <summary>
         /// 空
         /// </summary>
         NULL = 0,
         /// <summary>
-        /// 解锁武器（战斗中）
+        /// 关卡X开始
         /// </summary>
-        WEAPONUNLOCK = 1,
+        DUNGEON_START = 1,
         /// <summary>
-        /// 武器等级（战斗前）
+        /// 关卡X结束
         /// </summary>
-        WEAPONLEVEL = 2,
+        DUNGEON_OVER = 2,
         /// <summary>
-        /// 关卡等级
+        /// 切换到指定UI
         /// </summary>
-        DUNGEON_PASS = 3,
-        /// <summary>
-        /// 登录天数
-        /// </summary>
-        LOAD_DAY = 4,
+        UI_STATE = 3,
     }
 
 } 
