@@ -135,6 +135,12 @@ public static class Utility
     }
 
 
+    /// <summary>
+    /// 返回品质色
+    /// </summary>
+    /// <param name="_quality"></param>
+    /// <param name="_isLight"></param>
+    /// <returns></returns>
     public static Color SetQualityColor(cfg.Enums.Com.Quality _quality, bool _isLight)
     {
         int qualityid = 1;

@@ -156,6 +156,9 @@ public class BattleManager : MonoBehaviour
         //执行角色事件（装载武器）
         Player.instance.BattleStart();
 
+        //判断执行关卡开始时的AVG事件
+        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.DUNGEON_START);
+
     }
 
     void Update()

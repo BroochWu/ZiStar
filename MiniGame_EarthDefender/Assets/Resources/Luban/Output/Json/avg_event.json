@@ -2,12 +2,14 @@
   {
     "id": 1001,
     "text_color": 2,
+    "time_delay": 0,
     "time_duration": 5,
     "text_str": "是的是的"
   },
   {
     "id": 1002,
     "text_color": 3,
+    "time_delay": 5,
     "time_duration": 5,
     "text_str": "好的好的"
   }

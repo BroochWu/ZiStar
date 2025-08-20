@@ -20,6 +20,7 @@ public sealed partial class AvgEvent : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_color"].IsNumber) { throw new SerializationException(); }  TextColor = _buf["text_color"]; }
         TextColor_Ref = null;
+        { if(!_buf["time_delay"].IsNumber) { throw new SerializationException(); }  TimeDelay = _buf["time_delay"]; }
         { if(!_buf["time_duration"].IsNumber) { throw new SerializationException(); }  TimeDuration = _buf["time_duration"]; }
         { if(!_buf["text_str"].IsString) { throw new SerializationException(); }  TextStr = _buf["text_str"]; }
     }
@@ -38,6 +39,10 @@ public sealed partial class AvgEvent : Luban.BeanBase
     /// </summary>
     public readonly int TextColor;
     public com.Color TextColor_Ref;
+    /// <summary>
+    /// 文本是否需要延后出现时间(s)
+    /// </summary>
+    public readonly float TimeDelay;
     /// <summary>
     /// 持续时间(s)
     /// </summary>
@@ -60,6 +65,7 @@ public sealed partial class AvgEvent : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "textColor:" + TextColor + ","
+        + "timeDelay:" + TimeDelay + ","
         + "timeDuration:" + TimeDuration + ","
         + "textStr:" + TextStr + ","
         + "}";

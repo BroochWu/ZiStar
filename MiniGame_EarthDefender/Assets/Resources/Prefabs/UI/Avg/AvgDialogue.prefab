@@ -103,6 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8938864661810823353}
+  - component: {fileID: 5139699173368140399}
   m_Layer: 5
   m_Name: AvgDialogue
   m_TagString: Untagged
@@ -131,6 +132,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 110}
   m_SizeDelta: {x: -57.49, y: 98.62}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5139699173368140399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026405176095244811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089af901c82ca9f448c08e5becf1d19e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textAvg: {fileID: 8681537915538023204}
 --- !u!1 &9068981131751002144
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +180,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25.660034, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &860482978874466811

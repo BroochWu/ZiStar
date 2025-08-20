@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
     public GameObject commonCongraGainObj;
     public GameObject itemObj;
     public ItemInfoUI itemInfoObj;
+    
+    [Header("=====对话框AVG预制体=====")]
+    public AvgDialogueUI avgDialoguePrefab;//对话avg预制体
 
 
     // 注册的面板组
@@ -233,6 +236,21 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+
+
+
+    /// <summary>
+    /// 显示对话AVG
+    /// </summary>
+    /// <param name="_avgEvent"></param>
+    public void ShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
+    {
+        if (AvgManager.Instance.dialogueAvgInstance == null)
+        {
+            AvgManager.Instance.dialogueAvgInstance = Instantiate(avgDialoguePrefab, avgContainer);
+        }
+        AvgManager.Instance.dialogueAvgInstance.Initialize(_avgEvent);
+    }
 
 
 }
