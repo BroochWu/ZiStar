@@ -50,10 +50,18 @@ public class GameManager : MonoBehaviour
         mainCamMainViewSize = 30;
 
         //检查是否第一次登录
-        CheckIfFirstLoad();
+        if (CheckIfFirstLoad())
+        {
+            //首次登陆直接打关卡1
+            SwitchGameStateToBattle(1);
+        }
+        else
+        {
+            //切换到主界面
+            SwitchGameStateToMainView();
+        }
 
-        //切换到主界面
-        SwitchGameStateToMainView();
+        
 
         //统计并更新一次登录时间
         DataManager.Instance.SetLastLoadTime();
@@ -121,13 +129,17 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 检查是不是第一次启动游戏，如果是则给予数据
     /// </summary>
-    void CheckIfFirstLoad()
+    bool CheckIfFirstLoad()
     {
         //根据是否通关过任意关卡来判断是否首次加载游戏
-        if (PlayerPrefs.HasKey("dungeon_passed_level")) return;
+        if (PlayerPrefs.HasKey("dungeon_passed_level"))
+        {
+            return false;
+        }
         //加载初始数据
         DataManager.Instance.FirstLoad();
         Debug.Log("首次加载游戏，加载成功");
+        return true;
     }
 
 
