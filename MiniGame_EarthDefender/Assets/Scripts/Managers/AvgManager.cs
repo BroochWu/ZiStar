@@ -2,6 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// namespace cfg
+// {
+//     public partial class AvgEvent
+//     {
+//         public bool canInterruptAvg = false;
+//     }
+// }
+
+
 
 // AVG 触发器管理器
 public class AvgManager : MonoBehaviour
@@ -14,7 +23,7 @@ public class AvgManager : MonoBehaviour
     public static AvgDialogueUI dialogueAvgInstance;
 
 
-    public bool isPlayingAvg;//是否正在播放AVG
+    public int? isPlayingAvg;//是否正在播放AVG
 
 
     private Dictionary<int, IAvgTrigger> _triggers = new Dictionary<int, IAvgTrigger>();
@@ -81,7 +90,7 @@ public class AvgManager : MonoBehaviour
     // 检查并触发符合条件的AVG
     public void CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType triggerType)
     {
-        if (isPlayingAvg == true)
+        if (isPlayingAvg != null)
         {
             Debug.LogError("有正在播放的avg，终止AVG检测");
             return;
@@ -108,6 +117,15 @@ public class AvgManager : MonoBehaviour
     // 触发特定AVG
     public bool TriggerAvg(int avgId)
     {
+
+        //直接使用这个会跳过正在播放AVG的检测
+        //注意：可能会导致trigger不触发，并且目前很难解决它会打断其他AVG的情况
+
+        if (isPlayingAvg != null)
+        {
+            Debug.LogError("有正在播放的avg，终止AVG检测");
+            return false;
+        }
         var config = cfg.Tables.tb.AvgStory.GetOrDefault(avgId);
 
         if (config == null)
@@ -158,7 +176,7 @@ public class AvgManager : MonoBehaviour
     // 播放AVG的具体实现
     private void PlayAvg(int _avgStoryId)
     {
-        isPlayingAvg = true;
+        isPlayingAvg = _avgStoryId;
 
 
         // 这里实现AVG播放逻辑

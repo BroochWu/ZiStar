@@ -215,13 +215,31 @@ public class BattleManager : MonoBehaviour
         Player.instance.rotationTarget.transform.rotation = quaternion.identity;
     }
 
+
+    Vector2 buttonInit = new();
     /// <summary>
     /// 主动放弃对战
     /// </summary>
     public void QuitGame()
     {
+        Debug.Log("buttonInit：" + buttonInit);
         if (DataManager.Instance.dungeonPassedLevel == 0)
         {
+            var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+            if (buttonInit == Vector2.zero)
+            {
+                Debug.Log("Reset buttonInit");
+                buttonInit = Camera.main.WorldToViewportPoint(button.transform.position);
+            }
+
+            //随机移动放弃
+            var randomX = UnityEngine.Random.Range(-0.2f, 0.2f);
+            var randomY = UnityEngine.Random.Range(-0.3f, 0.3f);
+            var newPos = Camera.main.ViewportToWorldPoint(new Vector2(buttonInit.x + randomX, buttonInit.y + randomY));
+            newPos.z = 0;
+            button.transform.position = newPos;
+
+            //随机剧本
             var random = UnityEngine.Random.Range(2, 5);
             AvgManager.Instance.TriggerAvg(random);
             return;

@@ -258,6 +258,7 @@ public class UIManager : MonoBehaviour
     /// <param name="_avgEvent"></param>
     public void ShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
     {
+        Debug.Log("ShowAvgDialogue");
         //如果存在实例就立刻销毁，不会触发OnDestroy
         if (AvgManager.dialogueAvgInstance != null)
         {

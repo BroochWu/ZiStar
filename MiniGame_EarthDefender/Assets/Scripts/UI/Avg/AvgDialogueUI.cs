@@ -36,16 +36,17 @@ public class AvgDialogueUI : MonoBehaviour
 
         //判断什么时候销毁
         var elapsedTime = 0f;
-        var wait = new WaitForSecondsRealtime(Time.deltaTime);
-        while (elapsedTime <= _targetTime - animTime)
+        var wait = new WaitForSecondsRealtime(0.02f);
+        while (elapsedTime <= _targetTime)
         {
-            elapsedTime += Time.deltaTime;
+            Debug.Log("elapsedTime:" + elapsedTime);
+            elapsedTime += wait.waitTime;
             //返回真实等待时间，不会因为游戏暂停而停止
             yield return wait;
         }
 
         //销毁动画
-        elapsedTime = 0;
+        // elapsedTime = 0;
         anim.Play("AVGDialogueDisappear");
         // while (elapsedTime <= animTime)
         // {
@@ -67,7 +68,7 @@ public class AvgDialogueUI : MonoBehaviour
     void OnDestroy()
     {
         //销毁以后播放下一行
-        AvgPlayer.Instance.NextAvgEvent();
+        if (AvgManager.Instance.isPlayingAvg != null) AvgPlayer.Instance.NextAvgEvent();
     }
 
 
