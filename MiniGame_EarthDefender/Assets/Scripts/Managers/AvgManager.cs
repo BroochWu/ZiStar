@@ -11,7 +11,7 @@ public class AvgManager : MonoBehaviour
     public static AvgManager Instance => _instance;
 
 
-    public AvgDialogueUI dialogueAvgInstance;
+    public static AvgDialogueUI dialogueAvgInstance;
 
 
     private bool isPlayingAvg;//是否正在播放AVG

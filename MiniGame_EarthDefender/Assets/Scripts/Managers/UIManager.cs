@@ -258,11 +258,14 @@ public class UIManager : MonoBehaviour
     /// <param name="_avgEvent"></param>
     public void ShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
     {
-        if (AvgManager.Instance.dialogueAvgInstance == null)
+        //如果存在实例就立刻销毁，不会触发OnDestroy
+        if (AvgManager.dialogueAvgInstance != null)
         {
-            AvgManager.Instance.dialogueAvgInstance = Instantiate(avgDialoguePrefab, avgContainer);
+            DestroyImmediate(AvgManager.dialogueAvgInstance.gameObject);
         }
-        AvgManager.Instance.dialogueAvgInstance.Initialize(_avgEvent);
+
+        AvgManager.dialogueAvgInstance = Instantiate(avgDialoguePrefab, avgContainer);
+        AvgManager.dialogueAvgInstance.Initialize(_avgEvent);
     }
 
 
