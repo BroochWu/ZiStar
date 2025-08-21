@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     public GameObject commonCongraGainObj;
     public GameObject itemObj;
     public ItemInfoUI itemInfoObj;
-    
+
     [Header("=====对话框AVG预制体=====")]
     public AvgDialogueUI avgDialoguePrefab;//对话avg预制体
 
@@ -57,6 +57,19 @@ public class UIManager : MonoBehaviour
         ShowLayer(UILayer.NULL);
 
     }
+
+    void Start()
+    {
+
+        foreach (Transform child in avgContainer)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+
+    }
+
+
+
 
 
     /// <summary>

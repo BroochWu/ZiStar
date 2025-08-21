@@ -104,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8938864661810823353}
   - component: {fileID: 5139699173368140399}
+  - component: {fileID: 3996673543191833467}
   m_Layer: 5
   m_Name: AvgDialogue
   m_TagString: Untagged
@@ -145,6 +146,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAvg: {fileID: 8681537915538023204}
+  anim: {fileID: 3996673543191833467}
+--- !u!95 &3996673543191833467
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026405176095244811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c20608018f16b904891acf4f8fb46dc8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9068981131751002144
 GameObject:
   m_ObjectHideFlags: 0
