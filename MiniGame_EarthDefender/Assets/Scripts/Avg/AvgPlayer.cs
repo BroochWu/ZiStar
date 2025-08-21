@@ -57,7 +57,8 @@ public class AvgPlayer
     {
         if (nowEventId == lastEventId)
         {
-            Debug.Log("剧情播放完成");
+            Debug.Log("最后一个event已播放，剧情播放完成");
+            AvgManager.Instance.isPlayingAvg = false;
             return;
         }
 
@@ -73,9 +74,11 @@ public class AvgPlayer
             //如果已经超过了最后一个，就返回
             if (nowEventId > lastEventId)
             {
-                Debug.Log("剧情播放完成");
+                Debug.Log("找不到下一个可播放的event，剧情播放完成");
+                AvgManager.Instance.isPlayingAvg = false;
                 return;
             }
+            nowEvent = cfg.Tables.tb.AvgEvent.GetOrDefault(nowEventId);
         }
 
         //如果找得到，则播放

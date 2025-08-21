@@ -14,7 +14,7 @@ public class AvgManager : MonoBehaviour
     public static AvgDialogueUI dialogueAvgInstance;
 
 
-    private bool isPlayingAvg;//是否正在播放AVG
+    public bool isPlayingAvg;//是否正在播放AVG
 
 
     private Dictionary<int, IAvgTrigger> _triggers = new Dictionary<int, IAvgTrigger>();
@@ -83,7 +83,7 @@ public class AvgManager : MonoBehaviour
     {
         if (isPlayingAvg == true)
         {
-            Debug.LogError("已经在播放avg");
+            Debug.LogError("有正在播放的avg，终止AVG检测");
             return;
         }
 
@@ -101,7 +101,6 @@ public class AvgManager : MonoBehaviour
             }
         }
 
-        isPlayingAvg = false;
 
 
     }
@@ -109,25 +108,30 @@ public class AvgManager : MonoBehaviour
     // 触发特定AVG
     public bool TriggerAvg(int avgId)
     {
-        if (_triggeredAvgs.Contains(avgId))
-        {
-            Debug.Log($"AVG {avgId} 已经触发过，跳过");
-            return false;
-        }
-        if (cfg.Tables.tb.AvgStory.GetOrDefault(avgId) == null)
+        var config = cfg.Tables.tb.AvgStory.GetOrDefault(avgId);
+
+        if (config == null)
         {
             Debug.LogError($"AVG {avgId} 不存在");
+            return false;
+        }
+
+        if (_triggeredAvgs.Contains(avgId) && config.CanRecur == false)
+        {
+            Debug.Log($"AVG {avgId} 为一次性事件，并且已经触发过，跳过");
             return false;
         }
 
         // 播放AVG
         PlayAvg(avgId);
 
-        // 标记为已触发
-        _triggeredAvgs.Add(avgId);
-
         // 触发事件
         OnAvgTriggered?.Invoke(avgId);
+
+        // 如果没标记为已触发，则标记一下
+        // 此处主要以防万一有反复触发的被反复标记
+        if (!_triggeredAvgs.Contains(avgId)) _triggeredAvgs.Add(avgId);
+
 
         Debug.Log($"触发AVG: {avgId}");
         return true;
@@ -164,6 +168,7 @@ public class AvgManager : MonoBehaviour
         //保存已触发的avg们
         SaveTriggeredAvgs();
     }
+
 
     // 保存已触发的AVG
     private void SaveTriggeredAvgs()

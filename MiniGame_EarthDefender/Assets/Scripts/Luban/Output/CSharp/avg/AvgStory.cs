@@ -23,6 +23,7 @@ public sealed partial class AvgStory : Luban.BeanBase
         { if(!_buf["id_start"].IsNumber) { throw new SerializationException(); }  IdStart = _buf["id_start"]; }
         IdStart_Ref = null;
         { if(!_buf["id_end"].IsNumber) { throw new SerializationException(); }  IdEnd = _buf["id_end"]; }
+        { if(!_buf["can_recur"].IsBoolean) { throw new SerializationException(); }  CanRecur = _buf["can_recur"]; }
     }
 
     public static AvgStory DeserializeAvgStory(JSONNode _buf)
@@ -48,9 +49,13 @@ public sealed partial class AvgStory : Luban.BeanBase
     public readonly int IdStart;
     public avg.AvgEvent IdStart_Ref;
     /// <summary>
-    /// avg终止事件id
+    /// avg终止事件id<br/>（如果找不到id会一直+1寻找）
     /// </summary>
     public readonly int IdEnd;
+    /// <summary>
+    /// 是否允许反复触发
+    /// </summary>
+    public readonly bool CanRecur;
    
     public const int __ID__ = -261527297;
     public override int GetTypeId() => __ID__;
@@ -70,6 +75,7 @@ public sealed partial class AvgStory : Luban.BeanBase
         + "unlockConds:" + Luban.StringUtil.CollectionToString(UnlockConds) + ","
         + "idStart:" + IdStart + ","
         + "idEnd:" + IdEnd + ","
+        + "canRecur:" + CanRecur + ","
         + "}";
     }
 }

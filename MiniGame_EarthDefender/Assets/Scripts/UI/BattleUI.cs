@@ -19,6 +19,9 @@ public class BattleUI : MonoBehaviour
     public GameObject expProgressBar;//经验值进度条
     public Transform awardsContainer;//奖励列表
     public Transform damageTextsContainer;//伤害数字
+
+
+
     public GameObject awardsEmpty;//奖励列表
     public Text expLvText;//当前等级
     public Dictionary<cfg.item.Item, int> awardsList = new();
@@ -67,7 +70,8 @@ public class BattleUI : MonoBehaviour
             fpsCounter = 0;
         }
 #if UNITY_EDITOR
-        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.activeEnemysCount}";
+        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.activeEnemysCount}"
+        + $"\nisPlayingAvg:{AvgManager.Instance.isPlayingAvg}";
 #else
         gameTimeUI.gameObject.SetActive(false);
 #endif

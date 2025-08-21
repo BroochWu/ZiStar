@@ -10,21 +10,49 @@
     "id": 1002,
     "text_color": 2,
     "time_delay": 2,
-    "time_duration": 2,
+    "time_duration": 6,
     "text_str": "哦对，<color=#ff3333>拖动屏幕</color>瞄准敌人"
   },
   {
     "id": 1003,
     "text_color": 2,
-    "time_delay": 0.2,
-    "time_duration": 2,
-    "text_str": "嗯，我毕竟是实习生，不熟悉也正常"
+    "time_delay": 10,
+    "time_duration": 4,
+    "text_str": "我虽然是实习生，但没想到还挺能干的嘛"
   },
   {
     "id": 1004,
     "text_color": 2,
-    "time_delay": 5,
-    "time_duration": 2,
-    "text_str": "哈，我太强了，我要打十个"
+    "time_delay": 10,
+    "time_duration": 4,
+    "text_str": "芜湖！来吧！来挑战我吧！"
+  },
+  {
+    "id": 1005,
+    "text_color": 2,
+    "time_delay": 10,
+    "time_duration": 4,
+    "text_str": "我太强了，我要打十个"
+  },
+  {
+    "id": 2001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 3,
+    "text_str": "不可能的，兄弟\n这是我的第一战，我可不想撤退"
+  },
+  {
+    "id": 3001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 3,
+    "text_str": "不不不~"
+  },
+  {
+    "id": 4001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 3,
+    "text_str": "嘿，我都说了我不会放弃的了"
   }
 ]

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum BattleState
 {
@@ -216,8 +215,18 @@ public class BattleManager : MonoBehaviour
         Player.instance.rotationTarget.transform.rotation = quaternion.identity;
     }
 
+    /// <summary>
+    /// 主动放弃对战
+    /// </summary>
     public void QuitGame()
     {
+        if (DataManager.Instance.dungeonPassedLevel == 0)
+        {
+            var random = UnityEngine.Random.Range(2, 5);
+            AvgManager.Instance.TriggerAvg(random);
+            return;
+        }
+
         battleLoseReason = BattleLoseReason.ACTIVEQUIT;
         BattleFail();
     }

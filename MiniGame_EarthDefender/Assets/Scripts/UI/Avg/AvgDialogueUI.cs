@@ -36,10 +36,12 @@ public class AvgDialogueUI : MonoBehaviour
 
         //判断什么时候销毁
         var elapsedTime = 0f;
+        var wait = new WaitForSecondsRealtime(Time.deltaTime);
         while (elapsedTime <= _targetTime - animTime)
         {
             elapsedTime += Time.deltaTime;
-            yield return null;
+            //返回真实等待时间，不会因为游戏暂停而停止
+            yield return wait;
         }
 
         //销毁动画

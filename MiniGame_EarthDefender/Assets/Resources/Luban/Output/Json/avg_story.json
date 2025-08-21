@@ -9,6 +9,40 @@
     },
     "unlock_conds": [],
     "id_start": 1001,
-    "id_end": 1999
+    "id_end": 1999,
+    "can_recur": false
+  },
+  {
+    "id": 2,
+    "trigger": {
+      "trigger_type": 0,
+      "int_params": []
+    },
+    "unlock_conds": [],
+    "id_start": 2001,
+    "id_end": 2001,
+    "can_recur": true
+  },
+  {
+    "id": 3,
+    "trigger": {
+      "trigger_type": 0,
+      "int_params": []
+    },
+    "unlock_conds": [],
+    "id_start": 3001,
+    "id_end": 3001,
+    "can_recur": true
+  },
+  {
+    "id": 4,
+    "trigger": {
+      "trigger_type": 0,
+      "int_params": []
+    },
+    "unlock_conds": [],
+    "id_start": 4001,
+    "id_end": 4001,
+    "can_recur": true
   }
 ]
