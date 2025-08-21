@@ -1,8 +1,10 @@
 namespace SFramework
 {
+
     using UnityEngine;
     using System.Collections.Generic;
     using System;
+
 
     public struct LogData
     {
@@ -22,6 +24,9 @@ namespace SFramework
         Environment
     }
 
+#if UNITY_EDITOR
+    [RequireComponent(typeof(DevTest))]
+# endif
     public class SDebugger : MonoBehaviour
     {
         private DebugType _debugType = DebugType.Console;

@@ -6,6 +6,7 @@ using UnityEngine;
 // AVG 触发器管理器
 public class AvgManager : MonoBehaviour
 {
+
     private static AvgManager _instance;
     public static AvgManager Instance => _instance;
 
@@ -86,14 +87,17 @@ public class AvgManager : MonoBehaviour
             return;
         }
 
-        //寻找可以触发的AVG（只触发1个）
+        //遍历寻找在当前triggerType下可以触发的AVG（只触发1个）
         foreach (var trigger in _triggers.Values)
         {
             if (trigger.TriggerType == triggerType && trigger.ShouldTrigger())
             {
-                TriggerAvg(trigger.AvgId);
-                trigger.MarkAsTriggered();
-                break;
+                if (TriggerAvg(trigger.AvgId))
+                {
+                    //标记触发器为触发的
+                    trigger.MarkAsTriggered();
+                    break;
+                }
             }
         }
 
@@ -103,12 +107,17 @@ public class AvgManager : MonoBehaviour
     }
 
     // 触发特定AVG
-    public void TriggerAvg(int avgId)
+    public bool TriggerAvg(int avgId)
     {
         if (_triggeredAvgs.Contains(avgId))
         {
             Debug.Log($"AVG {avgId} 已经触发过，跳过");
-            return;
+            return false;
+        }
+        if (cfg.Tables.tb.AvgStory.GetOrDefault(avgId) == null)
+        {
+            Debug.LogError($"AVG {avgId} 不存在");
+            return false;
         }
 
         // 播放AVG
@@ -121,18 +130,39 @@ public class AvgManager : MonoBehaviour
         OnAvgTriggered?.Invoke(avgId);
 
         Debug.Log($"触发AVG: {avgId}");
+        return true;
     }
 
+#if UNITY_EDITOR
+    /// <summary>
+    /// 测试AVG（仅编辑器可用）
+    /// </summary>
+    /// <param name="avgId"></param>
+    public void TestAvg(int avgId)
+    {
+        if (cfg.Tables.tb.AvgStory.GetOrDefault(avgId) == null)
+        {
+            Debug.LogError($"AVG {avgId} 不存在");
+            return;
+        }
+
+        // 播放AVG
+        PlayAvg(avgId);
+    }
+#endif
+
     // 播放AVG的具体实现
-    private void PlayAvg(int avgId)
+    private void PlayAvg(int _avgStoryId)
     {
         isPlayingAvg = true;
 
 
         // 这里实现AVG播放逻辑
-        var avgConfig = cfg.Tables.tb.AvgStory.Get(avgId);
+        var avgConfig = cfg.Tables.tb.AvgStory.Get(_avgStoryId);
         //在AVG播放脚本中初始化本次AVG
         AvgPlayer.Instance.Initialize(avgConfig);
+        //保存已触发的avg们
+        SaveTriggeredAvgs();
     }
 
     // 保存已触发的AVG
@@ -167,4 +197,6 @@ public class AvgManager : MonoBehaviour
     //         }
     //     }
     // }
+
+
 }
