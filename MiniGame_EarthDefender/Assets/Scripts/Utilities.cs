@@ -231,4 +231,20 @@ public static class Utility
     }
 
 
+    /// <summary>
+    /// 从列表中随机一个
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    public static T GetRandomByList<T>(this List<T> list)
+    {
+        if (list == null || list.Count == 0)
+        {
+            Debug.LogWarning("列表为空或未初始化");
+            return default(T);
+        }
+
+        return list[Random.Range(0, list.Count)];
+    }
 }

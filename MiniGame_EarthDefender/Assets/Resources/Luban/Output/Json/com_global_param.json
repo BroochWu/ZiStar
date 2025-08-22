@@ -33,5 +33,27 @@
     "int_value": 300,
     "str_value": "",
     "int_list_value": []
+  },
+  {
+    "key": "avg_while_quit_in_dungeon_1",
+    "desc": "第一关放弃时的特殊剧情",
+    "param_type": 11,
+    "int_value": 0,
+    "str_value": "",
+    "int_list_value": [
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "key": "avg_while_total_damage_is_0",
+    "desc": "如果总伤害是0",
+    "param_type": 11,
+    "int_value": 0,
+    "str_value": "",
+    "int_list_value": [
+      5
+    ]
   }
 ]

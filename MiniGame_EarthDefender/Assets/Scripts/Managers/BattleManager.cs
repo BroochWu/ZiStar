@@ -252,6 +252,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("buttonInit：" + buttonInit);
         if (DataManager.Instance.dungeonPassedLevel == 0)
         {
+            //注册button
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             if (buttonInit == Vector2.zero)
             {
@@ -259,7 +260,7 @@ public class BattleManager : MonoBehaviour
                 buttonInit = Camera.main.WorldToViewportPoint(button.transform.position);
             }
 
-            //随机移动放弃
+            //随机移动放弃按钮的位置
             var randomX = UnityEngine.Random.Range(-0.2f, 0.2f);
             var randomY = UnityEngine.Random.Range(-0.3f, 0.3f);
             var newPos = Camera.main.ViewportToWorldPoint(new Vector2(buttonInit.x + randomX, buttonInit.y + randomY));
@@ -267,8 +268,10 @@ public class BattleManager : MonoBehaviour
             button.transform.position = newPos;
 
             //随机剧本
-            var random = UnityEngine.Random.Range(2, 5);
-            AvgManager.Instance.TriggerAvg(random);
+            var avgId = Utility.GetRandomByList(cfg.Tables.tb.GlobalParam.Get("avg_while_quit_in_dungeon_1").IntListValue);
+            AvgManager.Instance.TriggerAvg(avgId);
+
+
             return;
         }
 

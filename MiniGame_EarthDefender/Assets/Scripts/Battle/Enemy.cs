@@ -211,7 +211,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.LogError("沃日，这哪来的子弹，找不到父武器");
+            Debug.LogWarning("沃日，这哪来的子弹，找不到父武器");
         }
 
 

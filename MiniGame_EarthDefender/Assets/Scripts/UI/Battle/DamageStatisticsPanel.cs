@@ -21,7 +21,8 @@ public class DamageStatisticsPanel : MonoBehaviour
         if (mvpWeaponDamage == 0)
         {
             textMvpWeaponDamageCount.text = "造成伤害……0？？居然是0耶……";
-            AvgManager.Instance.TriggerAvg(5);
+            var avgId = Utility.GetRandomByList(cfg.Tables.tb.GlobalParam.Get("avg_while_total_damage_is_0").IntListValue);
+            AvgManager.Instance.TriggerAvg(avgId);
         }
         else
         {
