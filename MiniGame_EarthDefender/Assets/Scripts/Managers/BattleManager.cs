@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -51,6 +52,31 @@ public class BattleManager : MonoBehaviour
     List<Portal> activePortals = new();//活跃的传送门
     public List<Enemy> activeEnemys = new();//活跃的敌人
     public int activeEnemysCount { get { return activeEnemys.Count; } }
+
+    //战斗统计相关
+    public float totalDamage;
+    private List<KeyValuePair<Weapon, int>> _sortedWeaponDamageStatisticsList = new();
+    public List<KeyValuePair<Weapon, int>> sortedWeaponDamageStatisticsList
+    {
+        get
+        {
+            return _sortedWeaponDamageStatisticsList;
+        }
+        set
+        {
+            _sortedWeaponDamageStatisticsList = value;
+            //每次设置值的时候，都会更新总伤害
+            totalDamage = 0;
+            foreach (var a in value)
+            {
+                totalDamage += a.Value;
+            }
+        }
+    }
+
+    // // 事件委托
+    // public delegate void OnGameOver();
+    // public event OnGameOver onGameOver;
 
 
     void Awake()
@@ -182,12 +208,13 @@ public class BattleManager : MonoBehaviour
 
 
     /// <summary>
-    /// 释放所有的传送门和怪物
+    /// 重置关卡，释放所有的传送门和怪物
     /// </summary>
     public void ResetDungeon()
     {
 
         //移除所有的玩家武器
+        sortedWeaponDamageStatisticsList?.Clear();
         Player.instance.RemoveAllWeapons();
 
         //移除所有传送门
@@ -251,17 +278,33 @@ public class BattleManager : MonoBehaviour
 
 
     /// <summary>
+    /// 更新本局武器伤害排序
+    /// </summary>
+    void RefreshSortedWeaponDamageStatisticsList()
+    {
+        sortedWeaponDamageStatisticsList = Player.instance.battleEquipedWeapon
+                .OrderByDescending(n => n.Value)
+                .ToList();
+
+    }
+
+
+    /// <summary>
     /// 战斗失败
     /// </summary>
     void BattleFail()
     {
-        battleState = BattleState.BATTLEFAIL;
         //地球血量清零则战斗失败
+        battleState = BattleState.BATTLEFAIL;
+        RefreshSortedWeaponDamageStatisticsList();
+
+
         AwardDungeon();
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
 
         UIManager.Instance.battleLayer.BattleFail();
+
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
     }
@@ -272,9 +315,11 @@ public class BattleManager : MonoBehaviour
     void BattleSuccess()
     {
         battleState = BattleState.BATTLESUCCESS;
-        //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
+        RefreshSortedWeaponDamageStatisticsList();
+
+
         AwardDungeon();
-        // PlayerPrefs.SetInt("dungeon_passed_level", dungeonId);
+        //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
         DataManager.Instance.dungeonPassedLevel = dungeonId;
 
         canGameTimeCount = false;
@@ -282,8 +327,10 @@ public class BattleManager : MonoBehaviour
 
         //UI播放通关
         UIManager.Instance.battleLayer.BattleSuccess();
+
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
+
     }
 
 
@@ -299,13 +346,14 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 计算伤害公式
+    /// 计算伤害公式(返回真实扣除的伤害)
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="currentHp"></param>
-    public int CalDamage(int damage, int currentHp)
+    public int CalDamage(int damage, int currentHp, out int newHp)
     {
-        return Mathf.Max(0, currentHp - damage);
+        newHp = Mathf.Max(0, currentHp - damage);
+        return currentHp - newHp;
     }
 
 
@@ -326,8 +374,9 @@ public class BattleManager : MonoBehaviour
         //游戏结束就不计算了
         if (battleState != BattleState.ISBATTLEING) return;
 
+        CalDamage(_damage, currentEarthHp, out int newHp);
+        currentEarthHp = newHp;
 
-        currentEarthHp = CalDamage(_damage, currentEarthHp);
         UIManager.Instance.battleLayer.RefreshEarthHp();
         UIManager.Instance.backbattleLayer.GrilleHit();
         if (currentEarthHp <= 0)
@@ -509,7 +558,7 @@ public class BattleManager : MonoBehaviour
     {
         globalDamageMultiInOneBattle += number;
         Debug.Log("当前全局伤害加成：" + globalDamageMultiInOneBattle);
-        foreach (var weapon in Player.instance.equipedWeapon)
+        foreach (var weapon in Player.instance.battleEquipedWeapon.Keys)
         {
             weapon.GetAndSetWeaponAttack();
         }

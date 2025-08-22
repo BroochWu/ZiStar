@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TriCardEffect
@@ -26,11 +27,11 @@ public class TriCardEffect
         switch (_effectsType)
         {
             case cfg.Enums.Card.EffectsType.WEAPONCOLUMN:
-                Player.instance.equipedWeapon.Find(weapon => weapon.weaponId == _params[0])
+                Player.instance.battleEquipedWeapon.Keys.FirstOrDefault(weapon => weapon.weaponId == _params[0])
                 .PlusColumnCount(_params[1]);
                 break;
             case cfg.Enums.Card.EffectsType.WEAPONRAW:
-                Player.instance.equipedWeapon.Find(weapon => weapon.weaponId == _params[0])
+                Player.instance.battleEquipedWeapon.Keys.FirstOrDefault(weapon => weapon.weaponId == _params[0])
                 .PlusRowCount(_params[1]);
                 break;
             case cfg.Enums.Card.EffectsType.WEAPONDAMAGE:
@@ -40,7 +41,7 @@ public class TriCardEffect
                 }
                 else
                 {
-                    Player.instance.equipedWeapon.Find(weapon => weapon.weaponId == _params[0])
+                    Player.instance.battleEquipedWeapon.Keys.FirstOrDefault(weapon => weapon.weaponId == _params[0])
                     .PlusLocalDamageMultiInOneBattle(_params[1]);
                 }
                 break;

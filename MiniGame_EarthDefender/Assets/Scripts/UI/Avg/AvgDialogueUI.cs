@@ -39,7 +39,7 @@ public class AvgDialogueUI : MonoBehaviour
         var wait = new WaitForSecondsRealtime(0.02f);
         while (elapsedTime <= _targetTime)
         {
-            Debug.Log("elapsedTime:" + elapsedTime);
+            // Debug.Log("elapsedTime:" + elapsedTime);
             elapsedTime += wait.waitTime;
             //返回真实等待时间，不会因为游戏暂停而停止
             yield return wait;
@@ -61,14 +61,9 @@ public class AvgDialogueUI : MonoBehaviour
 
     public void DestroyThis()
     {
-
-        Destroy(gameObject);
-    }
-
-    void OnDestroy()
-    {
         //销毁以后播放下一行
         if (AvgManager.Instance.isPlayingAvg != null) AvgPlayer.Instance.NextAvgEvent();
+        Destroy(gameObject);
     }
 
 

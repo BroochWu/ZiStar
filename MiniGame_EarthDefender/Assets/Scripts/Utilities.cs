@@ -200,7 +200,7 @@ public static class Utility
             case cfg.Enums.Com.CondType.NULL:
                 return true;
             case cfg.Enums.Com.CondType.WEAPONUNLOCK:
-                return DataManager.Instance.IsWeaponEquipped(_intParams[0]) >= 0;
+                return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
                 return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];
             case cfg.Enums.Com.CondType.DUNGEON_PASS:
@@ -218,7 +218,7 @@ public static class Utility
                 return true;
             case cfg.Enums.Com.CondType.WEAPONUNLOCK:
                 _lockStr = $"需要穿戴武器{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName}！";
-                return DataManager.Instance.IsWeaponEquipped(_intParams[0]) >= 0;
+                return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
                 _lockStr = $"{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName} 等级需要达到 {_intParams[1]}！";
                 return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];

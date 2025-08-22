@@ -32,6 +32,10 @@ namespace cfg.Enums.Com
         /// 切换到指定UI
         /// </summary>
         UI_STATE = 3,
+        /// <summary>
+        /// 代码写死
+        /// </summary>
+        INCODE = 4,
     }
 
 } 

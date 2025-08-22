@@ -104,6 +104,10 @@ namespace cfg.weapon
 public class Weapon : MonoBehaviour
 {
     // public static int globalDamageMultiInOneBattle { get; private set; }//所有武器共同生效的，单局游戏全局伤害加成
+
+    private cfg.weapon.Weapon _config;
+    public cfg.weapon.Weapon config => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
+    private string bulletType;
     private int localDamageMultiInOneBattle; //仅这个武器生效
     private int rowCount;
     private float rowSpace;
@@ -120,23 +124,27 @@ public class Weapon : MonoBehaviour
     public float bulletSpeed { get; private set; }
     public int bulletScale { get; private set; }
     public float bulletReleaseTime { get; private set; }
-    private cfg.weapon.Weapon thisWeapon;
-    private string bulletType;
+    public float battleWeaponDamage { get; private set; }//武器单局造成的伤害
+
 
     public void Initialize(cfg.weapon.Weapon weapon, Transform bulletInitTransform, int weaponLevel)
     {
+        _config = weapon;
 
         // 加载配置
         weaponId = weapon.Id;
-        this.thisWeapon = weapon;
         this.bulletInitTransform = bulletInitTransform;
         this.weaponLevel = weaponLevel;
+
+        //重置武器造成的伤害
+        battleWeaponDamage = 0;
+
         //初始化武器伤害
         // this.attack = GetWeaponAttack();
 
-        if (thisWeapon == null)
+        if (config == null)
         {
-            Debug.LogError($"Weapon config not found for ID: {thisWeapon.Id}");
+            Debug.LogError($"Weapon config not found for ID: {config.Id}");
             return;
         }
 
@@ -162,7 +170,7 @@ public class Weapon : MonoBehaviour
         int final = (int)(
             basicValue *
             (1
-            + thisWeapon.basicAdditionAtk //基础武器伤害倍率
+            + config.basicAdditionAtk //基础武器伤害倍率
                                           // + DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100f //武器带来的全局加成量（删除，叠加在单局加成里）
             + BattleManager.Instance.globalDamageMultiInOneBattle / 10000f  //单局加成（基本上是卡牌带来的）
             + localDamageMultiInOneBattle / 10000f //单局本武器独特加成（基本上也是卡牌带来的）
@@ -179,15 +187,15 @@ public class Weapon : MonoBehaviour
     void UpdateData()
     {
         // 初始化武器参数(这些未来可能都不是固定读表的)
-        rateOfFire = new WaitForSeconds(1f / thisWeapon.RateOfFire);
-        bulletReleaseTime = thisWeapon.MaxLifetime;
-        rowCount = thisWeapon.RowCount;
-        rowSpace = thisWeapon.RowSpace;
-        columnCount = thisWeapon.ColumnCount;
-        columnSpace = new WaitForSeconds(thisWeapon.ColumnSpace);
-        bulletSpeed = thisWeapon.BulletSpeed;
-        bulletScale = thisWeapon.BulletScale;
-        bulletType = thisWeapon.BulletPrefab;
+        rateOfFire = new WaitForSeconds(1f / config.RateOfFire);
+        bulletReleaseTime = config.MaxLifetime;
+        rowCount = config.RowCount;
+        rowSpace = config.RowSpace;
+        columnCount = config.ColumnCount;
+        columnSpace = new WaitForSeconds(config.ColumnSpace);
+        bulletSpeed = config.BulletSpeed;
+        bulletScale = config.BulletScale;
+        bulletType = config.BulletPrefab;
         GetAndSetWeaponAttack();
 
         // 预热对象池（可选）
@@ -262,9 +270,9 @@ public class Weapon : MonoBehaviour
     }
 
     /// <summary>
-    /// 武器卸载时的行为
+    /// 战斗中武器卸载时的行为
     /// </summary>
-    public void UnEquip()
+    public void BattleUnEquip()
     {
         if (corShootBullet != null)
         {
@@ -280,7 +288,7 @@ public class Weapon : MonoBehaviour
     public void PlusLocalDamageMultiInOneBattle(int number)
     {
         localDamageMultiInOneBattle += number;
-        Debug.Log($"当前 {thisWeapon.TextName} 基础伤害加成：" + localDamageMultiInOneBattle);
+        Debug.Log($"当前 {config.TextName} 基础伤害加成：" + localDamageMultiInOneBattle);
         GetAndSetWeaponAttack();
     }
 

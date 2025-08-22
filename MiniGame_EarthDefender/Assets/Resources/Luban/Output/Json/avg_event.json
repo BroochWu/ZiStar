@@ -54,5 +54,12 @@
     "time_delay": 0,
     "time_duration": 2,
     "text_str": "嘿，我都说了我不会放弃的了"
+  },
+  {
+    "id": 5001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "我只是忘了些东西\n等会再来揍你们"
   }
 ]

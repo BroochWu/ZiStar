@@ -106,7 +106,7 @@ public class WeaponsUI : MonoBehaviour
         int a = 0;
         foreach (var slot in equippedWeaponsSlots)
         {
-            var weaponId = DataManager.Instance.GetEquippedWeaponList()[a];
+            var weaponId = DataManager.Instance.GetPreequippedWeaponList()[a];
             if (a >= DataManager.EQUIP_SLOT_COUNT) break;
             var maybeNull = config.GetOrDefault(weaponId);
             slot.GetComponentInChildren<WeaponCellUI>().Initialize(maybeNull);

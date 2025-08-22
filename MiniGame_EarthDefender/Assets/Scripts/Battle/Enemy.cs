@@ -190,13 +190,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+
+    /// <summary>
+    /// 造成伤害
+    /// </summary>
+    /// <param name="_damage"></param>
+    /// <param name="_source"></param>
+    public void TakeDamage(int _damage, Weapon _source)
     {
         if (dynamicConfig == null || isReleased) return;
 
         var dtx = ObjectPoolManager.Instance.GetVFX(VFXType.DAMAGETEXT);
-        dtx.GetComponent<VFX>().Initialize(damage, transform.position);
-        _currentHp = BattleManager.Instance.CalDamage(damage, _currentHp);
+        dtx.GetComponent<VFX>().Initialize(_damage, transform.position);
+
+        //统计伤害
+        if (Player.instance.battleEquipedWeapon.ContainsKey(_source))
+        {
+            Player.instance.battleEquipedWeapon[_source] += BattleManager.Instance.CalDamage(_damage, _currentHp, out int newHp);
+            _currentHp = newHp;
+        }
+        else
+        {
+            Debug.LogError("沃日，这哪来的子弹，找不到父武器");
+        }
+
 
         if (_currentHp <= 0)
         {

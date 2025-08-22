@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     }
 
     private BulletParent bulletParent;
+    public Weapon parentWeapon { get; private set; }
 
     public string bulletType;
     public int bulletDamage;
@@ -21,6 +22,8 @@ public class Bullet : MonoBehaviour
     public void Initialize(Weapon parent)
     {
         bulletParent = BulletParent.PLAYER;
+        parentWeapon = parent;
+
         speed = parent.bulletSpeed;
         lifeTime = parent.bulletReleaseTime;
         transform.localScale = Vector3.one * parent.bulletScale / 10000f;

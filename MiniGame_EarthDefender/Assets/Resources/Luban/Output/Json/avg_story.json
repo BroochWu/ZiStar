@@ -15,7 +15,7 @@
   {
     "id": 2,
     "trigger": {
-      "trigger_type": 0,
+      "trigger_type": 4,
       "int_params": []
     },
     "unlock_conds": [],
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "trigger": {
-      "trigger_type": 0,
+      "trigger_type": 4,
       "int_params": []
     },
     "unlock_conds": [],
@@ -37,12 +37,23 @@
   {
     "id": 4,
     "trigger": {
-      "trigger_type": 0,
+      "trigger_type": 4,
       "int_params": []
     },
     "unlock_conds": [],
     "id_start": 4001,
     "id_end": 4001,
+    "can_recur": true
+  },
+  {
+    "id": 5,
+    "trigger": {
+      "trigger_type": 4,
+      "int_params": []
+    },
+    "unlock_conds": [],
+    "id_start": 5001,
+    "id_end": 5001,
     "can_recur": true
   }
 ]

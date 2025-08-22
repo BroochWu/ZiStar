@@ -55,8 +55,11 @@ public class CollisionManager : MonoBehaviour
                 {
 
                     // 处理碰撞
+                    var bulletConfig = bullet.GetComponent<Bullet>();
                     obj.GetComponent<Enemy>().TakeDamage(
-                        bullet.GetComponent<Bullet>().bulletDamage
+                        bulletConfig.bulletDamage, bulletConfig.parentWeapon
+
+
                     );
                     // 回收子弹
                     ObjectPoolManager.Instance.ReleaseBullet(bullet);

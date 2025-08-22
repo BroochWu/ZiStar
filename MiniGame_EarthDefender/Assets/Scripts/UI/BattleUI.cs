@@ -19,6 +19,7 @@ public class BattleUI : MonoBehaviour
     public GameObject expProgressBar;//经验值进度条
     public Transform awardsContainer;//奖励列表
     public Transform damageTextsContainer;//伤害数字
+    public DamageStatisticsPanel damageStatisticsPanel;//伤害统计
 
 
 
@@ -93,6 +94,7 @@ public class BattleUI : MonoBehaviour
         battleStopWindow.SetActive(false);
         battleOver.SetActive(true);
         battleFail.SetActive(true);
+        damageStatisticsPanel.Initialize();
         AddAwardList();
     }
     /// <summary>
@@ -102,6 +104,7 @@ public class BattleUI : MonoBehaviour
     {
         battleOver.SetActive(true);
         battleSuccess.SetActive(true);
+        damageStatisticsPanel.Initialize();
         AddAwardList();
 
     }

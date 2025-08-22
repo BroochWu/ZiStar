@@ -71,7 +71,7 @@ public class WeaponDetailInfo : MonoBehaviour
 
         InitBonus();
 
-        if (DataManager.Instance.IsWeaponEquipped(weapon.Id) != -1)
+        if (DataManager.Instance.IsWeaponPreequipped(weapon.Id) != -1)
         {
             buttonState = ButtonState.UNEQUIP;
             buttonEquip.GetComponentInChildren<Text>().text = "卸下";
@@ -142,7 +142,7 @@ public class WeaponDetailInfo : MonoBehaviour
             var fistSlot = DataManager.Instance.GetFirstEmptySlot();
             if (fistSlot != -1)
             {
-                DataManager.Instance.EquipWeapon(fistSlot, weapon.Id);
+                DataManager.Instance.PreequipWeapon(fistSlot, weapon.Id);
                 UIManager.Instance.CommonToast("装备成功");
                 CloseThisWindow(true);
             }
@@ -153,8 +153,8 @@ public class WeaponDetailInfo : MonoBehaviour
         }
         else
         {
-            var slotId = DataManager.Instance.IsWeaponEquipped(weapon.Id);
-            if (DataManager.Instance.UnequipWeaponBySlot(slotId))
+            var slotId = DataManager.Instance.IsWeaponPreequipped(weapon.Id);
+            if (DataManager.Instance.UnequipPreweaponBySlot(slotId))
             {
                 CloseThisWindow(true);
             }

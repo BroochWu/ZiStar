@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public GameObject guideLine;
     public GameObject earthSprite;
 
-    public List<Weapon> equipedWeapon;
+    public Dictionary<Weapon, int> battleEquipedWeapon = new();//局中使用的装备列表及其本局伤害量
 
 
     Camera mainCam;
@@ -106,11 +106,15 @@ public class Player : MonoBehaviour
     /// </summary>
     public void BattleStart()
     {
-        foreach (var weaponId in DataManager.Instance.GetEquippedWeaponList())
-        {
-            if (weaponId == -1) continue;
-            AddWeaponInBattle(weaponId);
-        }
+        //需要注意这是错的！新武器要在游戏中解锁！
+        // foreach (var weaponId in DataManager.Instance.GetPreequippedWeaponList())
+        // {
+        //     if (weaponId == -1) continue;
+        //     AddWeaponInBattle(weaponId);
+        // }
+
+        //默认只携带基础枪
+        AddWeaponInBattle(1);
     }
 
     /// <summary>
@@ -126,7 +130,7 @@ public class Player : MonoBehaviour
         Weapon weapon = weaponObj.AddComponent<Weapon>();
         weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath.transform, 1);
 
-        equipedWeapon.Add(weapon);
+        battleEquipedWeapon.Add(weapon, 0);
 
     }
     /// <summary>
@@ -134,11 +138,15 @@ public class Player : MonoBehaviour
     /// </summary>
     public void RemoveAllWeapons()
     {
-        foreach (var weapon in equipedWeapon)
+        if (battleEquipedWeapon.Count == 0) return;
+
+        foreach (var weapon in battleEquipedWeapon?.Keys)
         {
+            Debug.Log($"{weapon.name} 本局造成了 {battleEquipedWeapon[weapon]} 的总伤害");
             Destroy(weapon.gameObject);
         }
-        equipedWeapon.Clear();
+        battleEquipedWeapon.Clear();
+
 
     }
 
