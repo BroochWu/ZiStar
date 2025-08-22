@@ -7,16 +7,16 @@ using UnityEngine;
 
 public enum BattleState
 {
-    NULL,
-    ISBATTLEING,
-    BATTLEFAIL,
-    BATTLESUCCESS
+    NULL = -2,
+    ISBATTLEING = -1,
+    BATTLEFAIL = 0,
+    BATTLESUCCESS = 1
 }
 public enum BattleLoseReason
 {
-    NULL,
-    ACTIVEQUIT,//主动放弃
-    NORMAL,//空血死亡
+    NULL = 0,
+    ACTIVEQUIT = 1,//主动放弃
+    NORMAL = 2,//空血死亡
 }
 
 public class BattleManager : MonoBehaviour

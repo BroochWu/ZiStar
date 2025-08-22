@@ -40,6 +40,14 @@ namespace cfg.Enums.Com
         /// 总伤害（战斗中）
         /// </summary>
         TOTALBATTLEDAMAGE = 5,
+        /// <summary>
+        /// 0失败，1胜利
+        /// </summary>
+        BATTLE_STATE = 6,
+        /// <summary>
+        /// 1是主动放弃，2是被动空血
+        /// </summary>
+        BATTLE_LOSE_REASON = 7,
     }
 
 } 

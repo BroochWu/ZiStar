@@ -70,5 +70,89 @@
     "id_start": 5001,
     "id_end": 5001,
     "can_recur": true
+  },
+  {
+    "id": 6,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          0
+        ]
+      },
+      {
+        "cond_type": 7,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          2
+        ]
+      }
+    ],
+    "id_start": 6001,
+    "id_end": 6001,
+    "can_recur": true
+  },
+  {
+    "id": 7,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 7001,
+    "id_end": 7001,
+    "can_recur": true
+  },
+  {
+    "id": 8,
+    "trigger": {
+      "trigger_type": 0,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      },
+      {
+        "cond_type": 7,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 8001,
+    "id_end": 8001,
+    "can_recur": true
   }
 ]

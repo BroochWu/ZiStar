@@ -10,14 +10,7 @@ public class DevTest : MonoBehaviour
 
     [Tooltip("ctrl+shift+1测试剧情")]
     public int test_avg_story_id;
-    public float test_time_scale
-    {
-        set
-        {
-            Time.timeScale = value;
-        }
-    }
-
+    public float test_time_scale;
 
     void Update()
     {
@@ -30,6 +23,11 @@ public class DevTest : MonoBehaviour
             {
                 Debug.Log("ctrl+shift+1触发成功");
                 AvgManager.Instance.TestAvg(test_avg_story_id);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("ctrl+shift+2触发成功");
+                Time.timeScale = test_time_scale;
             }
         }
     }

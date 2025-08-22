@@ -190,8 +190,7 @@ public class WeaponCellUI : MonoBehaviour
                 break;
             case cfg.weapon.Weapon.CellState.LOCK:
             case cfg.weapon.Weapon.CellState.NEXTUNLOCK:
-                string toastStr;
-                Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.StringParams, weapon.UnlockCond.IntParams, out toastStr);
+                Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.StringParams, weapon.UnlockCond.IntParams, out string toastStr);
                 UIManager.Instance.CommonToast(toastStr);
                 break;
 

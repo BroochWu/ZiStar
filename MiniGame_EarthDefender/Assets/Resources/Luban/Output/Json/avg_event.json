@@ -61,5 +61,26 @@
     "time_delay": 0,
     "time_duration": 2,
     "text_str": "我只是忘了些东西\n等会再来揍你们"
+  },
+  {
+    "id": 6001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "啊，我还会再回来的"
+  },
+  {
+    "id": 7001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "强大的我，哈哈"
+  },
+  {
+    "id": 8001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "留得青山在，不怕没柴烧"
   }
 ]

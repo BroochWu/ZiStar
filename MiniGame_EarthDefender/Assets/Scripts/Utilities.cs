@@ -227,6 +227,20 @@ public static class Utility
 
             case cfg.Enums.Com.CondType.TOTALBATTLEDAMAGE:
                 return Compare(BattleManager.Instance.totalDamage, _intParams[0], _stringParams[0]);
+
+            case cfg.Enums.Com.CondType.BATTLE_STATE:
+                return Compare((int)BattleManager.Instance.battleState, _intParams[0], _stringParams[0]);
+            // switch (_intParams[0])
+            // {
+            //     case 0: return BattleManager.Instance.battleState == BattleState.BATTLEFAIL;
+            //     case 1: return BattleManager.Instance.battleState == BattleState.BATTLESUCCESS;
+            //     default:
+            //         Debug.LogError("这是什么解锁条件？");
+            //         return false;
+            // }
+
+            case cfg.Enums.Com.CondType.BATTLE_LOSE_REASON:
+                return Compare((int)BattleManager.Instance.battleLoseReason, _intParams[0], _stringParams[0]);
         }
         Debug.LogError("这是什么解锁条件？");
         return false;
@@ -252,6 +266,12 @@ public static class Utility
 
             case cfg.Enums.Com.CondType.TOTALBATTLEDAMAGE:
                 return Compare(BattleManager.Instance.totalDamage, _intParams[0], _stringParams[0]);
+
+            case cfg.Enums.Com.CondType.BATTLE_STATE:
+                return Compare((int)BattleManager.Instance.battleState, _intParams[0], _stringParams[0]);
+
+            case cfg.Enums.Com.CondType.BATTLE_LOSE_REASON:
+                return Compare((int)BattleManager.Instance.battleLoseReason, _intParams[0], _stringParams[0]);
         }
         Debug.LogError("这是什么解锁条件？");
         return false;
@@ -260,7 +280,7 @@ public static class Utility
     public static bool CondListCheck(List<cfg.Beans.Com_UnlockConds> _conds)
     {
         if (_conds.Count == 0) return true;
-        
+
         foreach (var cond in _conds)
         {
             if (!CondCheck(cond.CondType, cond.StringParams, cond.IntParams)) return false;

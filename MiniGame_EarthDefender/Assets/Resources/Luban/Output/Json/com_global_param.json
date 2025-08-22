@@ -45,15 +45,5 @@
       3,
       4
     ]
-  },
-  {
-    "key": "avg_while_total_damage_is_0",
-    "desc": "如果总伤害是0",
-    "param_type": 11,
-    "int_value": 0,
-    "str_value": "",
-    "int_list_value": [
-      5
-    ]
   }
 ]
