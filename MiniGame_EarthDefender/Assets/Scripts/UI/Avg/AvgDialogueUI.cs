@@ -10,8 +10,6 @@ public class AvgDialogueUI : MonoBehaviour
     // Vector3 INIT_POS_OFFSET = new Vector3(-20, 0, 0);
     // Vector3 initPos;
 
-    const float animTime = 0.5f;
-
     public void Initialize(cfg.avg.AvgEvent _avgEvent)
     {
         // initPos = transform.position;

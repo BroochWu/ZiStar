@@ -36,6 +36,10 @@ namespace cfg.Enums.Com
         /// 登录天数
         /// </summary>
         LOAD_DAY = 4,
+        /// <summary>
+        /// 总伤害（战斗中）
+        /// </summary>
+        TOTALBATTLEDAMAGE = 5,
     }
 
 } 

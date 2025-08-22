@@ -163,28 +163,9 @@ public class TriCard
     bool CheckCardCondInBattle(cfg.card.Card card)
     {
         if (card.UnlockCondsInbattle.Count == 0) return true;
-        foreach (var cond in card.UnlockCondsInbattle)
-        {
-            //只要有一个条件不满足就return false
-            if (!Utility.CondCheck(cond.CondType, cond.IntParams)) return false;
-            // switch (cond.CondType)
-            // {
-            //     case cfg.Enums.Com.CondType.NULL:
-            //         break;
-            //     case cfg.Enums.Com.CondType.WEAPONUNLOCK:
-            //         if (DataManager.Instance.IsWeaponEquipped(cond.IntParams[0]) >= 0)
-            //         {
-            //             break;
-            //         }
-            //         else
-            //         {
-            //             return false;
-            //         }
-            //     default:
-            //         Debug.LogError($"配错表了，卡牌{card.Id}战斗中的解锁条件配了{cond.CondType}");
-            //         return false;
-            // }
-        }
+
+        if (!Utility.CondListCheck(card.UnlockCondsInbattle)) return false;
+
         return true;
     }
 

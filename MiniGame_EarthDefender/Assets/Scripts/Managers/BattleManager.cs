@@ -54,7 +54,7 @@ public class BattleManager : MonoBehaviour
     public int activeEnemysCount { get { return activeEnemys.Count; } }
 
     //战斗统计相关
-    public float totalDamage;
+    public int totalDamage;
     private List<KeyValuePair<Weapon, int>> _sortedWeaponDamageStatisticsList = new();
     public List<KeyValuePair<Weapon, int>> sortedWeaponDamageStatisticsList
     {
@@ -299,17 +299,11 @@ public class BattleManager : MonoBehaviour
     {
         //地球血量清零则战斗失败
         battleState = BattleState.BATTLEFAIL;
-        RefreshSortedWeaponDamageStatisticsList();
 
 
-        AwardDungeon();
-        canGameTimeCount = false;
-        Time.timeScale = 0.05f;
+        //战斗结束通用处理
+        BattleOver();
 
-        UIManager.Instance.battleLayer.BattleFail();
-
-        //移除所有的玩家武器
-        Player.instance.RemoveAllWeapons();
     }
 
     /// <summary>
@@ -318,24 +312,40 @@ public class BattleManager : MonoBehaviour
     void BattleSuccess()
     {
         battleState = BattleState.BATTLESUCCESS;
-        RefreshSortedWeaponDamageStatisticsList();
-
-
-        AwardDungeon();
         //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
         DataManager.Instance.dungeonPassedLevel = dungeonId;
 
+
+        //战斗结束通用处理
+        BattleOver();
+
+    }
+
+
+    /// <summary>
+    /// 战斗结束通用处理
+    /// </summary>
+    void BattleOver()
+    {
+        //刷新武器伤害总览
+        RefreshSortedWeaponDamageStatisticsList();
+
+        //奖励列表
+        AwardDungeon();
+
+        //数据重置
         canGameTimeCount = false;
         Time.timeScale = 0.05f;
-
         //UI播放通关
-        UIManager.Instance.battleLayer.BattleSuccess();
+        UIManager.Instance.battleLayer.BattleOver();
 
         //移除所有的玩家武器
         Player.instance.RemoveAllWeapons();
 
-    }
+        //判断执行关卡结束时的AVG事件
+        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.DUNGEON_OVER);
 
+    }
 
     /// <summary>
     /// 生成传送门

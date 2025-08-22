@@ -199,7 +199,7 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 检查预装备中的武器是否已装备,并且返回对应的位置（slot）
+    /// 检查预装备中的武器是否已装备,并且返回对应的位置（slot）-1就是没穿
     /// </summary>
     public int IsWeaponPreequipped(int weaponId)
     {

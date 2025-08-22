@@ -87,9 +87,28 @@ public class BattleUI : MonoBehaviour
     }
 
     /// <summary>
+    /// 根据战斗结果，显示战斗结束UI
+    /// </summary>
+    public void BattleOver()
+    {
+        switch (BattleManager.Instance.battleState)
+        {
+            case BattleState.BATTLEFAIL:
+                BattleFail();
+                break;
+            case BattleState.BATTLESUCCESS:
+                BattleSuccess();
+                break;
+            default:
+                Debug.LogWarning("啊？战斗没结束吗");
+                break;
+        }
+    }
+
+    /// <summary>
     /// 游戏失败时的UI
     /// </summary>
-    public void BattleFail()
+    private void BattleFail()
     {
         battleStopWindow.SetActive(false);
         battleOver.SetActive(true);
@@ -100,7 +119,7 @@ public class BattleUI : MonoBehaviour
     /// <summary>
     /// 游戏胜利时的UI
     /// </summary>
-    public void BattleSuccess()
+    private void BattleSuccess()
     {
         battleOver.SetActive(true);
         battleSuccess.SetActive(true);

@@ -189,11 +189,28 @@ public static class Utility
     }
 
 
+
+    private static bool Compare(int a, int b, string op)
+    {
+        switch (op)
+        {
+            case ">=": return a >= b;
+            case "<=": return a <= b;
+            case "==": return a == b;
+            case "<": return a < b;
+            case ">": return a > b;
+            case "!=": return a != b;
+            default:
+                Debug.LogError("不支持的判断条件: " + op);
+                return false;
+        }
+    }
+
     /// <summary>
     /// 通用条件判断
     /// </summary>
     /// <returns></returns>
-    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<int> _intParams)
+    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<string> _stringParams, List<int> _intParams)
     {
         switch (condType)
         {
@@ -201,15 +218,20 @@ public static class Utility
                 return true;
             case cfg.Enums.Com.CondType.WEAPONUNLOCK:
                 return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
+
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
-                return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];
+                return Compare(DataManager.Instance.GetWeaponLevel(_intParams[0]), _intParams[1], _stringParams[0]);
+
             case cfg.Enums.Com.CondType.DUNGEON_PASS:
-                return DataManager.Instance.dungeonPassedLevel >= _intParams[0];
+                return Compare(DataManager.Instance.dungeonPassedLevel, _intParams[0], _stringParams[0]);
+
+            case cfg.Enums.Com.CondType.TOTALBATTLEDAMAGE:
+                return Compare(BattleManager.Instance.totalDamage, _intParams[0], _stringParams[0]);
         }
         Debug.LogError("这是什么解锁条件？");
         return false;
     }
-    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<int> _intParams, out string _lockStr)
+    public static bool CondCheck(cfg.Enums.Com.CondType condType, List<string> _stringParams, List<int> _intParams, out string _lockStr)
     {
         _lockStr = "";
         switch (condType)
@@ -219,17 +241,32 @@ public static class Utility
             case cfg.Enums.Com.CondType.WEAPONUNLOCK:
                 _lockStr = $"需要穿戴武器{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName}！";
                 return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
+
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
                 _lockStr = $"{cfg.Tables.tb.Weapon.Get(_intParams[0]).TextName} 等级需要达到 {_intParams[1]}！";
-                return DataManager.Instance.GetWeaponLevel(_intParams[0]) >= _intParams[1];
+                return Compare(DataManager.Instance.GetWeaponLevel(_intParams[0]), _intParams[1], _stringParams[0]);
+
             case cfg.Enums.Com.CondType.DUNGEON_PASS:
                 _lockStr = $"请先通过第 {_intParams[0]} 关！";
-                return DataManager.Instance.dungeonPassedLevel >= _intParams[0];
+                return Compare(DataManager.Instance.dungeonPassedLevel, _intParams[0], _stringParams[0]);
+
+            case cfg.Enums.Com.CondType.TOTALBATTLEDAMAGE:
+                return Compare(BattleManager.Instance.totalDamage, _intParams[0], _stringParams[0]);
         }
         Debug.LogError("这是什么解锁条件？");
         return false;
     }
 
+    public static bool CondListCheck(List<cfg.Beans.Com_UnlockConds> _conds)
+    {
+        if (_conds.Count == 0) return true;
+        
+        foreach (var cond in _conds)
+        {
+            if (!CondCheck(cond.CondType, cond.StringParams, cond.IntParams)) return false;
+        }
+        return true;
+    }
 
     /// <summary>
     /// 从列表中随机一个

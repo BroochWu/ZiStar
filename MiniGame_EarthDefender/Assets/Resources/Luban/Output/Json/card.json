@@ -4,12 +4,14 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
     "unlock_conds_inbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
@@ -33,12 +35,14 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
     "unlock_conds_inbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
@@ -62,12 +66,14 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
     "unlock_conds_inbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
@@ -91,12 +97,14 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
     "unlock_conds_inbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
@@ -120,12 +128,14 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
     "unlock_conds_inbattle": [
       {
         "cond_type": 0,
+        "string_params": [],
         "int_params": []
       }
     ],
@@ -148,6 +158,9 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 2,
+        "string_params": [
+          ">="
+        ],
         "int_params": [
           1,
           1
@@ -157,12 +170,14 @@
     "unlock_conds_inbattle": [
       {
         "cond_type": 1,
+        "string_params": [],
         "int_params": [
           1
         ]
       },
       {
         "cond_type": 1,
+        "string_params": [],
         "int_params": [
           1
         ]
@@ -195,6 +210,9 @@
     "unlock_conds_bfbattle": [
       {
         "cond_type": 2,
+        "string_params": [
+          ">="
+        ],
         "int_params": [
           1,
           1
@@ -204,6 +222,7 @@
     "unlock_conds_inbattle": [
       {
         "cond_type": 1,
+        "string_params": [],
         "int_params": [
           1
         ]

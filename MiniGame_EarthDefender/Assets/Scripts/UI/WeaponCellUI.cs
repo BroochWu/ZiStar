@@ -167,7 +167,9 @@ public class WeaponCellUI : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// 打开详情页
+    /// </summary>
     public void OpenDetailInfo()
     {
         string str = "";
@@ -189,7 +191,7 @@ public class WeaponCellUI : MonoBehaviour
             case cfg.weapon.Weapon.CellState.LOCK:
             case cfg.weapon.Weapon.CellState.NEXTUNLOCK:
                 string toastStr;
-                Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.IntParams, out toastStr);
+                Utility.CondCheck(weapon.UnlockCond.CondType, weapon.UnlockCond.StringParams, weapon.UnlockCond.IntParams, out toastStr);
                 UIManager.Instance.CommonToast(toastStr);
                 break;
 

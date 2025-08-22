@@ -19,6 +19,7 @@ public sealed partial class AvgStory : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["trigger"].IsObject) { throw new SerializationException(); }  Trigger = global::cfg.Beans.Com_Trigger.DeserializeCom_Trigger(_buf["trigger"]);  }
+        { if(!_buf["sort"].IsNumber) { throw new SerializationException(); }  Sort = _buf["sort"]; }
         { var __json0 = _buf["unlock_conds"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockConds = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockConds.Add(__v0); }   }
         { if(!_buf["id_start"].IsNumber) { throw new SerializationException(); }  IdStart = _buf["id_start"]; }
         IdStart_Ref = null;
@@ -39,6 +40,10 @@ public sealed partial class AvgStory : Luban.BeanBase
     /// 触发时点
     /// </summary>
     public readonly Beans.Com_Trigger Trigger;
+    /// <summary>
+    /// 优先级<br/>（大的在前面）<br/>（同级别随机）
+    /// </summary>
+    public readonly int Sort;
     /// <summary>
     /// 解锁条件
     /// </summary>
@@ -72,6 +77,7 @@ public sealed partial class AvgStory : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "trigger:" + Trigger + ","
+        + "sort:" + Sort + ","
         + "unlockConds:" + Luban.StringUtil.CollectionToString(UnlockConds) + ","
         + "idStart:" + IdStart + ","
         + "idEnd:" + IdEnd + ","

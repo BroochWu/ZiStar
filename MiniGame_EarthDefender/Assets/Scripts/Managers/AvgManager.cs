@@ -75,8 +75,12 @@ public class AvgManager : MonoBehaviour
     {
         switch (config.Trigger.TriggerType)
         {
-            case cfg.Enums.Com.TriggerType.DUNGEON_START:
-                return new DungeonStartTrigger(config.Id, config.Trigger.IntParams[0]);
+            case cfg.Enums.Com.TriggerType.INCODE://代码写死的AVGSTORY规则
+                return null;
+            case cfg.Enums.Com.TriggerType.DUNGEON_START://关卡开始
+                return new DungeonStartTrigger(config);
+            case cfg.Enums.Com.TriggerType.DUNGEON_OVER://关卡结束
+                return new DungeonOverTrigger(config);
 
             default:
                 Debug.LogWarning($"未知的触发器类型: {config.Id}");
@@ -101,7 +105,7 @@ public class AvgManager : MonoBehaviour
         {
             if (trigger.TriggerType == triggerType && trigger.ShouldTrigger())
             {
-                if (TriggerAvg(trigger.AvgId))
+                if (TriggerAvg(trigger.config.Id))
                 {
                     //标记触发器为触发的
                     trigger.MarkAsTriggered();

@@ -21,6 +21,7 @@ public sealed partial class Com_UnlockConds : Luban.BeanBase
     public Com_UnlockConds(JSONNode _buf) 
     {
         { if(!_buf["cond_type"].IsNumber) { throw new SerializationException(); }  CondType = (Enums.Com.CondType)_buf["cond_type"].AsInt; }
+        { var __json0 = _buf["string_params"]; if(!__json0.IsArray) { throw new SerializationException(); } StringParams = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  StringParams.Add(__v0); }   }
         { var __json0 = _buf["int_params"]; if(!__json0.IsArray) { throw new SerializationException(); } IntParams = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  IntParams.Add(__v0); }   }
     }
 
@@ -33,6 +34,10 @@ public sealed partial class Com_UnlockConds : Luban.BeanBase
     /// 整型类型
     /// </summary>
     public readonly Enums.Com.CondType CondType;
+    /// <summary>
+    /// 字符串参数
+    /// </summary>
+    public readonly System.Collections.Generic.List<string> StringParams;
     /// <summary>
     /// 整型参数
     /// </summary>
@@ -49,6 +54,7 @@ public sealed partial class Com_UnlockConds : Luban.BeanBase
     {
         return "{ "
         + "condType:" + CondType + ","
+        + "stringParams:" + Luban.StringUtil.CollectionToString(StringParams) + ","
         + "intParams:" + Luban.StringUtil.CollectionToString(IntParams) + ","
         + "}";
     }

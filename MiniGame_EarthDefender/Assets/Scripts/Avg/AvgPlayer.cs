@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
-public class AvgPlayer
+public class AvgPlayer : MonoBehaviour
 {
 
     private static AvgPlayer _instance;
@@ -9,6 +9,7 @@ public class AvgPlayer
 
     int nowEventId;
     int lastEventId;
+    Coroutine corNextEvent;
 
 
 
@@ -46,12 +47,37 @@ public class AvgPlayer
     /// 执行AVG操作
     /// </summary>
     /// <param name="_eventId"></param>
-    async Task PlayAvgEvent(cfg.avg.AvgEvent _avgEvent)
+    void PlayAvgEvent(cfg.avg.AvgEvent _avgEvent)
     {
-        if (_avgEvent.TimeDelay != 0) await Task.Delay((int)(_avgEvent.TimeDelay * 1000));
-        UIManager.Instance.ShowAvgDialogue(_avgEvent);
+        if (_avgEvent.TimeDelay != 0)
+        {
+            corNextEvent = StartCoroutine(CWaitingForShowAvgDialogue(_avgEvent));
+        }
+        else
+        {
+            UIManager.Instance.ShowAvgDialogue(_avgEvent);
+        }
+        // await Task.Delay((int)(_avgEvent.TimeDelay * 1000));
     }
 
+
+    /// <summary>
+    /// 对于延后执行的事件
+    /// </summary>
+    /// <param name="_avgEvent"></param>
+    /// <returns></returns>
+    IEnumerator CWaitingForShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
+    {
+        var elapsedTime = 0f;
+        var waitSeconds = 0.02f;
+        var wait = new WaitForSecondsRealtime(waitSeconds);
+        while (elapsedTime <= _avgEvent.TimeDelay)
+        {
+            elapsedTime += waitSeconds;
+            yield return wait;
+        }
+        UIManager.Instance.ShowAvgDialogue(_avgEvent);
+    }
 
     public void NextAvgEvent()
     {

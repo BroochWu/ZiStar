@@ -4,6 +4,7 @@
     "text_name": "离子枪",
     "unlock_cond": {
       "cond_type": 0,
+      "string_params": [],
       "int_params": []
     },
     "init_quality": 2,
@@ -25,6 +26,9 @@
     "text_name": "磁轨炮",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         2
       ]
@@ -48,6 +52,9 @@
     "text_name": "自爆虫",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         5
       ]
@@ -71,6 +78,9 @@
     "text_name": "朗基努斯之枪",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         10
       ]
@@ -94,6 +104,9 @@
     "text_name": "星链计划",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         15
       ]
@@ -117,6 +130,9 @@
     "text_name": "长镰",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         20
       ]
@@ -140,6 +156,9 @@
     "text_name": "辐射",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         25
       ]
@@ -163,6 +182,9 @@
     "text_name": "抱脸虫",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         30
       ]
@@ -186,6 +208,9 @@
     "text_name": "曼陀罗",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         35
       ]
@@ -209,6 +234,9 @@
     "text_name": "水滴",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         40
       ]
@@ -232,6 +260,9 @@
     "text_name": "自动卫星",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         45
       ]
@@ -255,6 +286,9 @@
     "text_name": "黑鱼",
     "unlock_cond": {
       "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
       "int_params": [
         50
       ]

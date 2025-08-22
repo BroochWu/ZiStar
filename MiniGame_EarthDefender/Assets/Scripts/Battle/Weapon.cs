@@ -46,7 +46,7 @@ namespace cfg.weapon
         {
             get
             {
-                if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.IntParams))
+                if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.StringParams, UnlockCond.IntParams))
                 {
                     if (Id == DataManager.Instance.nextUnlockDungeonPassedWeapon)
                     {
@@ -171,7 +171,7 @@ public class Weapon : MonoBehaviour
             basicValue *
             (1
             + config.basicAdditionAtk //基础武器伤害倍率
-                                          // + DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100f //武器带来的全局加成量（删除，叠加在单局加成里）
+                                      // + DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100f //武器带来的全局加成量（删除，叠加在单局加成里）
             + BattleManager.Instance.globalDamageMultiInOneBattle / 10000f  //单局加成（基本上是卡牌带来的）
             + localDamageMultiInOneBattle / 10000f //单局本武器独特加成（基本上也是卡牌带来的）
             )
