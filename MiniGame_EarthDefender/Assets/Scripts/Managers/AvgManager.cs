@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,9 +26,14 @@ public class AvgManager : MonoBehaviour
 
     public int? isPlayingAvg;//是否正在播放AVG
 
+    public Coroutine nowAvgCor;
+
+
 
     private Dictionary<int, IAvgTrigger> _triggers = new Dictionary<int, IAvgTrigger>();
     private HashSet<int> _triggeredAvgs = new HashSet<int>();
+
+
 
     // 事件委托
     public delegate void AvgTriggeredHandler(int avgId);
@@ -225,5 +231,28 @@ public class AvgManager : MonoBehaviour
     //     }
     // }
 
+
+    public void StartWaitingNextAvgDialogue(cfg.avg.AvgEvent _avgEvent)
+    {
+        nowAvgCor = StartCoroutine(CWaitingForShowAvgDialogue(_avgEvent));
+    }
+
+    /// <summary>
+    /// 对于延后执行的事件
+    /// </summary>
+    /// <param name="_avgEvent"></param>
+    /// <returns></returns>
+    IEnumerator CWaitingForShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
+    {
+        var elapsedTime = 0f;
+        var waitSeconds = 0.02f;
+        var wait = new WaitForSecondsRealtime(waitSeconds);
+        while (elapsedTime <= _avgEvent.TimeDelay)
+        {
+            elapsedTime += waitSeconds;
+            yield return wait;
+        }
+        UIManager.Instance.ShowAvgDialogue(_avgEvent);
+    }
 
 }

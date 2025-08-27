@@ -3551,6 +3551,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.42059326
       objectReference: {fileID: 0}
+    - target: {fileID: 959761752668523685, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1078186
+      objectReference: {fileID: 0}
     - target: {fileID: 3621587723815468912, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 19.299988
@@ -6049,6 +6053,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.42059326
       objectReference: {fileID: 0}
+    - target: {fileID: 959761752668523685, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.10784912
+      objectReference: {fileID: 0}
     - target: {fileID: 3621587723815468912, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 19.299988
@@ -6064,6 +6072,10 @@ PrefabInstance:
     - target: {fileID: 7700180424995715904, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7700180424995715904, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.54748535
       objectReference: {fileID: 0}
     - target: {fileID: 7707921396750915606, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_Pivot.x
@@ -10301,7 +10313,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346488859}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2120374931}
+        m_TargetAssemblyTypeName: TriCardUI, Assembly-CSharp
+        m_MethodName: ButtonGetAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1346488859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10510,6 +10534,10 @@ PrefabInstance:
     - target: {fileID: 959761752668523685, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.42059326
+      objectReference: {fileID: 0}
+    - target: {fileID: 959761752668523685, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1078186
       objectReference: {fileID: 0}
     - target: {fileID: 3621587723815468912, guid: 2179f1c9b4cb9b7459586c3d0265fe20, type: 3}
       propertyPath: m_AnchoredPosition.y

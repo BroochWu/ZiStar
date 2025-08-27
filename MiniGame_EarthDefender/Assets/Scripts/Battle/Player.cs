@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public GameObject earthSprite;
 
     public Dictionary<Weapon, int> battleEquipedWeapon = new();//局中使用的装备列表及其本局伤害量
+    public bool canMove;
 
 
     Camera mainCam;
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         }
 
         //鼠标摁下、游戏没结束、没点到UI，就可以更换镜头
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject() && canMove)
         {
             guideLine.SetActive(true);
             LookCursor();

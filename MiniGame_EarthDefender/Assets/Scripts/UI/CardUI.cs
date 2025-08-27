@@ -40,8 +40,8 @@ public class CardUI : MonoBehaviour
 
     public void Initialize(cfg.card.Card card, int _slot)
     {
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
+        // gameObject.SetActive(false);
+        // gameObject.SetActive(true);
         this.card = card;
         textName.text = card.TextName;
         textDesc.text = card.TextDesc;

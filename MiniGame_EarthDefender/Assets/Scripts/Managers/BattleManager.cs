@@ -155,6 +155,9 @@ public class BattleManager : MonoBehaviour
         dataInitEarthHp = DataManager.Instance.GetPlayerBasicHp();
         currentEarthHp = dataInitEarthHp;
 
+
+        Player.instance.canMove = true;
+
         //关卡配置
         var config = cfg.Tables.tb.Dungeon.Get(dungeonId);
         dungeonLevel = config.DungeonLevel;
@@ -551,6 +554,8 @@ public class BattleManager : MonoBehaviour
     {
         Time.timeScale = 0;
 
+        Player.instance.canMove = false;
+
         TriCard.Instance.GetTriCards();
     }
 
@@ -559,6 +564,8 @@ public class BattleManager : MonoBehaviour
         //生效成功，关闭窗口们
         UIManager.Instance.battleLayer.triCardUI.gameObject.SetActive(false);
         Time.timeScale = 1;
+
+        Player.instance.canMove = true;
         //再判断是否连续升级
         CheckLevelUp();
 

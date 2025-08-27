@@ -49,9 +49,16 @@ public class AvgPlayer : MonoBehaviour
     /// <param name="_eventId"></param>
     void PlayAvgEvent(cfg.avg.AvgEvent _avgEvent)
     {
-        if (_avgEvent.TimeDelay != 0)
+        if (_avgEvent == null)
         {
-            corNextEvent = StartCoroutine(CWaitingForShowAvgDialogue(_avgEvent));
+            Debug.LogError($"{_avgEvent}为空，无法播放");
+            return;
+        }
+
+        if (_avgEvent?.TimeDelay != 0)
+        {
+            //如果有延迟时间，在AVGMANAGER调用一个协程来管理下一个对话（注意后续可能做成List<Coroutine>的形式）
+            AvgManager.Instance.StartWaitingNextAvgDialogue(_avgEvent);
         }
         else
         {
@@ -61,23 +68,6 @@ public class AvgPlayer : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 对于延后执行的事件
-    /// </summary>
-    /// <param name="_avgEvent"></param>
-    /// <returns></returns>
-    IEnumerator CWaitingForShowAvgDialogue(cfg.avg.AvgEvent _avgEvent)
-    {
-        var elapsedTime = 0f;
-        var waitSeconds = 0.02f;
-        var wait = new WaitForSecondsRealtime(waitSeconds);
-        while (elapsedTime <= _avgEvent.TimeDelay)
-        {
-            elapsedTime += waitSeconds;
-            yield return wait;
-        }
-        UIManager.Instance.ShowAvgDialogue(_avgEvent);
-    }
 
     public void NextAvgEvent()
     {

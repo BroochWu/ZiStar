@@ -60,7 +60,7 @@ public class TriCardUI : MonoBehaviour
 
     IEnumerator CPlayEndTriAnims()
     {
-        yield return new WaitForSecondsRealtime(0.8f);
+        yield return new WaitForSecondsRealtime(1f);
         BattleManager.Instance.EndTri();
     }
 
