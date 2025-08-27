@@ -19,7 +19,7 @@ namespace cfg.card
 
 public class CardUI : MonoBehaviour
 {
-    private cfg.card.Card me;
+    public cfg.card.Card card;
     private cfg.Enums.Com.Quality quality;
     private bool doubleBless;
     private int slot;
@@ -42,7 +42,7 @@ public class CardUI : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.SetActive(true);
-        me = card;
+        this.card = card;
         textName.text = card.TextName;
         textDesc.text = card.TextDesc;
         textTargetName.text = card.TextTargetName;
@@ -79,7 +79,7 @@ public class CardUI : MonoBehaviour
         if (TriCard.Instance.canChooseCard)
         {
             TriCard.Instance.canChooseCard = false;
-            TriCard.Instance.SetCardEffect(me, slot);
+            TriCard.Instance.SetCardEffect(card, slot);
         }
         else
         {

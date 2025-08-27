@@ -8,7 +8,7 @@ public class TriCardUI : MonoBehaviour
 {
     public Transform cardsContainer;
     public List<GameObject> cardSlots;
-    public Animator anim;//换一批
+    public Animator anim;//状态机
     public Button buttonRefresh;//换一批
     public Button buttonGetAll;//全都要
 
@@ -42,6 +42,8 @@ public class TriCardUI : MonoBehaviour
 
     public void PlayEndTriAnims(int _slot)
     {
+        anim.Play("Disappear");
+
         for (int i = 0; i <= 2; i++)
         {
             if (i == _slot)
@@ -76,6 +78,24 @@ public class TriCardUI : MonoBehaviour
         anim.Play("Appear", 0, anim.GetFloat("RefreshFrame"));
         //后面可以在换一批的时候把高品质的权重多加点
         TriCard.Instance.GetTriCards();
+    }
+
+    public void ButtonGetAll()
+    {
+        TriCard.Instance.SetCardEffectAll();
+
+
+
+        anim.Play("Disappear");
+
+        for (int i = 0; i <= 2; i++)
+        {
+            cardSlots[i].GetComponentInChildren<Animator>().Play("Chosen");
+        }
+
+
+        StartCoroutine(CPlayEndTriAnims());
+
     }
 
 }

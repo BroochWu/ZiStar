@@ -174,7 +174,7 @@ public class TriCard
         if (TriCardEffect.TakeEffect(card))
         {
             MinusCardDrawCount(card);
-            UIManager.Instance.battleLayer.triCardUI.cardSlots[0].GetComponentInChildren<Animator>().Play("TriPerCard_Disappear");
+            // UIManager.Instance.battleLayer.triCardUI.cardSlots[_slot].GetComponentInChildren<Animator>().Play("TriPerCard_Disappear");
         }
         else
         {
@@ -186,6 +186,23 @@ public class TriCard
         // BattleManager.Instance.EndTri();
 
     }
+
+
+    /// <summary>
+    /// 把所有3张卡牌都生效
+    /// </summary>
+    public void SetCardEffectAll()
+    {
+        canChooseCard = false;
+
+        foreach (var a in UIManager.Instance.battleLayer.triCardUI.cardSlots)
+        {
+            var card = a.GetComponentInChildren<CardUI>().card;
+            if (TriCardEffect.TakeEffect(card)) MinusCardDrawCount(card);
+        }
+    }
+
+
 
     /// <summary>
     /// 扣除并计算单局可被抽取的次数，如果<=0就移除
