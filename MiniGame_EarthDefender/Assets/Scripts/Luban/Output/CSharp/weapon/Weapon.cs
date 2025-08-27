@@ -22,7 +22,6 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["unlock_cond"].IsObject) { throw new SerializationException(); }  UnlockCond = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_cond"]);  }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
         { if(!_buf["image_icon_path"].IsString) { throw new SerializationException(); }  ImageIconPath = _buf["image_icon_path"]; }
-        { if(!_buf["image_tricardicon_path"].IsString) { throw new SerializationException(); }  ImageTricardiconPath = _buf["image_tricardicon_path"]; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
         { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
         Piece_Ref = null;
@@ -62,10 +61,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 图片资源索引
     /// </summary>
     public readonly string ImageIconPath;
-    /// <summary>
-    /// 三选一背景
-    /// </summary>
-    public readonly string ImageTricardiconPath;
     /// <summary>
     /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
     /// </summary>
@@ -129,7 +124,6 @@ public sealed partial class Weapon : Luban.BeanBase
         + "unlockCond:" + UnlockCond + ","
         + "initQuality:" + InitQuality + ","
         + "imageIconPath:" + ImageIconPath + ","
-        + "imageTricardiconPath:" + ImageTricardiconPath + ","
         + "bulletPrefab:" + BulletPrefab + ","
         + "piece:" + Piece + ","
         + "bulletSpeed:" + BulletSpeed + ","
