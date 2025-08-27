@@ -19,7 +19,7 @@
     "text_name": "增伤",
     "text_desc": "造成的所有伤害<color=#febf74>+10%</color>",
     "quality": 2,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 5,
     "card_effects": [
       {
@@ -52,7 +52,7 @@
     "text_name": "增伤",
     "text_desc": "造成的所有伤害<color=#febf74>+10%</color>",
     "quality": 2,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 5,
     "card_effects": [
       {
@@ -85,7 +85,7 @@
     "text_name": "增伤",
     "text_desc": "造成的所有伤害<color=#febf74>+10%</color>",
     "quality": 2,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 5,
     "card_effects": [
       {
@@ -118,7 +118,7 @@
     "text_name": "攻速",
     "text_desc": "武器射击冷却<color=#febf74>-5%</color>",
     "quality": 2,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 5,
     "card_effects": [
       {
@@ -151,7 +151,7 @@
     "text_name": "回复城防",
     "text_desc": "地球护盾值<color=#febf74>+30%</color>\n（不可突破上限）",
     "quality": 3,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 10,
     "card_effects": [
       {
@@ -197,7 +197,7 @@
     "text_name": "离子列",
     "text_desc": "离子枪列数<color=#febf74>+1</color>\n伤害<color=#febf74>+30%</color>",
     "quality": 4,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 1000,
     "card_effects": [
       {
@@ -244,7 +244,7 @@
     "text_name": "离子行",
     "text_desc": "离子枪<color=#febf74>连射+1</color>",
     "quality": 2,
-    "image_tricardicon_path": "UI/Cards/icon_tricardbg_1",
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 1000,
     "card_effects": [
       {

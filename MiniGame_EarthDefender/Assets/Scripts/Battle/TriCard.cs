@@ -168,19 +168,23 @@ public class TriCard
     }
 
 
-    public void SetCardEffect(cfg.card.Card card)
+    public void SetCardEffect(cfg.card.Card card, int _slot)
     {
         // UIManager.Instance.CommonToast($"假装生效成功 {card.TextName}");
-        if (!TriCardEffect.TakeEffect(card))
+        if (TriCardEffect.TakeEffect(card))
         {
-            Debug.LogError("生效失败！");
+            MinusCardDrawCount(card);
+            UIManager.Instance.battleLayer.triCardUI.cardSlots[0].GetComponentInChildren<Animator>().Play("TriPerCard_Disappear");
         }
         else
         {
-            MinusCardDrawCount(card);
+            Debug.LogError("生效失败！");
         }
 
-        BattleManager.Instance.EndTri();
+        UIManager.Instance.battleLayer.triCardUI.PlayEndTriAnims(_slot);
+
+        // BattleManager.Instance.EndTri();
+
     }
 
     /// <summary>
@@ -194,9 +198,10 @@ public class TriCard
             return;
         }
 
-        int newDrawCount;
-        listCardsAvailable.TryGetValue(card, out newDrawCount);
+        listCardsAvailable.TryGetValue(card, out int newDrawCount);
+
         newDrawCount -= 1;
+
         if (newDrawCount <= 0)
         {
             RemoveCard(card);

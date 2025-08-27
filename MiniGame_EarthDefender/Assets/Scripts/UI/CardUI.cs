@@ -9,7 +9,7 @@ namespace cfg.card
         {
             get
             {
-                return Resources.Load<Sprite>(ImageTricardiconPath);
+                return Resources.Load<Sprite>("Images/" + ImageTricardiconPath);
             }
         }
     }
@@ -21,6 +21,10 @@ public class CardUI : MonoBehaviour
 {
     private cfg.card.Card me;
     private cfg.Enums.Com.Quality quality;
+    private bool doubleBless;
+    private int slot;
+
+    public Animator anim;
     public Text textName;
     public Text textDesc;
     public Text textSpecial;
@@ -34,27 +38,48 @@ public class CardUI : MonoBehaviour
     public Sprite spriteTricardBgOrange;
     public Sprite spriteTricardBgDoubleBless;
 
-    public void Initialize(cfg.card.Card card)
+    public void Initialize(cfg.card.Card card, int _slot)
     {
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
         me = card;
         textName.text = card.TextName;
         textDesc.text = card.TextDesc;
         textTargetName.text = card.TextTargetName;
 
         quality = card.Quality;
-        SetQualityUI();
 
         icon.sprite = card.imgBg;
 
-        textSpecial.gameObject.SetActive(card.UnlockCondsInbattle.Count == 2);
+        slot = _slot;
+
+
+        doubleBless = card.UnlockCondsInbattle.Count == 2;
+        textSpecial.gameObject.SetActive(doubleBless);
+
+
+        if (doubleBless)
+        {
+            qualityBg.sprite = spriteTricardBgDoubleBless;
+        }
+        else
+        {
+            SetQualityUI();
+        }
         //icon
+    }
+
+    public void SetInitAnim()
+    {
+        anim.Play("Idle", 0, slot * anim.GetFloat("IdleSpace"));
     }
 
     public void ChooseMe()
     {
         if (TriCard.Instance.canChooseCard)
         {
-            TriCard.Instance.SetCardEffect(me);
+            TriCard.Instance.canChooseCard = false;
+            TriCard.Instance.SetCardEffect(me, slot);
         }
         else
         {

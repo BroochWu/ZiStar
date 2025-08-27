@@ -557,7 +557,6 @@ public class BattleManager : MonoBehaviour
     public void EndTri()
     {
         //生效成功，关闭窗口们
-        TriCard.Instance.canChooseCard = false;
         UIManager.Instance.battleLayer.triCardUI.gameObject.SetActive(false);
         Time.timeScale = 1;
         //再判断是否连续升级
