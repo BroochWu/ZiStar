@@ -27,7 +27,9 @@ public class DamageStatisticsPanel : MonoBehaviour
         }
         else
         {
-            textMvpWeaponDamageCount.text = "造成伤害：" + Utility.BigNumber(mvpWeaponDamage) + $"[{mvpWeaponDamage / BattleManager.Instance.totalDamage * 100f:F1}%]";
+            textMvpWeaponDamageCount.text = "造成伤害："
+            + Utility.BigNumber(mvpWeaponDamage)
+            + $"[{mvpWeaponDamage / BattleManager.Instance.totalDamage * 100f:F1}%]";
         }
     }
 }
