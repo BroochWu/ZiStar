@@ -20,9 +20,11 @@ public sealed partial class Card : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { var __json0 = _buf["unlock_conds_bfbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsBfbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsBfbattle.Add(__v0); }   }
         { var __json0 = _buf["unlock_conds_inbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsInbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsInbattle.Add(__v0); }   }
+        { if(!_buf["text_target_name"].IsString) { throw new SerializationException(); }  TextTargetName = _buf["text_target_name"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["text_desc"].IsString) { throw new SerializationException(); }  TextDesc = _buf["text_desc"]; }
         { if(!_buf["quality"].IsNumber) { throw new SerializationException(); }  Quality = (Enums.Com.Quality)_buf["quality"].AsInt; }
+        { if(!_buf["image_tricardicon_path"].IsString) { throw new SerializationException(); }  ImageTricardiconPath = _buf["image_tricardicon_path"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
         { var __json0 = _buf["card_effects"]; if(!__json0.IsArray) { throw new SerializationException(); } CardEffects = new System.Collections.Generic.List<Beans.card_Effects>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.card_Effects __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.card_Effects.Deserializecard_Effects(__e0);  }  CardEffects.Add(__v0); }   }
         { if(!_buf["draw_count"].IsNumber) { throw new SerializationException(); }  DrawCount = _buf["draw_count"]; }
@@ -46,6 +48,10 @@ public sealed partial class Card : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<Beans.Com_UnlockConds> UnlockCondsInbattle;
     /// <summary>
+    /// 生效对象名称
+    /// </summary>
+    public readonly string TextTargetName;
+    /// <summary>
     /// 名称
     /// </summary>
     public readonly string TextName;
@@ -57,6 +63,10 @@ public sealed partial class Card : Luban.BeanBase
     /// 品质
     /// </summary>
     public readonly Enums.Com.Quality Quality;
+    /// <summary>
+    /// 使用图标
+    /// </summary>
+    public readonly string ImageTricardiconPath;
     /// <summary>
     /// 抽取权重
     /// </summary>
@@ -83,9 +93,11 @@ public sealed partial class Card : Luban.BeanBase
         + "id:" + Id + ","
         + "unlockCondsBfbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsBfbattle) + ","
         + "unlockCondsInbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsInbattle) + ","
+        + "textTargetName:" + TextTargetName + ","
         + "textName:" + TextName + ","
         + "textDesc:" + TextDesc + ","
         + "quality:" + Quality + ","
+        + "imageTricardiconPath:" + ImageTricardiconPath + ","
         + "weight:" + Weight + ","
         + "cardEffects:" + Luban.StringUtil.CollectionToString(CardEffects) + ","
         + "drawCount:" + DrawCount + ","

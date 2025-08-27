@@ -1,0 +1,391 @@
+From c44a4066432328627570dfd3e7b5a3f6d5d5d98b Mon Sep 17 00:00:00 2001
+From: BroochWu <brooch0824@163.com>
+Date: Wed, 27 Aug 2025 13:18:49 +0800
+Subject: [PATCH] =?UTF-8?q?=E4=B8=89=E9=80=89=E4=B8=80=E4=BB=A3=E7=A0=81?=
+ =?UTF-8?q?=E4=BC=98=E5=8C=96+=E6=8A=BD=E5=8D=A1=E6=8D=A2=E4=B8=80?=
+ =?UTF-8?q?=E6=89=B9=E5=8A=9F=E8=83=BD=E5=AE=9E=E8=A3=85?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../Assets/Resources/Anims/Tri/Tri.controller |   8 +-
+ .../Assets/Scenes/MainScene.unity             |  58 +++++----
+ .../Assets/Scripts/Battle/TriCard.cs          | 117 +++++++++++++-----
+ .../Assets/Scripts/UI/TriCardUI.cs            |  13 ++
+ 4 files changed, 146 insertions(+), 50 deletions(-)
+
+diff --git a/MiniGame_EarthDefender/Assets/Resources/Anims/Tri/Tri.controller b/MiniGame_EarthDefender/Assets/Resources/Anims/Tri/Tri.controller
+index f440194..f2b8756 100644
+--- a/MiniGame_EarthDefender/Assets/Resources/Anims/Tri/Tri.controller
++++ b/MiniGame_EarthDefender/Assets/Resources/Anims/Tri/Tri.controller
+@@ -8,7 +8,13 @@ AnimatorController:
+   m_PrefabAsset: {fileID: 0}
+   m_Name: Tri
+   serializedVersion: 5
+-  m_AnimatorParameters: []
++  m_AnimatorParameters:
++  - m_Name: RefreshFrame
++    m_Type: 1
++    m_DefaultFloat: 0.35
++    m_DefaultInt: 0
++    m_DefaultBool: 0
++    m_Controller: {fileID: 9100000}
+   m_AnimatorLayers:
+   - serializedVersion: 5
+     m_Name: Base Layer
+diff --git a/MiniGame_EarthDefender/Assets/Scenes/MainScene.unity b/MiniGame_EarthDefender/Assets/Scenes/MainScene.unity
+index a480386..ea818d1 100644
+--- a/MiniGame_EarthDefender/Assets/Scenes/MainScene.unity
++++ b/MiniGame_EarthDefender/Assets/Scenes/MainScene.unity
+@@ -663,6 +663,7 @@ MonoBehaviour:
+   m_Name: 
+   m_EditorClassIdentifier: 
+   test_avg_story_id: 0
++  test_time_scale: 0
+ --- !u!1 &70824006
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -4949,10 +4950,10 @@ RectTransform:
+   - {fileID: 1066852275}
+   m_Father: {fileID: 1221833754}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-  m_AnchorMin: {x: 0, y: 1}
+-  m_AnchorMax: {x: 0, y: 1}
+-  m_AnchoredPosition: {x: 108.64499, y: -175.79045}
+-  m_SizeDelta: {x: 217.29, y: 351.5809}
++  m_AnchorMin: {x: 0, y: 0}
++  m_AnchorMax: {x: 0, y: 0}
++  m_AnchoredPosition: {x: 0, y: 0}
++  m_SizeDelta: {x: 0, y: 0}
+   m_Pivot: {x: 0.5, y: 0.5}
+ --- !u!1 &655769703
+ GameObject:
+@@ -7256,10 +7257,10 @@ RectTransform:
+   - {fileID: 1804782225}
+   m_Father: {fileID: 1221833754}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-  m_AnchorMin: {x: 0, y: 1}
+-  m_AnchorMax: {x: 0, y: 1}
+-  m_AnchoredPosition: {x: 583.225, y: -175.79045}
+-  m_SizeDelta: {x: 217.29, y: 351.5809}
++  m_AnchorMin: {x: 0, y: 0}
++  m_AnchorMax: {x: 0, y: 0}
++  m_AnchoredPosition: {x: 0, y: 0}
++  m_SizeDelta: {x: 0, y: 0}
+   m_Pivot: {x: 0.5, y: 0.5}
+ --- !u!1 &1005137687
+ GameObject:
+@@ -10123,9 +10124,9 @@ RectTransform:
+   - {fileID: 1627860451}
+   m_Father: {fileID: 1027846773}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-  m_AnchorMin: {x: 0, y: 1}
+-  m_AnchorMax: {x: 0, y: 1}
+-  m_AnchoredPosition: {x: 501.06, y: -66.285}
++  m_AnchorMin: {x: 0, y: 0}
++  m_AnchorMax: {x: 0, y: 0}
++  m_AnchoredPosition: {x: 0, y: 0}
+   m_SizeDelta: {x: 202.12, y: 88.13}
+   m_Pivot: {x: 0.5, y: 0.5}
+ --- !u!114 &1346488858
+@@ -13104,9 +13105,9 @@ RectTransform:
+   - {fileID: 2024640795}
+   m_Father: {fileID: 1027846773}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-  m_AnchorMin: {x: 0, y: 1}
+-  m_AnchorMax: {x: 0, y: 1}
+-  m_AnchoredPosition: {x: 248.94, y: -66.285}
++  m_AnchorMin: {x: 0, y: 0}
++  m_AnchorMax: {x: 0, y: 0}
++  m_AnchoredPosition: {x: 0, y: 0}
+   m_SizeDelta: {x: 202.12, y: 88.13}
+   m_Pivot: {x: 0.5, y: 0.5}
+ --- !u!114 &1702095623
+@@ -13152,7 +13153,19 @@ MonoBehaviour:
+   m_TargetGraphic: {fileID: 1702095624}
+   m_OnClick:
+     m_PersistentCalls:
+-      m_Calls: []
++      m_Calls:
++      - m_Target: {fileID: 2120374931}
++        m_TargetAssemblyTypeName: TriCardUI, Assembly-CSharp
++        m_MethodName: ButtonRefresh
++        m_Mode: 1
++        m_Arguments:
++          m_ObjectArgument: {fileID: 0}
++          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
++          m_IntArgument: 0
++          m_FloatArgument: 0
++          m_StringArgument: 
++          m_BoolArgument: 0
++        m_CallState: 2
+ --- !u!114 &1702095624
+ MonoBehaviour:
+   m_ObjectHideFlags: 0
+@@ -15026,10 +15039,10 @@ RectTransform:
+   - {fileID: 641925028}
+   m_Father: {fileID: 1221833754}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-  m_AnchorMin: {x: 0, y: 1}
+-  m_AnchorMax: {x: 0, y: 1}
+-  m_AnchoredPosition: {x: 345.935, y: -175.79045}
+-  m_SizeDelta: {x: 217.29, y: 351.5809}
++  m_AnchorMin: {x: 0, y: 0}
++  m_AnchorMax: {x: 0, y: 0}
++  m_AnchoredPosition: {x: 0, y: 0}
++  m_SizeDelta: {x: 0, y: 0}
+   m_Pivot: {x: 0.5, y: 0.5}
+ --- !u!1 &1925597935
+ GameObject:
+@@ -17039,7 +17052,7 @@ GameObject:
+   m_Icon: {fileID: 0}
+   m_NavMeshLayer: 0
+   m_StaticEditorFlags: 0
+-  m_IsActive: 0
++  m_IsActive: 1
+ --- !u!224 &2120374929
+ RectTransform:
+   m_ObjectHideFlags: 0
+@@ -17099,6 +17112,9 @@ MonoBehaviour:
+   - {fileID: 653312563}
+   - {fileID: 1907762378}
+   - {fileID: 991618635}
++  anim: {fileID: 2120374930}
++  buttonRefresh: {fileID: 1702095623}
++  buttonGetAll: {fileID: 1346488858}
+ --- !u!1 &2135161097
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -17193,7 +17209,7 @@ GameObject:
+   m_Icon: {fileID: 0}
+   m_NavMeshLayer: 0
+   m_StaticEditorFlags: 0
+-  m_IsActive: 1
++  m_IsActive: 0
+ --- !u!224 &2144352227
+ RectTransform:
+   m_ObjectHideFlags: 0
+diff --git a/MiniGame_EarthDefender/Assets/Scripts/Battle/TriCard.cs b/MiniGame_EarthDefender/Assets/Scripts/Battle/TriCard.cs
+index a31ac55..222b014 100644
+--- a/MiniGame_EarthDefender/Assets/Scripts/Battle/TriCard.cs
++++ b/MiniGame_EarthDefender/Assets/Scripts/Battle/TriCard.cs
+@@ -1,18 +1,24 @@
+ using System.Collections.Generic;
++using Unity.VisualScripting;
+ using UnityEngine;
+ public class TriCard
+ {
+     private static TriCard _instance;
+     public static TriCard Instance => _instance ??= new TriCard();
+     public Dictionary<cfg.card.Card, int> listCardsAvailable = new();//可被抽取的卡牌，及剩余抽取次数
+-    public Dictionary<cfg.card.Card, int> listTempRemove = new();//不放回重抽时临时去除的列表
++    public Dictionary<cfg.card.Card, int> listTempRemove = new();//不放回重抽时临时去除的卡牌+可抽取次数
+     public List<cfg.card.Card> listCardsThree = new();//最后抽到的三张牌
+     public int totalWeight;
++    int totalWeightTempMinus;//暂时扣除的总权重
+     public bool canChooseCard;
+ 
+     const int MAX_DRAW_COUNT = 10; //每张卡牌有10次重抽次数
+     int nowReDrawCount = 0;//当前重抽次数，重抽每一张的时候重置
+ 
++
++    /// <summary>
++    /// (战斗初始化时)初始化三选一
++    /// </summary>
+     public void InitializeBeforeBattle()
+     {
+         //获取可抽取的卡牌列表
+@@ -39,72 +45,127 @@ public class TriCard
+         listCardsThree.Clear();
+         listTempRemove.Clear();
+ 
++        //保证抽出3张不一样的牌以供选择
+         while (listCardsThree.Count <= 3)
+         {
+             //抽3张，并且3张卡牌绝对不一样
+             var cardResult = DrawOneCard();
+ 
++            //抽出一张牌后，将临时去除的列表复原（错误的！此时不能复原，否则会出现反复抽取的情况，第一张牌是A，第二张牌是B，第三张牌又抽到A，须在三张牌抽完后再复原临时去除的列表）
++            // RebackTempRemove();
++
+             listCardsThree.Add(cardResult);
+-            totalWeight -= cardResult.Weight;
+-            listTempRemove.Add(cardResult, listCardsAvailable[cardResult]);
+-            listCardsAvailable.Remove(cardResult);
++
++            //而后，再临时去除已生成的卡牌，保证不会生成相同的卡牌（除了id==1）
++            //等等，这里要小心，别出现反复调用的问题
++            //这里有问题，lca已经被移除了本项，是找不到的，因此我坐在方法内部了
++            // AddToTempRemove(cardResult, listCardsAvailable[cardResult]);
++
++            // totalWeight -= cardResult.Weight;
++            // listTempRemove.Add(cardResult, listCardsAvailable[cardResult]);
++
++            // //可获得的卡牌列表中删除抽卡结果
++            // listCardsAvailable.Remove(cardResult);
+         }
+ 
++        //全部抽完后把不放回重抽时被移除的列表添加回去（基于不存在第二张牌突然满足了条件的情况）
++        RebackTempRemove();
++
++        //可以初始化UI了
+         _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
+-        //事后把不放回重抽时被移除的列表添加回去（基于不存在第二张牌突然满足了条件的情况）
+-        foreach (var a in listTempRemove)
+-        {
+-            listCardsAvailable.Add(a.Key, a.Value);
+-            totalWeight += a.Key.Weight;
+-        }
+-        listTempRemove.Clear();
++
++        // foreach (var a in listTempRemove)
++        // {
++        //     listCardsAvailable.Add(a.Key, a.Value);
++        //     totalWeight += a.Key.Weight;
++        // }
++        // listTempRemove.Clear();
+     }
+ 
+     cfg.card.Card DrawOneCard()
+     {
++        //决定一个权重值
+         int finalNum = Random.Range(0, totalWeight);
+-        //这俩是如果重抽的时候要用到的
+-        cfg.card.Card a = null;
+-        int b = 0;
+ 
++
++        //这俩是如果重抽的时候要用到的
++        //重随时去除的卡和其权重
+         //重置每次抽取时的当前重抽次数
++
++        //准备好，接下来可能会触发重抽
++        //最多重新抽10次
+         nowReDrawCount = 0;
+ 
++
+         while (nowReDrawCount <= MAX_DRAW_COUNT)
+         {
+-            foreach (var cardAndDrawCount in listCardsAvailable)
++            foreach (var cardAndRemainCount in listCardsAvailable)
+             {
+-                finalNum -= cardAndDrawCount.Key.Weight;
++                //当前权重减去卡牌权重
++                finalNum -= cardAndRemainCount.Key.Weight;
++
++
++                //当前权重值如果<=0视为抽到此牌
+                 if (finalNum <= 0)
+                 {
+-                    if (CheckCardCondInBattle(cardAndDrawCount.Key))
++                    if (CheckCardCondInBattle(cardAndRemainCount.Key))
+                     {
+-                        //如果条件满足就添加并抽下一个(返回该道具)
+-                        return cardAndDrawCount.Key;
++                        //如果条件满足
++                        //添加并抽下一个(返回该道具)
++                        //抽到以后其他卡牌不会抽到本牌
++                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
++                        Debug.Log("已抽中：" + cardAndRemainCount.Key.TextName);
++                        return cardAndRemainCount.Key;
+                     }
+                     else
+                     {
+-                        //如果条件不满足就重抽
+-                        //重抽不放回
++                        //如果条件不满足
++                        //重抽
+                         //最多重抽10次，否则固定拿id==1的填充
+ 
++                        //如果重抽达到上限，指连续抽到无法被抽取的卡牌，则取id==1（这个可以重复）
++                        Debug.LogWarning($"抽到了{cardAndRemainCount.Key.TextName},但是条件不满足重抽，第{listCardsThree.Count + 1}张卡牌的剩余重抽次数：{MAX_DRAW_COUNT - nowReDrawCount}");
++
+                         nowReDrawCount += 1;
+-                        Debug.LogWarning($"抽到了{cardAndDrawCount.Key.TextName},但是条件不满足重抽，第{listCardsThree.Count + 1}张卡牌的剩余重抽次数：{MAX_DRAW_COUNT - nowReDrawCount}");
+-                        a = cardAndDrawCount.Key;
+-                        b = cardAndDrawCount.Value;
++
++                        //重抽不放回
++                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
++                        // totalWeight -= cardAndRemainCount.Key.Weight;
++                        // totalWeightTempMinus += cardAndRemainCount.Key.Weight;
++                        // listCardsAvailable.Remove(cardAndRemainCount.Key);
++                        // listTempRemove.Add(cardAndRemainCount.Key, cardAndRemainCount.Value);
++
+                         break;
+                     }
+                 }
+             }
+-            listCardsAvailable.Remove(a);
+-            totalWeight -= a.Weight;
+-            listTempRemove.Add(a, b);
+-
++            if (finalNum > 0)
++            {
++                Debug.LogWarning("算法有误，finalNum大于0，返回卡牌1");
++                break;
++            }
+         }
+         return cfg.Tables.tb.Card.Get(1);
+     }
+ 
++    void AddToTempRemove(cfg.card.Card _tempCard, int _tempDrawCount)
++    {
++        totalWeight -= _tempCard.Weight;
++        totalWeightTempMinus += _tempCard.Weight;
++
++        listCardsAvailable.Remove(_tempCard);
++        listTempRemove.Add(_tempCard, _tempDrawCount);
++
++    }
+ 
++    void RebackTempRemove()
++    {
++        totalWeight += totalWeightTempMinus;
++        listCardsAvailable.AddRange(listTempRemove);
++
++        totalWeightTempMinus = 0;
++        listTempRemove.Clear();
++    }
+ 
+ 
+     public void SetCardEffect(cfg.card.Card card)
+diff --git a/MiniGame_EarthDefender/Assets/Scripts/UI/TriCardUI.cs b/MiniGame_EarthDefender/Assets/Scripts/UI/TriCardUI.cs
+index 09d033c..3f980d4 100644
+--- a/MiniGame_EarthDefender/Assets/Scripts/UI/TriCardUI.cs
++++ b/MiniGame_EarthDefender/Assets/Scripts/UI/TriCardUI.cs
+@@ -1,11 +1,15 @@
+ using System.Collections.Generic;
+ using System.Threading.Tasks;
+ using UnityEngine;
++using UnityEngine.UI;
+ 
+ public class TriCardUI : MonoBehaviour
+ {
+     public Transform cardsContainer;
+     public List<GameObject> cardSlots;
++    public Animator anim;//换一批
++    public Button buttonRefresh;//换一批
++    public Button buttonGetAll;//全都要
+ 
+ 
+     public async Task Initialize(List<cfg.card.Card> cards)
+@@ -30,4 +34,13 @@ public class TriCardUI : MonoBehaviour
+         TriCard.Instance.canChooseCard = true;
+         gameObject.SetActive(true);
+     }
++
++
++    public void ButtonRefresh()
++    {
++        // anim.Play(null);
++        anim.Play("Appear", 0, anim.GetFloat("RefreshFrame"));
++        //后面可以在换一批的时候把高品质的权重多加点
++        TriCard.Instance.GetTriCards();
++    }
+ }
+\ No newline at end of file
+-- 
+2.46.0.windows.1
+

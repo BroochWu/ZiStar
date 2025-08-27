@@ -25,7 +25,7 @@ public class TriCardUI : MonoBehaviour
             }
         }
 
-        Debug.Log(cards[0] + "  \n" + cards[1] + "  \n" + cards[2]);
+        //Debug.Log(cards[0] + "  \n" + cards[1] + "  \n" + cards[2]);
         cardSlots[0].GetComponentInChildren<CardUI>().Initialize(cards[0]);
         cardSlots[1].GetComponentInChildren<CardUI>().Initialize(cards[1]);
         cardSlots[2].GetComponentInChildren<CardUI>().Initialize(cards[2]);
