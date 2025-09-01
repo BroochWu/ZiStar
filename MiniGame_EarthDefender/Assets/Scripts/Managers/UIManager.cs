@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public enum UILayer
@@ -10,7 +8,8 @@ public enum UILayer
     BATTLELAYER,
     MAINLAYER,
     DEVELOPLAYER,
-    WEAPONSLAYER
+    WEAPONSLAYER,
+    SHOPLAYER
 }
 
 
@@ -24,6 +23,7 @@ public class UIManager : MonoBehaviour
     public MainUI mainLayer;
     public DevelopUI developLayer;
     public WeaponsUI weaponsLayer;
+    public ShopUI shopLayer;
     [Header("=====更高的玩家层=====")]
     public GameObject bottomTabs;
     public TopPLPanelGroupUI topPLPanel;
@@ -112,6 +112,11 @@ public class UIManager : MonoBehaviour
                 weaponsLayer.gameObject.SetActive(true);
                 _ = weaponsLayer.Initialize();
                 break;
+            case UILayer.SHOPLAYER:
+                SetTopPanels(true);
+                SetBottomTabs(true);
+                shopLayer.gameObject.SetActive(true);
+                break;
             default:
                 uiLayer = UILayer.NULL;
                 Debug.LogWarning("没找到UI层");
@@ -139,6 +144,9 @@ public class UIManager : MonoBehaviour
                 break;
             case UILayer.WEAPONSLAYER:
                 weaponsLayer.gameObject.SetActive(false);
+                break;
+            case UILayer.SHOPLAYER:
+                shopLayer.gameObject.SetActive(false);
                 break;
             default:
                 Debug.LogWarning($"没找到 {uiLayer} 层");

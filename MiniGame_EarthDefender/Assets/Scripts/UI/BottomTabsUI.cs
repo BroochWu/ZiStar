@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BottomTabsUI : MonoBehaviour
 {
+    public Button buttonShop;
     public Button buttonDevelop;
     public Button buttonCommand;
     public Button buttonWeapons;
@@ -36,6 +36,9 @@ public class BottomTabsUI : MonoBehaviour
             case UILayer.WEAPONSLAYER:
                 SetButtonActive(buttonWeapons, true);
                 break;
+            case UILayer.SHOPLAYER:
+                SetButtonActive(buttonShop, true);
+                break;
         }
     }
 
@@ -44,6 +47,7 @@ public class BottomTabsUI : MonoBehaviour
     /// </summary>
     void ResetAllButtonStates()
     {
+        SetButtonActive(buttonShop, false);
         SetButtonActive(buttonCommand, false);
         SetButtonActive(buttonDevelop, false);
         SetButtonActive(buttonWeapons, false);
@@ -73,6 +77,12 @@ public class BottomTabsUI : MonoBehaviour
     {
         // UIManager.Instance.CommonToast("暂未开发");
         UIManager.Instance.SwitchLayer(UILayer.WEAPONSLAYER);
+        CheckNow();
+    }
+    public void SwitchToShop()
+    {
+        // UIManager.Instance.CommonToast("暂未开发");
+        UIManager.Instance.SwitchLayer(UILayer.SHOPLAYER);
         CheckNow();
     }
 }
