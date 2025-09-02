@@ -109,17 +109,23 @@ public class AvgManager : MonoBehaviour
         }
 
         //遍历寻找在当前triggerType下可以触发的AVG（只触发1个）
+        //条件均允许则随机触发
+        List<IAvgTrigger> lists = new();
         foreach (var trigger in _triggers.Values)
         {
             if (trigger.TriggerType == triggerType && trigger.ShouldTrigger())
             {
-                if (TriggerAvg(trigger.config.Id))
-                {
-                    //标记触发器为触发的
-                    trigger.MarkAsTriggered();
-                    break;
-                }
+                lists.Add(trigger);
             }
+
+        }
+        var random = Utility.GetRandomByList(lists);
+        if (random == null) return;
+
+        if (TriggerAvg(random.config.Id))
+        {
+            //标记触发器为触发的
+            random.MarkAsTriggered();
         }
 
 

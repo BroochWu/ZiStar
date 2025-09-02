@@ -84,10 +84,24 @@
     "text_str": "留得青山在，不怕没柴烧"
   },
   {
-    "id": 9001,
+    "id": 901001,
     "text_color": 2,
     "time_delay": 0,
     "time_duration": 2,
     "text_str": "有啥好东西么"
+  },
+  {
+    "id": 902001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "进什么货了"
+  },
+  {
+    "id": 903001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "嗯，是得补给一下"
   }
 ]

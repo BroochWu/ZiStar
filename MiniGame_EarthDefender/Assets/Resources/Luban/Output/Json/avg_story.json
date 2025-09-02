@@ -156,7 +156,7 @@
     "can_recur": true
   },
   {
-    "id": 9,
+    "id": 901,
     "trigger": {
       "trigger_type": 3,
       "int_params": [
@@ -165,8 +165,36 @@
     },
     "sort": 0,
     "unlock_conds": [],
-    "id_start": 9001,
-    "id_end": 9001,
+    "id_start": 901001,
+    "id_end": 901001,
+    "can_recur": true
+  },
+  {
+    "id": 902,
+    "trigger": {
+      "trigger_type": 3,
+      "int_params": [
+        1
+      ]
+    },
+    "sort": 0,
+    "unlock_conds": [],
+    "id_start": 902001,
+    "id_end": 902001,
+    "can_recur": true
+  },
+  {
+    "id": 903,
+    "trigger": {
+      "trigger_type": 3,
+      "int_params": [
+        1
+      ]
+    },
+    "sort": 0,
+    "unlock_conds": [],
+    "id_start": 903001,
+    "id_end": 903001,
     "can_recur": true
   }
 ]

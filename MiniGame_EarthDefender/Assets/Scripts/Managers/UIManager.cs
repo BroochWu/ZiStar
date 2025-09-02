@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour
         }
 
         //判断AVG事件
-        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.UI_STATE);
+        AvgManager.Instance?.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.UI_STATE);
         Debug.Log("当前UI：" + uiLayer);
 
     }
