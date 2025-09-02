@@ -106,3 +106,47 @@ public class DungeonOverTrigger : IAvgTrigger
 }
 
 
+
+//切换UI的触发器
+public class UIShowTrigger : IAvgTrigger
+{
+    public cfg.avg.AvgStory config { get; }
+    public bool HasTriggered { get; private set; }
+
+    public TriggerType TriggerType => TriggerType.UI_STATE;
+
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="_avgId">AVGID</param>
+    /// <param name="_targetDungeonId">第几关</param>
+    public UIShowTrigger(cfg.avg.AvgStory _config)
+    {
+        config = _config;
+    }
+
+
+    public bool ShouldTrigger()
+    {
+        //如果不可反复触发并且触发过了，则无法触发本剧情
+        if (!config.CanRecur && HasTriggered)
+            return false;
+
+        //如果当前新界面不是设定界面就返回
+        if (config.Trigger.IntParams[0] != (int)UIManager.Instance.uiLayer)
+            return false;
+
+        //接下来麻烦的来了：判断条件是否都满足
+        if (!Utility.CondListCheck(config.UnlockConds))
+            return false;
+
+        return true;
+    }
+    public void MarkAsTriggered()
+    {
+        HasTriggered = true;
+    }
+}
+
+

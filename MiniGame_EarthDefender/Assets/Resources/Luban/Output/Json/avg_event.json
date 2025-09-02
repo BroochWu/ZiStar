@@ -4,7 +4,7 @@
     "text_color": 2,
     "time_delay": 0,
     "time_duration": 2,
-    "text_str": "这大炮怎么用来着"
+    "text_str": "啊，这个，怎么使来着"
   },
   {
     "id": 1002,
@@ -16,21 +16,21 @@
   {
     "id": 1003,
     "text_color": 2,
-    "time_delay": 10,
+    "time_delay": 5,
     "time_duration": 4,
-    "text_str": "我虽然是实习生，但没想到还挺能干的嘛"
+    "text_str": "还挺简单的嘛"
   },
   {
     "id": 1004,
     "text_color": 2,
-    "time_delay": 10,
+    "time_delay": 5,
     "time_duration": 4,
     "text_str": "芜湖！来吧！来挑战我吧！"
   },
   {
     "id": 1005,
     "text_color": 2,
-    "time_delay": 10,
+    "time_delay": 5,
     "time_duration": 4,
     "text_str": "我太强了，我要打十个"
   },
@@ -60,7 +60,7 @@
     "text_color": 2,
     "time_delay": 0,
     "time_duration": 2,
-    "text_str": "我只是忘了些东西\n等会再来揍你们"
+    "text_str": "好像忘了什么东西\n嗯，等会再来揍你们"
   },
   {
     "id": 6001,
@@ -82,5 +82,12 @@
     "time_delay": 0,
     "time_duration": 2,
     "text_str": "留得青山在，不怕没柴烧"
+  },
+  {
+    "id": 9001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "有啥好东西么"
   }
 ]

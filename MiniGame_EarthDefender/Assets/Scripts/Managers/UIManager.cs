@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum UILayer
 {
-    NULL,
-    BATTLELAYER,
-    MAINLAYER,
-    DEVELOPLAYER,
-    WEAPONSLAYER,
-    SHOPLAYER
+    NULL = 0,
+    BATTLELAYER = -1,
+    SHOPLAYER = 1,
+    DEVELOPLAYER = 2,
+    MAINLAYER = 3,
+    WEAPONSLAYER = 4,
 }
 
 
@@ -122,6 +122,9 @@ public class UIManager : MonoBehaviour
                 Debug.LogWarning("没找到UI层");
                 break;
         }
+
+        //判断AVG事件
+        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.UI_STATE);
         Debug.Log("当前UI：" + uiLayer);
 
     }

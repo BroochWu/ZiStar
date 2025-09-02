@@ -154,5 +154,19 @@
     "id_start": 8001,
     "id_end": 8001,
     "can_recur": true
+  },
+  {
+    "id": 9,
+    "trigger": {
+      "trigger_type": 3,
+      "int_params": [
+        1
+      ]
+    },
+    "sort": 0,
+    "unlock_conds": [],
+    "id_start": 9001,
+    "id_end": 9001,
+    "can_recur": true
   }
 ]
