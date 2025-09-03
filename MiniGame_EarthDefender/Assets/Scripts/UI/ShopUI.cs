@@ -9,6 +9,7 @@ public class ShopUI : MonoBehaviour
     [Header("=====底部页签=====")]
     public Toggle tabLayerDraw;
     public Toggle tabLayerShop;
+    public ToggleGroup toggleGroup;
     public ScrollRect scrollRect;
 
 
@@ -19,8 +20,14 @@ public class ShopUI : MonoBehaviour
         // tabLayerDraw.isOn = true;
         Debug.Log("change success");
         tabLayerDraw.isOn = true;
+        tabLayerShop.isOn = false;
+
+        tabLayerDraw.GetComponent<PersistentSelectedToggle>().UpdateVisualState();
+        tabLayerShop.GetComponent<PersistentSelectedToggle>().UpdateVisualState();
+
         ShowTab(layerDraw);
         scrollRect.verticalNormalizedPosition = 1;
+        // tabLayerDraw.group.NotifyToggleOn(tabLayerDraw);
     }
 
     void ShowTab(GameObject _tab)
