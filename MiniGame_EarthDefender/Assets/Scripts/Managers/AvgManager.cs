@@ -109,7 +109,7 @@ public class AvgManager : MonoBehaviour
         }
 
         //遍历寻找在当前triggerType下可以触发的AVG（只触发1个）
-        //条件均允许则随机触发
+        //多个允许触发的则随机触发其中1个
         List<IAvgTrigger> lists = new();
         foreach (var trigger in _triggers.Values)
         {
