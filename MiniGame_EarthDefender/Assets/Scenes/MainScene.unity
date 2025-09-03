@@ -5166,6 +5166,7 @@ MonoBehaviour:
   layerShop: {fileID: 1470755371}
   tabLayerDraw: {fileID: 75811528}
   tabLayerShop: {fileID: 1633510332}
+  scrollRect: {fileID: 1898279914}
 --- !u!1 &583676240
 GameObject:
   m_ObjectHideFlags: 0

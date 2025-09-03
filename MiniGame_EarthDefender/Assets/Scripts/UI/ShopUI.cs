@@ -9,6 +9,9 @@ public class ShopUI : MonoBehaviour
     [Header("=====底部页签=====")]
     public Toggle tabLayerDraw;
     public Toggle tabLayerShop;
+    public ScrollRect scrollRect;
+
+
 
     void OnEnable()
     {
@@ -17,6 +20,7 @@ public class ShopUI : MonoBehaviour
         Debug.Log("change success");
         tabLayerDraw.isOn = true;
         ShowTab(layerDraw);
+        scrollRect.verticalNormalizedPosition = 1;
     }
 
     void ShowTab(GameObject _tab)
