@@ -494,8 +494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &9072105238761221316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,8 +1069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &8558767802824949608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2000,8 +2006,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &3000721448358912531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2167,8 +2176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &4068770610543296521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2662,8 +2674,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a03a50ac7a945498985ccef3955b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   selectedSprite: {fileID: 21300000, guid: 59fe937dd16ac7d4ab3d8d1f656d6d23, type: 3}
   normalSprite: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &7378251629650125478
 MonoBehaviour:
   m_ObjectHideFlags: 0

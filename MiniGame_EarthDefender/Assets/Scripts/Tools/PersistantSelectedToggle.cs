@@ -6,25 +6,29 @@ using UnityEngine.EventSystems;
 public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
 {
     private Toggle _toggle;
-    private ToggleGroup _group;
+    // private ToggleGroup _group;
     public bool isON { get { return _toggle.isOn; } }
 
     // 选中的sprite
+    public GameObject target;
     public Sprite selectedSprite;
     public Sprite normalSprite;
+    public Color selectedColor = Color.white;
+    public Color normalColor = Color.white;
 
     void Awake()
     {
+        if (target == null) target = this.gameObject;
         _toggle = GetComponent<Toggle>();
-        _group = _toggle.group;
+        // _group = _toggle.group;
         // normalSprite = Resources.Load<Sprite>($"Images/{GetComponent<TreasureChest>().item.ImagePath}");
 
         // 如果组内没有选中的Toggle，强制选中当前
-        if (!_group.AnyTogglesOn())
-        {
-            _toggle.isOn = true;
-            Debug.Log("已强制选中当前");
-        }
+        // if (!_group.AnyTogglesOn())
+        // {
+        //     _toggle.isOn = true;
+        //     Debug.Log("已强制选中当前");
+        // }
 
         // 确保初始状态正确
         UpdateVisualState();
@@ -71,18 +75,20 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
     private void SetSelectedAppearance()
     {
         // 设置选中状态的外观
-        if (TryGetComponent<Image>(out var image))
+        if (target.TryGetComponent<Image>(out var image))
         {
-            image.sprite = selectedSprite;
+            if (selectedSprite != null) image.sprite = selectedSprite;
+            if (selectedColor != null) image.color = selectedColor;
         }
     }
 
     private void SetNormalAppearance()
     {
         // 设置普通状态的外观
-        if (TryGetComponent<Image>(out var image))
+        if (target.TryGetComponent<Image>(out var image))
         {
-            image.sprite = normalSprite;
+            if (normalSprite != null) image.sprite = normalSprite;
+            if (normalColor != null) image.color = normalColor;
         }
     }
 
