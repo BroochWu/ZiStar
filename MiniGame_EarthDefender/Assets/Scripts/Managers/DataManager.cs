@@ -20,6 +20,8 @@ public class DataManager : MonoBehaviour
     public const int EQUIP_SLOT_COUNT = 5;
     const string PLAYERPREFS_KEY_LAST_LOAD_TIME = "rewardchest_last_load_time";
     const string PLAYERPREFS_KEY_MAX_DUNGEON = "dungeon_passed_level";
+    const string PLAYERPREFS_KEY_AD_DRAW_COUNT = "ad_draw_count";
+    const string PLAYERPREFS_KEY_TOTAL_DRAW_COUNT = "total_draw_count";
 
 
 
@@ -81,6 +83,25 @@ public class DataManager : MonoBehaviour
             return a;
         }
     }
+
+    public int AdDrawAdCount//广告抽卡的看广告次数
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(PLAYERPREFS_KEY_AD_DRAW_COUNT, 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt(PLAYERPREFS_KEY_AD_DRAW_COUNT, value);
+        }
+    }
+
+    public int TotalDrawCount
+    {
+        get => PlayerPrefs.GetInt(PLAYERPREFS_KEY_TOTAL_DRAW_COUNT, 0);
+        set => PlayerPrefs.SetInt(PLAYERPREFS_KEY_TOTAL_DRAW_COUNT, value);
+    }
+
 
 
     public List<Rewards> rewardList { get; private set; } = new();//奖励列表
@@ -254,7 +275,7 @@ public class DataManager : MonoBehaviour
     /// <param name="count"></param>
     public void GainResource(cfg.item.Item item, int count)
     {
-        var nowHas = PlayerPrefs.GetInt($"item_{item.Id}");
+        var nowHas = PlayerPrefs.GetInt($"item_{item.Id}",0);
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
 
         //刷新顶栏
@@ -416,7 +437,7 @@ public class DataManager : MonoBehaviour
 
     public int GetItemCount(cfg.item.Item item)
     {
-        return PlayerPrefs.GetInt($"item_{item.Id}");
+        return PlayerPrefs.GetInt($"item_{item.Id}", 0);
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     [Header("=====两个页签对应的层=====")]
-    public GameObject layerDraw;
+    public ShopLayerDraw layerDraw;
     public GameObject layerShop;
     [Header("=====底部页签=====")]
     public Toggle tabLayerDraw;
@@ -25,14 +25,14 @@ public class ShopUI : MonoBehaviour
         tabLayerDraw.GetComponent<PersistentSelectedToggle>().UpdateVisualState();
         tabLayerShop.GetComponent<PersistentSelectedToggle>().UpdateVisualState();
 
-        ShowTab(layerDraw);
+        ShowTab(layerDraw.gameObject);
         scrollRect.verticalNormalizedPosition = 1;
         // tabLayerDraw.group.NotifyToggleOn(tabLayerDraw);
     }
 
     void ShowTab(GameObject _tab)
     {
-        layerDraw.SetActive(_tab == layerDraw);
+        layerDraw.gameObject.SetActive(_tab == layerDraw.gameObject);
         layerShop.SetActive(_tab == layerShop);
     }
 
