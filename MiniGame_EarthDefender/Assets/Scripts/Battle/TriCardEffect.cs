@@ -30,7 +30,7 @@ public class TriCardEffect
                 Player.instance.battleEquipedWeapon.Keys.FirstOrDefault(weapon => weapon.weaponId == _params[0])
                 .PlusColumnCount(_params[1]);
                 break;
-            case cfg.Enums.Card.EffectsType.WEAPONRAW:
+            case cfg.Enums.Card.EffectsType.WEAPONROW:
                 Player.instance.battleEquipedWeapon.Keys.FirstOrDefault(weapon => weapon.weaponId == _params[0])
                 .PlusRowCount(_params[1]);
                 break;

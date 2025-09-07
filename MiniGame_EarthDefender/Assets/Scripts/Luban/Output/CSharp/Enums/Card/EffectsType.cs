@@ -27,7 +27,7 @@ namespace cfg.Enums.Card
         /// <summary>
         /// 武器id,数量
         /// </summary>
-        WEAPONRAW = 2,
+        WEAPONROW = 2,
         /// <summary>
         /// 武器id（-1为全部）,数值
         /// </summary>

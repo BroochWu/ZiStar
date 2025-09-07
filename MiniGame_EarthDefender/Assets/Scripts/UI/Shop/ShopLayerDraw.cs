@@ -2,6 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
+using UnityEngine.EventSystems;
 
 public class ShopLayerDraw : MonoBehaviour
 {
@@ -18,7 +23,7 @@ public class ShopLayerDraw : MonoBehaviour
 
     private void Start()
     {
-        DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
+        // DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
 
         // 添加按钮事件监听
         btnRegularDraw.onClick.AddListener(ButtonRegularDrawEvent);
@@ -49,7 +54,6 @@ public class ShopLayerDraw : MonoBehaviour
     void UpdateAdDrawUI()
     {
         textAdDrawDesc.text = $"{ShopDrawManager.instance.AdDrawNum} 连抽";
-        textAdDrawConsume.text = "观看广告";
 
         // 更新广告按钮状态
         btnAdDraw.interactable = ShopDrawManager.instance.IsAdDrawAvailable();
@@ -57,6 +61,10 @@ public class ShopLayerDraw : MonoBehaviour
         {
             // 显示冷却时间
             textAdDrawConsume.text = $"冷却中({Mathf.CeilToInt(ShopDrawManager.instance.AdDrawCooldownRemaining)}s)";
+        }
+        else
+        {
+            textAdDrawConsume.text = "观看广告";
         }
     }
 
@@ -107,36 +115,54 @@ public class ShopLayerDraw : MonoBehaviour
         UpdateAdDrawUI();
     }
 
+
     /// <summary>
     /// 开始抽卡
     /// </summary>
-    public void LetUsDraw(int drawCount, bool isAdDraw)
+    public async void LetUsDraw(int drawCount, bool isAdDraw)
     {
-        // 执行抽卡逻辑
-        var rewards = ShopDrawManager.instance.DrawCards(drawCount);
+        // 显示加载UI
+        // UIManager.Instance.ShowLoading(true);
+        // GameManager.Instance.DisableEventSystem();
 
-        // 显示抽卡结果
-        Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
+        try
+        {
+            // 执行抽卡逻辑
+            var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
 
-        UIManager.Instance.CommonCongra(rewards);
+            // 显示抽卡结果
+            Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
 
-        // 刷新UI
-        RefreshUI();
+            UIManager.Instance.CommonCongra(rewards);
+
+            // 刷新UI
+            RefreshUI();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"抽卡过程中发生错误: {ex.Message}");
+            // 可以在这里显示错误提示
+        }
+        finally
+        {
+            // 隐藏加载UI
+            // UIManager.Instance.ShowLoading(false);
+            // GameManager.Instance.EnableEventSystem();
+        }
     }
 
-    // private void Update()
-    // {
-    //     // 实时更新广告按钮状态（如果需要）
-    //     if (ShopDrawManager.instance.IsAdDrawAvailable() && !btnAdDraw.interactable)
-    //     {
-    //         UpdateAdDrawUI();
-    //     }
+    private void Update()
+    {
+        if (Time.frameCount % 30 != 0) return;
+        // 实时更新钻石抽卡按钮状态
+        // bool canDraw = ShopDrawManager.instance.canRegularDraw;
+        // if (btnRegularDraw.interactable != canDraw)
+        // {
+        //     UpdateRegularDrawUI();
+        // }
 
-    //     // 实时更新钻石抽卡按钮状态
-    //     bool canDraw = ShopDrawManager.instance.canRegularDraw;
-    //     if (btnRegularDraw.interactable != canDraw)
-    //     {
-    //         UpdateRegularDrawUI();
-    //     }
-    // }
+        // 实时更新广告按钮状态（如果需要）
+        UpdateAdDrawUI();
+
+    }
 }

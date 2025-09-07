@@ -3,6 +3,7 @@ using SimpleJSON;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 public class ShopDrawManager
 {
@@ -133,7 +134,7 @@ public class ShopDrawManager
         return (DateTime.Now - lastAdDrawTime).TotalSeconds >= ADDrawCooldown;
     }
 
-    public List<Rewards> DrawCards(int count)
+    public async Task<List<Rewards>> DrawCards(int count)
     {
         List<Rewards> results = new();
         int currentLevel = DrawLevel;
@@ -170,6 +171,11 @@ public class ShopDrawManager
 
             // 更新玩家数据
             DataManager.Instance.GainResource(item, 1);
+
+
+            await Task.Delay(5);
+
+
         }
 
         // 更新总抽卡次数

@@ -1,103 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
-namespace cfg.weapon
-{
-    public partial class Weapon : Luban.BeanBase
-    {
-        //补充武器的解锁状态
-        public enum CellState
-        {
-            NORMAL = 1,
-            LOCK = 2,//未解锁
-            NEXTUNLOCK = 3 //下一个即将解锁
-        }
-
-        public Sprite ImageIcon//道具图标
-        {
-            get
-            {
-                return Resources.Load<Sprite>("Images/" + ImageIconPath);
-            }
-        }
-        public int currentLevel//当前等级
-        {
-            get
-            {
-                return DataManager.Instance.GetWeaponLevel(Id);
-            }
-            set
-            {
-                PlayerPrefs.SetInt($"weapon_level_{Id}", value);
-            }
-        }
-
-        public float basicAdditionAtk //基础的武器伤害倍率
-        {
-            get
-            {
-                return currentLevel * 0.05f;
-            }
-        }
-
-        public CellState weaponState //武器当前是否解锁
-        {
-            get
-            {
-                if (!Utility.CondCheck(UnlockCond.CondType, UnlockCond.StringParams, UnlockCond.IntParams))
-                {
-                    if (Id == DataManager.Instance.nextUnlockDungeonPassedWeapon)
-                    {
-                        Debug.Log("下一个要解锁的是：" + Id);
-                        return CellState.NEXTUNLOCK;
-                    }
-                    else
-                        return CellState.LOCK;
-                }
-                return CellState.NORMAL;
-
-            }
-        }
-        public Dictionary<item.Item, int> levelUpConsumes //武器升级消耗
-        {
-            get
-            {
-                Dictionary<item.Item, int> tempDic = new()
-                {
-                    { Tables.tb.Item.Get(1), Mathf.Min(5000,currentLevel*5) },//金币 - 等级*5，最高5000
-                    { Piece_Ref, 3 + 2 * currentLevel } //碎片 - 3+2*（等级-1）
-                };
-                return tempDic;
-            }
-        }
-
-        private int curGlobalBonusLv//当前全局奖励等级(武器每5级提升1档)
-        {
-            get
-            { return currentLevel / 5; }
-        }
-
-        public int curGlobalBonusNum //当前全局奖励数额（暂定每5档送3%）
-        {
-            get
-            {
-                return curGlobalBonusLv * Tables.tb.GlobalParam.Get("weapon_global_bonus_atk_per_level").IntValue;
-            }
-        }
-
-        // public int nextGlobalBonusNum//下一档奖励
-        // {
-        //     get
-        //     {
-        //         return (currentLevel + 1) / 5 * 3;
-        //     }
-        // }
-
-    }
-
-}
 
 
 
@@ -225,20 +127,20 @@ public class Weapon : MonoBehaviour
             Vector3 perpendicular = Vector3.Cross(fireDirection, Vector3.forward).normalized;
 
             // 计算起始位置（居中分布）
-            if (rowCount > 1)
+            if (columnCount > 1)
             {
-                float totalWidth = rowSpace * (rowCount - 1);
+                float totalWidth = rowSpace * (columnCount - 1);
                 Vector3 startOffset = perpendicular * (totalWidth / 2f);
                 spawnPos = bulletInitTransform.position - startOffset;
             }
 
             var oldSpawnPos = spawnPos;
             // 生成子弹行
-            for (int j = 0; j < columnCount; j++)
+            for (int j = 0; j < rowCount; j++)
             {
                 spawnPos = oldSpawnPos;
                 // 生成子弹列
-                for (int i = 0; i < rowCount; i++)
+                for (int i = 0; i < columnCount; i++)
                 {
                     // 从对象池获取子弹
                     GameObject bullet = GetBulletFromPool();
