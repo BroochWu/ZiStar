@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     private float mainCamBattleSize;
     private int mainCamMainViewSize;
     private Coroutine CorCameraMove;
+    private EventSystem eventSystem => EventSystem.current;
 
     void Awake()
     {
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour
             SwitchGameStateToMainView();
         }
 
-        
+
 
         //统计并更新一次登录时间
         DataManager.Instance.SetLastLoadTime();
@@ -167,7 +169,21 @@ public class GameManager : MonoBehaviour
         mainCam.orthographicSize = newSize;
     }
 
+    public void DisableEventSystem()
+    {
+        if (eventSystem != null)
+        {
+            eventSystem.enabled = false; // 禁用EventSystem
+        }
+    }
 
+    public void EnableEventSystem()
+    {
+        if (eventSystem != null)
+        {
+            eventSystem.enabled = true; // 启用EventSystem
+        }
+    }
 
 
 
