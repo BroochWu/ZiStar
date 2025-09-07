@@ -18,7 +18,7 @@ public class ShopLayerDraw : MonoBehaviour
 
     private void Start()
     {
-        // DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
+        DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
 
         // 添加按钮事件监听
         btnRegularDraw.onClick.AddListener(ButtonRegularDrawEvent);
@@ -124,19 +124,19 @@ public class ShopLayerDraw : MonoBehaviour
         RefreshUI();
     }
 
-    private void Update()
-    {
-        // 实时更新广告按钮状态（如果需要）
-        if (ShopDrawManager.instance.IsAdDrawAvailable() && !btnAdDraw.interactable)
-        {
-            UpdateAdDrawUI();
-        }
+    // private void Update()
+    // {
+    //     // 实时更新广告按钮状态（如果需要）
+    //     if (ShopDrawManager.instance.IsAdDrawAvailable() && !btnAdDraw.interactable)
+    //     {
+    //         UpdateAdDrawUI();
+    //     }
 
-        // 实时更新钻石抽卡按钮状态
-        bool canDraw = ShopDrawManager.instance.canRegularDraw;
-        if (btnRegularDraw.interactable != canDraw)
-        {
-            UpdateRegularDrawUI();
-        }
-    }
+    //     // 实时更新钻石抽卡按钮状态
+    //     bool canDraw = ShopDrawManager.instance.canRegularDraw;
+    //     if (btnRegularDraw.interactable != canDraw)
+    //     {
+    //         UpdateRegularDrawUI();
+    //     }
+    // }
 }
