@@ -18,12 +18,12 @@ public class ShopDrawManager
 
     // 连抽设置
     private const int RDNumMin = 5;
-    private const int RDNumMax = 50;
+    private const int RDNumMax = 30;
     private const int RDNumStep = 5;
 
     // 广告抽卡设置
     private const int ADNumMin = 10;
-    private const int ADNumMax = 50;
+    private const int ADNumMax = 30;
 
     public bool canRegularDraw
     {
@@ -104,6 +104,92 @@ public class ShopDrawManager
     }
 
 
+
+// 简单的对象池实现
+private Queue<Rewards> rewardsPool = new Queue<Rewards>();
+
+private Rewards GetRewardsFromPool(cfg.item.Item item, int count)
+{
+    Rewards reward;
+    if (rewardsPool.Count > 0)
+    {
+        reward = rewardsPool.Dequeue();
+        reward.rewardItem = item;
+        reward.gainNumber = count;
+    }
+    else
+    {
+        reward = new Rewards() { rewardItem = item, gainNumber = count };
+    }
+    return reward;
+}
+
+private void ReturnRewardsToPool(Rewards reward)
+{
+    rewardsPool.Enqueue(reward);
+}
+
+
+
+
+
+
+
+    // 使用缓存的方法
+    private cfg.item.Item GetRandomFragmentByQualityFromCache(cfg.Enums.Com.Quality quality)
+    {
+        if (qualityItemCache.ContainsKey(quality) && qualityItemCache[quality].Count > 0)
+        {
+            var items = qualityItemCache[quality];
+            return items[UnityEngine.Random.Range(0, items.Count)];
+        }
+        else if (quality != cfg.Enums.Com.Quality.GREEN)
+        {
+            // 降级处理
+            return GetRandomFragmentByQualityFromCache(cfg.Enums.Com.Quality.GREEN);
+        }
+        else
+        {
+            // 默认返回
+            return cfg.Tables.tb.Item.Get(2001);
+        }
+    }
+
+
+
+// 在类中添加缓存字段
+private Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>> qualityItemCache = new Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>>();
+private DateTime lastCacheUpdate = DateTime.MinValue;
+
+
+    // 更新缓存
+    private void UpdateQualityItemCache()
+    {
+        // 每10分钟更新一次缓存，或根据需要
+        if ((DateTime.Now - lastCacheUpdate).TotalMinutes < 10) return;
+
+        qualityItemCache.Clear();
+        UpdateUnlockWeaponFragmentIdList();
+
+        foreach (var itemId in UnlockWeaponFragmentIdList)
+        {
+            var item = cfg.Tables.tb.Item.Get(itemId);
+            if (!qualityItemCache.ContainsKey(item.Quality))
+            {
+                qualityItemCache[item.Quality] = new List<cfg.item.Item>();
+            }
+            qualityItemCache[item.Quality].Add(item);
+        }
+
+        lastCacheUpdate = DateTime.Now;
+    }
+
+
+
+
+
+
+
     public bool TryRegularDraw()
     {
         // 检查钻石是否足够
@@ -133,56 +219,64 @@ public class ShopDrawManager
     {
         return (DateTime.Now - lastAdDrawTime).TotalSeconds >= ADDrawCooldown;
     }
+public async Task<List<Rewards>> DrawCards(int count)
+{
+    List<Rewards> results = new List<Rewards>(count); // 预分配容量
+    int currentLevel = DrawLevel;
+    float[] probabilities = drawProbabilities[currentLevel];
+    
+    // 更新缓存
+    UpdateQualityItemCache();
+    
+    // 批量更新资源的字典
+    Dictionary<cfg.item.Item, int> resourceUpdates = new Dictionary<cfg.item.Item, int>();
 
-    public async Task<List<Rewards>> DrawCards(int count)
+    for (int i = 0; i < count; i++)
     {
-        List<Rewards> results = new();
-        int currentLevel = DrawLevel;
-        float[] probabilities = drawProbabilities[currentLevel];
-
-        for (int i = 0; i < count; i++)
+        // 根据概率随机品质
+        cfg.Enums.Com.Quality quality = cfg.Enums.Com.Quality.GREEN;
+        float rand = UnityEngine.Random.value;
+        float cumulative = 0;
+        
+        for (int q = 0; q < probabilities.Length; q++)
         {
-            // 根据概率随机品质
-            cfg.Enums.Com.Quality quality = cfg.Enums.Com.Quality.GREEN;
-
-
-
-            float rand = UnityEngine.Random.value;
-            float cumulative = 0;
-            for (int q = 0; q < probabilities.Length; q++)
+            cumulative += probabilities[q];
+            if (rand <= cumulative)
             {
-                cumulative += probabilities[q];
-                if (rand <= cumulative)
-                {
-                    quality = (cfg.Enums.Com.Quality)(q + 1);
-                    break;
-                }
+                quality = (cfg.Enums.Com.Quality)(q + 1);
+                break;
             }
-
-
-
-            // 根据品质随机选择碎片（这里需要根据实际游戏设计实现）
-            var item = GetRandomFragmentByQuality(quality);
-            Debug.Log("抽到了：" + item.TextName);
-
-            // 添加碎片到结果列表
-            results.Add(new Rewards() { rewardItem = item, gainNumber = 1 });
-
-
-            // 更新玩家数据
-            DataManager.Instance.GainResource(item, 1);
-
-
-            await Task.Delay(5);
-
-
         }
 
-        // 更新总抽卡次数
-        DataManager.Instance.TotalDrawCount += count;
-
-        return results;
+        // 使用缓存获取物品
+        var item = GetRandomFragmentByQualityFromCache(quality);
+        
+        // 使用对象池创建奖励对象
+        var reward = GetRewardsFromPool(item, 1);
+        results.Add(reward);
+        
+        // 累积资源更新
+        if (resourceUpdates.ContainsKey(item))
+        {
+            resourceUpdates[item] += 1;
+        }
+        else
+        {
+            resourceUpdates[item] = 1;
+        }
     }
+
+    // 批量更新资源
+    foreach (var update in resourceUpdates)
+    {
+        DataManager.Instance.GainResource(update.Key, update.Value);
+    }
+
+    // 更新总抽卡次数
+    DataManager.Instance.TotalDrawCount += count;
+
+    return results;
+}
 
     /// <summary>
     /// 根据品质返回碎片ID
@@ -191,8 +285,6 @@ public class ShopDrawManager
     /// <returns></returns>
     private cfg.item.Item GetRandomFragmentByQuality(cfg.Enums.Com.Quality quality)
     {
-
-        UpdateUnlockWeaponFragmentIdList();
 
         List<cfg.item.Item> matchQualityItems = new();
 
@@ -208,10 +300,10 @@ public class ShopDrawManager
 
         if (matchQualityItems.Count > 0)
         {
-            return Utility.GetRandomByList(matchQualityItems);
-
+            // return Utility.GetRandomByList(matchQualityItems);
+            return matchQualityItems[UnityEngine.Random.Range(0, matchQualityItems.Count)];
         }
-        else if (quality != cfg.Enums.Com.Quality.GREEN)
+        else if (matchQualityItems.Count == 0 && quality != cfg.Enums.Com.Quality.GREEN)
         {
             //如果没有这个品质就从绿色里随一个
             return GetRandomFragmentByQuality(cfg.Enums.Com.Quality.GREEN);

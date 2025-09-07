@@ -115,42 +115,45 @@ public class ShopLayerDraw : MonoBehaviour
         UpdateAdDrawUI();
     }
 
-
-    /// <summary>
-    /// 开始抽卡
-    /// </summary>
-    public async void LetUsDraw(int drawCount, bool isAdDraw)
+/// <summary>
+/// 开始抽卡 - 优化版本
+/// </summary>
+public async void LetUsDraw(int drawCount, bool isAdDraw)
+{
+    // // 禁用按钮，防止重复点击
+    // btnRegularDraw.interactable = false;
+    // btnAdDraw.interactable = false;
+    
+    // // 显示加载UI
+    // UIManager.Instance.ShowLoading(true);
+    
+    try
     {
-        // 显示加载UI
-        // UIManager.Instance.ShowLoading(true);
-        // GameManager.Instance.DisableEventSystem();
-
-        try
-        {
-            // 执行抽卡逻辑
-            var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
-
-            // 显示抽卡结果
-            Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
-
-            UIManager.Instance.CommonCongra(rewards);
-
-            // 刷新UI
-            RefreshUI();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"抽卡过程中发生错误: {ex.Message}");
-            // 可以在这里显示错误提示
-        }
-        finally
-        {
-            // 隐藏加载UI
-            // UIManager.Instance.ShowLoading(false);
-            // GameManager.Instance.EnableEventSystem();
-        }
+        // 执行抽卡逻辑
+        var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
+        
+        // 显示抽卡结果
+        Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
+        
+        UIManager.Instance.CommonCongra(rewards);
+        
+        // 刷新UI
+        RefreshUI();
     }
-
+    catch (Exception ex)
+    {
+        Debug.LogError($"抽卡过程中发生错误: {ex.Message}");
+    }
+    finally
+    {
+        // 隐藏加载UI
+        // UIManager.Instance.ShowLoading(false);
+        
+        // 重新启用按钮
+        // btnRegularDraw.interactable = true;
+        // btnAdDraw.interactable = true;
+    }
+}
     private void Update()
     {
         if (Time.frameCount % 30 != 0) return;
