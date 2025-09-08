@@ -38,7 +38,9 @@ public class ShopDrawManager
     private List<int> UnlockWeaponFragmentIdList = new();
 
     // 抽卡等级设置
-    private int[] drawLevelThresholds = { 0, 100, 300, 600, 1000 }; // 各级别所需的抽卡次数
+    public int[] drawLevelThresholds = { 0, 100, 300, 600, 1000 }; // 各级别所需的抽卡次数
+
+
     // 抽卡概率配置（示例，实际应根据需求调整）
     private Dictionary<int, float[]> drawProbabilities = new Dictionary<int, float[]>
     {

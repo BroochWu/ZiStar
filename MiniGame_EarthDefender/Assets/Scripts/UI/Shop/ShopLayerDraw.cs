@@ -2,15 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Unity.VisualScripting;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System;
-using UnityEngine.EventSystems;
+using System.Linq;
 
 public class ShopLayerDraw : MonoBehaviour
 {
     [Header("=====UI装配=====")]
+    public Text textCurrentExp;
+    public Text textCurrentLv;
+    public GameObject objCurrentExpProgress;
+
     public Button btnRegularDraw;//常规抽卡
     public Button btnAdDraw;//广告抽卡
 
@@ -38,6 +39,21 @@ public class ShopLayerDraw : MonoBehaviour
         // 更新UI文本
         UpdateRegularDrawUI();
         UpdateAdDrawUI();
+        UpdateDrawLevel();
+    }
+
+    void UpdateDrawLevel()
+    {
+        var drawLevel = ShopDrawManager.instance.DrawLevel;
+        textCurrentLv.text = "等级 " + drawLevel;
+
+        var thresholds = ShopDrawManager.instance.drawLevelThresholds;
+
+        var currentLevelRequire = thresholds.Contains(drawLevel - 1) ? thresholds[drawLevel - 1] : 0;
+        var N = DataManager.Instance.TotalDrawCount - currentLevelRequire;
+        var D = ShopDrawManager.instance.drawLevelThresholds[drawLevel] - currentLevelRequire;
+        textCurrentExp.text = N + "/" + D;
+        objCurrentExpProgress.transform.localScale = new Vector3(N * 1f / D, 1, 1);
     }
 
     void UpdateRegularDrawUI()
@@ -115,45 +131,45 @@ public class ShopLayerDraw : MonoBehaviour
         UpdateAdDrawUI();
     }
 
-/// <summary>
-/// 开始抽卡 - 优化版本
-/// </summary>
-public async void LetUsDraw(int drawCount, bool isAdDraw)
-{
-    // // 禁用按钮，防止重复点击
-    // btnRegularDraw.interactable = false;
-    // btnAdDraw.interactable = false;
-    
-    // // 显示加载UI
-    // UIManager.Instance.ShowLoading(true);
-    
-    try
+    /// <summary>
+    /// 开始抽卡 - 优化版本
+    /// </summary>
+    public async void LetUsDraw(int drawCount, bool isAdDraw)
     {
-        // 执行抽卡逻辑
-        var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
-        
-        // 显示抽卡结果
-        Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
-        
-        UIManager.Instance.CommonCongra(rewards);
-        
-        // 刷新UI
-        RefreshUI();
+        // // 禁用按钮，防止重复点击
+        // btnRegularDraw.interactable = false;
+        // btnAdDraw.interactable = false;
+
+        // // 显示加载UI
+        // UIManager.Instance.ShowLoading(true);
+
+        try
+        {
+            // 执行抽卡逻辑
+            var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
+
+            // 显示抽卡结果
+            Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");
+
+            UIManager.Instance.CommonCongra(rewards);
+
+            // 刷新UI
+            RefreshUI();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"抽卡过程中发生错误: {ex.Message}");
+        }
+        finally
+        {
+            // 隐藏加载UI
+            // UIManager.Instance.ShowLoading(false);
+
+            // 重新启用按钮
+            // btnRegularDraw.interactable = true;
+            // btnAdDraw.interactable = true;
+        }
     }
-    catch (Exception ex)
-    {
-        Debug.LogError($"抽卡过程中发生错误: {ex.Message}");
-    }
-    finally
-    {
-        // 隐藏加载UI
-        // UIManager.Instance.ShowLoading(false);
-        
-        // 重新启用按钮
-        // btnRegularDraw.interactable = true;
-        // btnAdDraw.interactable = true;
-    }
-}
     private void Update()
     {
         if (Time.frameCount % 30 != 0) return;
