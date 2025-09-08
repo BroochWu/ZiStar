@@ -76,6 +76,16 @@ public class AvgManager : MonoBehaviour
         }
     }
 
+
+
+
+
+
+
+
+
+
+
     // 根据配置创建触发器
     private IAvgTrigger CreateTriggerFromConfig(cfg.avg.AvgStory config)
     {
@@ -97,6 +107,12 @@ public class AvgManager : MonoBehaviour
                 return null;
         }
     }
+
+
+
+
+
+
 
 
 
@@ -130,9 +146,18 @@ public class AvgManager : MonoBehaviour
             random.MarkAsTriggered();
         }
 
-
-
     }
+
+
+
+
+
+
+
+
+
+
+    
 
     // 触发特定AVG
     public bool TriggerAvg(int avgId)

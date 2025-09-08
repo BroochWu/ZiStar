@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using cfg.Enums.Com;
 
 // AVG 触发器接口
@@ -160,6 +161,11 @@ public class AdPlayTrigger : IAvgTrigger
     public TriggerType TriggerType => TriggerType.PLAYAD;
 
 
+
+    // private bool isAdEnded;//广告是否播放完成，这tm太扯了，不能传参数我草
+
+
+
     /// <summary>
     /// 构造函数
     /// </summary>
@@ -178,6 +184,17 @@ public class AdPlayTrigger : IAvgTrigger
         //接下来麻烦的来了：判断条件是否都满足
         if (!Utility.CondListCheck(config.UnlockConds))
             return false;
+
+        var intParam = config.Trigger.IntParams[0];
+        // UnityEngine.Debug.Log(config.Id + "  " + intParam + "  isAdEnded:" + isAdEnded);
+        if ( AdManager.isAdEnded)
+        {
+            if (intParam != 1) return false;
+        }
+        else
+        {
+            if (intParam != 0) return false;
+        }
 
         return true;
     }
