@@ -217,7 +217,18 @@ public static class Utility
             case cfg.Enums.Com.CondType.NULL:
                 return true;
             case cfg.Enums.Com.CondType.WEAPONUNLOCK:
-                return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
+                if (GameManager.Instance.gameState != GameManager.GameState.BATTLE)
+                {
+                    Debug.LogError("非战斗中无法使用WEAPONUNLOCK的解锁条件！");
+                    return false;
+                }
+                // return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
+                foreach (var weapon in Player.instance.battleEquipedWeapon)
+                {
+                    if (weapon.Key.weaponId == _intParams[0]) return true;
+                }
+                return false;
+            // return Player.instance.battleEquipedWeapon.ContainsKey(cfg.Tables.tb.Weapon.Get(_intParams[0]));
 
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
                 return Compare(DataManager.Instance.GetWeaponLevel(_intParams[0]), _intParams[1], _stringParams[0]);

@@ -28,11 +28,18 @@ public class TriCard
         {
             //if条件
             if (!CheckCardBeforeBattle(card))
+            {
+                Debug.Log(card.Id + "不满足条件，已从本局剔除");
                 continue;
+            }
 
             listCardsAvailable.Add(card, card.DrawCount);
             totalWeight += card.Weight;
+
+            Debug.Log($"{card.TextName}已加载，可使用次数：{card.DrawCount},总权重:{totalWeight}");
+
         }
+
     }
 
     public void GetTriCards()
@@ -51,21 +58,8 @@ public class TriCard
             //抽3张，并且3张卡牌绝对不一样
             var cardResult = DrawOneCard();
 
-            //抽出一张牌后，将临时去除的列表复原（错误的！此时不能复原，否则会出现反复抽取的情况，第一张牌是A，第二张牌是B，第三张牌又抽到A，须在三张牌抽完后再复原临时去除的列表）
-            // RebackTempRemove();
-
             listCardsThree.Add(cardResult);
 
-            //而后，再临时去除已生成的卡牌，保证不会生成相同的卡牌（除了id==1）
-            //等等，这里要小心，别出现反复调用的问题
-            //这里有问题，lca已经被移除了本项，是找不到的，因此我坐在方法内部了
-            // AddToTempRemove(cardResult, listCardsAvailable[cardResult]);
-
-            // totalWeight -= cardResult.Weight;
-            // listTempRemove.Add(cardResult, listCardsAvailable[cardResult]);
-
-            // //可获得的卡牌列表中删除抽卡结果
-            // listCardsAvailable.Remove(cardResult);
         }
 
         //全部抽完后把不放回重抽时被移除的列表添加回去（基于不存在第二张牌突然满足了条件的情况）
@@ -74,19 +68,13 @@ public class TriCard
         //可以初始化UI了
         _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
 
-        // foreach (var a in listTempRemove)
-        // {
-        //     listCardsAvailable.Add(a.Key, a.Value);
-        //     totalWeight += a.Key.Weight;
-        // }
-        // listTempRemove.Clear();
     }
 
     cfg.card.Card DrawOneCard()
     {
         //决定一个权重值
         int finalNum = Random.Range(0, totalWeight);
-
+        Debug.Log($"权重值：{finalNum}/{totalWeight}");
 
         //这俩是如果重抽的时候要用到的
         //重随时去除的卡和其权重
@@ -158,7 +146,7 @@ public class TriCard
 
     }
 
-    void RebackTempRemove()
+    public void RebackTempRemove()
     {
         totalWeight += totalWeightTempMinus;
         listCardsAvailable.AddRange(listTempRemove);

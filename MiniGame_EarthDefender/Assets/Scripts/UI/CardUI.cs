@@ -1,20 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace cfg.card
-{
-    public partial class Card
-    {
-        public Sprite imgBg
-        {
-            get
-            {
-                return Resources.Load<Sprite>("Images/" + ImageTricardiconPath);
-            }
-        }
-    }
-}
-
 
 
 public class CardUI : MonoBehaviour
@@ -24,6 +10,7 @@ public class CardUI : MonoBehaviour
     private bool doubleBless;
     private int slot;
 
+    [Header("组件装配")]
     public Animator anim;
     public Text textName;
     public Text textDesc;
@@ -31,6 +18,7 @@ public class CardUI : MonoBehaviour
     public Text textTargetName;
     public Image qualityBg;
     public Image icon;
+    public GameObject VfxNode;
 
     [Header("资源装配")]
     public Sprite spriteTricardBgBlue;
@@ -56,6 +44,7 @@ public class CardUI : MonoBehaviour
 
         doubleBless = card.UnlockCondsInbattle.Count == 2;
         textSpecial.gameObject.SetActive(doubleBless);
+        VfxNode.SetActive(doubleBless);
 
 
         if (doubleBless)

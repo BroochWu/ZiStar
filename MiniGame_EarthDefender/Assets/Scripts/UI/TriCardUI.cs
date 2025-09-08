@@ -75,8 +75,18 @@ public class TriCardUI : MonoBehaviour
     public void ButtonRefresh()
     {
         // anim.Play(null);
+        //播动画
         anim.Play("Appear", 0, anim.GetFloat("RefreshFrame"));
+
         //后面可以在换一批的时候把高品质的权重多加点
+        //总权重重置
+        // foreach (var card in TriCard.Instance.listCardsThree)
+        // {
+        //     TriCard.Instance.totalWeight += card.Weight;
+        // }
+
+        // TriCard.Instance.RebackTempRemove();
+
         TriCard.Instance.GetTriCards();
     }
 

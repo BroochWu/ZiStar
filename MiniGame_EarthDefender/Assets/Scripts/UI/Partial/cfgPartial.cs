@@ -122,3 +122,20 @@ namespace cfg.weapon
     }
 
 }
+
+
+
+namespace cfg.card
+{
+    public partial class Card
+    {
+        public Sprite imgBg
+        {
+            get
+            {
+                return Resources.Load<Sprite>("Images/" + ImageTricardiconPath);
+            }
+        }
+    }
+}
+
