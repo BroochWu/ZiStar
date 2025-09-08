@@ -74,9 +74,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    // // 事件委托
-    // public delegate void OnGameOver();
-    // public event OnGameOver onGameOver;
+    // 事件委托
+    // public delegate void OnBattleSuccess();
+    // public event OnBattleSuccess onBattleSuccess;
 
 
     void Awake()
@@ -318,6 +318,8 @@ public class BattleManager : MonoBehaviour
         //存档：已通关的最高等级（日后如果有活动和支线关卡的话另当别论）
         DataManager.Instance.dungeonPassedLevel = dungeonId;
 
+        //通关第五关解锁并初始化商店
+        if (dungeonId == 5) ShopShoppingManager.Instance.UnlockShop();
 
         //战斗结束通用处理
         BattleOver();

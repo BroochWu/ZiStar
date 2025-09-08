@@ -329,7 +329,7 @@ public class ShopDrawManager
     }
 
 
-    private void UpdateUnlockWeaponFragmentIdList()
+    public List<int> UpdateUnlockWeaponFragmentIdList()
     {
 
         UnlockWeaponFragmentIdList.Clear();
@@ -341,5 +341,6 @@ public class ShopDrawManager
                 UnlockWeaponFragmentIdList.Add(weapon.Piece);
             }
         }
+        return UnlockWeaponFragmentIdList;
     }
 }

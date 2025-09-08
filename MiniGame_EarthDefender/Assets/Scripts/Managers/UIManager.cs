@@ -273,7 +273,7 @@ public class UIManager : MonoBehaviour
         //如果存在实例就立刻销毁，不会触发OnDestroy
         if (AvgManager.dialogueAvgInstance != null)
         {
-            DestroyImmediate(AvgManager.dialogueAvgInstance.gameObject);
+            Destroy(AvgManager.dialogueAvgInstance.gameObject);
         }
 
         AvgManager.dialogueAvgInstance = Instantiate(avgDialoguePrefab, avgContainer);
