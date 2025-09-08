@@ -36,6 +36,10 @@ namespace cfg.Enums.Com
         /// 代码写死
         /// </summary>
         INCODE = 4,
+        /// <summary>
+        /// 1是成功，0是失败
+        /// </summary>
+        PLAYAD = 5,
     }
 
 } 

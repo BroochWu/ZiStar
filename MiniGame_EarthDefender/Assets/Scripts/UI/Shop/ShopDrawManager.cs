@@ -215,6 +215,9 @@ public class ShopDrawManager
         if (!IsAdDrawAvailable())
             return false;
 
+
+        if (!AdManager.PlayAd()) return false;
+
         // 记录广告抽卡时间
         lastAdDrawTime = DateTime.Now;
 

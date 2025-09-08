@@ -103,5 +103,26 @@
     "time_delay": 0,
     "time_duration": 2,
     "text_str": "嗯，是得补给一下"
+  },
+  {
+    "id": 1001001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "怎么突然收到一张字条：\n【wow！感谢大哥支持！\n可以加丘丘群：1021392676】"
+  },
+  {
+    "id": 1001002,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "落款是……【茜楠公馆】？"
+  },
+  {
+    "id": 1002001,
+    "text_color": 2,
+    "time_delay": 0,
+    "time_duration": 2,
+    "text_str": "降神失败了吗？\n没关系，我们总是可以凭借自己的努力攻克难关"
   }
 ]

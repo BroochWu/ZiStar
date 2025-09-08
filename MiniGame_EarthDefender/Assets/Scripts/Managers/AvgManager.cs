@@ -87,8 +87,10 @@ public class AvgManager : MonoBehaviour
                 return new DungeonStartTrigger(config);
             case cfg.Enums.Com.TriggerType.DUNGEON_OVER://关卡结束
                 return new DungeonOverTrigger(config);
-            case cfg.Enums.Com.TriggerType.UI_STATE://关卡结束
+            case cfg.Enums.Com.TriggerType.UI_STATE://切UI
                 return new UIShowTrigger(config);
+            case cfg.Enums.Com.TriggerType.PLAYAD://看广告
+                return new AdPlayTrigger(config);
 
             default:
                 Debug.LogWarning($"未知的触发器类型: {config.Id}");

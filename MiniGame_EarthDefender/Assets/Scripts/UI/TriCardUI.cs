@@ -74,6 +74,8 @@ public class TriCardUI : MonoBehaviour
 
     public void ButtonRefresh()
     {
+        if (!AdManager.PlayAd()) return;
+        
         // anim.Play(null);
         //播动画
         anim.Play("Appear", 0, anim.GetFloat("RefreshFrame"));
@@ -92,6 +94,8 @@ public class TriCardUI : MonoBehaviour
 
     public void ButtonGetAll()
     {
+        if (!AdManager.PlayAd()) return;
+
         TriCard.Instance.SetCardEffectAll();
 
 
