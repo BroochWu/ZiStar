@@ -38,13 +38,20 @@ public class ShopDrawManager
     private List<int> UnlockWeaponFragmentIdList = new();
 
     // 抽卡等级设置
-    public int[] drawLevelThresholds = { 0, 100, 300, 600, 1000 }; // 各级别所需的抽卡次数
+    public int[] drawLevelThresholds =
+    {
+        0,
+        100,
+        300,
+        600,
+        1000
+        }; // 各级别所需的抽卡次数
 
 
     // 抽卡概率配置（示例，实际应根据需求调整）
     private Dictionary<int, float[]> drawProbabilities = new Dictionary<int, float[]>
     {
-        { 1, new float[] { 0.7f, 0.25f, 0.05f } }, // 等级1概率：普通, 稀有, 史诗, 传说
+        { 1, new float[] { 0.7f, 0.25f, 0.05f } }, // 等级1概率：普通, 稀有, 史诗
         { 2, new float[] { 0.6f, 0.3f, 0.1f } },
         { 3, new float[] { 0.5f, 0.35f, 0.15f } },
         { 4, new float[] { 0.4f, 0.4f, 0.2f } },
@@ -107,29 +114,29 @@ public class ShopDrawManager
 
 
 
-// 简单的对象池实现
-private Queue<Rewards> rewardsPool = new Queue<Rewards>();
+    // 简单的对象池实现
+    private Queue<Rewards> rewardsPool = new Queue<Rewards>();
 
-private Rewards GetRewardsFromPool(cfg.item.Item item, int count)
-{
-    Rewards reward;
-    if (rewardsPool.Count > 0)
+    private Rewards GetRewardsFromPool(cfg.item.Item item, int count)
     {
-        reward = rewardsPool.Dequeue();
-        reward.rewardItem = item;
-        reward.gainNumber = count;
+        Rewards reward;
+        if (rewardsPool.Count > 0)
+        {
+            reward = rewardsPool.Dequeue();
+            reward.rewardItem = item;
+            reward.gainNumber = count;
+        }
+        else
+        {
+            reward = new Rewards() { rewardItem = item, gainNumber = count };
+        }
+        return reward;
     }
-    else
-    {
-        reward = new Rewards() { rewardItem = item, gainNumber = count };
-    }
-    return reward;
-}
 
-private void ReturnRewardsToPool(Rewards reward)
-{
-    rewardsPool.Enqueue(reward);
-}
+    private void ReturnRewardsToPool(Rewards reward)
+    {
+        rewardsPool.Enqueue(reward);
+    }
 
 
 
@@ -159,9 +166,9 @@ private void ReturnRewardsToPool(Rewards reward)
 
 
 
-// 在类中添加缓存字段
-private Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>> qualityItemCache = new Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>>();
-private DateTime lastCacheUpdate = DateTime.MinValue;
+    // 在类中添加缓存字段
+    private Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>> qualityItemCache = new Dictionary<cfg.Enums.Com.Quality, List<cfg.item.Item>>();
+    private DateTime lastCacheUpdate = DateTime.MinValue;
 
 
     // 更新缓存
@@ -221,64 +228,64 @@ private DateTime lastCacheUpdate = DateTime.MinValue;
     {
         return (DateTime.Now - lastAdDrawTime).TotalSeconds >= ADDrawCooldown;
     }
-public async Task<List<Rewards>> DrawCards(int count)
-{
-    List<Rewards> results = new List<Rewards>(count); // 预分配容量
-    int currentLevel = DrawLevel;
-    float[] probabilities = drawProbabilities[currentLevel];
-    
-    // 更新缓存
-    UpdateQualityItemCache();
-    
-    // 批量更新资源的字典
-    Dictionary<cfg.item.Item, int> resourceUpdates = new Dictionary<cfg.item.Item, int>();
-
-    for (int i = 0; i < count; i++)
+    public async Task<List<Rewards>> DrawCards(int count)
     {
-        // 根据概率随机品质
-        cfg.Enums.Com.Quality quality = cfg.Enums.Com.Quality.GREEN;
-        float rand = UnityEngine.Random.value;
-        float cumulative = 0;
-        
-        for (int q = 0; q < probabilities.Length; q++)
+        List<Rewards> results = new List<Rewards>(count); // 预分配容量
+        int currentLevel = DrawLevel;
+        float[] probabilities = drawProbabilities[currentLevel];
+
+        // 更新缓存
+        UpdateQualityItemCache();
+
+        // 批量更新资源的字典
+        Dictionary<cfg.item.Item, int> resourceUpdates = new Dictionary<cfg.item.Item, int>();
+
+        for (int i = 0; i < count; i++)
         {
-            cumulative += probabilities[q];
-            if (rand <= cumulative)
+            // 根据概率随机品质
+            cfg.Enums.Com.Quality quality = cfg.Enums.Com.Quality.GREEN;
+            float rand = UnityEngine.Random.value;
+            float cumulative = 0;
+
+            for (int q = 0; q < probabilities.Length; q++)
             {
-                quality = (cfg.Enums.Com.Quality)(q + 1);
-                break;
+                cumulative += probabilities[q];
+                if (rand <= cumulative)
+                {
+                    quality = (cfg.Enums.Com.Quality)(q + 1);
+                    break;
+                }
+            }
+
+            // 使用缓存获取物品
+            var item = GetRandomFragmentByQualityFromCache(quality);
+
+            // 使用对象池创建奖励对象
+            var reward = GetRewardsFromPool(item, 1);
+            results.Add(reward);
+
+            // 累积资源更新
+            if (resourceUpdates.ContainsKey(item))
+            {
+                resourceUpdates[item] += 1;
+            }
+            else
+            {
+                resourceUpdates[item] = 1;
             }
         }
 
-        // 使用缓存获取物品
-        var item = GetRandomFragmentByQualityFromCache(quality);
-        
-        // 使用对象池创建奖励对象
-        var reward = GetRewardsFromPool(item, 1);
-        results.Add(reward);
-        
-        // 累积资源更新
-        if (resourceUpdates.ContainsKey(item))
+        // 批量更新资源
+        foreach (var update in resourceUpdates)
         {
-            resourceUpdates[item] += 1;
+            DataManager.Instance.GainResource(update.Key, update.Value);
         }
-        else
-        {
-            resourceUpdates[item] = 1;
-        }
+
+        // 更新总抽卡次数
+        DataManager.Instance.TotalDrawCount += count;
+
+        return results;
     }
-
-    // 批量更新资源
-    foreach (var update in resourceUpdates)
-    {
-        DataManager.Instance.GainResource(update.Key, update.Value);
-    }
-
-    // 更新总抽卡次数
-    DataManager.Instance.TotalDrawCount += count;
-
-    return results;
-}
 
     /// <summary>
     /// 根据品质返回碎片ID
