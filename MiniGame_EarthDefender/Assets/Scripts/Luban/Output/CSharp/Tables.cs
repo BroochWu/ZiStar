@@ -86,6 +86,10 @@ public partial class Tables
     /// AVG事件组
     /// </summary>
     public Tbavg.AvgStory AvgStory {get; }
+    /// <summary>
+    /// 红点表
+    /// </summary>
+    public Tbcom.RedPoint RedPoint {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -107,6 +111,7 @@ public partial class Tables
         ChestLoop = new Tbchest.ChestLoop(loader("chest_loop"));
         AvgEvent = new Tbavg.AvgEvent(loader("avg_event"));
         AvgStory = new Tbavg.AvgStory(loader("avg_story"));
+        RedPoint = new Tbcom.RedPoint(loader("com_redpoint"));
         ResolveRef();
     }
     
@@ -130,6 +135,7 @@ public partial class Tables
         ChestLoop.ResolveRef(this);
         AvgEvent.ResolveRef(this);
         AvgStory.ResolveRef(this);
+        RedPoint.ResolveRef(this);
     }
 }
 
