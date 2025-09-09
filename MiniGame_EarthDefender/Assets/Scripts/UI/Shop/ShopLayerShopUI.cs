@@ -14,9 +14,15 @@ public class ShopLayerShopUI : MonoBehaviour
     [Header("=====UI元素=====")]
     public Text refreshTimeText;
     public Button refreshButton;
+    public ScrollRect scrollRect;
 
     private List<ShopCellUI> discountCells = new List<ShopCellUI>();
     private List<ShopCellUI> regularCells = new List<ShopCellUI>();
+
+    void OnEnable()
+    {
+        scrollRect.verticalNormalizedPosition = 1;
+    }
 
     void Start()
     {

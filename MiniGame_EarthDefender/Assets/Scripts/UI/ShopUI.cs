@@ -10,7 +10,6 @@ public class ShopUI : MonoBehaviour
     public Toggle tabLayerDraw;
     public Toggle tabLayerShop;
     public ToggleGroup toggleGroup;
-    public ScrollRect scrollRect;
 
 
 
@@ -26,7 +25,7 @@ public class ShopUI : MonoBehaviour
         tabLayerShop.GetComponent<PersistentSelectedToggle>().UpdateVisualState();
 
         ShowTab(layerDraw.gameObject);
-        scrollRect.verticalNormalizedPosition = 1;
+        // scrollRect.verticalNormalizedPosition = 1;
         // tabLayerDraw.group.NotifyToggleOn(tabLayerDraw);
     }
 
