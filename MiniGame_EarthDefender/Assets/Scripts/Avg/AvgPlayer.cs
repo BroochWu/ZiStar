@@ -84,16 +84,25 @@ public class AvgPlayer : MonoBehaviour
 
         //如果找不到这个ID，则+1以后找下一个ID，直到找到最后一个ID为止
         var nowEvent = cfg.Tables.tb.AvgEvent.GetOrDefault(nowEventId);
+        var recheckCount = 10;
         while (nowEvent == null)
         {
+            --recheckCount;
             nowEventId += 1;
             //如果已经超过了最后一个，就返回
             if (nowEventId > lastEventId)
             {
-                Debug.Log("找不到下一个可播放的event，剧情播放完成");
+                Debug.LogWarning("找不到下一个可播放的event，剧情播放完成");
                 AvgManager.Instance.isPlayingAvg = null;
                 return;
             }
+            else if (recheckCount < 0)
+            {
+                Debug.LogWarning("超出连续查找的数值上限，请配置连续的avgeventid");
+                AvgManager.Instance.isPlayingAvg = null;
+                return;
+            }
+            ;
             nowEvent = cfg.Tables.tb.AvgEvent.GetOrDefault(nowEventId);
         }
 
