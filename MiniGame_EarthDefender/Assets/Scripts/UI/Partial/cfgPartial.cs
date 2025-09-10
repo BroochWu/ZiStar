@@ -22,7 +22,7 @@ namespace cfg.Beans
             return itemRequire;
         }
     }
-        
+
 }
 
 
@@ -139,3 +139,10 @@ namespace cfg.card
     }
 }
 
+namespace cfg.com
+{
+    public partial class RedDot
+    {
+        public int value = 0;//红点值
+    }
+}

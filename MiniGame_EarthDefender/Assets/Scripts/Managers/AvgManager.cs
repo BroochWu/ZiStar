@@ -122,7 +122,7 @@ public class AvgManager : MonoBehaviour
     {
         if (isPlayingAvg != null)
         {
-            Debug.LogError("有正在播放的avg，终止AVG检测");
+            Debug.LogWarning("有正在播放的avg，终止AVG检测");
             return;
         }
 

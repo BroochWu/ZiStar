@@ -13,17 +13,17 @@ using SimpleJSON;
 
 namespace cfg.com
 {
-public sealed partial class RedPoint : Luban.BeanBase
+public sealed partial class RedDot : Luban.BeanBase
 {
-    public RedPoint(JSONNode _buf) 
+    public RedDot(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { var __json0 = _buf["child_ids"]; if(!__json0.IsArray) { throw new SerializationException(); } ChildIds = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ChildIds.Add(__v0); }   }
     }
 
-    public static RedPoint DeserializeRedPoint(JSONNode _buf)
+    public static RedDot DeserializeRedDot(JSONNode _buf)
     {
-        return new com.RedPoint(_buf);
+        return new com.RedDot(_buf);
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public sealed partial class RedPoint : Luban.BeanBase
     /// </summary>
     public readonly System.Collections.Generic.List<int> ChildIds;
    
-    public const int __ID__ = 77813100;
+    public const int __ID__ = 268225573;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)

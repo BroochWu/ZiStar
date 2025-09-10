@@ -26,8 +26,11 @@ public class ShopShoppingManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
+    }
+
+    public void Initialize()
+    {
         LoadShopData();
         InitializeShop();
     }
@@ -98,6 +101,7 @@ public class ShopShoppingManager : MonoBehaviour
             (now.Hour == 12 && lastRefreshTime.Hour != 12))
         {
             RefreshDiscountShop();
+            RedDotManager.Instance.OnShopAutoRefresh();
             lastRefreshTime = now;
             SaveShopData();
         }

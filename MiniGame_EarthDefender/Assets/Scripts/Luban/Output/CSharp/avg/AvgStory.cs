@@ -54,7 +54,7 @@ public sealed partial class AvgStory : Luban.BeanBase
     public readonly int IdStart;
     public avg.AvgEvent IdStart_Ref;
     /// <summary>
-    /// avg终止事件id<br/>（如果找不到id会一直+1寻找）
+    /// avg终止事件id<br/>（如果找不到id会一直+1寻找，最多找10次）
     /// </summary>
     public readonly int IdEnd;
     /// <summary>

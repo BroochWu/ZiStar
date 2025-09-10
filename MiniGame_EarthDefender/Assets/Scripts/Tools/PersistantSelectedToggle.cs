@@ -79,7 +79,7 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
         {
             if (selectedSprite != null) image.sprite = selectedSprite;
             if (selectedColor != null) image.color = selectedColor;
-            Debug.Log("SetSelectedAppearance " + name);
+            // Debug.Log("SetSelectedAppearance " + name);
         }
     }
 
@@ -90,7 +90,7 @@ public class PersistentSelectedToggle : MonoBehaviour, IPointerClickHandler
         {
             if (normalSprite != null) image.sprite = normalSprite;
             if (normalColor != null) image.color = normalColor;
-            Debug.Log("SetNormalAppearance" + name);
+            // Debug.Log("SetNormalAppearance" + name);
         }
 
     }

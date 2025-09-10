@@ -4,12 +4,25 @@ using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
+    public static MainUI Instance;
     public Text dungeonName;
     public Text textChestButtonRemainTime;
     public GameObject objChestButtonRedPoint;
 
     private int nowChooseDungeonId;
     private Text textChestButtonRedPoint => objChestButtonRedPoint.GetComponentInChildren<Text>();
+
+
+
+
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+    }
 
 
     public void Initialize()
@@ -30,6 +43,8 @@ public class MainUI : MonoBehaviour
 
 
         dungeonName.text = $"第{nowChooseDungeonId}关";
+
+        //宝箱UI
         SetChestsUI();
     }
 
@@ -66,4 +81,6 @@ public class MainUI : MonoBehaviour
         }
 
     }
+
+
 }

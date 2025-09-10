@@ -24,6 +24,12 @@ public class ShopLayerShopUI : MonoBehaviour
         scrollRect.verticalNormalizedPosition = 1;
     }
 
+    void OnDisable()
+    {
+        Debug.Log("OnDisable");
+        RedDotManager.Instance.shopRedDotController.OnLeaveShopTab();
+    }
+
     void Start()
     {
         InitializeShop();

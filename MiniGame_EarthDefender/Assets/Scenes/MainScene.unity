@@ -4009,6 +4009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 579600501}
   - component: {fileID: 579600502}
+  - component: {fileID: 579600503}
   m_Layer: 5
   m_Name: ShopLayer
   m_TagString: Untagged
@@ -4053,7 +4054,19 @@ MonoBehaviour:
   tabLayerDraw: {fileID: 75811528}
   tabLayerShop: {fileID: 1633510332}
   toggleGroup: {fileID: 763368442}
-  scrollRect: {fileID: 1898279914}
+  reddotTabShop: {fileID: 1953952573}
+--- !u!114 &579600503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579600500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19bc682298685f4bb300f902af20b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &583676240
 GameObject:
   m_ObjectHideFlags: 0
@@ -6129,6 +6142,7 @@ GameObject:
   - component: {fileID: 772931064}
   - component: {fileID: 772931067}
   - component: {fileID: 772931070}
+  - component: {fileID: 772931071}
   m_Layer: 0
   m_Name: Loader
   m_TagString: Untagged
@@ -6273,6 +6287,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690a28026220be0419320c95f74c46bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &772931071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772931060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e62e50cb16f8848a4e9f39fd2c92f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopRedDotController: {fileID: 579600503}
 --- !u!1 &806679512
 GameObject:
   m_ObjectHideFlags: 0
@@ -14033,6 +14060,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7620145155385158922, guid: b477ed61910f72546be27f26a637a68d, type: 3}
   m_PrefabInstance: {fileID: 1731515871}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731515873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1072113683826868450, guid: b477ed61910f72546be27f26a637a68d, type: 3}
+  m_PrefabInstance: {fileID: 1731515871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1749013505
 GameObject:
   m_ObjectHideFlags: 0
@@ -14774,6 +14806,7 @@ MonoBehaviour:
   buttonDevelop: {fileID: 726036265}
   buttonCommand: {fileID: 166387803}
   buttonWeapons: {fileID: 1304545375}
+  reddotTabMainShop: {fileID: 1731515873}
 --- !u!1 &1826110256
 GameObject:
   m_ObjectHideFlags: 0
@@ -16163,6 +16196,11 @@ PrefabInstance:
 --- !u!224 &1953952572 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7620145155385158922, guid: b477ed61910f72546be27f26a637a68d, type: 3}
+  m_PrefabInstance: {fileID: 1953952571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1953952573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1072113683826868450, guid: b477ed61910f72546be27f26a637a68d, type: 3}
   m_PrefabInstance: {fileID: 1953952571}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1958696918
