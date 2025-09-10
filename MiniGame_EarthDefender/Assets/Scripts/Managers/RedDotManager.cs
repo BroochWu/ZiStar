@@ -160,9 +160,11 @@ public class RedDotManager : MonoBehaviour
     }
 
     // 重置红点值
-    public void ResetValue(int nodeId)
+    public bool ResetValue(int nodeId)
     {
+        if (GetValue(nodeId) == 0) return false;//代表无需重置
         SetValue(nodeId, 0);
+        return true;
     }
 
     // 检查是否有红点

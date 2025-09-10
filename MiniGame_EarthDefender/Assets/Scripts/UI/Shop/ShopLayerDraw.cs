@@ -69,8 +69,6 @@ public class ShopLayerDraw : MonoBehaviour
 
         // 根据钻石是否能抽设置消耗颜色
         textRegularDrawConsume.color = ShopDrawManager.instance.canRegularDraw ? Color.white : Color.red;
-        // Debug.Log($" ShopDrawManager.instance.canRegularDraw:{ShopDrawManager.instance.canRegularDraw}");
-        // textRegularDrawDesc.color = Utility.SetColorByCount(ShopDrawManager.instance.RegularDrawTotalConsume.Number,0,0);
 
         imgRegularConsume.sprite = ShopDrawManager.instance.RegularDrawPerConsume.Id_Ref.Image;
     }
@@ -80,16 +78,22 @@ public class ShopLayerDraw : MonoBehaviour
         textAdDrawDesc.text = $"{ShopDrawManager.instance.AdDrawNum} 连抽";
 
         // 更新广告按钮状态
-        btnAdDraw.interactable = ShopDrawManager.instance.IsAdDrawAvailable();
-        if (!btnAdDraw.interactable)
+        if (!ShopDrawManager.instance.IsAdDrawAvailable())
         {
-            // 显示冷却时间
-            textAdDrawConsume.text = $"冷却中({Mathf.CeilToInt(ShopDrawManager.instance.AdDrawCooldownRemaining)}s)";
+            UpdateAdDrawCoolDownUI();
         }
         else
         {
             textAdDrawConsume.text = "观看广告";
         }
+    }
+
+    /// <summary>
+    /// 显示冷却时间
+    /// </summary>
+    void UpdateAdDrawCoolDownUI()
+    {
+        textAdDrawConsume.text = $"冷却中({Mathf.CeilToInt(ShopDrawManager.instance.AdDrawCooldownRemaining)}s)";
     }
 
     /// <summary>
@@ -128,7 +132,7 @@ public class ShopLayerDraw : MonoBehaviour
     {
         while (!ShopDrawManager.instance.IsAdDrawAvailable())
         {
-            UpdateAdDrawUI();
+            UpdateAdDrawCoolDownUI();
             yield return new WaitForSeconds(1f);
         }
         UpdateAdDrawUI();

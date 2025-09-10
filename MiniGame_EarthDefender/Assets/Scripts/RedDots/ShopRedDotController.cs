@@ -47,8 +47,8 @@ public class ShopRedDotController : MonoBehaviour
     public void OnLeaveShopTab()
     {
         // 重置商城内部页签红点
-        RedDotManager.Instance.ResetValue(SHOP_INNER_NODE_ID);
-        UpdateRedDotUI();
+        if (RedDotManager.Instance.ResetValue(SHOP_INNER_NODE_ID))
+            UpdateRedDotUI();
     }
 
     // 红点值变化事件处理

@@ -11,10 +11,8 @@ public class ShopDrawManager
     public static ShopDrawManager instance => _instance ??= new ShopDrawManager();
 
     // 单抽消耗
-    public cfg.Beans.Item_Require RegularDrawPerConsume
-    {
-        get => cfg.Beans.Item_Require.Create(2, 1);// 假设2是钻石的物品ID
-    }
+    private cfg.Beans.Item_Require _RegularDrawPerConsume;
+    public cfg.Beans.Item_Require RegularDrawPerConsume => _RegularDrawPerConsume ??= cfg.Beans.Item_Require.Create(2, 1);
 
     // 连抽设置
     private const int RDNumMin = 5;
@@ -63,7 +61,6 @@ public class ShopDrawManager
         get
         {
             // 根据当前钻石数量计算最大可连抽次数
-            // Debug.Log(RegularDrawPerConsume.Id_Ref + " " + RegularDrawPerConsume.Id + " " + RegularDrawPerConsume.Number);
             int maxPossibleDraws = DataManager.Instance.GetItemCount(RegularDrawPerConsume.Id_Ref) / RegularDrawPerConsume.Number;
 
             // 限制在5-50之间，且为5的倍数
@@ -83,10 +80,8 @@ public class ShopDrawManager
         }
     }
 
-    public cfg.Beans.Item_Require RegularDrawTotalConsume
-    {
-        get => cfg.Beans.Item_Require.Create(RegularDrawPerConsume.Id, RegularDrawPerConsume.Number * RegularDrawNum);
-    }
+    public cfg.Beans.Item_Require RegularDrawTotalConsume => cfg.Beans.Item_Require.Create(RegularDrawPerConsume.Id, RegularDrawPerConsume.Number * RegularDrawNum);
+
 
     public int DrawLevel
     {
