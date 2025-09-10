@@ -10,9 +10,10 @@ public enum CostType
     Ad
 }
 
-public class ShopItem
+public class ShopCell
 {
-    public int id;
+    public int shopId;//隶属于哪个商店
+    public int slotId;//第几个格子，用于刷新和保存
     public cfg.item.Item reward;
     public int rewardCount;
     public CostType costType;
@@ -38,7 +39,7 @@ public class ShopCellUI : MonoBehaviour
     public Button buyButton;
     public GameObject soldOutOverlay;
 
-    private ShopItem itemData;
+    private ShopCell itemData;
 
     private static cfg.item.Item Coin => cfg.Tables.tb.Item.Get(1);
     private static cfg.item.Item Diamond => cfg.Tables.tb.Item.Get(2);
@@ -63,61 +64,64 @@ public class ShopCellUI : MonoBehaviour
 
 
 
-    public void InitializeAsAdReward()
+    public void InitializeAsAdReward(int _shopId, int _slot)
     {
         // 设置广告奖励商品
 
-        itemData = new ShopItem
+        itemData = new ShopCell
         {
-            id = -1, // 特殊ID表示广告奖励
+            shopId = _shopId,
             reward = Diamond,
             rewardCount = 100,
             costType = CostType.Ad,
             costCount = 0,
             name = "海量钻石",
             isInfinity = true,
+            slotId = _slot
         };
 
         UpdateUI();
     }
 
-    public void InitializeAsAdCoin()
+    public void InitializeAsAdCoin(int _shopId, int _slot)
     {
         // 设置广告金币奖励
 
-        itemData = new ShopItem
+        itemData = new ShopCell
         {
-            id = -2, // 特殊ID表示广告金币
+            shopId = _shopId,
             reward = Coin,
             rewardCount = 1000,
             costType = CostType.Ad,
             costCount = 0,
             name = "海量金币",
             isInfinity = true,
+            slotId = _slot
         };
 
         UpdateUI();
     }
 
-    public void InitializeAsDiamondToCoin(int diamondCost, int coinAmount)
+    public void InitializeAsDiamondToCoin(int diamondCost, int coinAmount, int _shopId, int _slot)
     {
         // 设置钻石兑换金币
 
-        itemData = new ShopItem
+        itemData = new ShopCell
         {
-            id = -3, // 特殊ID表示钻石兑换
+            shopId = _shopId,
             reward = Coin,
             rewardCount = coinAmount,
             costType = CostType.Diamond,
             costCount = diamondCost,
             name = "钻石兑换",
             isInfinity = true,
+            slotId = _slot
         };
 
         UpdateUI();
     }
 
-    public void InitializeAsRandomItem()
+    public void InitializeAsRandomItem(int _shopId, int _slot)
     {
         // 使用种子生成随机商品
         iconCost.enabled = true;
@@ -139,9 +143,10 @@ public class ShopCellUI : MonoBehaviour
         int randomAmount = listAmounts[qualityid][UnityEngine.Random.Range(0, listAmounts[qualityid].Length)];
         int randomPrice = randomAmount * listCost[qualityid];
 
-        itemData = new ShopItem
+        itemData = new ShopCell
         {
-            id = randomFragmentId,
+            shopId = _shopId,
+            slotId = _slot,
             reward = randomFragment,
             rewardCount = randomAmount,
             costType = CostType.Coin,
@@ -151,10 +156,8 @@ public class ShopCellUI : MonoBehaviour
         };
 
         // 检查是否已购买
-        if (ShopShoppingManager.Instance.IsItemPurchased(itemData.id))
-        {
-            itemData.isSoldOut = true;
-        }
+        itemData.isSoldOut = ShopShoppingManager.Instance.IsShopSlotPurchased(new KeyValuePair<int, int>(itemData.shopId, itemData.slotId));
+
 
         UpdateUI();
     }
@@ -198,7 +201,7 @@ public class ShopCellUI : MonoBehaviour
         // itemIcon.sprite = GetItemIcon(itemData.type, itemData.id);
 
         // 设置购买按钮状态
-        buyButton.interactable = !itemData.isSoldOut;
+        // buyButton.interactable = !itemData.isSoldOut;
         soldOutOverlay.SetActive(itemData.isSoldOut);
 
         // 添加购买按钮点击事件
@@ -209,7 +212,11 @@ public class ShopCellUI : MonoBehaviour
     void OnBuyButtonClicked()
     {
         // 处理购买逻辑
-        if (itemData.isSoldOut) return;
+        if (itemData.isSoldOut)
+        {
+            UIManager.Instance.CommonToast("卖完力！等商店刷新吧！");
+            return;
+        }
 
         bool successBusiness = false;
         // 扣除货币
@@ -233,10 +240,10 @@ public class ShopCellUI : MonoBehaviour
         UIManager.Instance.CommonCongra(new List<Rewards> { new Rewards { rewardItem = itemData.reward, gainNumber = itemData.rewardCount } });
 
         // 标记为已购买
-        if (!itemData.isInfinity) itemData.isSoldOut = true;
-        if (itemData.id > 0) // 只记录非特殊商品的购买
+        if (!itemData.isInfinity)
         {
-            ShopShoppingManager.Instance.MarkItemAsPurchased(itemData.id);
+            ShopShoppingManager.Instance.MarkItemAsPurchased(itemData.shopId, itemData.slotId);
+            itemData.isSoldOut = true;
         }
 
 

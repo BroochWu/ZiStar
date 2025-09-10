@@ -14,8 +14,8 @@ public class ShopShoppingManager : MonoBehaviour
     // 特惠商店种子
     private int discountShopSeed;
 
-    // 购买记录
-    private HashSet<int> purchasedDiscountItems = new HashSet<int>();
+    // 购买记录(商店ID，格子ID)
+    private List<KeyValuePair<int, int>> purchasedDiscountItems = new();
 
     void Awake()
     {
@@ -48,6 +48,25 @@ public class ShopShoppingManager : MonoBehaviour
         InitializeShop();
     }
 
+
+    void SaveShopData()
+    {
+        // 保存商店数据到PlayerPrefs
+        PlayerPrefs.SetInt("Shop_Unlocked", IsUnlocked ? 1 : 0);
+        PlayerPrefs.SetString("Shop_LastRefresh", lastRefreshTime.ToString());
+        PlayerPrefs.SetInt("Shop_DiscountSeed", discountShopSeed);
+
+        // 保存购买记录
+        List<string> purchasedItems = new List<string>();
+        foreach (var item in purchasedDiscountItems)
+        {
+            purchasedItems.Add(item.Key + "_" + item.Value);
+        }
+        PlayerPrefs.SetString("Shop_PurchasedSlots", string.Join(",", purchasedItems));
+
+        PlayerPrefs.Save();
+    }
+
     void LoadShopData()
     {
         // 从PlayerPrefs加载商店数据
@@ -67,37 +86,20 @@ public class ShopShoppingManager : MonoBehaviour
         discountShopSeed = PlayerPrefs.GetInt("Shop_DiscountSeed", (int)lastRefreshTime.Ticks);
 
         // 加载购买记录
-        string purchasedItems = PlayerPrefs.GetString("Shop_PurchasedItems", "");
+        string purchasedItems = PlayerPrefs.GetString("Shop_PurchasedSlots", "");
         if (!string.IsNullOrEmpty(purchasedItems))
         {
             string[] items = purchasedItems.Split(',');
-            foreach (string item in items)
+            foreach (string kvpair in items)
             {
-                if (int.TryParse(item, out int itemId))
-                {
-                    purchasedDiscountItems.Add(itemId);
-                }
+                int.TryParse(kvpair.Split('_')[0], out int shopId);
+                int.TryParse(kvpair.Split('_')[1], out int slotId);
+
+                purchasedDiscountItems.Add(new KeyValuePair<int, int>(shopId, slotId));
             }
         }
     }
 
-    void SaveShopData()
-    {
-        // 保存商店数据到PlayerPrefs
-        PlayerPrefs.SetInt("Shop_Unlocked", IsUnlocked ? 1 : 0);
-        PlayerPrefs.SetString("Shop_LastRefresh", lastRefreshTime.ToString());
-        PlayerPrefs.SetInt("Shop_DiscountSeed", discountShopSeed);
-
-        // 保存购买记录
-        List<string> purchasedItems = new List<string>();
-        foreach (int itemId in purchasedDiscountItems)
-        {
-            purchasedItems.Add(itemId.ToString());
-        }
-        PlayerPrefs.SetString("Shop_PurchasedItems", string.Join(",", purchasedItems));
-
-        PlayerPrefs.Save();
-    }
 
     void InitializeShop()
     {
@@ -105,7 +107,7 @@ public class ShopShoppingManager : MonoBehaviour
         CheckAutoRefresh();
     }
 
-    void CheckAutoRefresh()
+    public void CheckAutoRefresh()
     {
         DateTime now = DateTime.Now;
 
@@ -149,14 +151,15 @@ public class ShopShoppingManager : MonoBehaviour
     }
 
 
-    public bool IsItemPurchased(int itemId)
+    public bool IsShopSlotPurchased(KeyValuePair<int, int> _shopSlotIndex)
     {
-        return purchasedDiscountItems.Contains(itemId);
+        return purchasedDiscountItems.Contains(_shopSlotIndex);
     }
 
-    public void MarkItemAsPurchased(int itemId)
+    public void MarkItemAsPurchased(int _shopId, int itemId)
     {
-        purchasedDiscountItems.Add(itemId);
+        var index = new KeyValuePair<int, int>(_shopId, itemId);
+        purchasedDiscountItems.Add(index);
         SaveShopData();
     }
 

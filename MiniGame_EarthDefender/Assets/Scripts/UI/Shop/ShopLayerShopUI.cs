@@ -16,6 +16,9 @@ public class ShopLayerShopUI : MonoBehaviour
     public Button refreshButton;
     public ScrollRect scrollRect;
 
+    private const int DISCOUNT_SHOP_ID = 0;//特惠商店ID
+    private const int REGULAR_SHOP_ID = 1;//常驻商店ID
+
     private List<ShopCellUI> discountCells = new List<ShopCellUI>();
     private List<ShopCellUI> regularCells = new List<ShopCellUI>();
 
@@ -50,6 +53,7 @@ public class ShopLayerShopUI : MonoBehaviour
 
     void InitializeDiscountShop()
     {
+
         // 清空容器
         foreach (Transform child in DiscountCellsContainer)
         {
@@ -69,12 +73,12 @@ public class ShopLayerShopUI : MonoBehaviour
                 // 第一格固定是看广告领钻石
                 if (i == 0)
                 {
-                    cellUI.InitializeAsAdReward();
+                    cellUI.InitializeAsAdReward(DISCOUNT_SHOP_ID, i);
                 }
                 else
                 {
                     // 其他格子根据已解锁碎片随机生成
-                    cellUI.InitializeAsRandomItem();
+                    cellUI.InitializeAsRandomItem(DISCOUNT_SHOP_ID, i);
                 }
             }
         }
@@ -102,13 +106,13 @@ public class ShopLayerShopUI : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        cellUI.InitializeAsAdCoin();
+                        cellUI.InitializeAsAdCoin(REGULAR_SHOP_ID, i);
                         break;
                     case 1:
-                        cellUI.InitializeAsDiamondToCoin(100, 4000);
+                        cellUI.InitializeAsDiamondToCoin(100, 4000, REGULAR_SHOP_ID, i);
                         break;
                     case 2:
-                        cellUI.InitializeAsDiamondToCoin(500, 5000);
+                        cellUI.InitializeAsDiamondToCoin(500, 5000, REGULAR_SHOP_ID, i);
                         break;
                 }
             }
@@ -124,6 +128,8 @@ public class ShopLayerShopUI : MonoBehaviour
     void UpdateRefreshTime()
     {
         System.TimeSpan timeToNextRefresh = ShopShoppingManager.Instance.GetTimeToNextRefresh();
+        //如果看着它时间归零，立刻刷新
+        if (timeToNextRefresh.Seconds <= 0) ShopShoppingManager.Instance.CheckAutoRefresh();
         refreshTimeText.text = string.Format("下次刷新: {0:D2}:{1:D2}:{2:D2}",
             timeToNextRefresh.Hours, timeToNextRefresh.Minutes, timeToNextRefresh.Seconds);
     }
