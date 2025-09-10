@@ -108,15 +108,8 @@
     "id": 1001001,
     "text_color": 2,
     "time_delay": 0,
-    "time_duration": 2,
-    "text_str": "怎么突然收到一张字条：\n【wow！感谢大哥支持！\n可以加丘丘群：1021392676】"
-  },
-  {
-    "id": 1001002,
-    "text_color": 2,
-    "time_delay": 0,
-    "time_duration": 2,
-    "text_str": "落款是……【茜楠公馆】？"
+    "time_duration": 4,
+    "text_str": "怎么突然收到一张字条：\n【wow！感谢大哥支持！\n可以加丘丘群：<color=#ff3333>1021392676</color>】\n落款是……【茜楠公馆】？"
   },
   {
     "id": 1002001,

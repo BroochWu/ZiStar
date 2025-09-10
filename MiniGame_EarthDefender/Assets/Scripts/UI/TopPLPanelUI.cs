@@ -48,24 +48,13 @@ public class TopPLPanelUI : TopPLPanelGroupUI
     // 实现具体刷新逻辑
     public override void RefreshChild()
     {
-        Debug.Log("RefreshTopPanel");
+        //Debug.Log("RefreshTopPanel");
         // 获取当前道具数量并更新UI
         int count = DataManager.Instance.GetResourceCount(_item.Id);
         textCount.text = Utility.BigNumber(count).ToString();
 
         // 根据数量设置不同颜色
-        if (count <= 0)
-        {
-            textCount.color = Color.red;
-        }
-        else if (count < 10)
-        {
-            textCount.color = Color.yellow;
-        }
-        else
-        {
-            textCount.color = Color.white;
-        }
+        textCount.color = Utility.SetColorByCount(count, 0, 10);
     }
 
     // 面板点击事件

@@ -39,7 +39,7 @@ public class BottomTabsUI : MonoBehaviour
 
         // 重置所有按钮状态
         ResetAllButtonStates();
-        Debug.Log(currentLayer);
+        //Debug.Log(currentLayer);
         // 根据当前层高亮对应按钮
         switch (currentLayer)
         {
@@ -130,7 +130,7 @@ public class BottomTabsUI : MonoBehaviour
         {
             yield return null;
         }
-        
+
         RedDotManager.Instance.shopRedDotController.Initialize();
     }
 }

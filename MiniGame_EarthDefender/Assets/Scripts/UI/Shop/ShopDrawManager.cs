@@ -202,12 +202,7 @@ public class ShopDrawManager
     public bool TryRegularDraw()
     {
         // 检查钻石是否足够
-        if (!canRegularDraw)
-            return false;
-
-        // 消耗钻石
-        DataManager.Instance.CostResource(RegularDrawPerConsume.Id_Ref, RegularDrawTotalConsume.Number);
-        return true;
+        return DataManager.Instance.CostResource(RegularDrawPerConsume.Id_Ref, RegularDrawTotalConsume.Number);
     }
 
     public bool TryAdDraw()

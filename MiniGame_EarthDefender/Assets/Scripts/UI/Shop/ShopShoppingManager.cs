@@ -28,6 +28,19 @@ public class ShopShoppingManager : MonoBehaviour
         Instance = this;
 
     }
+    void Start()
+    {
+        Initialize();
+    }
+
+    void Update()
+    {
+        if (Time.frameCount % 300 == 0)
+        {
+            //每300帧判断一次自动刷新
+            CheckAutoRefresh();
+        }
+    }
 
     public void Initialize()
     {
@@ -101,7 +114,7 @@ public class ShopShoppingManager : MonoBehaviour
             (now.Hour == 12 && lastRefreshTime.Hour != 12))
         {
             RefreshDiscountShop();
-            RedDotManager.Instance.OnShopAutoRefresh();
+            RedDotManager.Instance.shopRedDotController.OnAutoRefreshTriggered();//触发红点
             lastRefreshTime = now;
             SaveShopData();
         }

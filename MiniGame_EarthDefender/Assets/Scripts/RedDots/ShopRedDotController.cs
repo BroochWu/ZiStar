@@ -13,21 +13,17 @@ public class ShopRedDotController : MonoBehaviour
     // 初始化方法
     public void Initialize()
     {
-        if (_isInitialized) return;
+        if (!_isInitialized)
+        {
+            // 注册红点变化事件
+            RedDotManager.Instance.OnRedDotValueChanged += OnRedDotValueChanged;
+            _isInitialized = true;
+        }
 
-        // 注册红点变化事件
-        RedDotManager.Instance.OnRedDotValueChanged += OnRedDotValueChanged;
 
         // 初始化红点状态 - 延迟一帧执行，确保UI已经初始化
-        StartCoroutine(DelayedUpdateRedDotUI());
-
-        _isInitialized = true;
-    }
-
-    IEnumerator DelayedUpdateRedDotUI()
-    {
-        yield return null; // 等待一帧
         UpdateRedDotUI();
+
     }
 
     void OnDestroy()
@@ -88,23 +84,8 @@ public class ShopRedDotController : MonoBehaviour
         {
             BottomTabsUI.Instance.SetShopRedDot(showRedDot);
         }
-        else
-        {
-            // 如果实例不存在，延迟一段时间再尝试
-            StartCoroutine(DelayedUpdateMainShopRedDot(showRedDot));
-        }
     }
 
-    IEnumerator DelayedUpdateMainShopRedDot(bool showRedDot)
-    {
-        // 等待直到BottomTabsUI实例存在
-        while (BottomTabsUI.Instance == null)
-        {
-            yield return null;
-        }
-
-        BottomTabsUI.Instance.SetShopRedDot(showRedDot);
-    }
 
     // 更新商城内部页签红点显示
     private void UpdateShopInnerRedDot(bool showRedDot)
@@ -114,21 +95,5 @@ public class ShopRedDotController : MonoBehaviour
         {
             ShopUI.Instance.SetShopRedDot(showRedDot);
         }
-        else
-        {
-            // 如果实例不存在，延迟一段时间再尝试
-            StartCoroutine(DelayedUpdateShopInnerRedDot(showRedDot));
-        }
-    }
-
-    IEnumerator DelayedUpdateShopInnerRedDot(bool showRedDot)
-    {
-        // 等待直到ShopUI实例存在
-        while (ShopUI.Instance == null)
-        {
-            yield return null;
-        }
-
-        ShopUI.Instance.SetShopRedDot(showRedDot);
     }
 }

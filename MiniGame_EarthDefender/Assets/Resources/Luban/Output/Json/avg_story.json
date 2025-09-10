@@ -127,7 +127,7 @@
   {
     "id": 8,
     "trigger": {
-      "trigger_type": 0,
+      "trigger_type": 2,
       "int_params": []
     },
     "sort": 0,

@@ -49,7 +49,7 @@ public class BackGroundRoller : MonoBehaviour
         initPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0f, 1f) > 0.5f ? 1.1f : -0.1f, Random.Range(0.4f, 0.6f)));
         initPos.z = 0;
         transform.position = initPos;
-        Debug.Log($"ip:{initPos},tp:{transform.position}");
+        // Debug.Log($"ip:{initPos},tp:{transform.position}");
 
         //随机自转角度
         randomRotate = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));

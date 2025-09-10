@@ -280,5 +280,4 @@ public class UIManager : MonoBehaviour
         AvgManager.dialogueAvgInstance.Initialize(_avgEvent);
     }
 
-
 }

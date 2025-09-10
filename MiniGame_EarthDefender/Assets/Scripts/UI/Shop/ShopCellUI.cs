@@ -211,41 +211,22 @@ public class ShopCellUI : MonoBehaviour
         // 处理购买逻辑
         if (itemData.isSoldOut) return;
 
-        // 检查是否足够支付
-        bool canAfford = false;
-        switch (itemData.costType)
-        {
-            case CostType.Coin:
-                canAfford = DataManager.Instance.CheckRes(Coin, itemData.costCount);
-                break;
-            case CostType.Diamond:
-                canAfford = DataManager.Instance.CheckRes(Diamond, itemData.costCount);
-                break;
-            case CostType.Ad:
-                canAfford = true; // 广告总是可以观看
-                break;
-        }
-
-        if (!canAfford)
-        {
-            Debug.Log("货币不足");
-            return;
-        }
-
+        bool successBusiness = false;
         // 扣除货币
         switch (itemData.costType)
         {
             case CostType.Coin:
-                DataManager.Instance.CostResource(Coin, itemData.costCount);
+                successBusiness = DataManager.Instance.CostResource(Coin, itemData.costCount);
                 break;
             case CostType.Diamond:
-                DataManager.Instance.CostResource(Diamond, itemData.costCount);
+                successBusiness = DataManager.Instance.CostResource(Diamond, itemData.costCount);
                 break;
             case CostType.Ad:
                 // 播放广告
-                if (!AdManager.PlayAd()) return;
+                successBusiness = AdManager.PlayAd();
                 break;
         }
+        if (!successBusiness) return;
 
         // 发放奖励
         DataManager.Instance.GainResource(itemData.reward, itemData.rewardCount);

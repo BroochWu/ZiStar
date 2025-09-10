@@ -197,12 +197,4 @@ public class RedDotManager : MonoBehaviour
         return shopRedDotController;
     }
 
-    // 当自动刷新发生时调用
-    public void OnShopAutoRefresh()
-    {
-        if (shopRedDotController != null)
-        {
-            shopRedDotController.OnAutoRefreshTriggered();
-        }
-    }
 }

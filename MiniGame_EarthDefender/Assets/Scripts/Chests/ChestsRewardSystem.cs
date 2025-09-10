@@ -62,7 +62,7 @@ public static class ChestsRewardSystem
 
         var chestCount = timePend / PENDING_TIME + PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_COUNT);
         // var remainTime = TimeSpan.FromSeconds(initRemainSecond);
-        Debug.Log("timePend:" + timePend);
+        // Debug.Log("timePend:" + timePend);
 
 
         // initRemainSecond = PENDING_TIME - timePend % PENDING_TIME;

@@ -315,4 +315,31 @@ public static class Utility
 
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
+
+
+    /// <summary>
+    /// 根据数量设置颜色
+    /// </summary>
+    /// <param name="_count"></param>
+    /// <param name="_countRed"></param>
+    /// <param name="_countYellow"></param>
+    /// <returns></returns>
+    public static Color SetColorByCount(int _count, int _countRed, int _countYellow)
+    {
+
+        // 根据数量设置不同颜色
+        if (_count <= _countRed)
+        {
+            return Color.red;
+        }
+        else if (_countRed != _countYellow && _count < _countYellow)
+        {
+            return Color.yellow;
+        }
+        else
+        {
+            return Color.white;
+        }
+    }
+
 }

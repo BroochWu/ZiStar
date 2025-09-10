@@ -22,7 +22,7 @@ public class ShopLayerDraw : MonoBehaviour
 
     public Image imgRegularConsume;
 
-    private void Start()
+    void OnEnable()
     {
         // DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
 
@@ -32,6 +32,13 @@ public class ShopLayerDraw : MonoBehaviour
 
         // 初始化UI
         RefreshUI();
+    }
+
+    void OnDisable()
+    {
+        btnRegularDraw.onClick.RemoveListener(ButtonRegularDrawEvent);
+        btnAdDraw.onClick.RemoveListener(ButtonAdDrawEvent);
+
     }
 
     public void RefreshUI()
@@ -61,8 +68,10 @@ public class ShopLayerDraw : MonoBehaviour
         textRegularDrawDesc.text = $"{ShopDrawManager.instance.RegularDrawNum} 连抽";
         textRegularDrawConsume.text = $"{ShopDrawManager.instance.RegularDrawTotalConsume.Number}";
 
-        // 根据钻石是否足够设置按钮交互状态
-        btnRegularDraw.interactable = ShopDrawManager.instance.canRegularDraw;
+        // 根据钻石是否能抽设置消耗颜色
+        textRegularDrawConsume.color = ShopDrawManager.instance.canRegularDraw ? Color.white : Color.red;
+        // Debug.Log($" ShopDrawManager.instance.canRegularDraw:{ShopDrawManager.instance.canRegularDraw}");
+        // textRegularDrawDesc.color = Utility.SetColorByCount(ShopDrawManager.instance.RegularDrawTotalConsume.Number,0,0);
 
         imgRegularConsume.sprite = ShopDrawManager.instance.RegularDrawPerConsume.Id_Ref.Image;
     }
@@ -94,12 +103,6 @@ public class ShopLayerDraw : MonoBehaviour
             // 抽卡成功
             LetUsDraw(ShopDrawManager.instance.RegularDrawNum, false);
             RefreshUI();
-        }
-        else
-        {
-            // 钻石不足
-            Debug.Log("钻石不足");
-            // 这里可以添加钻石不足的提示
         }
     }
 

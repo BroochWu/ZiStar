@@ -103,7 +103,7 @@ public class AvgManager : MonoBehaviour
                 return new AdPlayTrigger(config);
 
             default:
-                Debug.LogWarning($"未知的触发器类型: {config.Id}");
+                Debug.LogWarning($"未知的触发器类型，avgId：{config.Id}");
                 return null;
         }
     }
