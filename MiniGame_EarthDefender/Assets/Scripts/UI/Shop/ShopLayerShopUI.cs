@@ -24,6 +24,7 @@ public class ShopLayerShopUI : MonoBehaviour
 
     void OnEnable()
     {
+        UpdateShopUI();
         scrollRect.verticalNormalizedPosition = 1;
     }
 
@@ -48,7 +49,7 @@ public class ShopLayerShopUI : MonoBehaviour
         InitializeRegularShop();
 
         // 设置刷新按钮
-        refreshButton.onClick.AddListener(OnRefreshButtonClicked);
+        // refreshButton.onClick.AddListener(OnRefreshButtonClicked);
     }
 
     void InitializeDiscountShop()
@@ -128,14 +129,16 @@ public class ShopLayerShopUI : MonoBehaviour
     void UpdateRefreshTime()
     {
         System.TimeSpan timeToNextRefresh = ShopShoppingManager.Instance.GetTimeToNextRefresh();
+
         //如果看着它时间归零，立刻刷新
         if (timeToNextRefresh.Seconds <= 0) ShopShoppingManager.Instance.CheckAutoRefresh();
+
         refreshTimeText.text = string.Format("下次刷新: {0:D2}:{1:D2}:{2:D2}",
             timeToNextRefresh.Hours, timeToNextRefresh.Minutes, timeToNextRefresh.Seconds);
     }
 
 
-    void OnRefreshButtonClicked()
+    public void OnRefreshButtonClicked()
     {
         if (!AdManager.PlayAd()) return;
         ShopShoppingManager.Instance.RefreshDiscountShop();

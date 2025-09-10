@@ -26,18 +26,17 @@ public class ShopLayerDraw : MonoBehaviour
     {
         // DataManager.Instance.GainResource(cfg.Tables.tb.Item.Get(2), 10000000);
 
-        // 添加按钮事件监听
-        btnRegularDraw.onClick.AddListener(ButtonRegularDrawEvent);
-        btnAdDraw.onClick.AddListener(ButtonAdDrawEvent);
 
         // 初始化UI
         RefreshUI();
     }
 
-    void OnDisable()
+
+    void Start()
     {
-        btnRegularDraw.onClick.RemoveListener(ButtonRegularDrawEvent);
-        btnAdDraw.onClick.RemoveListener(ButtonAdDrawEvent);
+        // 添加按钮事件监听
+        btnRegularDraw.onClick.AddListener(ButtonRegularDrawEvent);
+        btnAdDraw.onClick.AddListener(ButtonAdDrawEvent);
 
     }
 
@@ -114,13 +113,14 @@ public class ShopLayerDraw : MonoBehaviour
         if (ShopDrawManager.instance.TryAdDraw())
         {
             // 广告抽卡成功
-            LetUsDraw(ShopDrawManager.instance.AdDrawNum, true);
+            // -1是为了如果广告播放成功，但是抽卡失败了，能将损失最小化，这里是先加了次数，再执行的抽卡
+            LetUsDraw(ShopDrawManager.instance.AdDrawNum - 1, true);
             StartCoroutine(UpdateAdButtonCooldown());
         }
         else
         {
             // 广告抽卡不可用
-            Debug.Log("广告抽卡冷却中");
+            UIManager.Instance.CommonToast("莫急莫急，冷却中");
         }
     }
 
@@ -135,7 +135,7 @@ public class ShopLayerDraw : MonoBehaviour
     }
 
     /// <summary>
-    /// 开始抽卡 - 优化版本
+    /// 开始抽卡
     /// </summary>
     public async void LetUsDraw(int drawCount, bool isAdDraw)
     {

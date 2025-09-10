@@ -211,7 +211,8 @@ public class ShopDrawManager
             return false;
 
 
-        if (!AdManager.PlayAd()) return false;
+        if (!AdManager.PlayAd())
+            return false;
 
         // 记录广告抽卡时间
         lastAdDrawTime = DateTime.Now;
@@ -281,6 +282,7 @@ public class ShopDrawManager
 
         // 更新总抽卡次数
         DataManager.Instance.TotalDrawCount += count;
+        Debug.Log("count:" + count);
 
         return results;
     }

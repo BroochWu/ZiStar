@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public enum CostType
 {
-    Coin,
-    Diamond,
+    item,
     Ad
 }
 
@@ -14,13 +13,14 @@ public class ShopCell
 {
     public int shopId;//隶属于哪个商店
     public int slotId;//第几个格子，用于刷新和保存
-    public cfg.item.Item reward;
-    public int rewardCount;
-    public CostType costType;
-    public int costCount;
-    public string name;
-    public bool isSoldOut;
-    public bool isInfinity;
+    public cfg.item.Item reward;//奖励的道具
+    public int rewardCount;//奖励数量
+    public CostType costType;//是什么类型的消耗
+    public cfg.item.Item costItem;//消耗什么资源，广告不用赋值
+    public int costCount;//消耗资源的数量，广告不用赋值也可以
+    public string name;//格子商品的名字
+    public bool isSoldOut;//是否售罄
+    public bool isInfinity;//可无限购买（后面可以改成购买次数限制，但目前没有需求）
 }
 
 
@@ -111,7 +111,8 @@ public class ShopCellUI : MonoBehaviour
             shopId = _shopId,
             reward = Coin,
             rewardCount = coinAmount,
-            costType = CostType.Diamond,
+            costType = CostType.item,
+            costItem = Diamond,
             costCount = diamondCost,
             name = "钻石兑换",
             isInfinity = true,
@@ -149,7 +150,8 @@ public class ShopCellUI : MonoBehaviour
             slotId = _slot,
             reward = randomFragment,
             rewardCount = randomAmount,
-            costType = CostType.Coin,
+            costType = CostType.item,
+            costItem = Coin,
             costCount = randomPrice,
             name = randomFragment.TextName,
             isInfinity = false,
@@ -182,13 +184,9 @@ public class ShopCellUI : MonoBehaviour
         string priceText = "";
         switch (itemData.costType)
         {
-            case CostType.Coin:
+            case CostType.item:
                 priceText = $"{itemData.costCount}";
-                iconCost.sprite = cfg.Tables.tb.Item.Get(1).Image;
-                break;
-            case CostType.Diamond:
-                priceText = $"{itemData.costCount}";
-                iconCost.sprite = cfg.Tables.tb.Item.Get(2).Image;
+                iconCost.sprite = itemData.costItem.Image;
                 break;
             case CostType.Ad:
                 priceText = "免费";
@@ -222,11 +220,8 @@ public class ShopCellUI : MonoBehaviour
         // 扣除货币
         switch (itemData.costType)
         {
-            case CostType.Coin:
-                successBusiness = DataManager.Instance.CostResource(Coin, itemData.costCount);
-                break;
-            case CostType.Diamond:
-                successBusiness = DataManager.Instance.CostResource(Diamond, itemData.costCount);
+            case CostType.item:
+                successBusiness = DataManager.Instance.CostResource(itemData.costItem, itemData.costCount);
                 break;
             case CostType.Ad:
                 // 播放广告
