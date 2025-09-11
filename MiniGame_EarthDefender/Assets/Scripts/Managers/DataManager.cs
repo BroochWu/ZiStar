@@ -43,7 +43,7 @@ public class DataManager : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetInt(PLAYERPREFS_KEY_MAX_DUNGEON);
+            return PlayerPrefs.GetInt(PLAYERPREFS_KEY_MAX_DUNGEON, 0);
         }
         set
         {

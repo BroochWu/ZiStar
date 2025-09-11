@@ -26,7 +26,6 @@ namespace cfg.Beans
 }
 
 
-
 namespace cfg.weapon
 {
     public partial class Weapon : Luban.BeanBase

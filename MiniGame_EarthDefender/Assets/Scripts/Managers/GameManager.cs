@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
         //检查是否第一次登录
         if (CheckIfFirstLoad())
         {
+
+            //加载初始数据
+            DataManager.Instance.FirstLoad();
+
             //首次登陆直接打关卡1
             SwitchGameStateToBattle(1);
         }
@@ -133,15 +137,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     bool CheckIfFirstLoad()
     {
-        //根据是否通关过任意关卡来判断是否首次加载游戏
-        if (PlayerPrefs.HasKey("dungeon_passed_level"))
-        {
-            return false;
-        }
-        //加载初始数据
-        DataManager.Instance.FirstLoad();
-        Debug.Log("首次加载游戏，加载成功");
-        return true;
+        bool result = DataManager.Instance.dungeonPassedLevel <= 0;
+        if (result) Debug.LogWarning("首次加载游戏，加载成功");
+        return result;
     }
 
 

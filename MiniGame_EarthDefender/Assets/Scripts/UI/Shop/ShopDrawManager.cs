@@ -36,25 +36,27 @@ public class ShopDrawManager
     private List<int> UnlockWeaponFragmentIdList = new();
 
     // 抽卡等级设置
-    public int[] drawLevelThresholds =
-    {
-        0,
-        100,
-        300,
-        600,
-        1000
-        }; // 各级别所需的抽卡次数
+    // public int[] drawLevelThresholds =
+    // {
+    //     0,
+    //     100,
+    //     300,
+    //     600,
+    //     1000
+    //     }; // 各级别所需的抽卡次数
 
 
     // 抽卡概率配置（示例，实际应根据需求调整）
-    private Dictionary<int, float[]> drawProbabilities = new Dictionary<int, float[]>
-    {
-        { 1, new float[] { 0.7f, 0.25f, 0.05f } }, // 等级1概率：普通, 稀有, 史诗
-        { 2, new float[] { 0.6f, 0.3f, 0.1f } },
-        { 3, new float[] { 0.5f, 0.35f, 0.15f } },
-        { 4, new float[] { 0.4f, 0.4f, 0.2f } },
-        { 5, new float[] { 0.3f, 0.45f, 0.25f } }
-    };
+    // private Dictionary<int, float[]> drawProbabilities = new Dictionary<int, float[]>
+    // {
+    //     { 1, new float[] { 0.7f, 0.25f, 0.05f } }, // 等级1概率：普通, 稀有, 史诗
+    //     { 2, new float[] { 0.6f, 0.3f, 0.1f } },
+    //     { 3, new float[] { 0.5f, 0.35f, 0.15f } },
+    //     { 4, new float[] { 0.4f, 0.4f, 0.2f } },
+    //     { 5, new float[] { 0.3f, 0.45f, 0.25f } }
+    // };
+    //从配置表读取配置
+    private readonly cfg.Tbshop.drawLevel drawLevelConfig = cfg.Tables.tb.DrawLevel;
 
     public int RegularDrawNum
     {
@@ -83,14 +85,14 @@ public class ShopDrawManager
     public cfg.Beans.Item_Require RegularDrawTotalConsume => cfg.Beans.Item_Require.Create(RegularDrawPerConsume.Id, RegularDrawPerConsume.Number * RegularDrawNum);
 
 
-    public int DrawLevel
+    public int DrawLevel//当前抽卡等级
     {
         get
         {
             int totalDraws = DataManager.Instance.TotalDrawCount;
-            for (int i = drawLevelThresholds.Length - 1; i >= 0; i--)
+            for (int i = drawLevelConfig.DataList.Count - 1; i >= 0; i--)
             {
-                if (totalDraws >= drawLevelThresholds[i])
+                if (totalDraws >= drawLevelConfig.DataList[i].NextExpRequire)
                     return i + 1;
             }
             return 1;
@@ -226,7 +228,7 @@ public class ShopDrawManager
     {
         List<Rewards> results = new List<Rewards>(count); // 预分配容量
         int currentLevel = DrawLevel;
-        float[] probabilities = drawProbabilities[currentLevel];
+        var probabilities = drawLevelConfig.Get(currentLevel).Probs;
 
         // 更新缓存
         UpdateQualityItemCache();
@@ -234,14 +236,21 @@ public class ShopDrawManager
         // 批量更新资源的字典
         Dictionary<cfg.item.Item, int> resourceUpdates = new Dictionary<cfg.item.Item, int>();
 
+        //计算总权重
+        int totalWeight = 0;
+        foreach (var prob in probabilities)
+        {
+            totalWeight += prob;
+        }
+
         for (int i = 0; i < count; i++)
         {
-            // 根据概率随机品质
+            // 根据权重随机品质
             cfg.Enums.Com.Quality quality = cfg.Enums.Com.Quality.GREEN;
-            float rand = UnityEngine.Random.value;
-            float cumulative = 0;
+            float rand = UnityEngine.Random.value * totalWeight;
+            float cumulative = 0;//当前权重
 
-            for (int q = 0; q < probabilities.Length; q++)
+            for (int q = 0; q < probabilities.Count; q++)
             {
                 cumulative += probabilities[q];
                 if (rand <= cumulative)

@@ -342,4 +342,18 @@ public static class Utility
         }
     }
 
+    public static string GetQualityName(cfg.Enums.Com.Quality _quality)
+    {
+        switch (_quality)
+        {
+            case cfg.Enums.Com.Quality.NULL: return "无";
+            case cfg.Enums.Com.Quality.GREEN: return "普通";
+            case cfg.Enums.Com.Quality.BLUE: return "民用";
+            case cfg.Enums.Com.Quality.PURPLE: return "军用";
+            case cfg.Enums.Com.Quality.ORANGE: return "机密";
+            case cfg.Enums.Com.Quality.RED: return "绝密";
+        }
+        return "未知";
+    }
+
 }

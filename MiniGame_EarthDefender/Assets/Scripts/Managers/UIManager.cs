@@ -218,11 +218,14 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void OpenInDynamic(GameObject _uiPrefab)
+    public void OpenInDynamic<T>(T _uiPrefab) where T : MonoBehaviour
     {
-        Instantiate(_uiPrefab, dynamicContainer);
+        Instantiate(_uiPrefab.gameObject, dynamicContainer);
     }
-
+    public void OpenInDynamic(GameObject uiPrefab)
+    {
+        Instantiate(uiPrefab, dynamicContainer);
+    }
 
 
     public void OpenItemInfoUI(cfg.item.Item _item)

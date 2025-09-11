@@ -21,6 +21,7 @@ public class ShopLayerDraw : MonoBehaviour
     public Text textAdDrawConsume;
 
     public Image imgRegularConsume;
+    public ShopDrawLevelInfo popShopDrawLevelInfo;
 
     void OnEnable()
     {
@@ -53,11 +54,11 @@ public class ShopLayerDraw : MonoBehaviour
         var drawLevel = ShopDrawManager.instance.DrawLevel;
         textCurrentLv.text = "等级 " + drawLevel;
 
-        var thresholds = ShopDrawManager.instance.drawLevelThresholds;
+        var thresholds = cfg.Tables.tb.DrawLevel;
 
-        var currentLevelRequire = thresholds.Contains(drawLevel - 1) ? thresholds[drawLevel - 1] : 0;
+        var currentLevelRequire = thresholds.GetOrDefault(drawLevel - 1)?.NextExpRequire ?? 0;
         var N = DataManager.Instance.TotalDrawCount - currentLevelRequire;
-        var D = ShopDrawManager.instance.drawLevelThresholds[drawLevel] - currentLevelRequire;
+        var D = thresholds.Get(drawLevel).NextExpRequire - currentLevelRequire;
         textCurrentExp.text = N + "/" + D;
         objCurrentExpProgress.transform.localScale = new Vector3(N * 1f / D, 1, 1);
     }
@@ -190,5 +191,10 @@ public class ShopLayerDraw : MonoBehaviour
         // 实时更新广告按钮状态（如果需要）
         UpdateAdDrawUI();
 
+    }
+
+    public void OnShowDrawLevelInfoBtnClick()
+    {
+        UIManager.Instance.OpenInDynamic(popShopDrawLevelInfo);
     }
 }

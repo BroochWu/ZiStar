@@ -157,7 +157,7 @@ public class AvgManager : MonoBehaviour
 
 
 
-    
+
 
     // 触发特定AVG
     public bool TriggerAvg(int avgId)
@@ -243,12 +243,10 @@ public class AvgManager : MonoBehaviour
     // 加载已触发的AVG
     private void LoadTriggeredAvgs()
     {
-        if (PlayerPrefs.HasKey("triggered_avgs"))
-        {
-            string triggeredIds = PlayerPrefs.GetString("triggered_avgs");
-            var ids = triggeredIds.Split(',').Select(int.Parse);
-            _triggeredAvgs = new HashSet<int>(ids);
-        }
+        string triggeredIds = PlayerPrefs.GetString("triggered_avgs", "");
+        if (triggeredIds == "") return;
+        var ids = triggeredIds.Split(',').Select(int.Parse);
+        _triggeredAvgs = new HashSet<int>(ids);
     }
 
     // // 重置所有AVG触发状态（用于测试或重置游戏）

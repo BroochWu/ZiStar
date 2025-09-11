@@ -90,6 +90,10 @@ public partial class Tables
     /// 红点表
     /// </summary>
     public Tbcom.RedDot RedDot {get; }
+    /// <summary>
+    /// 商店抽卡表
+    /// </summary>
+    public Tbshop.drawLevel DrawLevel {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -112,6 +116,7 @@ public partial class Tables
         AvgEvent = new Tbavg.AvgEvent(loader("avg_event"));
         AvgStory = new Tbavg.AvgStory(loader("avg_story"));
         RedDot = new Tbcom.RedDot(loader("com_reddot"));
+        DrawLevel = new Tbshop.drawLevel(loader("shop_drawlevel"));
         ResolveRef();
     }
     
@@ -136,6 +141,7 @@ public partial class Tables
         AvgEvent.ResolveRef(this);
         AvgStory.ResolveRef(this);
         RedDot.ResolveRef(this);
+        DrawLevel.ResolveRef(this);
     }
 }
 
