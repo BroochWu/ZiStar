@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public struct Rewards
@@ -23,7 +22,17 @@ public class DataManager : MonoBehaviour
     const string PLAYERPREFS_KEY_AD_DRAW_COUNT = "ad_draw_count";
     const string PLAYERPREFS_KEY_TOTAL_DRAW_COUNT = "total_draw_count";
 
+    private static readonly List<string> StrResLack = new()
+{
+    "什么，<color={0}>{1}</color>不足！",
+    "你没有<color={0}>{1}</color>啊，你没有<color={0}>{1}</color>",
+    "兄弟，没带够<color={0}>{1}</color>啊",
+    "去备点<color={0}>{1}</color>再来吧，这里不让赊账",
+    "买不起，想办法再去补点<color={0}>{1}</color>吧"
+};
 
+    // 缓存颜色代码，避免重复查找
+    private static readonly string ResourceColor = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
 
     // 道具数量变化事件
     public static event Action<int> OnItemCountChanged;
@@ -275,7 +284,7 @@ public class DataManager : MonoBehaviour
     /// <param name="count"></param>
     public void GainResource(cfg.item.Item item, int count)
     {
-        var nowHas = PlayerPrefs.GetInt($"item_{item.Id}",0);
+        var nowHas = PlayerPrefs.GetInt($"item_{item.Id}", 0);
         PlayerPrefs.SetInt($"item_{item.Id}", nowHas + count);
 
         //刷新顶栏
@@ -313,7 +322,7 @@ public class DataManager : MonoBehaviour
         //Debug.Log($"{item.TextName} 剩余数量 {newValue}");
         else
         {
-            UIManager.Instance.CommonToast("数量不足，使用失败！");
+            UIManager.Instance.CommonToast(StrIfResLack(item.TextName));
             return false;
         }
 
@@ -327,7 +336,7 @@ public class DataManager : MonoBehaviour
             var nowHas = GetResourceCount(k.Key);
             if (!CheckRes(k.Key, k.Value))
             {
-                UIManager.Instance.CommonToast("数量不足，使用失败！");
+                UIManager.Instance.CommonToast(StrIfResLack(k.Key.TextName));
                 return false;
             }
         }
@@ -354,7 +363,7 @@ public class DataManager : MonoBehaviour
             var nowHas = GetResourceCount(k.Id_Ref);
             if (!CheckRes(k.Id_Ref, k.Number))
             {
-                UIManager.Instance.CommonToast("数量不足，使用失败！");
+                UIManager.Instance.CommonToast(StrIfResLack(k.Id_Ref.TextName));
                 return false;
             }
         }
@@ -373,6 +382,14 @@ public class DataManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 获取随机资源不足消息
+    /// </summary>
+    private string StrIfResLack(string resourceName)
+    {
+        string template = Utility.GetRandomByList(StrResLack);
+        return string.Format(template, ResourceColor, resourceName);
+    }
     /// <summary>
     /// 在道具结构体内管理道具使用和掉落
     /// </summary>
