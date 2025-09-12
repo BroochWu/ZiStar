@@ -6,8 +6,16 @@ public class ShopShoppingManager : MonoBehaviour
 {
     public static ShopShoppingManager Instance { get; private set; }
 
+    // public event Action OnShopUnlockCheck;
     // 商店状态
-    public bool IsUnlocked { get; private set; }
+    public bool IsUnlocked
+    {
+        get
+        {
+            // OnShopUnlockCheck.Invoke();
+            return DataManager.Instance.dungeonPassedLevel >= cfg.Tables.tb.GlobalParam.Get("unlock_shop").IntValue;
+        }
+    }
 
     // 刷新相关
     private DateTime lastRefreshTime;
@@ -44,7 +52,16 @@ public class ShopShoppingManager : MonoBehaviour
 
     public void Initialize()
     {
+        //加载商店数据
         LoadShopData();
+
+        //加载完了看看解锁没
+        if (!IsUnlocked)
+        {
+            Debug.LogWarning("商店功能未解锁");
+            return;
+        }
+
         InitializeShop();
     }
 
@@ -52,7 +69,7 @@ public class ShopShoppingManager : MonoBehaviour
     void SaveShopData()
     {
         // 保存商店数据到PlayerPrefs
-        PlayerPrefs.SetInt("Shop_Unlocked", IsUnlocked ? 1 : 0);
+        // PlayerPrefs.SetInt("Shop_Unlocked", IsUnlocked ? 1 : 0);
         PlayerPrefs.SetString("Shop_LastRefresh", lastRefreshTime.ToString());
         PlayerPrefs.SetInt("Shop_DiscountSeed", discountShopSeed);
 
@@ -70,7 +87,8 @@ public class ShopShoppingManager : MonoBehaviour
     void LoadShopData()
     {
         // 从PlayerPrefs加载商店数据
-        IsUnlocked = PlayerPrefs.GetInt("Shop_Unlocked", 0) == 1;
+        // IsUnlocked = PlayerPrefs.GetInt("Shop_Unlocked", 0) == 1;
+        // Debug.Log("isShopUnlocked:" + IsUnlocked);
 
         // 加载刷新时间
         string refreshTimeStr = PlayerPrefs.GetString("Shop_LastRefresh", "");
@@ -109,7 +127,6 @@ public class ShopShoppingManager : MonoBehaviour
 
     public void CheckAutoRefresh()
     {
-        Debug.Log("checkRefresh" + "last:" + lastRefreshTime);
         DateTime now = DateTime.Now;
 
         // 检查是否到了刷新时间 (0点或12点)
@@ -171,12 +188,12 @@ public class ShopShoppingManager : MonoBehaviour
         return discountShopSeed;
     }
 
-    // 解锁商店
-    public void UnlockShop()
-    {
-        IsUnlocked = true;
-        SaveShopData();
-    }
+    // // 解锁商店
+    // public void UnlockShop()
+    // {
+    //     IsUnlocked = true;
+    //     SaveShopData();
+    // }
 
     void OnApplicationPause(bool pauseStatus)
     {

@@ -319,7 +319,7 @@ public class BattleManager : MonoBehaviour
         DataManager.Instance.dungeonPassedLevel = dungeonId;
 
         //通关第五关解锁并初始化商店
-        if (dungeonId == 5) ShopShoppingManager.Instance.UnlockShop();
+        // if (dungeonId == 5) ShopShoppingManager.Instance.UnlockShop();
 
         //战斗结束通用处理
         BattleOver();

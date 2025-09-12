@@ -13,6 +13,15 @@ public class BottomTabsUI : MonoBehaviour
     // 引用商城红点控制器
     public GameObject reddotTabMainShop;
 
+    // void OnEnable()
+    // {
+    //     ShopShoppingManager.Instance.OnShopUnlockCheck += CheckButtonsUnlock;
+    // }
+    // void OnDisable()
+    // {
+    //     ShopShoppingManager.Instance.OnShopUnlockCheck -= CheckButtonsUnlock;
+    // }
+
     void Awake()
     {
         if (Instance != null)
@@ -27,6 +36,7 @@ public class BottomTabsUI : MonoBehaviour
     {
         // 在Start中检查红点，确保RedDotManager已经初始化完成
         CheckRedDot();
+        CheckButtonsAppear();
     }
 
     /// <summary>
@@ -77,6 +87,7 @@ public class BottomTabsUI : MonoBehaviour
         button.GetComponent<Image>().color = _isActive ? Color.blue : Color.white;
     }
 
+    #region 按钮点击后的事件
     public void SwitchToCommand()
     {
         UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);
@@ -95,10 +106,10 @@ public class BottomTabsUI : MonoBehaviour
     }
     public void SwitchToShop()
     {
-        // UIManager.Instance.CommonToast("暂未开发");
         UIManager.Instance.SwitchLayer(UILayer.SHOPLAYER);
         CheckNow();
     }
+    #endregion
 
     // 更新主界面商城页签红点显示
     public void SetShopRedDot(bool showRedDot)
@@ -132,5 +143,14 @@ public class BottomTabsUI : MonoBehaviour
         }
 
         RedDotManager.Instance.shopRedDotController.Initialize();
+    }
+
+
+    /// <summary>
+    /// 判断按钮是否出现
+    /// </summary>
+    void CheckButtonsAppear()
+    {
+        buttonShop.gameObject.SetActive(ShopShoppingManager.Instance.IsUnlocked);
     }
 }
