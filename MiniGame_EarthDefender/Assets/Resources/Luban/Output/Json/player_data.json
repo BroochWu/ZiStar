@@ -63,5 +63,10 @@
     "data_str": "total_draw_count",
     "param_type": 1,
     "param_value_init": "0"
+  },
+  {
+    "data_str": "unlock_shop",
+    "param_type": 1,
+    "param_value_init": "0"
   }
 ]

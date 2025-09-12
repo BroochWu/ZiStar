@@ -7,6 +7,9 @@ public class ShopShoppingManager : MonoBehaviour
 {
     public static ShopShoppingManager Instance { get; private set; }
 
+    private const string PLAYERPREFS_UNLOCK_SHOP = "unlock_shop";
+
+
     // public event Action OnShopUnlockCheck;
     // 商店状态
     public bool IsUnlocked
@@ -14,18 +17,18 @@ public class ShopShoppingManager : MonoBehaviour
         get
         {
             // OnShopUnlockCheck.Invoke();
-            bool isUnlock = PlayerPrefs.GetInt("unlock_shop", 0) == 1;
+            bool isUnlock = PlayerPrefs.GetInt(PLAYERPREFS_UNLOCK_SHOP, 0) == 1;
             if (isUnlock)
             {
                 //如果已经解锁了，就再也不用判断是否解锁了
                 return true;
             }
 
-            var newResult = DataManager.Instance.dungeonPassedLevel >= cfg.Tables.tb.GlobalParam.Get("unlock_shop").IntValue;
+            var newResult = DataManager.Instance.dungeonPassedLevel >= cfg.Tables.tb.GlobalParam.Get(PLAYERPREFS_UNLOCK_SHOP).IntValue;
             if (isUnlock != newResult)
             {
                 //首次解锁
-                PlayerPrefs.SetInt("unlock_shop", 1);
+                PlayerPrefs.SetInt(PLAYERPREFS_UNLOCK_SHOP, 1);
                 InitializeShop();
             }
             return newResult;
