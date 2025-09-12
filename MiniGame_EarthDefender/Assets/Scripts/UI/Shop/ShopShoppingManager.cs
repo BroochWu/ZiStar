@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ShopShoppingManager : MonoBehaviour
 {
@@ -13,9 +14,24 @@ public class ShopShoppingManager : MonoBehaviour
         get
         {
             // OnShopUnlockCheck.Invoke();
-            return DataManager.Instance.dungeonPassedLevel >= cfg.Tables.tb.GlobalParam.Get("unlock_shop").IntValue;
+            bool isUnlock = PlayerPrefs.GetInt("unlock_shop", 0) == 1;
+            if (isUnlock)
+            {
+                //如果已经解锁了，就再也不用判断是否解锁了
+                return true;
+            }
+
+            var newResult = DataManager.Instance.dungeonPassedLevel >= cfg.Tables.tb.GlobalParam.Get("unlock_shop").IntValue;
+            if (isUnlock != newResult)
+            {
+                //首次解锁
+                PlayerPrefs.SetInt("unlock_shop", 1);
+                InitializeShop();
+            }
+            return newResult;
         }
     }
+    private Coroutine coroutineCheckingAutoRefreshInGaming;
 
     // 刷新相关
     private DateTime lastRefreshTime;
@@ -41,12 +57,29 @@ public class ShopShoppingManager : MonoBehaviour
         Initialize();
     }
 
-    void Update()
+    void StartCheckingRefreshInGaming()
     {
-        if (Time.frameCount % 300 == 0)
+        if (coroutineCheckingAutoRefreshInGaming == null)
         {
-            //每300帧判断一次自动刷新
-            CheckAutoRefreshInGaming();
+            coroutineCheckingAutoRefreshInGaming = StartCoroutine(CheckingRefreshInGaming());
+        }
+        else
+        {
+            Debug.LogWarning("协程已存在");
+        }
+
+    }
+
+    IEnumerator CheckingRefreshInGaming()
+    {
+        while (true)
+        {
+            if (Time.frameCount % 300 == 0)
+            {
+                //每300帧判断一次自动刷新
+                CheckAutoRefreshInGaming();
+            }
+            yield return null;
         }
     }
 
@@ -121,8 +154,11 @@ public class ShopShoppingManager : MonoBehaviour
 
     void InitializeShop()
     {
-        // 检查是否需要自动刷新
+        // if (!IsUnlocked) return;
+        // 检查是否需要自动刷新，复杂判断登录时的关系
         CheckAutoRefreshOnLoading();
+        // 启动协程，在线检查是否需要自动刷新，简单判断
+        StartCheckingRefreshInGaming();
     }
 
     public void CheckAutoRefreshInGaming()
