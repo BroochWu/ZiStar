@@ -88,8 +88,6 @@ public class ShopShoppingManager : MonoBehaviour
 
     public void Initialize()
     {
-        //加载商店数据
-        LoadShopData();
 
         //加载完了看看解锁没
         if (!IsUnlocked)
@@ -157,11 +155,18 @@ public class ShopShoppingManager : MonoBehaviour
 
     void InitializeShop()
     {
+
         // if (!IsUnlocked) return;
+
+
+        //加载商店数据
+        LoadShopData();
         // 检查是否需要自动刷新，复杂判断登录时的关系
         CheckAutoRefreshOnLoading();
         // 启动协程，在线检查是否需要自动刷新，简单判断
         StartCheckingRefreshInGaming();
+        
+        
     }
 
     public void CheckAutoRefreshInGaming()
