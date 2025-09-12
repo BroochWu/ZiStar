@@ -46,7 +46,7 @@ public class ShopShoppingManager : MonoBehaviour
         if (Time.frameCount % 300 == 0)
         {
             //每300帧判断一次自动刷新
-            CheckAutoRefresh();
+            CheckAutoRefreshInGaming();
         }
     }
 
@@ -122,10 +122,10 @@ public class ShopShoppingManager : MonoBehaviour
     void InitializeShop()
     {
         // 检查是否需要自动刷新
-        CheckAutoRefresh();
+        CheckAutoRefreshOnLoading();
     }
 
-    public void CheckAutoRefresh()
+    public void CheckAutoRefreshInGaming()
     {
         DateTime now = DateTime.Now;
 
@@ -134,21 +134,50 @@ public class ShopShoppingManager : MonoBehaviour
         if ((now.Hour == 0 && lastRefreshTime.Hour != 0) ||
             (now.Hour == 12 && lastRefreshTime.Hour != 12))
         {
-            RefreshDiscountShop();
-            RedDotManager.Instance.shopRedDotController.OnAutoRefreshTriggered();//触发红点
-            lastRefreshTime = now;
-            SaveShopData();
-            Debug.Log("checkRefreshsuccess");
+            RefreshDiscountShop(now);
         }
     }
 
-    public void RefreshDiscountShop()
+    void CheckAutoRefreshOnLoading()
+    {
+        Debug.Log("检查自动刷新 - 上次刷新时间: " + lastRefreshTime);
+        DateTime now = DateTime.Now;
+
+        // 计算今天和昨天的0点和12点
+        DateTime todayMidnight = DateTime.Today;
+        DateTime todayNoon = DateTime.Today.AddHours(12);
+        DateTime yesterdayMidnight = DateTime.Today.AddDays(-1);
+        DateTime yesterdayNoon = DateTime.Today.AddDays(-1).AddHours(12);
+
+        // 检查是否需要执行0点刷新
+        bool shouldRefreshMidnight =
+            (now >= todayMidnight && lastRefreshTime < todayMidnight) || // 今天0点后且上次刷新在今天0点前
+            (now >= yesterdayMidnight && lastRefreshTime < yesterdayMidnight && now.Hour >= 0); // 或昨天0点后且上次刷新在昨天0点前
+
+        // 检查是否需要执行12点刷新
+        bool shouldRefreshNoon =
+            (now >= todayNoon && lastRefreshTime < todayNoon) || // 今天12点后且上次刷新在今天12点前
+            (now >= yesterdayNoon && lastRefreshTime < yesterdayNoon && now.Hour >= 12); // 或昨天12点后且上次刷新在昨天12点前
+
+        // 如果需要刷新
+        if (shouldRefreshMidnight || shouldRefreshNoon)
+        {
+            RefreshDiscountShop(now);
+        }
+    }
+
+
+    public void RefreshDiscountShop(DateTime now)
     {
         // 使用新的种子重新生成特惠商店
         discountShopSeed = (int)DateTime.Now.Ticks;
         purchasedDiscountItems.Clear();
 
+        RedDotManager.Instance.shopRedDotController.OnAutoRefreshTriggered();//触发红点
+        lastRefreshTime = now;
+
         SaveShopData();
+        Debug.Log("checkRefreshsuccess");
     }
 
 

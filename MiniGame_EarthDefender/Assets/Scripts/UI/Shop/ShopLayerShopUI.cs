@@ -131,7 +131,7 @@ public class ShopLayerShopUI : MonoBehaviour
         System.TimeSpan timeToNextRefresh = ShopShoppingManager.Instance.GetTimeToNextRefresh();
 
         //如果看着它时间归零，立刻刷新
-        if (timeToNextRefresh.Seconds <= 0) ShopShoppingManager.Instance.CheckAutoRefresh();
+        if (timeToNextRefresh.Seconds <= 0) ShopShoppingManager.Instance.CheckAutoRefreshInGaming();
 
         refreshTimeText.text = string.Format("下次刷新: {0:D2}:{1:D2}:{2:D2}",
             timeToNextRefresh.Hours, timeToNextRefresh.Minutes, timeToNextRefresh.Seconds);
