@@ -69,7 +69,7 @@ public class ShopRedDotController : MonoBehaviour
 
         // 获取商城内部页签红点状态
         bool shopInnerHasRedDot = RedDotManager.Instance.HasRedDot(SHOP_INNER_NODE_ID);
-        Debug.Log($"mainShopHasRedDot:{mainShopHasRedDot},shopInnerHasRedDot:{shopInnerHasRedDot}");
+        // Debug.Log($"mainShopHasRedDot:{mainShopHasRedDot},shopInnerHasRedDot:{shopInnerHasRedDot}");
 
         // 更新UI显示
         UpdateMainShopRedDot(mainShopHasRedDot);

@@ -142,6 +142,16 @@ namespace cfg.com
 {
     public partial class RedDot
     {
-        public int value = 0;//红点值
+        public int value//红点值
+        {
+            get
+            {
+                return PlayerPrefs.GetInt($"RedDot_{Id}");
+            }
+            set
+            {
+                PlayerPrefs.SetInt($"RedDot_{Id}", value);
+            }
+        }
     }
 }

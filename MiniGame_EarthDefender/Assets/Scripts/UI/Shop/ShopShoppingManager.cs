@@ -109,9 +109,11 @@ public class ShopShoppingManager : MonoBehaviour
 
     public void CheckAutoRefresh()
     {
+        Debug.Log("checkRefresh" + "last:" + lastRefreshTime);
         DateTime now = DateTime.Now;
 
         // 检查是否到了刷新时间 (0点或12点)
+        // if (true)
         if ((now.Hour == 0 && lastRefreshTime.Hour != 0) ||
             (now.Hour == 12 && lastRefreshTime.Hour != 12))
         {
@@ -119,6 +121,7 @@ public class ShopShoppingManager : MonoBehaviour
             RedDotManager.Instance.shopRedDotController.OnAutoRefreshTriggered();//触发红点
             lastRefreshTime = now;
             SaveShopData();
+            Debug.Log("checkRefreshsuccess");
         }
     }
 
