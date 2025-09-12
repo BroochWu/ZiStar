@@ -631,6 +631,8 @@ MonoBehaviour:
   - {fileID: 1366420548623456050}
   - {fileID: 8759809138338222415}
   - {fileID: 5990153923609433089}
+  btnLeftArrow: {fileID: 2478194092212703043}
+  btnRightArrow: {fileID: 2587918073297838094}
 --- !u!1 &6678583035455644245
 GameObject:
   m_ObjectHideFlags: 0

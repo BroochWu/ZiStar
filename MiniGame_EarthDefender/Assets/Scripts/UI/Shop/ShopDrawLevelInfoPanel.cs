@@ -9,11 +9,10 @@ public class ShopDrawLevelInfoPanel : MonoBehaviour
 
     public void Initialize(cfg.Enums.Com.Quality _quality, float _prob)
     {
-        if (_quality == cfg.Enums.Com.Quality.NULL || _prob == 0)
-            Destroy(gameObject);
+        gameObject.SetActive(_quality != cfg.Enums.Com.Quality.NULL && _prob != 0);
 
-        imageQuality.color = Utility.SetQualityColor(_quality, true);
+        imageQuality.color = Utility.SetQualityColor(_quality, false);
         textQuality.text = Utility.GetQualityName(_quality);
-        textProb.text = _prob.ToString();
+        textProb.text = (_prob * 100f).ToString("0.00") + "%";
     }
 }
