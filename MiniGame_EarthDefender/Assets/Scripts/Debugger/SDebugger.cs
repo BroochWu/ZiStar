@@ -44,7 +44,7 @@ namespace SFramework
         private Vector2 _scrollCurrentLogView = Vector2.zero;
         private Vector2 _scrollSystemView = Vector2.zero;
         private bool _expansion;
-        private Rect _windowRect = new Rect(0, 0, 100, 60);
+        private Rect _windowRect = new Rect(0, 0, 200, 120);
 
         private int _fps;
         private Color _fpsColor = Color.white;
@@ -62,7 +62,7 @@ namespace SFramework
         void LoadChineseFont()
         {
             // 尝试从 Resources 文件夹加载字体
-            _chineseFont = Resources.Load<Font>("Fonts/simhei"); // 替换为你的中文字体名称
+            _chineseFont = Resources.Load<Font>("Fonts/平方张亚玲黑方体"); // 替换为你的中文字体名称
 
             // 如果找不到字体，尝试使用系统默认中文字体
             if (_chineseFont == null)
@@ -164,45 +164,46 @@ namespace SFramework
 
             GUILayout.BeginHorizontal();
             GUI.contentColor = _fpsColor;
-            if (GUILayout.Button("FPS:" + _fps, GUILayout.Height(30)))
+            var height = 60;
+            if (GUILayout.Button("FPS:" + _fps, GUILayout.Height(height)))
             {
                 _expansion = false;
-                _windowRect.width = 100;
-                _windowRect.height = 60;
+                _windowRect.width = 200;
+                _windowRect.height = 120;
             }
 
             GUI.contentColor = (_debugType == DebugType.Console ? Color.white : Color.gray);
-            if (GUILayout.Button("Console", GUILayout.Height(30)))
+            if (GUILayout.Button("Console", GUILayout.Height(height)))
             {
                 _debugType = DebugType.Console;
             }
 
             GUI.contentColor = (_debugType == DebugType.Memory ? Color.white : Color.gray);
-            if (GUILayout.Button("Memory", GUILayout.Height(30)))
+            if (GUILayout.Button("Memory", GUILayout.Height(height)))
             {
                 _debugType = DebugType.Memory;
             }
 
             GUI.contentColor = (_debugType == DebugType.System ? Color.white : Color.gray);
-            if (GUILayout.Button("System", GUILayout.Height(30)))
+            if (GUILayout.Button("System", GUILayout.Height(height)))
             {
                 _debugType = DebugType.System;
             }
 
             GUI.contentColor = (_debugType == DebugType.Screen ? Color.white : Color.gray);
-            if (GUILayout.Button("Screen", GUILayout.Height(30)))
+            if (GUILayout.Button("Screen", GUILayout.Height(height)))
             {
                 _debugType = DebugType.Screen;
             }
 
             GUI.contentColor = (_debugType == DebugType.Quality ? Color.white : Color.gray);
-            if (GUILayout.Button("Quality", GUILayout.Height(30)))
+            if (GUILayout.Button("Quality", GUILayout.Height(height)))
             {
                 _debugType = DebugType.Quality;
             }
 
             GUI.contentColor = (_debugType == DebugType.Environment ? Color.white : Color.gray);
-            if (GUILayout.Button("Environment", GUILayout.Height(30)))
+            if (GUILayout.Button("Environment", GUILayout.Height(height)))
             {
                 _debugType = DebugType.Environment;
             }
@@ -470,10 +471,10 @@ namespace SFramework
             GUI.DragWindow(new Rect(0, 0, 10000, 20));
 
             GUI.contentColor = _fpsColor;
-            if (GUILayout.Button("FPS:" + _fps, GUILayout.Width(80), GUILayout.Height(30)))
+            if (GUILayout.Button("FPS:" + _fps, GUILayout.Width(160), GUILayout.Height(80)))
             {
                 _expansion = true;
-                _windowRect.width = 600;
+                _windowRect.width = 500;
                 _windowRect.height = 360;
             }
 
