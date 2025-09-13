@@ -44,7 +44,7 @@ namespace SFramework
         private Vector2 _scrollCurrentLogView = Vector2.zero;
         private Vector2 _scrollSystemView = Vector2.zero;
         private bool _expansion;
-        private Rect _windowRect = new Rect(0, 0, 200, 120);
+        private Rect _windowRect = new Rect(100, 200, 200, 120);
 
         private int _fps;
         private Color _fpsColor = Color.white;

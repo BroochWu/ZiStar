@@ -51,7 +51,6 @@ public class BattleManager : MonoBehaviour
     public int globalDamageMultiInOneBattle;//当局所有武器的总伤害加成
     List<Portal> activePortals = new();//活跃的传送门
     public List<Enemy> activeEnemys = new();//活跃的敌人
-    public int activeEnemysCount { get { return activeEnemys.Count; } }
 
     //战斗统计相关
     public int totalDamage;
@@ -440,8 +439,23 @@ public class BattleManager : MonoBehaviour
         if (activeEnemys.Contains(enemy))
         {
             activeEnemys.Remove(enemy);
-            GainExp(enemy.enemyExp);
-            UIManager.Instance.battleLayer.RefreshExpLevel();
+            if (GameManager.Instance.gameState == GameManager.GameState.BATTLE)
+            {
+                //每死一个B就检测一下
+                if (activePortals.Count <= 0 && activeEnemys.Count <= 0)
+                {
+                    BattleSuccess();
+                }
+                else
+                {
+                    GainExp(enemy.enemyExp);
+                    UIManager.Instance.battleLayer.RefreshExpLevel();
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("未能找到enemy  " + enemy);
         }
     }
     #endregion

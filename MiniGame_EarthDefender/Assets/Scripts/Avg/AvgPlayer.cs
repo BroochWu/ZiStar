@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class AvgPlayer : MonoBehaviour
+public class AvgPlayer 
 {
 
     private static AvgPlayer _instance;
