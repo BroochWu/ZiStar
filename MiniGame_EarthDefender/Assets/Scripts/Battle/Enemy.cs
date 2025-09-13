@@ -53,8 +53,8 @@ public class Enemy : MonoBehaviour
         if (_earth == null)
         {
             _earth = Player.instance.rotationTarget.transform;
-            int stopDistance = cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue;
-            _enemyStopDisSqr = stopDistance * stopDistance; // 预计算平方值
+            _enemyStopDisSqr = cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue;
+            // _enemyStopDisSqr = stopDistance * stopDistance; // 预计算平方值
         }
 
         // 缓存组件引用

@@ -1,17 +1,9 @@
 [
   {
-    "key": "maincharacter_idle_count",
-    "desc": "主角idle待机数量",
-    "param_type": 1,
-    "int_value": 4,
-    "str_value": "",
-    "int_list_value": []
-  },
-  {
     "key": "enemy_stop_distance",
     "desc": "敌人会在距离地球X距离时停止移动并播放攻击动作",
     "param_type": 1,
-    "int_value": 7,
+    "int_value": 30,
     "str_value": "",
     "int_list_value": []
   },
