@@ -57,10 +57,6 @@ public class ShopShoppingManager : MonoBehaviour
         Instance = this;
 
     }
-    void Start()
-    {
-        Initialize();
-    }
 
     void StartCheckingRefreshInGaming()
     {

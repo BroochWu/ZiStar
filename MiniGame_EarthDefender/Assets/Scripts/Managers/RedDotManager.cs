@@ -24,13 +24,18 @@ public class RedDotManager : MonoBehaviour
         }
 
         _instance = this;
-        DontDestroyOnLoad(gameObject);
+    }
+
+
+    public void Initialize()
+    {
 
         // 先初始化所有红点控制器
         InitializeAllRedDotControllers();
 
         // 然后加载保存的红点状态
         LoadRedDotStates();
+
     }
 
     // 加载保存的红点状态

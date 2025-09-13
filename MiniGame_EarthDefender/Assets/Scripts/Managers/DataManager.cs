@@ -32,7 +32,7 @@ public class DataManager : MonoBehaviour
 };
 
     // 缓存颜色代码，避免重复查找
-    private static readonly string ResourceColor = cfg.Tables.tb.Color.Get(1).ColorDarkbg;
+    private static string ResourceColor;
 
     // 道具数量变化事件
     public static event Action<int> OnItemCountChanged;
@@ -388,7 +388,7 @@ public class DataManager : MonoBehaviour
     private string StrIfResLack(string resourceName)
     {
         string template = Utility.GetRandomByList(StrResLack);
-        return string.Format(template, ResourceColor, resourceName);
+        return string.Format(template, ResourceColor ??= cfg.Tables.tb.Color.Get(1).ColorDarkbg, resourceName);
     }
     /// <summary>
     /// 在道具结构体内管理道具使用和掉落

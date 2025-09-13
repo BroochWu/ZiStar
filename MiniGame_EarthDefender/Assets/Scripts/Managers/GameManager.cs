@@ -76,6 +76,11 @@ public class GameManager : MonoBehaviour
         Instance.StartCoroutine(ChestsRewardSystem.OnlineSendChests());
 
 
+        RedDotManager.Instance.Initialize();
+        ShopShoppingManager.Instance.Initialize();
+
+
+
 
         Debug.Log("GameManager is Initialize");
 

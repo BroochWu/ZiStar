@@ -29,13 +29,13 @@ public class BottomTabsUI : MonoBehaviour
             Destroy(Instance.gameObject);
         }
         Instance = this;
-        CheckNow();
     }
 
     void OnEnable()
     {
         Debug.Log("OnEnable");
         // 在Start中检查红点，确保RedDotManager已经初始化完成
+        CheckNow();
         CheckRedDot();
         CheckButtonsAppear();
     }

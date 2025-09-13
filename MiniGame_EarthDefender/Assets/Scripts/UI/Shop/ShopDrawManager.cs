@@ -13,6 +13,7 @@ public class ShopDrawManager
     // 单抽消耗
     private cfg.Beans.Item_Require _RegularDrawPerConsume;
     public cfg.Beans.Item_Require RegularDrawPerConsume => _RegularDrawPerConsume ??= cfg.Beans.Item_Require.Create(2, 1);
+    public cfg.Beans.Item_Require RegularDrawTotalConsume => cfg.Beans.Item_Require.Create(RegularDrawPerConsume.Id, RegularDrawPerConsume.Number * RegularDrawNum);
 
     // 连抽设置
     private const int RDNumMin = 5;
@@ -82,7 +83,6 @@ public class ShopDrawManager
         }
     }
 
-    public cfg.Beans.Item_Require RegularDrawTotalConsume => cfg.Beans.Item_Require.Create(RegularDrawPerConsume.Id, RegularDrawPerConsume.Number * RegularDrawNum);
 
 
     public int DrawLevel//当前抽卡等级

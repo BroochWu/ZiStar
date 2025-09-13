@@ -51,34 +51,12 @@ namespace SFramework
         private int _frameNumber;
         private float _lastShowFPSTime;
         Font _chineseFont;
-        private bool _fontLoaded = false;
 
         protected void Awake()
         {
             Application.logMessageReceived += LogHandler;
-            LoadChineseFont();
         }
 
-        void LoadChineseFont()
-        {
-            // 尝试从 Resources 文件夹加载字体
-            _chineseFont = Resources.Load<Font>("Fonts/平方张亚玲黑方体"); // 替换为你的中文字体名称
-
-            // 如果找不到字体，尝试使用系统默认中文字体
-            if (_chineseFont == null)
-            {
-                Debug.LogWarning("中文字体未找到，尝试使用系统默认字体");
-                string[] chineseFontNames = { "SimHei", "Microsoft YaHei", "NSimSun", "SimSun" };
-                foreach (string fontName in chineseFontNames)
-                {
-                    _chineseFont = Font.CreateDynamicFontFromOSFont(fontName, 14);
-                    if (_chineseFont != null) break;
-                }
-            }
-
-            _fontLoaded = (_chineseFont != null);
-
-        }
 
 
         private void Update()
@@ -143,14 +121,6 @@ namespace SFramework
 
         private void OnGUI()
         {
-
-
-            if (_fontLoaded)
-            {
-                GUI.skin.font = _chineseFont;
-            }
-
-
             this._windowRect = this._expansion
                 ? GUI.Window(0, this._windowRect, this.ExpansionGUIWindow, "DEBUGGER")
                 : GUI.Window(0, this._windowRect, this.ShrinkGUIWindow, "DEBUGGER");
@@ -285,7 +255,7 @@ namespace SFramework
 
                 GUILayout.EndScrollView();
 
-                _scrollCurrentLogView = GUILayout.BeginScrollView(_scrollCurrentLogView, "Box", GUILayout.Height(100));
+                _scrollCurrentLogView = GUILayout.BeginScrollView(_scrollCurrentLogView, "Box", GUILayout.Height(400));
                 if (_currentLogIndex != -1)
                 {
                     GUILayout.Label(_logInformations[_currentLogIndex].message + "\r\n\r\n" + _logInformations[_currentLogIndex].stackTrace);
@@ -474,8 +444,8 @@ namespace SFramework
             if (GUILayout.Button("FPS:" + _fps, GUILayout.Width(160), GUILayout.Height(80)))
             {
                 _expansion = true;
-                _windowRect.width = 500;
-                _windowRect.height = 360;
+                _windowRect.width = 450;
+                _windowRect.height = 500;
             }
 
             GUI.contentColor = Color.white;
