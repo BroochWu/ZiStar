@@ -17,7 +17,7 @@ public class ShopShoppingManager : MonoBehaviour
         get
         {
             // // OnShopUnlockCheck.Invoke();
-            var saveUnlock = PlayerPrefs.GetInt(PLAYERPREFS_UNLOCK_SHOP,0);
+            var saveUnlock = PlayerPrefs.GetInt(PLAYERPREFS_UNLOCK_SHOP, 0);
             bool isUnlock = saveUnlock == 1;
             if (isUnlock)
             {
@@ -204,6 +204,13 @@ public class ShopShoppingManager : MonoBehaviour
         bool shouldRefreshNoon =
             (now >= todayNoon && lastRefreshTime < todayNoon) || // 今天12点后且上次刷新在今天12点前
             (now >= yesterdayNoon && lastRefreshTime < yesterdayNoon && now.Hour >= 12); // 或昨天12点后且上次刷新在昨天12点前
+
+        // var spaceLastRefresh = (now - lastRefreshTime).Ticks;
+        // var sapceTodayMid = (now - todayMidnight).Ticks;
+        // var spaceTodayNoon = (now - todayNoon).Ticks;
+
+        // //会自动刷新的逻辑
+        // bool shouldAutoRefresh = !(spaceLastRefresh <= sapceTodayMid && spaceLastRefresh <= spaceTodayNoon);
 
         // 如果需要刷新
         if (shouldRefreshMidnight || shouldRefreshNoon)
