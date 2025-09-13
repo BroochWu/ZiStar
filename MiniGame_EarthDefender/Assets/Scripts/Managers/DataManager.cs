@@ -630,11 +630,14 @@ public class DataManager : MonoBehaviour
             {
                 case cfg.Enums.Com.ParamType.INT:
                     PlayerPrefs.SetInt(data.DataStr, int.Parse(data.ParamValueInit));
+                    // Debug.Log(data.DataStr + ":" + PlayerPrefs.GetInt(data.DataStr));
                     break;
                 case cfg.Enums.Com.ParamType.STRING:
                     PlayerPrefs.SetString(data.DataStr, data.ParamValueInit);
+                    // Debug.Log(data.DataStr + ":" + PlayerPrefs.GetString(data.DataStr));
                     break;
             }
+
 
         }
 

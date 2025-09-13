@@ -32,8 +32,9 @@ public class BottomTabsUI : MonoBehaviour
         CheckNow();
     }
 
-    void Start()
+    void OnEnable()
     {
+        Debug.Log("OnEnable");
         // 在Start中检查红点，确保RedDotManager已经初始化完成
         CheckRedDot();
         CheckButtonsAppear();
@@ -151,6 +152,7 @@ public class BottomTabsUI : MonoBehaviour
     /// </summary>
     void CheckButtonsAppear()
     {
+        Debug.LogWarning(ShopShoppingManager.Instance.IsUnlocked);
         buttonShop.gameObject.SetActive(ShopShoppingManager.Instance.IsUnlocked);
     }
 }

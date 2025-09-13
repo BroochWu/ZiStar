@@ -50,10 +50,8 @@
     "key": "unlock_shop",
     "desc": "商店解锁关卡数值",
     "param_type": 1,
-    "int_value": 0,
+    "int_value": 5,
     "str_value": "",
-    "int_list_value": [
-      5
-    ]
+    "int_list_value": []
   }
 ]

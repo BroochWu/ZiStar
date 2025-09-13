@@ -16,8 +16,9 @@ public class ShopShoppingManager : MonoBehaviour
     {
         get
         {
-            // OnShopUnlockCheck.Invoke();
-            bool isUnlock = PlayerPrefs.GetInt(PLAYERPREFS_UNLOCK_SHOP, 0) == 1;
+            // // OnShopUnlockCheck.Invoke();
+            var saveUnlock = PlayerPrefs.GetInt(PLAYERPREFS_UNLOCK_SHOP,0);
+            bool isUnlock = saveUnlock == 1;
             if (isUnlock)
             {
                 //如果已经解锁了，就再也不用判断是否解锁了
@@ -32,6 +33,7 @@ public class ShopShoppingManager : MonoBehaviour
                 InitializeShop();
             }
             return newResult;
+            // return false;
         }
     }
     private Coroutine coroutineCheckingAutoRefreshInGaming;
@@ -165,8 +167,8 @@ public class ShopShoppingManager : MonoBehaviour
         CheckAutoRefreshOnLoading();
         // 启动协程，在线检查是否需要自动刷新，简单判断
         StartCheckingRefreshInGaming();
-        
-        
+
+
     }
 
     public void CheckAutoRefreshInGaming()
@@ -178,7 +180,7 @@ public class ShopShoppingManager : MonoBehaviour
         if ((now.Hour == 0 && lastRefreshTime.Hour != 0) ||
             (now.Hour == 12 && lastRefreshTime.Hour != 12))
         {
-            RefreshDiscountShop(now);
+            RefreshDiscountShop();
         }
     }
 
@@ -206,15 +208,16 @@ public class ShopShoppingManager : MonoBehaviour
         // 如果需要刷新
         if (shouldRefreshMidnight || shouldRefreshNoon)
         {
-            RefreshDiscountShop(now);
+            RefreshDiscountShop();
         }
     }
 
 
-    public void RefreshDiscountShop(DateTime now)
+    public void RefreshDiscountShop()
     {
         // 使用新的种子重新生成特惠商店
-        discountShopSeed = (int)DateTime.Now.Ticks;
+        var now = DateTime.Now;
+        discountShopSeed = (int)now.Ticks;
         purchasedDiscountItems.Clear();
 
         RedDotManager.Instance.shopRedDotController.OnAutoRefreshTriggered();//触发红点

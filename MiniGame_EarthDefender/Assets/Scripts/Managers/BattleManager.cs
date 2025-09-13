@@ -252,7 +252,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
-        Debug.Log("buttonInit：" + buttonInit);
+        // Debug.Log("buttonInit：" + buttonInit);
         if (DataManager.Instance.dungeonPassedLevel == 0)
         {
             //注册button
