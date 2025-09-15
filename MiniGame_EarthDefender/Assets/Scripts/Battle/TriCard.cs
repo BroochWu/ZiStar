@@ -62,11 +62,16 @@ public class TriCard
 
         }
 
+
         //全部抽完后把不放回重抽时被移除的列表添加回去（基于不存在第二张牌突然满足了条件的情况）
         RebackTempRemove();
 
         //可以初始化UI了
         _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
+
+        
+        //判断AVG事件（刷新的时候也会触发）
+        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.ON_TRICARD);
 
     }
 

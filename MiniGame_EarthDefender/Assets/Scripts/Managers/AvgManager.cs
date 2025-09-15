@@ -101,6 +101,10 @@ public class AvgManager : MonoBehaviour
                 return new UIShowTrigger(config);
             case cfg.Enums.Com.TriggerType.PLAYAD://看广告
                 return new AdPlayTrigger(config);
+            case cfg.Enums.Com.TriggerType.ON_TRICARD://三选一开始
+                return new OnTriPlayTrigger(config);
+            case cfg.Enums.Com.TriggerType.END_TRICARD://三选一结束
+                return new EndTriPlayTrigger(config);
 
             default:
                 Debug.LogWarning($"未知的触发器类型，avgId：{config.Id}");
@@ -137,7 +141,10 @@ public class AvgManager : MonoBehaviour
             }
 
         }
+        Debug.Log("listscount:" + lists.Count);
         var random = Utility.GetRandomByList(lists);
+
+        Debug.Log("random:" + random);
         if (random == null) return;
 
         if (TriggerAvg(random.config.Id))

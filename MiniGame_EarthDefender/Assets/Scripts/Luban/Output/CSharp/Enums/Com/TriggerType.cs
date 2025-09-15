@@ -40,6 +40,14 @@ namespace cfg.Enums.Com
         /// 1是成功，0是失败
         /// </summary>
         PLAYAD = 5,
+        /// <summary>
+        /// 三选一开始
+        /// </summary>
+        ON_TRICARD = 6,
+        /// <summary>
+        /// 三选一结束
+        /// </summary>
+        END_TRICARD = 7,
     }
 
 } 

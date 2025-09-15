@@ -205,3 +205,80 @@ public class AdPlayTrigger : IAvgTrigger
 }
 
 
+
+//三选一开始时的触发器
+public class OnTriPlayTrigger : IAvgTrigger
+{
+    public cfg.avg.AvgStory config { get; }
+    public bool HasTriggered { get; private set; }
+
+    public TriggerType TriggerType => TriggerType.ON_TRICARD;
+
+
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    public OnTriPlayTrigger(cfg.avg.AvgStory _config)
+    {
+        config = _config;
+    }
+
+
+    public bool ShouldTrigger()
+    {
+        //如果不可反复触发并且触发过了，则无法触发本剧情
+        if (!config.CanRecur && HasTriggered)
+            return false;
+
+        //接下来麻烦的来了：判断条件是否都满足
+        if (!Utility.CondListCheck(config.UnlockConds))
+            return false;
+
+        return true;
+    }
+    public void MarkAsTriggered()
+    {
+        HasTriggered = true;
+    }
+}
+
+
+
+//三选一结束时的触发器
+public class EndTriPlayTrigger : IAvgTrigger
+{
+    public cfg.avg.AvgStory config { get; }
+    public bool HasTriggered { get; private set; }
+
+    public TriggerType TriggerType => TriggerType.END_TRICARD;
+
+
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    public EndTriPlayTrigger(cfg.avg.AvgStory _config)
+    {
+        config = _config;
+    }
+
+
+    public bool ShouldTrigger()
+    {
+        //如果不可反复触发并且触发过了，则无法触发本剧情
+        if (!config.CanRecur && HasTriggered)
+            return false;
+
+        //接下来麻烦的来了：判断条件是否都满足
+        if (!Utility.CondListCheck(config.UnlockConds))
+            return false;
+
+        return true;
+    }
+    public void MarkAsTriggered()
+    {
+        HasTriggered = true;
+    }
+}
+

@@ -60,6 +60,11 @@ public class TriCardUI : MonoBehaviour
 
     IEnumerator CPlayEndTriAnims()
     {
+        
+        //判断AVG事件
+        AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.END_TRICARD);
+
+        
         yield return new WaitForSecondsRealtime(1f);
         BattleManager.Instance.EndTri();
     }

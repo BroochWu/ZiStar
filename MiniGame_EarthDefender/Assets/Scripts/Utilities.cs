@@ -336,7 +336,7 @@ public static class Utility
         if (list == null || list.Count == 0)
         {
             Debug.LogWarning("列表为空或未初始化");
-            return default(T);
+            return default;
         }
 
         return list[UnityEngine.Random.Range(0, list.Count)];

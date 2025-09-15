@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 100,
     "trigger": {
       "trigger_type": 1,
       "int_params": [
@@ -9,70 +9,48 @@
     },
     "sort": 0,
     "unlock_conds": [],
-    "id_start": 1001,
-    "id_end": 1999,
+    "id_start": 100001,
+    "id_end": 100002,
     "can_recur": false
   },
   {
-    "id": 2,
+    "id": 200,
     "trigger": {
       "trigger_type": 4,
       "int_params": []
     },
     "sort": 0,
     "unlock_conds": [],
-    "id_start": 2001,
-    "id_end": 2001,
+    "id_start": 200001,
+    "id_end": 200002,
     "can_recur": true
   },
   {
-    "id": 3,
+    "id": 201,
     "trigger": {
       "trigger_type": 4,
       "int_params": []
     },
     "sort": 0,
     "unlock_conds": [],
-    "id_start": 3001,
-    "id_end": 3001,
+    "id_start": 201001,
+    "id_end": 201001,
     "can_recur": true
   },
   {
-    "id": 4,
+    "id": 202,
     "trigger": {
       "trigger_type": 4,
       "int_params": []
     },
     "sort": 0,
     "unlock_conds": [],
-    "id_start": 4001,
-    "id_end": 4001,
+    "id_start": 202001,
+    "id_end": 202001,
     "can_recur": true
   },
   {
-    "id": 5,
-    "trigger": {
-      "trigger_type": 2,
-      "int_params": []
-    },
-    "sort": 0,
-    "unlock_conds": [
-      {
-        "cond_type": 5,
-        "string_params": [
-          "=="
-        ],
-        "int_params": [
-          0
-        ]
-      }
-    ],
-    "id_start": 5001,
-    "id_end": 5001,
-    "can_recur": true
-  },
-  {
-    "id": 6,
+    "id": 600,
     "trigger": {
       "trigger_type": 2,
       "int_params": []
@@ -98,12 +76,12 @@
         ]
       }
     ],
-    "id_start": 6001,
-    "id_end": 6001,
+    "id_start": 600001,
+    "id_end": 600001,
     "can_recur": true
   },
   {
-    "id": 7,
+    "id": 601,
     "trigger": {
       "trigger_type": 2,
       "int_params": []
@@ -116,16 +94,56 @@
           "=="
         ],
         "int_params": [
-          1
+          0
+        ]
+      },
+      {
+        "cond_type": 7,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          2
         ]
       }
     ],
-    "id_start": 7001,
-    "id_end": 7001,
+    "id_start": 601001,
+    "id_end": 601001,
     "can_recur": true
   },
   {
-    "id": 8,
+    "id": 602,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          0
+        ]
+      },
+      {
+        "cond_type": 7,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          2
+        ]
+      }
+    ],
+    "id_start": 602001,
+    "id_end": 602001,
+    "can_recur": true
+  },
+  {
+    "id": 620,
     "trigger": {
       "trigger_type": 2,
       "int_params": []
@@ -151,8 +169,118 @@
         ]
       }
     ],
-    "id_start": 8001,
-    "id_end": 8001,
+    "id_start": 620001,
+    "id_end": 620001,
+    "can_recur": true
+  },
+  {
+    "id": 621,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 5,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          0
+        ]
+      }
+    ],
+    "id_start": 621001,
+    "id_end": 621001,
+    "can_recur": true
+  },
+  {
+    "id": 700,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 700001,
+    "id_end": 700001,
+    "can_recur": true
+  },
+  {
+    "id": 701,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 701001,
+    "id_end": 701001,
+    "can_recur": true
+  },
+  {
+    "id": 702,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 702001,
+    "id_end": 702001,
+    "can_recur": true
+  },
+  {
+    "id": 703,
+    "trigger": {
+      "trigger_type": 2,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [
+      {
+        "cond_type": 6,
+        "string_params": [
+          "=="
+        ],
+        "int_params": [
+          1
+        ]
+      }
+    ],
+    "id_start": 703001,
+    "id_end": 703001,
     "can_recur": true
   },
   {
@@ -224,5 +352,29 @@
     "id_start": 1002001,
     "id_end": 1002001,
     "can_recur": true
+  },
+  {
+    "id": 1101,
+    "trigger": {
+      "trigger_type": 6,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [],
+    "id_start": 1101001,
+    "id_end": 1101001,
+    "can_recur": false
+  },
+  {
+    "id": 1201,
+    "trigger": {
+      "trigger_type": 7,
+      "int_params": []
+    },
+    "sort": 0,
+    "unlock_conds": [],
+    "id_start": 1201001,
+    "id_end": 1201002,
+    "can_recur": false
   }
 ]
