@@ -18,7 +18,7 @@ public class BattleUI : MonoBehaviour
     public GameObject battleStopWindow;
     public GameObject expProgressBar;//经验值进度条
     public Transform awardsContainer;//奖励列表
-    public Transform damageTextsContainer;//伤害数字
+    public Transform UIVFXsContainer;//UI层特效存放地址
     public DamageStatisticsPanel damageStatisticsPanel;//伤害统计
 
 
@@ -137,8 +137,9 @@ public class BattleUI : MonoBehaviour
         GameManager.Instance.SwitchGameStateToMainView();
 
         //删除所有特效字体
-        foreach (Transform dtx in damageTextsContainer)
+        foreach (Transform dtx in UIVFXsContainer)
         {
+            ObjectPoolManager.Instance.ReleaseVFX(dtx.gameObject);
             Destroy(dtx.gameObject);
         }
     }

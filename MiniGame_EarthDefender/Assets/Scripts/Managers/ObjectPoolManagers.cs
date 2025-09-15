@@ -324,6 +324,9 @@ public class ObjectPoolManager : MonoBehaviour
             case VFXType.DAMAGETEXT:
                 prefabPath = "Prefabs/Common/DamageText";
                 break;
+            case VFXType.BOMB:
+                prefabPath = "Prefabs/Common/VfxBoom";
+                break;
         }
         GameObject prefab = LoadPrefab(prefabPath);
 
@@ -347,11 +350,15 @@ public class ObjectPoolManager : MonoBehaviour
     // 创建特效实例
     private GameObject CreateVFXInstance(GameObject prefab, VFXType _type)
     {
+        // Transform instantiateTrans = UIManager.Instance.battleLayer.UIVFXsContainer;
         Transform instantiateTrans = null;
         switch (_type)
         {
             case VFXType.DAMAGETEXT:
-                instantiateTrans = UIManager.Instance.battleLayer.damageTextsContainer;
+                instantiateTrans = UIManager.Instance.battleLayer.UIVFXsContainer;
+                break;
+            case VFXType.BOMB:
+                instantiateTrans = BattleManager.Instance.VfxsPath;
                 break;
         }
         GameObject VFXIns = Instantiate(prefab, instantiateTrans);

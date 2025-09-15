@@ -1,0 +1,434 @@
+fileFormatVersion: 2
+guid: a80c1cdb499e786428c59c492c1a638c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -202760612745633296
+    second: vfx_img_boom_0
+  - first:
+      213: -5899441299508500879
+    second: vfx_img_boom_1
+  - first:
+      213: 6521880170630975781
+    second: vfx_img_boom_2
+  - first:
+      213: -5210063959302791165
+    second: vfx_img_boom_3
+  - first:
+      213: -858837614742999878
+    second: vfx_img_boom_4
+  - first:
+      213: -5796404110431992057
+    second: vfx_img_boom_5
+  - first:
+      213: -5649982160688334794
+    second: vfx_img_boom_6
+  - first:
+      213: 7150740671880513539
+    second: vfx_img_boom_7
+  - first:
+      213: 6994777836094951638
+    second: vfx_img_boom_8
+  - first:
+      213: -5516696763169132078
+    second: vfx_img_boom_9
+  - first:
+      213: 8624021313822933729
+    second: vfx_img_boom_10
+  - first:
+      213: 3932256678479602112
+    second: vfx_img_boom_11
+  - first:
+      213: -703515730843794594
+    second: vfx_img_boom_12
+  - first:
+      213: -4023697332691474230
+    second: vfx_img_boom_13
+  - first:
+      213: -368949648174848549
+    second: vfx_img_boom_14
+  - first:
+      213: -8893223234717706378
+    second: vfx_img_boom_15
+  - first:
+      213: 680919421029073720
+    second: vfx_img_boom_16
+  - first:
+      213: -5276442338190544419
+    second: vfx_img_boom_17
+  - first:
+      213: -3010225031452674126
+    second: vfx_img_boom_18
+  - first:
+      213: -3581501318442447538
+    second: vfx_img_boom_19
+  - first:
+      213: -304537733910905427
+    second: vfx_img_boom_20
+  - first:
+      213: -2977276118395601921
+    second: vfx_img_boom_21
+  - first:
+      213: -5232936171199990555
+    second: vfx_img_boom_22
+  - first:
+      213: -8660934366232458848
+    second: vfx_img_boom_23
+  - first:
+      213: 1096013201233841166
+    second: vfx_img_boom_24
+  - first:
+      213: 3231555040231649574
+    second: vfx_img_boom_25
+  - first:
+      213: -3354129646201674871
+    second: vfx_img_boom_26
+  - first:
+      213: 2044869598461057574
+    second: vfx_img_boom_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vfx_img_boom_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 341
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f12bd60c46af2df0800000000000000
+      internalID: -202760612745633296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_1
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 341
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176e6890569f02ea0800000000000000
+      internalID: -5899441299508500879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_2
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 341
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5219f16f57f528a50800000000000000
+      internalID: 6521880170630975781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 171
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30021b0ee6222b7b0800000000000000
+      internalID: -5210063959302791165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 171
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abcef7d5dbbc414f0800000000000000
+      internalID: -858837614742999878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_5
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 171
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70746171c290f8fa0800000000000000
+      internalID: -5796404110431992057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 638b0e4e82b3791b0800000000000000
+      internalID: -5649982160688334794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_7
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 1
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 308406c31c88c3360800000000000000
+      internalID: 7150740671880513539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_img_boom_8
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d0173bc161721160800000000000000
+      internalID: 6994777836094951638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      vfx_img_boom_0: -202760612745633296
+      vfx_img_boom_1: -5899441299508500879
+      vfx_img_boom_2: 6521880170630975781
+      vfx_img_boom_3: -5210063959302791165
+      vfx_img_boom_4: -858837614742999878
+      vfx_img_boom_5: -5796404110431992057
+      vfx_img_boom_6: -5649982160688334794
+      vfx_img_boom_7: 7150740671880513539
+      vfx_img_boom_8: 6994777836094951638
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

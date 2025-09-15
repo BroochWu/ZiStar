@@ -141,10 +141,10 @@ public class AvgManager : MonoBehaviour
             }
 
         }
-        Debug.Log("listscount:" + lists.Count);
+        // Debug.Log("listscount:" + lists.Count);
         var random = Utility.GetRandomByList(lists);
 
-        Debug.Log("random:" + random);
+        // Debug.Log("random:" + random);
         if (random == null) return;
 
         if (TriggerAvg(random.config.Id))

@@ -28,9 +28,10 @@ public class BattleManager : MonoBehaviour
 
     [Header("资源索引")]
     public Transform BattleObjectsPath;
-    public Transform PortalsPath;
-    public Transform BulletsPath;
-    public Transform EnemyPath;
+    public Transform PortalsPath { get; private set; }
+    public Transform BulletsPath { get; private set; }
+    public Transform EnemyPath { get; private set; }
+    public Transform VfxsPath { get; private set; }//场景特效层
     //传送门
     public GameObject PortalPrefab;
 
@@ -113,6 +114,9 @@ public class BattleManager : MonoBehaviour
 
             EnemyPath = new GameObject("Enemys").transform;
             EnemyPath.SetParent(BattleObjectsPath);
+
+            VfxsPath = new GameObject("VFXs").transform;
+            VfxsPath.SetParent(BattleObjectsPath);
         }
 
         //令单局的全局攻击加成初始值为局外的全局加成总值

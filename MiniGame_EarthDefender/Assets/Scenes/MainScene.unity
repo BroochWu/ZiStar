@@ -375,7 +375,7 @@ MonoBehaviour:
   battleStopWindow: {fileID: 1653627805}
   expProgressBar: {fileID: 759753707}
   awardsContainer: {fileID: 471422621}
-  damageTextsContainer: {fileID: 439747970}
+  UIVFXsContainer: {fileID: 439747970}
   damageStatisticsPanel: {fileID: 1078957010}
   awardsEmpty: {fileID: 1456201220}
   expLvText: {fileID: 60236268}
@@ -2572,7 +2572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439747970}
   m_Layer: 5
-  m_Name: DamageTextsContainer
+  m_Name: VFXsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4567,7 +4567,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 609756901}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6400,9 +6400,6 @@ MonoBehaviour:
   battleState: 0
   battleLoseReason: 0
   BattleObjectsPath: {fileID: 0}
-  PortalsPath: {fileID: 0}
-  BulletsPath: {fileID: 0}
-  EnemyPath: {fileID: 0}
   PortalPrefab: {fileID: 8770212461898048473, guid: 316e0a38748b76145ae11b699fce52fd, type: 3}
   GameTime: 0
   dungeonId: 0

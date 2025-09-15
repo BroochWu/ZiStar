@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
         if (dynamicConfig == null || isReleased) return;
 
         var dtx = ObjectPoolManager.Instance.GetVFX(VFXType.DAMAGETEXT);
-        dtx.GetComponent<VFX>().Initialize(_damage, transform.position);
+        dtx.GetComponent<VFX>().InitializeAsDTX(_damage, transform.position);
 
         //统计伤害
         if (Player.instance.battleEquipedWeapon.ContainsKey(_source))
@@ -234,7 +234,14 @@ public class Enemy : MonoBehaviour
     void OnDie()
     {
         hpBar.SetActive(false);
+        //爆炸效果
+        var bomb = ObjectPoolManager.Instance.GetVFX(VFXType.BOMB);
+        Debug.Log(transform.position);
+        bomb.GetComponent<VFX>().InitializeAsBomb(transform.position);
+
+        
         ObjectPoolManager.Instance.ReleaseEnemy(this);
+
         BattleManager.Instance.UnregisterEnemy(this);
     }
 
