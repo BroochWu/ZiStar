@@ -4,11 +4,7 @@ using System.Collections;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    // 公共字段和属性
-    [Header("组件引用")]
-    public GameObject hpBar;
-    public GameObject hpLight;
-    public SpriteRenderer sprite;
+    public EnemyUI enemyUI;
 
     [Header("敌人属性")]
     public int enemyId;
@@ -30,8 +26,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected int _currentHp;
     protected float _moveSpeed;
     protected float _rotationSpeed;
-    protected int _initOrder = 20;
-    protected Material _spriteMaterial;
 
     // 属性
     public int Damage { get; protected set; }
@@ -45,6 +39,7 @@ public abstract class EnemyBase : MonoBehaviour
     // 虚方法，子类可重写
     protected virtual void Awake()
     {
+        enemyUI = GetComponent<EnemyUI>();
         // 静态初始化只执行一次
         if (_earth == null)
         {
@@ -52,13 +47,6 @@ public abstract class EnemyBase : MonoBehaviour
             _enemyStopDisSqr = cfg.Tables.tb.GlobalParam.Get("enemy_stop_distance").IntValue;
         }
 
-        // 缓存组件引用
-        if (hpBar == null) hpBar = transform.Find("root/HpBar").gameObject;
-        if (hpLight == null) hpLight = transform.Find("root/HpBar/Hp").gameObject;
-        if (sprite == null) sprite = transform.Find("root/Sprite").GetComponent<SpriteRenderer>();
-
-        hpBar.SetActive(false);
-        _spriteMaterial = sprite.material;
     }
 
     protected virtual void FixedUpdate()
@@ -92,18 +80,18 @@ public abstract class EnemyBase : MonoBehaviour
         else
         {
             // 显示血条并更新
-            hpBar.SetActive(true);
-            var hpRenderer = hpLight.GetComponent<SpriteRenderer>();
+            enemyUI.hpBar.SetActive(true);
+            var hpRenderer = enemyUI.hpLight.GetComponent<SpriteRenderer>();
             hpRenderer.size = new Vector2((float)_currentHp / InitHp, hpRenderer.size.y);
 
             // 启动受击效果
-            StartCoroutine(OnHitEffect());
+            StartCoroutine(enemyUI.OnHitEffect(_hitDuration));
         }
     }
 
     protected virtual void OnDie()
     {
-        hpBar.SetActive(false);
+        enemyUI.hpBar.SetActive(false);
         // 爆炸效果
         var bomb = ObjectPoolManager.Instance.GetVFX(VFXType.BOMB);
         bomb.GetComponent<VFX>().InitializeAsBomb(transform.position);
@@ -112,22 +100,27 @@ public abstract class EnemyBase : MonoBehaviour
         BattleManager.Instance.UnregisterEnemy(this);
     }
 
-    protected IEnumerator OnHitEffect()
+    // protected IEnumerator OnHitEffect()
+    // {
+    //     sprite.sortingOrder = 50;
+    //     _spriteMaterial.color = Color.red;
+
+    //     yield return new WaitForSeconds(_hitDuration);
+
+    //     sprite.sortingOrder = _initOrder;
+    //     _spriteMaterial.color = Color.white;
+    // }
+
+    protected virtual void ResetAttributes()
     {
-        sprite.sortingOrder = 50;
-        _spriteMaterial.color = Color.red;
-
-        yield return new WaitForSeconds(_hitDuration);
-
-        sprite.sortingOrder = _initOrder;
-        _spriteMaterial.color = Color.white;
+        enemyUI.ResetAttributes();
     }
 
     protected virtual void OnDisable()
     {
         StopAllCoroutines();
     }
-    public  void SetBasicEssentials(cfg.enemy.Enemy enemyBasic)
+    public void SetBasicEssentials(cfg.enemy.Enemy enemyBasic)
     {
         _dynamicConfig = enemyBasic;
         enemyId = _dynamicConfig.Id;

@@ -67,13 +67,6 @@ public class Portal : MonoBehaviour
 
             var obj = ObjectPoolManager.Instance.GetEnemy(enemy_Init.EnemyId);
 
-            switch (enemy_Init.EnemyId_Ref.EnemyType)
-            {
-                case cfg.Enums.Enemy.Type.TRASH:
-                    break;
-                case cfg.Enums.Enemy.Type.REWARDWEAPON:
-                    break;
-            }
 
             var enemyBase = obj.GetComponent<EnemyBase>();
 

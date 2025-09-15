@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
         timer = 0f;
         bulletDamage = parent.attack;
     }
-    public void Initialize(EnemyBase parent)
+    public void Initialize<T>(T parent) where T:EnemyBase
     {
 
         bulletParent = BulletParent.ENEMY;

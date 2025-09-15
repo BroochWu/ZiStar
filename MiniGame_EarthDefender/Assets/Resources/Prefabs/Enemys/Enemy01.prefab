@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2560635631935939106}
   - component: {fileID: 7515003149878622296}
-  - component: {fileID: 6865947033433253390}
+  - component: {fileID: 7192688943169947753}
   m_Layer: 0
   m_Name: Enemy01
   m_TagString: Enemy
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 0.8
---- !u!114 &6865947033433253390
+--- !u!114 &7192688943169947753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,14 +350,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6831312901135545378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2610949ef26d70141bbb8f8fad1f254c, type: 3}
+  m_Script: {fileID: 11500000, guid: 51dcd4cf3cb815a409ae624b67118957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6202619572989728276}
   hpLight: {fileID: 3888985549685484381}
   sprite: {fileID: 8193111644864734793}
-  enemyId: 0
-  enemyExp: 0
+  _spriteMaterial: {fileID: 0}
 --- !u!1 &6904111681176095077
 GameObject:
   m_ObjectHideFlags: 0

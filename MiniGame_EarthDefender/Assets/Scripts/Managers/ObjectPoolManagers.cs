@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -172,7 +171,23 @@ public class ObjectPoolManager : MonoBehaviour
             CreateEnemyPool(enemyId);
         }
 
-        return enemyPools[enemyId].Get();
+        var obj = enemyPools[enemyId].Get();
+        var _type = cfg.Tables.tb.Enemy.Get(enemyId).EnemyType;
+
+        switch (_type)
+        {
+            case cfg.Enums.Enemy.Type.TRASH:
+                obj.AddComponent<EnemyTrash>();
+                break;
+            case cfg.Enums.Enemy.Type.REWARDWEAPON:
+                obj.AddComponent<EnemyRewardWeapon>();
+                break;
+            default:
+                Debug.LogError("你这是放了个什么几把玩意进来啊啊啊");
+                break;
+        }
+
+        return obj;
     }
 
 
@@ -262,7 +277,8 @@ public class ObjectPoolManager : MonoBehaviour
         }
         foreach (var a in tempList)
         {
-            ReleaseEnemy(a.GetComponent<EnemyBase>());
+            var obj = a.GetComponent<EnemyBase>();
+            ReleaseEnemy(obj);
         }
     }
     #endregion
@@ -321,10 +337,10 @@ public class ObjectPoolManager : MonoBehaviour
         switch (_type)
         {
             case VFXType.DAMAGETEXT:
-                prefabPath = "Prefabs/Common/DamageText";
+                prefabPath = "Prefabs/Battle/VFXs/DamageText";
                 break;
             case VFXType.BOMB:
-                prefabPath = "Prefabs/Common/VfxBoom";
+                prefabPath = "Prefabs/Battle/VFXs/VfxBoom";
                 break;
         }
         GameObject prefab = LoadPrefab(prefabPath);
@@ -448,7 +464,7 @@ public class ObjectPoolManager : MonoBehaviour
 
         // 重置敌人状态（别搞了，预热的时候可能没有）
         // if (enemyComponent != null)
-        // {
+        // {`
         //     enemyComponent.ResetAttr();
         // }
     }
@@ -472,11 +488,11 @@ public class ObjectPoolManager : MonoBehaviour
         enemy.transform.position = Vector3.zero;
 
         // 重置敌人组件
-        EnemyBase enemyComponent = enemy.GetComponent<EnemyBase>();
-        if (enemyComponent != null)
-        {
-            enemyComponent.hpBar.SetActive(false);
-        }
+        // EnemyBase enemyComponent = enemy.GetComponent<EnemyBase>();
+        // if (enemyComponent != null)
+        // {
+        //     enemyComponent.hpBar.SetActive(false);
+        // }
     }
 
 

@@ -18,7 +18,7 @@ public class EnemyRewardWeapon : EnemyBase
     {
         _isReleased = false;
         BattleManager.Instance.RegisterEnemy(this);
-        sprite.sortingOrder = _initOrder;
+        // sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
         _enemyLevel = enemyLevel;
 
@@ -63,12 +63,6 @@ public class EnemyRewardWeapon : EnemyBase
             Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotationSpeed * 0.5f);
         }
-
-        // 更新排序层级
-        if (Time.frameCount % 5 == 0)
-        {
-            sprite.sortingOrder = Mathf.Max(sprite.sortingOrder - 1, _initOrder);
-        }
     }
 
     private void SetNewWanderTarget()
@@ -97,11 +91,12 @@ public class EnemyRewardWeapon : EnemyBase
         // ShopDrawManager.instance.StartDrawProcess(1);
     }
 
-    private void ResetAttributes()
+
+    protected override void ResetAttributes()
     {
+        base.ResetAttributes();
+
         _state = EnemyState.WANDER;
-        _spriteMaterial.color = Color.white;
-        hpBar.SetActive(false);
 
         if (_dynamicConfig == null)
         {
