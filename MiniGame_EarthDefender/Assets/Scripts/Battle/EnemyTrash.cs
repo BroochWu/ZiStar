@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 
-public class EnemyNormal : EnemyBase
+public class EnemyTrash : EnemyBase
 {
     private enum EnemyState { MOVE, ATTACK }
     private EnemyState _state;
