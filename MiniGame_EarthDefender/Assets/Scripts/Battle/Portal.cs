@@ -65,11 +65,10 @@ public class Portal : MonoBehaviour
         {
             Quaternion moveDirection = portalBaseRotation * Quaternion.Euler(0, 0, i);
 
-            var obj = ObjectPoolManager.Instance
-            .GetEnemy(enemy_Init.EnemyId)
-            .GetComponent<Enemy>();
+            var obj = ObjectPoolManager.Instance.GetEnemy(enemy_Init.EnemyId);
+            var enemyBase = obj.GetComponent<EnemyBase>();
 
-            obj.Initialize(enemy_Init.EnemyId_Ref, enemyLevel, moveDirection, this);
+            enemyBase.Initialize(enemy_Init.EnemyId_Ref, enemyLevel, moveDirection, this);
 
         }
     }

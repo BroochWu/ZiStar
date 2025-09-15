@@ -56,7 +56,7 @@ public class CollisionManager : MonoBehaviour
 
                     // 处理碰撞
                     var bulletConfig = bullet.GetComponent<Bullet>();
-                    obj.GetComponent<Enemy>().TakeDamage(
+                    obj.GetComponent<EnemyBase>().TakeDamage(
                         bulletConfig.bulletDamage, bulletConfig.parentWeapon
 
 

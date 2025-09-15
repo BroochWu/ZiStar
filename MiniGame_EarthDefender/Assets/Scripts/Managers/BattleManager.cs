@@ -51,7 +51,7 @@ public class BattleManager : MonoBehaviour
     public int currentLv;//玩家当前等级
     public int globalDamageMultiInOneBattle;//当局所有武器的总伤害加成
     List<Portal> activePortals = new();//活跃的传送门
-    public List<Enemy> activeEnemys = new();//活跃的敌人
+    public List<EnemyBase> activeEnemys = new();//活跃的敌人
 
     //战斗统计相关
     public int totalDamage;
@@ -429,7 +429,7 @@ public class BattleManager : MonoBehaviour
     }
 
     // 注册敌人
-    public void RegisterEnemy(Enemy enemy)
+    public void RegisterEnemy(EnemyBase enemy)
     {
         if (!activeEnemys.Contains(enemy))
         {
@@ -438,7 +438,7 @@ public class BattleManager : MonoBehaviour
     }
 
     // 注销敌人
-    public void UnregisterEnemy(Enemy enemy)
+    public void UnregisterEnemy(EnemyBase enemy)
     {
         if (activeEnemys.Contains(enemy))
         {

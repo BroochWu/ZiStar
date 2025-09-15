@@ -123,6 +123,14 @@ namespace cfg.weapon
 }
 
 
+namespace cfg.enemy
+{
+    public partial class Enemy
+    {
+
+        public int exp => Tables.tb.EnemyTypeIndex.Get(EnemyType).Exp;
+    }
+}
 
 namespace cfg.card
 {

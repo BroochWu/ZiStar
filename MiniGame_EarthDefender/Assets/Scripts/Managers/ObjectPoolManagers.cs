@@ -175,22 +175,23 @@ public class ObjectPoolManager : MonoBehaviour
         return enemyPools[enemyId].Get();
     }
 
+
     /// <summary>
     /// 回收敌人
     /// </summary>
-    public void ReleaseEnemy(Enemy enemy)
+    public void ReleaseEnemy<T>(T enemy) where T : EnemyBase
     {
-        int enemyId = enemy.enemyId; // 假设Enemy类中有config
+        int enemyId = enemy.enemyId;
 
         if (enemyPools.ContainsKey(enemyId))
         {
+            enemy.IsReleased = true; // 先设置释放状态
             enemyPools[enemyId].Release(enemy.gameObject);
-            enemy.isReleased = true;
         }
         else
         {
             Debug.LogWarning($"找不到敌人类型 {enemyId} 的对象池");
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
     }
 
@@ -227,8 +228,7 @@ public class ObjectPoolManager : MonoBehaviour
     private GameObject CreateEnemyInstance(GameObject prefab, int enemyId)
     {
         GameObject enemy = Instantiate(prefab, BattleManager.Instance.EnemyPath);
-        // enemy.transform.SetParent(enemyContainer);
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
+        EnemyBase enemyComponent = enemy.GetComponent<EnemyBase>();
         if (enemyComponent != null)
         {
             // 设置敌人ID以便回收
@@ -236,8 +236,7 @@ public class ObjectPoolManager : MonoBehaviour
             {
                 enemyCache = cfg.Tables.tb.Enemy.Get(enemyId);
             }
-            // enemyComponent.enemyId = enemyId;
-            enemyComponent.SetEnemyBasicEssentials(enemyCache);
+            enemyComponent.SetBasicEssentials(enemyCache);
             Debug.Log($"CreateEnemyInstance");
         }
         else
@@ -263,7 +262,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
         foreach (var a in tempList)
         {
-            ReleaseEnemy(a.GetComponent<Enemy>());
+            ReleaseEnemy(a.GetComponent<EnemyBase>());
         }
     }
     #endregion
@@ -473,7 +472,7 @@ public class ObjectPoolManager : MonoBehaviour
         enemy.transform.position = Vector3.zero;
 
         // 重置敌人组件
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
+        EnemyBase enemyComponent = enemy.GetComponent<EnemyBase>();
         if (enemyComponent != null)
         {
             enemyComponent.hpBar.SetActive(false);
