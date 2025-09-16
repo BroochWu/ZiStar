@@ -71,7 +71,7 @@ public class BattleUI : MonoBehaviour
             fpsCounter = 0;
         }
 #if UNITY_EDITOR
-        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.activeEnemys.Count}"
+        gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.totalEnemyThisDungeon}"
         + $"\nisPlayingAvg:{AvgManager.Instance.isPlayingAvg}";
 #else
         gameTimeUI.gameObject.SetActive(false);

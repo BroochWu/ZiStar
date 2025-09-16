@@ -20,6 +20,7 @@ public sealed partial class Dungeon_Portals : Luban.BeanBase
 {
     public Dungeon_Portals(JSONNode _buf) 
     {
+        { if(!_buf["delay_time"].IsNumber) { throw new SerializationException(); }  DelayTime = _buf["delay_time"]; }
         { if(!_buf["position"].IsObject) { throw new SerializationException(); }  Position = ExternalTypeUtil.NewVector2(global::cfg.Vector2.DeserializeVector2(_buf["position"]));  }
         { if(!_buf["wave_id"].IsNumber) { throw new SerializationException(); }  WaveId = _buf["wave_id"]; }
         WaveId_Ref = null;
@@ -30,6 +31,10 @@ public sealed partial class Dungeon_Portals : Luban.BeanBase
         return new Beans.Dungeon_Portals(_buf);
     }
 
+    /// <summary>
+    /// 延迟出生时间
+    /// </summary>
+    public readonly float DelayTime;
     /// <summary>
     /// 传送门坐标
     /// </summary>
@@ -51,6 +56,7 @@ public sealed partial class Dungeon_Portals : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
+        + "delayTime:" + DelayTime + ","
         + "position:" + Position + ","
         + "waveId:" + WaveId + ","
         + "}";
