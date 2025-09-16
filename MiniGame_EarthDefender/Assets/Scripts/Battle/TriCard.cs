@@ -217,7 +217,7 @@ public class TriCard
                         //如果条件满足
                         //添加并抽下一个(返回该道具)
                         //抽到以后其他卡牌不会抽到本牌
-                        //AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
+                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
                         Debug.Log("已抽中：" + cardAndRemainCount.Key.TextName);
                         return cardAndRemainCount.Key;
                     }
@@ -229,11 +229,8 @@ public class TriCard
 
                         //如果重抽达到上限，指连续抽到无法被抽取的卡牌，则取id==1（这个可以重复）
                         Debug.LogWarning($"抽到了{cardAndRemainCount.Key.TextName},但是条件不满足重抽，第{listCardsThree.Count + 1}张卡牌的剩余重抽次数：{MAX_DRAW_COUNT - nowReDrawCount}");
-
-                        nowReDrawCount += 1;
-
                         //重抽不放回
-                        //AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
+                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
                         // totalWeight -= cardAndRemainCount.Key.Weight;
                         // totalWeightTempMinus += cardAndRemainCount.Key.Weight;
                         // listCardsAvailable.Remove(cardAndRemainCount.Key);
@@ -243,6 +240,8 @@ public class TriCard
                     }
                 }
             }
+
+            nowReDrawCount += 1;
             if (finalNum > 0)
             {
                 Debug.LogWarning("算法有误，finalNum大于0，返回卡牌1");
