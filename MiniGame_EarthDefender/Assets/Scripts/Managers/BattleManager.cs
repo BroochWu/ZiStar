@@ -523,7 +523,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void LevelUp()
     {
-        Debug.Log("升级成功");
+        // Debug.Log("升级成功");
         //3选1
         StartTri(cfg.Enums.Card.Type.UPGRADE);
 

@@ -70,9 +70,21 @@ public class BattleUI : MonoBehaviour
             updateFpsTimer = 0;
             fpsCounter = 0;
         }
+        string str1 = null;
+        foreach (var a in Player.instance.battleEquipedWeapon)
+        {
+            str1 += "[" + a.Key.weaponId + "]";
+        }
+        string str2 = null;
+        foreach (var a in DataManager.Instance.GetPreequippedWeaponList())
+        {
+            str2 += "[" + a + "]";
+        }
+
+
 #if UNITY_EDITOR
         gameTimeUI.text = $"游戏时长：{(int)BattleManager.Instance.GameTime}秒  FPS:{FPS}   剩余敌人数量：{BattleManager.Instance.totalEnemyThisDungeon}"
-        + $"\nisPlayingAvg:{AvgManager.Instance.isPlayingAvg}";
+            + $"\nisPlayingAvg:{AvgManager.Instance.isPlayingAvg}" + $" equippedWeapoons:{str1}"+ $" preeWeapoons:{str2}";
 #else
         gameTimeUI.gameObject.SetActive(false);
 #endif

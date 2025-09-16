@@ -175,7 +175,7 @@ public class AvgManager : MonoBehaviour
 
         if (isPlayingAvg != null)
         {
-            Debug.LogWarning("有正在播放的avg，终止AVG检测");
+            // Debug.LogWarning("有正在播放的avg，终止AVG检测");
             return false;
         }
         var config = cfg.Tables.tb.AvgStory.GetOrDefault(avgId);
@@ -188,7 +188,7 @@ public class AvgManager : MonoBehaviour
 
         if (_triggeredAvgs.Contains(avgId) && config.CanRecur == false)
         {
-            Debug.Log($"AVG {avgId} 为一次性事件，并且已经触发过，跳过");
+            // Debug.Log($"AVG {avgId} 为一次性事件，并且已经触发过，跳过");
             return false;
         }
 
@@ -203,7 +203,7 @@ public class AvgManager : MonoBehaviour
         if (!_triggeredAvgs.Contains(avgId)) _triggeredAvgs.Add(avgId);
 
 
-        Debug.Log($"触发AVG: {avgId}");
+        // Debug.Log($"触发AVG: {avgId}");
         return true;
     }
 

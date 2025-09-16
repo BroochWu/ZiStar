@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cfg.enemy;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -520,6 +521,11 @@ public class ObjectPoolManager : MonoBehaviour
         {
             ReleaseEnemy(enemy);
         }
+        if (BattleManager.Instance.EnemyPath != null)
+            foreach (EnemyBase enemy in BattleManager.Instance.EnemyPath)
+            {
+                ReleaseEnemy(enemy);
+            }
     }
 
     /// <summary>

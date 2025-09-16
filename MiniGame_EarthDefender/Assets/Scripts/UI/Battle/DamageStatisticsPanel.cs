@@ -14,6 +14,13 @@ public class DamageStatisticsPanel : MonoBehaviour
 
     public void Initialize()
     {
+        // string str1 = null;
+        // foreach (var a in BattleManager.Instance.sortedWeaponDamageStatisticsList)
+        // {
+        //     str1 += a.Key.config.TextName + "  " + a.Value;
+        // }
+        // Debug.Log(str1);
+
         mvpWeapon = BattleManager.Instance.sortedWeaponDamageStatisticsList[0].Key;
         mvpWeaponDamage = BattleManager.Instance.sortedWeaponDamageStatisticsList[0].Value;
         imageMvpWeapon.sprite = mvpWeapon.config.ImageIcon;
@@ -29,7 +36,7 @@ public class DamageStatisticsPanel : MonoBehaviour
         {
             textMvpWeaponDamageCount.text = "造成伤害："
             + Utility.BigNumber(mvpWeaponDamage)
-            + $"[{mvpWeaponDamage / BattleManager.Instance.totalDamage * 100f:F1}%]";
+            + $"<b> 【{(float)(mvpWeaponDamage * 1f / BattleManager.Instance.totalDamage) * 100:F1}%】</b>";
         }
     }
 }

@@ -48,12 +48,12 @@ public class TriCardUI : MonoBehaviour
         {
             if (i == _slot)
             {
-                Debug.Log(i + "号位的卡牌不播放消失动效");
+                // Debug.Log(i + "号位的卡牌不播放消失动效");
                 cardSlots[i].GetComponentInChildren<Animator>().Play("Chosen");
                 continue;
             }
             cardSlots[i].GetComponentInChildren<Animator>().Play("TriPerCard_Disappear");
-            Debug.Log("抽中的slot是" + _slot);
+            // Debug.Log("抽中的slot是" + _slot);
         }
         StartCoroutine(CPlayEndTriAnims());
     }

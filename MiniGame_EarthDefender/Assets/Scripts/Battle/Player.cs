@@ -131,6 +131,7 @@ public class Player : MonoBehaviour
         Weapon weapon = weaponObj.AddComponent<Weapon>();
         weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath.transform, 1);
 
+        //没处理卸载后又装上的情况
         battleEquipedWeapon.Add(weapon, 0);
 
     }

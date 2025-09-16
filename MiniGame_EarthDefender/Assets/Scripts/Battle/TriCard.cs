@@ -94,37 +94,6 @@ public class TriCard
 
 
 
-        // //如果是武器解锁类的抽卡，先抽武器卡
-        // if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK)
-        // {
-
-        //     var unlockWeaponDrawCount = Mathf.Min(listWeaponUnlockCardsAvailable.Count, 3);
-        //     Debug.Log("unlockWeaponDrawCount:" + unlockWeaponDrawCount);
-
-
-        //     foreach (var card in listWeaponUnlockCardsAvailable)
-        //     {
-        //         var result = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
-        //         listCardsThree.Add(result);
-        //         if (listCardsThree.Count == 3) break;
-        //     }
-
-        //     // int a = 0;
-        //     // //保证抽出3张不一样的牌以供选择
-        //     // while (listCardsThree.Count < unlockWeaponDrawCount && a < 10)
-        //     // {
-        //     //     //抽3张，并且3张卡牌绝对不一样
-        //     //     var cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
-
-        //     //     listCardsThree.Add(cardResult);
-        //     //     a++;
-
-        //     // }
-        //     // if (a == 10) Debug.LogError("死循环在这里");
-
-
-        // }
-
 
         //保证抽出3张不一样的牌以供选择
         while (listCardsThree.Count < 3)
@@ -132,10 +101,10 @@ public class TriCard
             //抽3张，并且3张卡牌绝对不一样
             cfg.card.Card cardResult = null;
 
-            // if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK) cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
-            // else if (_type == cfg.Enums.Card.Type.UPGRADE) cardResult = DrawOneCard(cfg.Enums.Card.Type.UPGRADE);
+            if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK && listWeaponUnlockCardsAvailable.Count > 0) cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+            else cardResult = DrawOneCard(cfg.Enums.Card.Type.UPGRADE);
 
-            cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+            // cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
 
             listCardsThree.Add(cardResult);
 
@@ -175,7 +144,7 @@ public class TriCard
 
         //决定一个权重值
         int finalNum = Random.Range(0, _totalWeight);
-        Debug.Log($"权重值：{finalNum}/{_totalWeight}");
+        // Debug.Log($"权重值：{finalNum}/{_totalWeight}");
 
         //这俩是如果重抽的时候要用到的
         //重随时去除的卡和其权重
@@ -218,7 +187,7 @@ public class TriCard
                         //添加并抽下一个(返回该道具)
                         //抽到以后其他卡牌不会抽到本牌
                         AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
-                        Debug.Log("已抽中：" + cardAndRemainCount.Key.TextName);
+                        // Debug.Log("已抽中：" + cardAndRemainCount.Key.TextName);
                         return cardAndRemainCount.Key;
                     }
                     else

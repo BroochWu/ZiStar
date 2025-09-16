@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        Debug.Log("GameManager is Initialize");
+        // Debug.Log("GameManager is Initialize");
 
     }
 

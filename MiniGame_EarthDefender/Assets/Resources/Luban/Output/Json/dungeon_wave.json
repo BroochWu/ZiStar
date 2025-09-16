@@ -12,15 +12,6 @@
         }
       },
       {
-        "init_time": 2,
-        "enemy_init": {
-          "enemy_id": 1002,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
         "init_time": 4,
         "enemy_init": {
           "enemy_id": 1001,
@@ -418,6 +409,20 @@
             150,
             0,
             -150
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "enemy_create": [
+      {
+        "init_time": 1,
+        "enemy_init": {
+          "enemy_id": 1002,
+          "angles": [
+            0
           ]
         }
       }
