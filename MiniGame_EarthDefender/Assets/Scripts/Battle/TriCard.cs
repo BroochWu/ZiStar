@@ -94,37 +94,56 @@ public class TriCard
 
 
 
-        //如果是武器解锁类的抽卡，先抽武器卡
-        if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK)
-        {
+        // //如果是武器解锁类的抽卡，先抽武器卡
+        // if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK)
+        // {
 
-            var unlockWeaponDrawCount = Mathf.Min(listWeaponUnlockCardsAvailable.Count, 3);
-            Debug.Log("unlockWeaponDrawCount:" + unlockWeaponDrawCount);
-
-            //保证抽出3张不一样的牌以供选择
-            while (listCardsThree.Count < unlockWeaponDrawCount)
-            {
-                //抽3张，并且3张卡牌绝对不一样
-                var cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
-
-                listCardsThree.Add(cardResult);
-
-            }
+        //     var unlockWeaponDrawCount = Mathf.Min(listWeaponUnlockCardsAvailable.Count, 3);
+        //     Debug.Log("unlockWeaponDrawCount:" + unlockWeaponDrawCount);
 
 
-        }
+        //     foreach (var card in listWeaponUnlockCardsAvailable)
+        //     {
+        //         var result = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+        //         listCardsThree.Add(result);
+        //         if (listCardsThree.Count == 3) break;
+        //     }
+
+        //     // int a = 0;
+        //     // //保证抽出3张不一样的牌以供选择
+        //     // while (listCardsThree.Count < unlockWeaponDrawCount && a < 10)
+        //     // {
+        //     //     //抽3张，并且3张卡牌绝对不一样
+        //     //     var cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+
+        //     //     listCardsThree.Add(cardResult);
+        //     //     a++;
+
+        //     // }
+        //     // if (a == 10) Debug.LogError("死循环在这里");
+
+
+        // }
 
 
         //保证抽出3张不一样的牌以供选择
         while (listCardsThree.Count < 3)
         {
             //抽3张，并且3张卡牌绝对不一样
-            var cardResult = DrawOneCard(cfg.Enums.Card.Type.UPGRADE);
+            cfg.card.Card cardResult = null;
+
+            // if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK) cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+            // else if (_type == cfg.Enums.Card.Type.UPGRADE) cardResult = DrawOneCard(cfg.Enums.Card.Type.UPGRADE);
+
+            cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
 
             listCardsThree.Add(cardResult);
 
         }
-
+        // var test = cfg.Tables.tb.Card.Get(1);
+        // listCardsThree.Add(test);
+        // listCardsThree.Add(test);
+        // listCardsThree.Add(test);
 
         //全部抽完后把不放回重抽时被移除的列表添加回去（基于不存在第二张牌突然满足了条件的情况）
         RebackTempRemove();
@@ -142,7 +161,7 @@ public class TriCard
 
     cfg.card.Card DrawOneCard(cfg.Enums.Card.Type _type)
     {
-        int _totalWeight = 0;
+        int _totalWeight = totalWeight;
         switch (_type)
         {
             case cfg.Enums.Card.Type.UPGRADE:
@@ -180,8 +199,10 @@ public class TriCard
 
 
         nowReDrawCount = 0;
+
         while (nowReDrawCount <= MAX_DRAW_COUNT)
         {
+            if (_pool.Count == 0) break;
             foreach (var cardAndRemainCount in _pool)
             {
                 //当前权重减去卡牌权重
@@ -196,7 +217,7 @@ public class TriCard
                         //如果条件满足
                         //添加并抽下一个(返回该道具)
                         //抽到以后其他卡牌不会抽到本牌
-                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
+                        //AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
                         Debug.Log("已抽中：" + cardAndRemainCount.Key.TextName);
                         return cardAndRemainCount.Key;
                     }
@@ -212,7 +233,7 @@ public class TriCard
                         nowReDrawCount += 1;
 
                         //重抽不放回
-                        AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
+                        //AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
                         // totalWeight -= cardAndRemainCount.Key.Weight;
                         // totalWeightTempMinus += cardAndRemainCount.Key.Weight;
                         // listCardsAvailable.Remove(cardAndRemainCount.Key);
@@ -225,9 +246,10 @@ public class TriCard
             if (finalNum > 0)
             {
                 Debug.LogWarning("算法有误，finalNum大于0，返回卡牌1");
-                break;
+                return cfg.Tables.tb.Card.Get(1);
             }
         }
+
         return cfg.Tables.tb.Card.Get(1);
     }
 

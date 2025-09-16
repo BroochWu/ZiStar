@@ -27,7 +27,7 @@
   {
     "data_str": "preequipped_weapons",
     "param_type": 4,
-    "param_value_init": "1,-1,-1,-1,-1"
+    "param_value_init": "1,2,3,-1,-1"
   },
   {
     "data_str": "weapon_level_1",

@@ -248,24 +248,20 @@ public static class Utility
                     Debug.LogError("非战斗中无法使用WEAPONUNLOCK的解锁条件！");
                     return false;
                 }
-                // return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
+                bool antiResult = false;
+
                 if (_stringParams.Count > 0)
                 {
-                    foreach (var weapon in Player.instance.battleEquipedWeapon)
-                    {
-                        if (weapon.Key.weaponId == _intParams[0]) return _stringParams[0] != "!=";
-                    }
-
+                    antiResult = _stringParams[0] == "!=";
                 }
-                else
+
+                foreach (var weapon in Player.instance.battleEquipedWeapon)
                 {
-                    foreach (var weapon in Player.instance.battleEquipedWeapon)
-                    {
-                        if (weapon.Key.weaponId == _intParams[0]) return true;
-                    }
-
+                    if (weapon.Key.weaponId == _intParams[0]) return !antiResult;
                 }
-                return false;
+                return antiResult;
+
+
             // return Player.instance.battleEquipedWeapon.ContainsKey(cfg.Tables.tb.Weapon.Get(_intParams[0]));
 
             case cfg.Enums.Com.CondType.WEAPONLEVEL:
