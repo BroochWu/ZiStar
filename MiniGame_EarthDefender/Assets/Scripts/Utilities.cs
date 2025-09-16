@@ -249,9 +249,21 @@ public static class Utility
                     return false;
                 }
                 // return DataManager.Instance.IsWeaponPreequipped(_intParams[0]) >= 0;
-                foreach (var weapon in Player.instance.battleEquipedWeapon)
+                if (_stringParams.Count > 0)
                 {
-                    if (weapon.Key.weaponId == _intParams[0]) return true;
+                    foreach (var weapon in Player.instance.battleEquipedWeapon)
+                    {
+                        if (weapon.Key.weaponId == _intParams[0]) return _stringParams[0] != "!=";
+                    }
+
+                }
+                else
+                {
+                    foreach (var weapon in Player.instance.battleEquipedWeapon)
+                    {
+                        if (weapon.Key.weaponId == _intParams[0]) return true;
+                    }
+
                 }
                 return false;
             // return Player.instance.battleEquipedWeapon.ContainsKey(cfg.Tables.tb.Weapon.Get(_intParams[0]));

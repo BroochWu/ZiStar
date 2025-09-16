@@ -12,6 +12,15 @@
         }
       },
       {
+        "init_time": 2,
+        "enemy_init": {
+          "enemy_id": 1002,
+          "angles": [
+            0
+          ]
+        }
+      },
+      {
         "init_time": 4,
         "enemy_init": {
           "enemy_id": 1001,
@@ -150,6 +159,62 @@
           "enemy_id": 1001,
           "angles": [
             0
+          ]
+        }
+      },
+      {
+        "init_time": 25,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0
+          ]
+        }
+      },
+      {
+        "init_time": 26,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 27,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5
+          ]
+        }
+      },
+      {
+        "init_time": 28,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0
+          ]
+        }
+      },
+      {
+        "init_time": 29,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 30,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            150,
+            0,
+            -150
           ]
         }
       }
@@ -306,6 +371,53 @@
           "enemy_id": 1001,
           "angles": [
             0
+          ]
+        }
+      },
+      {
+        "init_time": 26,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 27,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5
+          ]
+        }
+      },
+      {
+        "init_time": 28,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0
+          ]
+        }
+      },
+      {
+        "init_time": 29,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 30,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            150,
+            0,
+            -150
           ]
         }
       }

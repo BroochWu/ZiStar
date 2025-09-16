@@ -52,6 +52,9 @@ public class TriCardEffect
                 BattleManager.Instance.currentEarthHp *= (int)(1 + _params[0] / 10000f);
                 UIManager.Instance.battleLayer.RefreshEarthHp();
                 break;
+            case cfg.Enums.Card.EffectsType.WEAPONUNLOCK:
+                Player.instance.AddWeaponInBattle(_params[0]);
+                break;
             default:
                 Debug.LogError("你这传了啥进来啊");
                 return;

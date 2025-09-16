@@ -18,6 +18,7 @@ public sealed partial class Card : Luban.BeanBase
     public Card(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
+        { if(!_buf["card_type"].IsNumber) { throw new SerializationException(); }  CardType = (Enums.Card.Type)_buf["card_type"].AsInt; }
         { var __json0 = _buf["unlock_conds_bfbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsBfbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsBfbattle.Add(__v0); }   }
         { var __json0 = _buf["unlock_conds_inbattle"]; if(!__json0.IsArray) { throw new SerializationException(); } UnlockCondsInbattle = new System.Collections.Generic.List<Beans.Com_UnlockConds>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Beans.Com_UnlockConds __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(__e0);  }  UnlockCondsInbattle.Add(__v0); }   }
         { if(!_buf["text_target_name"].IsString) { throw new SerializationException(); }  TextTargetName = _buf["text_target_name"]; }
@@ -39,6 +40,10 @@ public sealed partial class Card : Luban.BeanBase
     /// id
     /// </summary>
     public readonly int Id;
+    /// <summary>
+    /// 卡牌类型
+    /// </summary>
+    public readonly Enums.Card.Type CardType;
     /// <summary>
     /// 战斗前加载的条件<br/>（多个之间取并集&amp;&amp;）
     /// </summary>
@@ -91,6 +96,7 @@ public sealed partial class Card : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
+        + "cardType:" + CardType + ","
         + "unlockCondsBfbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsBfbattle) + ","
         + "unlockCondsInbattle:" + Luban.StringUtil.CollectionToString(UnlockCondsInbattle) + ","
         + "textTargetName:" + TextTargetName + ","

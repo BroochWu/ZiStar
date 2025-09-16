@@ -14,36 +14,20 @@ namespace cfg.Enums.Card
     /// <summary>
     /// ,
     /// </summary>
-    public enum EffectsType
+    public enum Type
     {
         /// <summary>
         /// 空
         /// </summary>
         NULL = 0,
         /// <summary>
-        /// 武器id,数量
+        /// 武器解锁卡
         /// </summary>
-        WEAPONCOLUMN = 1,
+        WEAPONUNLOCK = 1,
         /// <summary>
-        /// 武器id,数量
+        /// 升级卡
         /// </summary>
-        WEAPONROW = 2,
-        /// <summary>
-        /// 武器id（-1为全部）,数值
-        /// </summary>
-        WEAPONDAMAGE = 3,
-        /// <summary>
-        /// 武器id（-1为全部）,数值
-        /// </summary>
-        WEAPONCD = 4,
-        /// <summary>
-        /// 血量百分比
-        /// </summary>
-        HEAL = 5,
-        /// <summary>
-        /// 武器id
-        /// </summary>
-        WEAPONUNLOCK = 6,
+        UPGRADE = 2,
     }
 
 } 

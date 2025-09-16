@@ -1,6 +1,85 @@
 [
   {
+    "id": 101,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          2
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          2
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          2
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 102,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          3
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          3
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          3
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
     "id": 1,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
@@ -34,6 +113,7 @@
   },
   {
     "id": 2,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
@@ -67,6 +147,7 @@
   },
   {
     "id": 3,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
@@ -100,6 +181,7 @@
   },
   {
     "id": 4,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
@@ -133,6 +215,7 @@
   },
   {
     "id": 5,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 0,
@@ -165,6 +248,7 @@
   },
   {
     "id": 1001,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 2,
@@ -219,6 +303,7 @@
   },
   {
     "id": 1002,
+    "card_type": 2,
     "unlock_conds_bfbattle": [
       {
         "cond_type": 2,

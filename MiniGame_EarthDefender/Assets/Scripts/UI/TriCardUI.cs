@@ -60,11 +60,11 @@ public class TriCardUI : MonoBehaviour
 
     IEnumerator CPlayEndTriAnims()
     {
-        
+
         //判断AVG事件
         AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.END_TRICARD);
 
-        
+
         yield return new WaitForSecondsRealtime(1f);
         BattleManager.Instance.EndTri();
     }
@@ -80,7 +80,7 @@ public class TriCardUI : MonoBehaviour
     public void ButtonRefresh()
     {
         if (!AdManager.PlayAd()) return;
-        
+
         // anim.Play(null);
         //播动画
         anim.Play("Appear", 0, anim.GetFloat("RefreshFrame"));
@@ -94,7 +94,7 @@ public class TriCardUI : MonoBehaviour
 
         // TriCard.Instance.RebackTempRemove();
 
-        TriCard.Instance.GetTriCards();
+        TriCard.Instance.GetTriCards(TriCard.Instance.triCardType);
     }
 
     public void ButtonGetAll()

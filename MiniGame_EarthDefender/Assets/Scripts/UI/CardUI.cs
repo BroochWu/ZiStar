@@ -31,9 +31,21 @@ public class CardUI : MonoBehaviour
         // gameObject.SetActive(false);
         // gameObject.SetActive(true);
         this.card = card;
-        textName.text = card.TextName;
-        textDesc.text = card.TextDesc;
+
         textTargetName.text = card.TextTargetName;
+
+        if (card.CardType == cfg.Enums.Card.Type.WEAPONUNLOCK)
+        {
+            var weapon = cfg.Tables.tb.Weapon.Get(card.CardEffects[0].IntParams[0]);
+            textName.text = string.Format(card.TextName, weapon.TextName);
+            textDesc.text = string.Format(card.TextDesc, weapon.TextName);
+
+        }
+        else
+        {
+            textName.text = card.TextName;
+            textDesc.text = card.TextDesc;
+        }
 
         quality = card.Quality;
 

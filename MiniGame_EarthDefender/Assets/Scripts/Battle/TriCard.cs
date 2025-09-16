@@ -1,19 +1,37 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 public class TriCard
 {
     private static TriCard _instance;
     public static TriCard Instance => _instance ??= new TriCard();
+    public List<cfg.card.Card> listCardsThree = new();//最后抽到的三张牌
+
     public Dictionary<cfg.card.Card, int> listCardsAvailable = new();//可被抽取的卡牌，及剩余抽取次数
     public Dictionary<cfg.card.Card, int> listTempRemove = new();//不放回重抽时临时去除的卡牌+可抽取次数
-    public List<cfg.card.Card> listCardsThree = new();//最后抽到的三张牌
     public int totalWeight;
     int totalWeightTempMinus;//暂时扣除的总权重
+
+    //武器解锁
+    public Dictionary<cfg.card.Card, int> listWeaponUnlockCardsAvailable = new();
+    public Dictionary<cfg.card.Card, int> listWeaponUnlockTempRemove = new();
+    public int totalWeaponUnlockWeight;
+    int totalWeaponUnlockWeightTempMinus;
+
+    //武器升级
+    public Dictionary<cfg.card.Card, int> listUpgradeCardsAvailable = new();
+    public Dictionary<cfg.card.Card, int> listUpgradeTempRemove = new();
+    public int totalUpgradeWeight;
+    int totalUpgradeWeightTempMinus;
+
+
     public bool canChooseCard;
 
     const int MAX_DRAW_COUNT = 10; //每张卡牌有10次重抽次数
     int nowReDrawCount = 0;//当前重抽次数，重抽每一张的时候重置
+
+    public cfg.Enums.Card.Type triCardType { get; private set; }//抽卡类型
 
 
     /// <summary>
@@ -23,7 +41,14 @@ public class TriCard
     {
         //获取可抽取的卡牌列表
         listCardsAvailable.Clear();
+        listWeaponUnlockCardsAvailable.Clear();
+        listUpgradeCardsAvailable.Clear();
+
         totalWeight = 0;
+        totalWeaponUnlockWeight = 0;
+        totalUpgradeWeight = 0;
+
+
         foreach (var card in cfg.Tables.tb.Card.DataList)
         {
             //if条件
@@ -36,27 +61,65 @@ public class TriCard
             listCardsAvailable.Add(card, card.DrawCount);
             totalWeight += card.Weight;
 
-            Debug.Log($"{card.TextName}已加载，可使用次数：{card.DrawCount},总权重:{totalWeight}");
+            if (card.CardType == cfg.Enums.Card.Type.WEAPONUNLOCK)
+            {
+                listWeaponUnlockCardsAvailable.Add(card, card.DrawCount);
+                totalWeaponUnlockWeight += card.Weight;
+            }
+            if (card.CardType == cfg.Enums.Card.Type.UPGRADE)
+            {
+                listUpgradeCardsAvailable.Add(card, card.DrawCount);
+                totalUpgradeWeight += card.Weight;
+            }
+
 
         }
 
     }
 
-    public void GetTriCards()
+
+    public void GetTriCards(cfg.Enums.Card.Type _type)
     {
         //3选1
         //从可抽取的卡牌列表中，根据权重随机3个
 
+        triCardType = _type;
 
         //重置3张卡牌、临时去除的重抽列表
         listCardsThree.Clear();
+
         listTempRemove.Clear();
+        listUpgradeTempRemove.Clear();
+        listWeaponUnlockTempRemove.Clear();
+
+
+
+        //如果是武器解锁类的抽卡，先抽武器卡
+        if (_type == cfg.Enums.Card.Type.WEAPONUNLOCK)
+        {
+
+            var unlockWeaponDrawCount = Mathf.Min(listWeaponUnlockCardsAvailable.Count, 3);
+            Debug.Log("unlockWeaponDrawCount:" + unlockWeaponDrawCount);
+
+            //保证抽出3张不一样的牌以供选择
+            while (listCardsThree.Count < unlockWeaponDrawCount)
+            {
+                //抽3张，并且3张卡牌绝对不一样
+                var cardResult = DrawOneCard(cfg.Enums.Card.Type.WEAPONUNLOCK);
+
+                listCardsThree.Add(cardResult);
+
+            }
+
+
+        }
+
 
         //保证抽出3张不一样的牌以供选择
-        while (listCardsThree.Count <= 3)
+        while (listCardsThree.Count < 3)
         {
             //抽3张，并且3张卡牌绝对不一样
-            var cardResult = DrawOneCard();
+            var cardResult = DrawOneCard(cfg.Enums.Card.Type.UPGRADE);
 
             listCardsThree.Add(cardResult);
 
@@ -69,17 +132,31 @@ public class TriCard
         //可以初始化UI了
         _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
 
-        
+
         //判断AVG事件（刷新的时候也会触发）
         AvgManager.Instance.CheckAndTriggerAvgs(cfg.Enums.Com.TriggerType.ON_TRICARD);
 
     }
 
-    cfg.card.Card DrawOneCard()
+
+
+    cfg.card.Card DrawOneCard(cfg.Enums.Card.Type _type)
     {
+        int _totalWeight = 0;
+        switch (_type)
+        {
+            case cfg.Enums.Card.Type.UPGRADE:
+                _totalWeight = totalUpgradeWeight;
+                break;
+            case cfg.Enums.Card.Type.WEAPONUNLOCK:
+                _totalWeight = totalWeaponUnlockWeight;
+                break;
+
+        }
+
         //决定一个权重值
-        int finalNum = Random.Range(0, totalWeight);
-        Debug.Log($"权重值：{finalNum}/{totalWeight}");
+        int finalNum = Random.Range(0, _totalWeight);
+        Debug.Log($"权重值：{finalNum}/{_totalWeight}");
 
         //这俩是如果重抽的时候要用到的
         //重随时去除的卡和其权重
@@ -87,12 +164,25 @@ public class TriCard
 
         //准备好，接下来可能会触发重抽
         //最多重新抽10次
+
+        Dictionary<cfg.card.Card, int> _pool = listCardsAvailable;
+
+        switch (_type)
+        {
+            case cfg.Enums.Card.Type.UPGRADE:
+                _pool = listUpgradeCardsAvailable;
+                break;
+            case cfg.Enums.Card.Type.WEAPONUNLOCK:
+                _pool = listWeaponUnlockCardsAvailable;
+                break;
+
+        }
+
+
         nowReDrawCount = 0;
-
-
         while (nowReDrawCount <= MAX_DRAW_COUNT)
         {
-            foreach (var cardAndRemainCount in listCardsAvailable)
+            foreach (var cardAndRemainCount in _pool)
             {
                 //当前权重减去卡牌权重
                 finalNum -= cardAndRemainCount.Key.Weight;
@@ -149,15 +239,45 @@ public class TriCard
         listCardsAvailable.Remove(_tempCard);
         listTempRemove.Add(_tempCard, _tempDrawCount);
 
+        if (_tempCard.CardType == cfg.Enums.Card.Type.WEAPONUNLOCK)
+        {
+            totalWeaponUnlockWeight -= _tempCard.Weight;
+            totalWeaponUnlockWeightTempMinus += _tempCard.Weight;
+
+            listWeaponUnlockCardsAvailable.Remove(_tempCard);
+            listWeaponUnlockTempRemove.Add(_tempCard, _tempDrawCount);
+
+        }
+        else if (_tempCard.CardType == cfg.Enums.Card.Type.UPGRADE)
+        {
+            totalUpgradeWeight -= _tempCard.Weight;
+            totalUpgradeWeightTempMinus += _tempCard.Weight;
+
+            listUpgradeCardsAvailable.Remove(_tempCard);
+            listUpgradeTempRemove.Add(_tempCard, _tempDrawCount);
+
+        }
+
     }
 
     public void RebackTempRemove()
     {
         totalWeight += totalWeightTempMinus;
         listCardsAvailable.AddRange(listTempRemove);
-
         totalWeightTempMinus = 0;
         listTempRemove.Clear();
+
+
+        totalWeaponUnlockWeight += totalWeaponUnlockWeightTempMinus;
+        listWeaponUnlockCardsAvailable.AddRange(listWeaponUnlockTempRemove);
+        totalWeaponUnlockWeightTempMinus = 0;
+        listWeaponUnlockTempRemove.Clear();
+
+
+        totalUpgradeWeight += totalUpgradeWeightTempMinus;
+        listUpgradeCardsAvailable.AddRange(listUpgradeTempRemove);
+        totalUpgradeWeightTempMinus = 0;
+        listUpgradeTempRemove.Clear();
     }
 
 
@@ -209,9 +329,9 @@ public class TriCard
         }
 
         listCardsAvailable.TryGetValue(card, out int newDrawCount);
+        // listWeaponUnlockCardsAvailable.TryGetValue(card, out int newDrawCount2);
 
         newDrawCount -= 1;
-
         if (newDrawCount <= 0)
         {
             RemoveCard(card);
@@ -220,7 +340,8 @@ public class TriCard
         {
             listCardsAvailable[card] = newDrawCount;
         }
-        Debug.Log($"已扣除，{card.TextName} 剩余可抽取次数 {newDrawCount} ");
+
+
     }
 
 
@@ -231,6 +352,17 @@ public class TriCard
     {
         listCardsAvailable.Remove(card);
         totalWeight -= card.Weight;
+
+        if (card.CardType == cfg.Enums.Card.Type.WEAPONUNLOCK)
+        {
+            listWeaponUnlockCardsAvailable.Remove(card);
+            totalWeaponUnlockWeight -= card.Weight;
+        }
+        else if (card.CardType == cfg.Enums.Card.Type.UPGRADE)
+        {
+            listUpgradeCardsAvailable.Remove(card);
+            totalUpgradeWeight -= card.Weight;
+        }
     }
 
     /// <summary>
@@ -262,6 +394,15 @@ public class TriCard
                     break;
                 case cfg.Enums.Com.CondType.WEAPONLEVEL:
                     if (DataManager.Instance.GetWeaponLevel(cond.IntParams[0]) >= cond.IntParams[1])
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case cfg.Enums.Com.CondType.WEAPONPREEQUIP:
+                    if (DataManager.Instance.GetPreequippedWeaponList().Contains(cond.IntParams[0]))
                     {
                         break;
                     }

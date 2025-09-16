@@ -25,13 +25,9 @@
     "id": 2,
     "text_name": "磁轨炮",
     "unlock_cond": {
-      "cond_type": 3,
-      "string_params": [
-        ">="
-      ],
-      "int_params": [
-        2
-      ]
+      "cond_type": 0,
+      "string_params": [],
+      "int_params": []
     },
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",
@@ -51,13 +47,9 @@
     "id": 3,
     "text_name": "自爆虫",
     "unlock_cond": {
-      "cond_type": 3,
-      "string_params": [
-        ">="
-      ],
-      "int_params": [
-        5
-      ]
+      "cond_type": 0,
+      "string_params": [],
+      "int_params": []
     },
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",

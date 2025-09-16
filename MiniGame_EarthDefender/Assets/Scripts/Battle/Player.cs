@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public GameObject guideLine;
     public GameObject earthSprite;
 
-    public Dictionary<Weapon, int> battleEquipedWeapon = new();//局中使用的装备列表及其本局伤害量
+    public Dictionary<Weapon, int> battleEquipedWeapon { get; private set; } = new();//局中使用的装备列表及其本局伤害量
     public bool canMove;
 
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 添加武器
     /// </summary>
-    void AddWeaponInBattle(int weaponId)
+    public void AddWeaponInBattle(int weaponId)
     {
         // 创建武器对象
         GameObject weaponObj = new GameObject($"Weapon_{weaponId}");

@@ -48,6 +48,10 @@ namespace cfg.Enums.Com
         /// 1是主动放弃，2是被动空血
         /// </summary>
         BATTLE_LOSE_REASON = 7,
+        /// <summary>
+        /// 武器预装备（战斗前）
+        /// </summary>
+        WEAPONPREEQUIP = 8,
     }
 
 } 

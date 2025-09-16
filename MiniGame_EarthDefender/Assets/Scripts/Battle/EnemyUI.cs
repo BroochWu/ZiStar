@@ -9,7 +9,7 @@ public class EnemyUI : MonoBehaviour
     public GameObject hpLight;
     public SpriteRenderer sprite;
     public Material _spriteMaterial;
-    protected int _initOrder = 20;
+    public int _initOrder = 20;
 
 
     void Awake()
