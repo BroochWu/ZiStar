@@ -22,6 +22,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected cfg.enemy.EnemyLevel _levelData => levelData ??= _dynamicConfig.LevelId_Ref;
     protected int _enemyLevel;
     protected cfg.Enums.Enemy.Type _enemyType;
+    protected string _bulletType;
 
     // 状态变量
     protected bool _isReleased;
@@ -134,7 +135,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         Damage = (int)(baseDamage * (1 + additionMulti));
         InitHp = (int)(baseHp * (1 + additionMulti));
-        
+
         _currentHp = InitHp;
         enemyUI.ResetAttributes();
     }
@@ -149,6 +150,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyId = _dynamicConfig.Id;
         _enemyType = _dynamicConfig.EnemyType;
         enemyExp = _dynamicConfig.exp;
+        _bulletType = _dynamicConfig.PrefabBullet;
 
         // 预计算速度值
         _moveSpeed = _dynamicConfig.MultiMoveSpeed * 0.0001f;

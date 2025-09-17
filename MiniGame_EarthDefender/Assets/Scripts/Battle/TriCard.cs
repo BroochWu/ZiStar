@@ -32,6 +32,7 @@ public class TriCard
     int nowReDrawCount = 0;//当前重抽次数，重抽每一张的时候重置
 
     public cfg.Enums.Card.Type triCardType { get; private set; }//抽卡类型
+    private cfg.card.Card _defaultCard = cfg.Tables.tb.Card.Get(1);//默认卡
 
 
     /// <summary>
@@ -214,11 +215,11 @@ public class TriCard
             if (finalNum > 0)
             {
                 Debug.LogWarning("算法有误，finalNum大于0，返回卡牌1");
-                return cfg.Tables.tb.Card.Get(1);
+                return _defaultCard;
             }
         }
 
-        return cfg.Tables.tb.Card.Get(1);
+        return _defaultCard;
     }
 
     void AddToTempRemove(cfg.card.Card _tempCard, int _tempDrawCount)

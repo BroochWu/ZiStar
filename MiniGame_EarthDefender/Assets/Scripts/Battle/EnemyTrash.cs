@@ -2,13 +2,11 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
-using System.Linq;
 
 public class EnemyTrash : EnemyBase
 {
     private enum EnemyState { MOVE, ATTACK }
     private EnemyState _state;
-    private string _bulletType;
     private static WaitForSeconds _attackSep = new WaitForSeconds(0.5f);
 
     public override void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
@@ -24,7 +22,6 @@ public class EnemyTrash : EnemyBase
         if (enemyId != enemy.Id)
         {
             SetBasicEssentials(enemy);
-            _bulletType = _dynamicConfig.PrefabBullet;
         }
 
         ResetAttributes();
