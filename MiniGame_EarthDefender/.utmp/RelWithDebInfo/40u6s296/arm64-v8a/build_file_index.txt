@@ -1,3 +1,0 @@
-S:\My_Project\MiniGame_EarthDefender\MiniGame_EarthDefender\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
-S:\My_Project\MiniGame_EarthDefender\MiniGame_EarthDefender\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
-S:\My_Project\MiniGame_EarthDefender\MiniGame_EarthDefender\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
