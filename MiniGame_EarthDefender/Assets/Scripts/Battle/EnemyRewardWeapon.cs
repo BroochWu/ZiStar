@@ -121,18 +121,6 @@ public class EnemyRewardWeapon : EnemyBase
 
         _state = EnemyState.WANDER;
 
-        if (_dynamicConfig == null)
-        {
-            _dynamicConfig = cfg.Tables.tb.Enemy.Get(enemyId);
-        }
-
-        // 计算属性
-        _levelData = cfg.Tables.tb.EnemyLevel.Get(_dynamicConfig.LevelId, _enemyLevel);
-
-        Damage = _levelData.Damage;
-        InitHp = _levelData.Hp;
-        _currentHp = InitHp;
-
         // 设置初始游荡目标
         SetNewWanderTarget();
     }

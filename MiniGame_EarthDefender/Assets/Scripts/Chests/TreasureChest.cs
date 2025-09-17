@@ -64,7 +64,7 @@ public class TreasureChest : MonoBehaviour
     public void UseChest()
     {
         var _useNum = Mathf.Clamp(DataManager.Instance.GetResourceCount(itemId), 0, 20);
-        Debug.Log("useNum：" + _useNum);
+        // Debug.Log("useNum：" + _useNum);
         if (_useNum == 0)
         {
             UIManager.Instance.CommonToast("？这不是啥也没有吗");

@@ -13,10 +13,10 @@
     "piece": 2001,
     "bullet_speed": 6,
     "max_lifetime": 3,
-    "rate_of_fire": 2,
-    "row_count": 2,
+    "rate_of_fire": 1,
+    "row_count": 1,
     "row_space": 0.4,
-    "column_count": 2,
+    "column_count": 1,
     "column_space": 0.05,
     "bullet_scale": 2000,
     "level_id": 1001
@@ -25,9 +25,13 @@
     "id": 2,
     "text_name": "磁轨炮",
     "unlock_cond": {
-      "cond_type": 0,
-      "string_params": [],
-      "int_params": []
+      "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
+      "int_params": [
+        2
+      ]
     },
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",
@@ -47,9 +51,13 @@
     "id": 3,
     "text_name": "自爆虫",
     "unlock_cond": {
-      "cond_type": 0,
-      "string_params": [],
-      "int_params": []
+      "cond_type": 3,
+      "string_params": [
+        ">="
+      ],
+      "int_params": [
+        3
+      ]
     },
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",
@@ -74,7 +82,7 @@
         ">="
       ],
       "int_params": [
-        10
+        5
       ]
     },
     "init_quality": 3,
@@ -100,7 +108,7 @@
         ">="
       ],
       "int_params": [
-        15
+        10
       ]
     },
     "init_quality": 3,
@@ -126,7 +134,7 @@
         ">="
       ],
       "int_params": [
-        20
+        15
       ]
     },
     "init_quality": 3,
@@ -152,7 +160,7 @@
         ">="
       ],
       "int_params": [
-        25
+        20
       ]
     },
     "init_quality": 3,
@@ -178,7 +186,7 @@
         ">="
       ],
       "int_params": [
-        30
+        25
       ]
     },
     "init_quality": 3,
@@ -204,7 +212,7 @@
         ">="
       ],
       "int_params": [
-        35
+        30
       ]
     },
     "init_quality": 3,
@@ -230,7 +238,7 @@
         ">="
       ],
       "int_params": [
-        40
+        35
       ]
     },
     "init_quality": 4,
@@ -256,7 +264,7 @@
         ">="
       ],
       "int_params": [
-        45
+        40
       ]
     },
     "init_quality": 4,
@@ -282,7 +290,7 @@
         ">="
       ],
       "int_params": [
-        50
+        45
       ]
     },
     "init_quality": 4,

@@ -1,126 +1,126 @@
 [
   {
     "level": 0,
-    "next_exp": 5
+    "next_exp": 3
   },
   {
     "level": 1,
-    "next_exp": 6
+    "next_exp": 4
   },
   {
     "level": 2,
-    "next_exp": 7
+    "next_exp": 5
   },
   {
     "level": 3,
-    "next_exp": 10
+    "next_exp": 8
   },
   {
     "level": 4,
-    "next_exp": 13
+    "next_exp": 11
   },
   {
     "level": 5,
-    "next_exp": 16
+    "next_exp": 14
   },
   {
     "level": 6,
-    "next_exp": 19
+    "next_exp": 17
   },
   {
     "level": 7,
-    "next_exp": 23
+    "next_exp": 21
   },
   {
     "level": 8,
-    "next_exp": 27
+    "next_exp": 25
   },
   {
     "level": 9,
-    "next_exp": 32
+    "next_exp": 30
   },
   {
     "level": 10,
-    "next_exp": 36
+    "next_exp": 34
   },
   {
     "level": 11,
-    "next_exp": 41
+    "next_exp": 39
   },
   {
     "level": 12,
-    "next_exp": 46
+    "next_exp": 44
   },
   {
     "level": 13,
-    "next_exp": 51
+    "next_exp": 49
   },
   {
     "level": 14,
-    "next_exp": 57
+    "next_exp": 55
   },
   {
     "level": 15,
-    "next_exp": 63
+    "next_exp": 61
   },
   {
     "level": 16,
-    "next_exp": 69
+    "next_exp": 67
   },
   {
     "level": 17,
-    "next_exp": 75
+    "next_exp": 73
   },
   {
     "level": 18,
-    "next_exp": 81
+    "next_exp": 79
   },
   {
     "level": 19,
-    "next_exp": 87
+    "next_exp": 85
   },
   {
     "level": 20,
-    "next_exp": 94
+    "next_exp": 92
   },
   {
     "level": 21,
-    "next_exp": 101
+    "next_exp": 99
   },
   {
     "level": 22,
-    "next_exp": 108
+    "next_exp": 106
   },
   {
     "level": 23,
-    "next_exp": 115
+    "next_exp": 113
   },
   {
     "level": 24,
-    "next_exp": 122
+    "next_exp": 120
   },
   {
     "level": 25,
-    "next_exp": 130
+    "next_exp": 128
   },
   {
     "level": 26,
-    "next_exp": 137
+    "next_exp": 135
   },
   {
     "level": 27,
-    "next_exp": 145
+    "next_exp": 143
   },
   {
     "level": 28,
-    "next_exp": 153
+    "next_exp": 151
   },
   {
     "level": 29,
-    "next_exp": 161
+    "next_exp": 159
   },
   {
     "level": 30,
-    "next_exp": 169
+    "next_exp": 167
   }
 ]

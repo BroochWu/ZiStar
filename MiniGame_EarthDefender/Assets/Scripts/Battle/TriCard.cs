@@ -54,7 +54,7 @@ public class TriCard
             //if条件
             if (!CheckCardBeforeBattle(card))
             {
-                Debug.Log(card.Id + "不满足条件，已从本局剔除");
+                // Debug.Log(card.Id + "不满足条件，已从本局剔除");
                 continue;
             }
 
@@ -197,7 +197,7 @@ public class TriCard
                         //最多重抽10次，否则固定拿id==1的填充
 
                         //如果重抽达到上限，指连续抽到无法被抽取的卡牌，则取id==1（这个可以重复）
-                        Debug.LogWarning($"抽到了{cardAndRemainCount.Key.TextName},但是条件不满足重抽，第{listCardsThree.Count + 1}张卡牌的剩余重抽次数：{MAX_DRAW_COUNT - nowReDrawCount}");
+                        // Debug.LogWarning($"抽到了{cardAndRemainCount.Key.TextName},但是条件不满足重抽，第{listCardsThree.Count + 1}张卡牌的剩余重抽次数：{MAX_DRAW_COUNT - nowReDrawCount}");
                         //重抽不放回
                         AddToTempRemove(cardAndRemainCount.Key, cardAndRemainCount.Value);
                         // totalWeight -= cardAndRemainCount.Key.Weight;
@@ -314,7 +314,7 @@ public class TriCard
     {
         if (card.DrawCount <= -1)
         {
-            Debug.Log($"{card.TextName} 剩余可抽取次数为-1，跳过扣除阶段 ");
+            // Debug.Log($"{card.TextName} 剩余可抽取次数为-1，跳过扣除阶段 ");
             return;
         }
 

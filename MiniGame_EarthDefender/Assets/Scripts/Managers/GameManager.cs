@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.Log("GM实例已存在");
+            Debug.LogError("GM实例已存在");
             return;
         }
         Instance = this;

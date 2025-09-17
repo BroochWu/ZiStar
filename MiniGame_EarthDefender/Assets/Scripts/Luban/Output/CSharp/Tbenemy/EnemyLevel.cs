@@ -18,12 +18,12 @@ namespace cfg.Tbenemy
 /// </summary>
 public partial class EnemyLevel
 {
+    private readonly System.Collections.Generic.Dictionary<int, enemy.EnemyLevel> _dataMap;
     private readonly System.Collections.Generic.List<enemy.EnemyLevel> _dataList;
-
-    private System.Collections.Generic.Dictionary<(int, int), enemy.EnemyLevel> _dataMapUnion;
-
+    
     public EnemyLevel(JSONNode _buf)
     {
+        _dataMap = new System.Collections.Generic.Dictionary<int, enemy.EnemyLevel>();
         _dataList = new System.Collections.Generic.List<enemy.EnemyLevel>();
         
         foreach(JSONNode _ele in _buf.Children)
@@ -31,18 +31,17 @@ public partial class EnemyLevel
             enemy.EnemyLevel _v;
             { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.enemy.EnemyLevel.DeserializeEnemyLevel(_ele);  }
             _dataList.Add(_v);
-        }
-        _dataMapUnion = new System.Collections.Generic.Dictionary<(int, int), enemy.EnemyLevel>();
-        foreach(var _v in _dataList)
-        {
-            _dataMapUnion.Add((_v.Id, _v.Level), _v);
+            _dataMap.Add(_v.Id, _v);
         }
     }
 
+    public System.Collections.Generic.Dictionary<int, enemy.EnemyLevel> DataMap => _dataMap;
     public System.Collections.Generic.List<enemy.EnemyLevel> DataList => _dataList;
 
-    public enemy.EnemyLevel Get(int id, int level) => _dataMapUnion.TryGetValue((id, level), out enemy.EnemyLevel __v) ? __v : null;
-    
+    public enemy.EnemyLevel GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public enemy.EnemyLevel Get(int key) => _dataMap[key];
+    public enemy.EnemyLevel this[int key] => _dataMap[key];
+
     public void ResolveRef(Tables tables)
     {
         foreach(var _v in _dataList)
@@ -50,6 +49,7 @@ public partial class EnemyLevel
             _v.ResolveRef(tables);
         }
     }
+
 }
 
 }

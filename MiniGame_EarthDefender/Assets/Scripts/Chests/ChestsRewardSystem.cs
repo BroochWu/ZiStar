@@ -36,8 +36,8 @@ public static class ChestsRewardSystem
     {
         get
         {
-            Debug.Log(PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT));
-            Debug.Log(cfg.Tables.tb.ChestLoop.DataList[PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)]);
+            // Debug.Log(PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT));
+            // Debug.Log(cfg.Tables.tb.ChestLoop.DataList[PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)]);
             return cfg.Tables.tb.ChestLoop.DataList[PlayerPrefs.GetInt(PLAYERPREFS_KEY_CHEST_SCORE_NEXT_SORT)];
         }
     }

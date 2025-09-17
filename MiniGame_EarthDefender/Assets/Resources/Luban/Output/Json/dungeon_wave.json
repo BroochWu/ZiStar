@@ -12,7 +12,7 @@
         }
       },
       {
-        "init_time": 4,
+        "init_time": 5,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
@@ -23,7 +23,234 @@
         }
       },
       {
-        "init_time": 6,
+        "init_time": 8,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10
+          ]
+        }
+      },
+      {
+        "init_time": 11,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10
+          ]
+        }
+      },
+      {
+        "init_time": 14,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10
+          ]
+        }
+      },
+      {
+        "init_time": 17,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 20,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            110,
+            250
+          ]
+        }
+      },
+      {
+        "init_time": 23,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10
+          ]
+        }
+      },
+      {
+        "init_time": 24.2,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5,
+            15,
+            -5
+          ]
+        }
+      },
+      {
+        "init_time": 25.4,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5,
+            5,
+            -15
+          ]
+        }
+      },
+      {
+        "init_time": 26.6,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            15,
+            10,
+            0,
+            -10,
+            -15
+          ]
+        }
+      },
+      {
+        "init_time": 29,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5,
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 32,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -8,
+            0,
+            8
+          ]
+        }
+      },
+      {
+        "init_time": 35,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            160,
+            0,
+            -160
+          ]
+        }
+      },
+      {
+        "init_time": 38,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10
+          ]
+        }
+      },
+      {
+        "init_time": 40,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            5,
+            15,
+            -5
+          ]
+        }
+      },
+      {
+        "init_time": 42,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5,
+            5,
+            -15
+          ]
+        }
+      },
+      {
+        "init_time": 44,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            15,
+            10,
+            0,
+            -10,
+            -15
+          ]
+        }
+      },
+      {
+        "init_time": 46,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -5,
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "init_time": 48,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            -8,
+            0,
+            8
+          ]
+        }
+      },
+      {
+        "init_time": 50,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            160,
+            0,
+            -160
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "enemy_create": [
+      {
+        "init_time": 2,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0
+          ]
+        }
+      },
+      {
+        "init_time": 5,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
@@ -41,22 +268,11 @@
         }
       },
       {
-        "init_time": 10,
+        "init_time": 11,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
             0
-          ]
-        }
-      },
-      {
-        "init_time": 12,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0,
-            20,
-            -20
           ]
         }
       },
@@ -65,166 +281,12 @@
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
-            0,
-            110,
-            250
-          ]
-        }
-      },
-      {
-        "init_time": 16,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
             0
           ]
         }
       },
       {
-        "init_time": 16.2,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 16.4,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5
-          ]
-        }
-      },
-      {
-        "init_time": 16.6,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            15,
-            10,
-            0,
-            -10,
-            -15
-          ]
-        }
-      },
-      {
-        "init_time": 18,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5,
-            0,
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 20,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -8,
-            0,
-            8
-          ]
-        }
-      },
-      {
-        "init_time": 22,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            150,
-            0,
-            -150
-          ]
-        }
-      },
-      {
-        "init_time": 24,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 25,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 26,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 27,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5
-          ]
-        }
-      },
-      {
-        "init_time": 28,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 29,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 30,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            150,
-            0,
-            -150
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "id": 1002,
-    "enemy_create": [
-      {
-        "init_time": 3,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 5,
+        "init_time": 17,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
@@ -235,113 +297,13 @@
         }
       },
       {
-        "init_time": 7,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 9,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 11,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 13,
+        "init_time": 20,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
             0,
-            20,
-            -20
-          ]
-        }
-      },
-      {
-        "init_time": 15,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0,
-            110,
-            250
-          ]
-        }
-      },
-      {
-        "init_time": 17,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
-          ]
-        }
-      },
-      {
-        "init_time": 17.2,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 17.4,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5
-          ]
-        }
-      },
-      {
-        "init_time": 17.6,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            15,
             10,
-            0,
-            -10,
-            -15
-          ]
-        }
-      },
-      {
-        "init_time": 19,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5,
-            0,
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 21,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -8,
-            0,
-            8
+            -10
           ]
         }
       },
@@ -350,18 +312,9 @@
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
-            -5,
             0,
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 25,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
+            10,
+            -10
           ]
         }
       },
@@ -370,25 +323,9 @@
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
-            5
-          ]
-        }
-      },
-      {
-        "init_time": 27,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            -5
-          ]
-        }
-      },
-      {
-        "init_time": 28,
-        "enemy_init": {
-          "enemy_id": 1001,
-          "angles": [
-            0
+            0,
+            10,
+            -10
           ]
         }
       },
@@ -397,18 +334,139 @@
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
-            5
+            0,
+            10,
+            -10
           ]
         }
       },
       {
-        "init_time": 30,
+        "init_time": 32,
         "enemy_init": {
           "enemy_id": 1001,
           "angles": [
-            150,
             0,
-            -150
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 35,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 38,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 41,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 44,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 47,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 50,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 53,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 56,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
+          ]
+        }
+      },
+      {
+        "init_time": 59,
+        "enemy_init": {
+          "enemy_id": 1001,
+          "angles": [
+            0,
+            10,
+            -10,
+            20,
+            -20
           ]
         }
       }

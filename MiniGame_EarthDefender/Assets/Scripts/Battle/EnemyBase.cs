@@ -15,9 +15,11 @@ public abstract class EnemyBase : MonoBehaviour
     protected static int _enemyStopDisSqr;
     protected static float _hitDuration = 0.1f;
 
+
     // 保护字段，子类可访问
     protected cfg.enemy.Enemy _dynamicConfig;
-    protected cfg.enemy.EnemyLevel _levelData;
+    private cfg.enemy.EnemyLevel levelData;
+    protected cfg.enemy.EnemyLevel _levelData => levelData ??= _dynamicConfig.LevelId_Ref;
     protected int _enemyLevel;
     protected cfg.Enums.Enemy.Type _enemyType;
 
@@ -35,6 +37,9 @@ public abstract class EnemyBase : MonoBehaviour
     // 抽象方法，子类必须实现
     public abstract void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent);
     protected abstract void UpdateBehavior();
+
+
+
 
     // 虚方法，子类可重写
     protected virtual void Awake()
@@ -113,6 +118,24 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void ResetAttributes()
     {
+
+        var baseDamage = (int)(_levelData.Damage + (_enemyLevel - 1) * _levelData.DamageMulti / 10000f);
+        var baseHp = (int)(_levelData.Hp + (_enemyLevel - 1) * _levelData.HpMulti / 10000f);
+
+        // Damage = baseDamage;
+        // InitHp = baseHp;
+
+        // 计算属性
+        //杂兵每过X秒成长N%
+
+        //if判断敌人类型
+
+        float additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 1f;
+
+        Damage = (int)(baseDamage * (1 + additionMulti));
+        InitHp = (int)(baseHp * (1 + additionMulti));
+        
+        _currentHp = InitHp;
         enemyUI.ResetAttributes();
     }
 

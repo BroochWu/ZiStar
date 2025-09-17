@@ -193,7 +193,7 @@ public class DataManager : MonoBehaviour
         preequippedWeapons[slotIndex] = weaponId;
         SavePreequippedWeapons();
 
-        Debug.Log($"槽位 {slotIndex} 装备武器: {weaponId}");
+        // Debug.Log($"槽位 {slotIndex} 装备武器: {weaponId}");
         return true;
     }
     /// <summary>

@@ -1,6 +1,6 @@
 [
   {
-    "id": 101,
+    "id": 102,
     "card_type": 1,
     "unlock_conds_bfbattle": [
       {
@@ -39,7 +39,7 @@
     "draw_count": 1
   },
   {
-    "id": 102,
+    "id": 103,
     "card_type": 1,
     "unlock_conds_bfbattle": [
       {
@@ -72,6 +72,357 @@
         "effect_type": 6,
         "int_params": [
           3
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 104,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          4
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          4
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          4
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 105,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          5
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          5
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          5
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 106,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          6
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          6
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          6
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 107,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          7
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          7
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          7
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 108,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          8
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          8
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          8
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 109,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          9
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          9
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          9
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 110,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          10
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          10
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          10
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 111,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          11
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          11
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          11
+        ]
+      }
+    ],
+    "draw_count": 1
+  },
+  {
+    "id": 112,
+    "card_type": 1,
+    "unlock_conds_bfbattle": [
+      {
+        "cond_type": 8,
+        "string_params": [],
+        "int_params": [
+          12
+        ]
+      }
+    ],
+    "unlock_conds_inbattle": [
+      {
+        "cond_type": 1,
+        "string_params": [
+          "!="
+        ],
+        "int_params": [
+          12
+        ]
+      }
+    ],
+    "text_target_name": "武器解锁",
+    "text_name": "解锁-{0}",
+    "text_desc": "解锁武器<color=#febf74>{0}</color>！",
+    "quality": 4,
+    "image_tricardicon_path": "Cards/icon_tricardbg_1",
+    "weight": 100,
+    "card_effects": [
+      {
+        "effect_type": 6,
+        "int_params": [
+          12
         ]
       }
     ],
@@ -231,8 +582,8 @@
       }
     ],
     "text_target_name": "全局",
-    "text_name": "回复城防",
-    "text_desc": "地球护盾值<color=#febf74>+30%</color>\n（不可突破上限）",
+    "text_name": "修复",
+    "text_desc": "吱星护盾值<color=#febf74>+30%</color>\n（不可突破上限）",
     "quality": 3,
     "image_tricardicon_path": "Cards/icon_tricardbg_1",
     "weight": 10,

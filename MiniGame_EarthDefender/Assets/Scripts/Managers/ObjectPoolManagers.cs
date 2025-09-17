@@ -61,6 +61,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// </summary>
     public GameObject GetBullet(string bulletType)
     {
+        Debug.Log("bt:" + bulletType);
         if (!bulletPools.ContainsKey(bulletType))
         {
             CreateBulletPool(bulletType);
@@ -517,15 +518,26 @@ public class ObjectPoolManager : MonoBehaviour
         }
         vfxPools.Clear();
 
-        foreach (var enemy in BattleManager.Instance.activeEnemys)
+        // 清理敌人池
+        foreach (var pool in enemyPools.Values)
         {
-            ReleaseEnemy(enemy);
+            pool.Clear();
         }
-        if (BattleManager.Instance.EnemyPath != null)
-            foreach (EnemyBase enemy in BattleManager.Instance.EnemyPath)
-            {
-                ReleaseEnemy(enemy);
-            }
+        enemyPools.Clear();
+
+        // //敌人池不清空，下次加载可以快一些？
+        // foreach (var enemy in BattleManager.Instance.activeEnemys)
+        // {
+        //     ReleaseEnemy(enemy);
+        // }
+        // if (BattleManager.Instance.EnemyPath != null)
+        // {
+        //     foreach (Transform enemy in BattleManager.Instance.EnemyPath)
+        //     {
+        //         enemy.TryGetComponent<EnemyBase>(out EnemyBase _enemy);
+        //         if (_enemy != null) ReleaseEnemy(_enemy);
+        //     }
+        // }
     }
 
     /// <summary>

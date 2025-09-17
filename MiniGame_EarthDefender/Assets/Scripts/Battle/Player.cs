@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         {
 
             Destroy(gameObject);
-            Debug.Log("实例已存在");
+            Debug.LogError("实例已存在");
             return;
         }
         instance = this;
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
 
         foreach (var weapon in battleEquipedWeapon?.Keys)
         {
-            Debug.Log($"{weapon.name} 本局造成了 {battleEquipedWeapon[weapon]} 的总伤害");
+            // Debug.Log($"{weapon.name} 本局造成了 {battleEquipedWeapon[weapon]} 的总伤害");
             Destroy(weapon.gameObject);
         }
         battleEquipedWeapon.Clear();

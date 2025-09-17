@@ -182,13 +182,13 @@ public class BattleManager : MonoBehaviour
                 totalEnemyThisDungeon += perWave.EnemyInit.Angles.Count;
             }
         }
-        Debug.Log("本关敌人总数：" + totalEnemyThisDungeon);
+        // Debug.Log("本关敌人总数：" + totalEnemyThisDungeon);
 
 
         //创建黑洞以生成敌人波次
         foreach (var i in config.Portals)
         {
-            Debug.Log(i.WaveId + " 波次已加载");
+            // Debug.Log(i.WaveId + " 波次已加载");
             StartCoroutine(CorCreatePortal(i));
         }
 
@@ -262,7 +262,7 @@ public class BattleManager : MonoBehaviour
         ObjectPoolManager.Instance.Reset();
 
 
-        //if (BattleObjectsPath != null) Destroy(BattleObjectsPath.gameObject);
+        if (BattleObjectsPath != null) Destroy(BattleObjectsPath.gameObject);
         //ObjectPoolManager.Instance.ClearAllPools();
         Player.instance.rotationTarget.transform.rotation = quaternion.identity;
     }
@@ -281,7 +281,7 @@ public class BattleManager : MonoBehaviour
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             if (buttonInit == Vector2.zero)
             {
-                Debug.Log("Reset buttonInit");
+                // Debug.Log("Reset buttonInit");
                 buttonInit = Camera.main.WorldToViewportPoint(button.transform.position);
             }
 
@@ -598,7 +598,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartTri(cfg.Enums.Card.Type _type)
     {
-        Debug.Log("开始抽卡：" + _type);
+        // Debug.Log("开始抽卡：" + _type);
 
         Time.timeScale = 0;
 

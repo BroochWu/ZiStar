@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class EnemyTrash : EnemyBase
 {
@@ -17,6 +18,8 @@ public class EnemyTrash : EnemyBase
         // sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
         _enemyLevel = enemyLevel;
+
+
 
         if (enemyId != enemy.Id)
         {
@@ -62,7 +65,7 @@ public class EnemyTrash : EnemyBase
     {
         while (_state == EnemyState.ATTACK)
         {
-        var obj = ObjectPoolManager.Instance.GetBullet(_bulletType);
+            var obj = ObjectPoolManager.Instance.GetBullet(_bulletType);
             obj.GetOrAddComponent<Bullet>().Initialize(this);
             yield return _attackSep;
         }
@@ -74,22 +77,5 @@ public class EnemyTrash : EnemyBase
 
         _state = EnemyState.MOVE;
 
-        if (_dynamicConfig == null)
-        {
-            _dynamicConfig = cfg.Tables.tb.Enemy.Get(enemyId);
-        }
-
-        // 计算属性
-        float additionMulti = 0;
-        _levelData = cfg.Tables.tb.EnemyLevel.Get(_dynamicConfig.LevelId, _enemyLevel);
-
-        if (_enemyType == cfg.Enums.Enemy.Type.TRASH)
-        {
-            additionMulti = (int)(BattleManager.Instance.GameTime / 5) * 1f;
-        }
-
-        Damage = (int)(_levelData.Damage * (1 + additionMulti));
-        InitHp = (int)(_levelData.Hp * (1 + additionMulti));
-        _currentHp = InitHp;
     }
 }

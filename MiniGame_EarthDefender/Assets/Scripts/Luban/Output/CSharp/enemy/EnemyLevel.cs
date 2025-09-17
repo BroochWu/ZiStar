@@ -18,9 +18,10 @@ public sealed partial class EnemyLevel : Luban.BeanBase
     public EnemyLevel(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["level"].IsNumber) { throw new SerializationException(); }  Level = _buf["level"]; }
         { if(!_buf["damage"].IsNumber) { throw new SerializationException(); }  Damage = _buf["damage"]; }
+        { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
         { if(!_buf["hp"].IsNumber) { throw new SerializationException(); }  Hp = _buf["hp"]; }
+        { if(!_buf["hp_multi"].IsNumber) { throw new SerializationException(); }  HpMulti = _buf["hp_multi"]; }
     }
 
     public static EnemyLevel DeserializeEnemyLevel(JSONNode _buf)
@@ -33,17 +34,21 @@ public sealed partial class EnemyLevel : Luban.BeanBase
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 等级
-    /// </summary>
-    public readonly int Level;
-    /// <summary>
-    /// 伤害
+    /// 基础伤害
     /// </summary>
     public readonly int Damage;
     /// <summary>
-    /// 血量
+    /// 基础伤害成长率
+    /// </summary>
+    public readonly int DamageMulti;
+    /// <summary>
+    /// 基础血量
     /// </summary>
     public readonly int Hp;
+    /// <summary>
+    /// 基础血量成长率
+    /// </summary>
+    public readonly int HpMulti;
    
     public const int __ID__ = -1961363678;
     public override int GetTypeId() => __ID__;
@@ -56,9 +61,10 @@ public sealed partial class EnemyLevel : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "level:" + Level + ","
         + "damage:" + Damage + ","
+        + "damageMulti:" + DamageMulti + ","
         + "hp:" + Hp + ","
+        + "hpMulti:" + HpMulti + ","
         + "}";
     }
 }

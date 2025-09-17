@@ -25,6 +25,7 @@ public sealed partial class Enemy : Luban.BeanBase
         { if(!_buf["multi_angle"].IsNumber) { throw new SerializationException(); }  MultiAngle = _buf["multi_angle"]; }
         { if(!_buf["enemy_type"].IsNumber) { throw new SerializationException(); }  EnemyType = (Enums.Enemy.Type)_buf["enemy_type"].AsInt; }
         { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
+        LevelId_Ref = null;
     }
 
     public static Enemy DeserializeEnemy(JSONNode _buf)
@@ -64,12 +65,14 @@ public sealed partial class Enemy : Luban.BeanBase
     /// 等级组id（伤害等养成）
     /// </summary>
     public readonly int LevelId;
+    public enemy.EnemyLevel LevelId_Ref;
    
     public const int __ID__ = -1023814270;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        LevelId_Ref = tables.EnemyLevel.GetOrDefault(LevelId);
     }
 
     public override string ToString()
