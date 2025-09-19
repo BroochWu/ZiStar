@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class TreasureChest : MonoBehaviour
 {
     public int itemId;
-    public cfg.item.Item item => cfg.Tables.tb.Item.Get(itemId);
+    private cfg.item.Item _item;
+    public cfg.item.Item item => _item ??= cfg.Tables.tb.Item.Get(itemId);
     public int score;
 
     private Toggle _toggle;

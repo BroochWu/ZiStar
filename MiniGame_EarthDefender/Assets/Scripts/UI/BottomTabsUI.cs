@@ -33,7 +33,7 @@ public class BottomTabsUI : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("OnEnable");
+        // Debug.Log("OnEnable");
         // 在Start中检查红点，确保RedDotManager已经初始化完成
         CheckNow();
         CheckRedDot();
