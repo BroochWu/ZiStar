@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     public int weaponId;
     public int attack;
     public float bulletSpeed { get; private set; }
-    public int bulletScale { get; private set; }
+    // public int bulletScale { get; private set; }
     public float bulletReleaseTime { get; private set; }
     public float battleWeaponDamage { get; private set; }//武器单局造成的伤害
 
@@ -96,7 +96,7 @@ public class Weapon : MonoBehaviour
         columnCount = config.ColumnCount;
         columnSpace = new WaitForSeconds(config.ColumnSpace);
         bulletSpeed = config.BulletSpeed;
-        bulletScale = config.BulletScale;
+        // bulletScale = config.BulletScale;
         bulletType = config.BulletPrefab;
         GetAndSetWeaponAttack();
 

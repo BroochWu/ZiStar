@@ -42,23 +42,30 @@ public class CollisionManager : MonoBehaviour
         {
             if (!bullet.activeInHierarchy)
                 continue;
+                
+            // 获取子弹的碰撞体
+            var bulletCollider = bullet.GetComponent<SimpleCollider>();
+            if (bulletCollider == null) continue;
+            
+            // 获取子弹的边界框
+            Rect bulletBounds = bulletCollider.GetBounds();
+            
             // 获取可能碰撞的敌人对象
             var potentialCollisions = new List<GameObject>();
-            quadTree.Retrieve(potentialCollisions, bullet);
+            quadTree.Retrieve(potentialCollisions, bulletBounds);
 
             foreach (var obj in potentialCollisions)
             {
-                //隐藏的不计数
+                // 隐藏的不计数
                 if (!obj.activeInHierarchy)
                     continue;
 
                 if (obj.CompareTag("Enemy") && IsColliding(bullet, obj))
                 {
-
                     // 处理碰撞
                     var bulletConfig = bullet.GetComponent<Bullet>();
-                    
-                    //判断目前是不是和该实例的碰撞正在冷却中
+
+                    // 判断目前是不是和该实例的碰撞正在冷却中
                     if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval))
                     {
                         obj.GetComponent<EnemyBase>().TakeDamage(
@@ -70,10 +77,8 @@ public class CollisionManager : MonoBehaviour
                         {
                             // 回收子弹
                             ObjectPoolManager.Instance.ReleaseBullet(bullet);
-                            Debug.Log("子弹剩余穿透为0，已回收");
                         }
                     }
-
                 }
             }
         }
@@ -82,22 +87,19 @@ public class CollisionManager : MonoBehaviour
     bool IsColliding(GameObject a, GameObject b)
     {
         if (a == null || b == null) return false;
-        if (a.activeInHierarchy && b.activeInHierarchy == false) return false;
+        if (!a.activeInHierarchy || !b.activeInHierarchy) return false;
 
         SimpleCollider colA = a.GetComponent<SimpleCollider>();
         SimpleCollider colB = b.GetComponent<SimpleCollider>();
 
         if (colA == null || colB == null) return false;
 
-        // 简化的圆形碰撞检测（完全忽略Z轴）
-        Vector2 posA = new Vector2(a.transform.position.x, a.transform.position.y);
-        Vector2 posB = new Vector2(b.transform.position.x, b.transform.position.y);
+        // 获取两个碰撞体的边界框
+        Rect rectA = colA.GetBounds();
+        Rect rectB = colB.GetBounds();
 
-        float distanceSqr = (posA - posB).sqrMagnitude;
-        float radiusSum = (colA.Size + colB.Size) / 2f;
-        float minDistanceSqr = radiusSum * radiusSum;
-
-        return distanceSqr < minDistanceSqr;
+        // 检查两个矩形是否相交
+        return rectA.Overlaps(rectB);
     }
 
     public void RegisterEnemy(GameObject enemy)
@@ -119,7 +121,6 @@ public class CollisionManager : MonoBehaviour
     {
         bullets.Remove(bullet);
     }
-
 
     // 调试绘制四叉树
     void OnDrawGizmos()
@@ -145,6 +146,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 }
+
 // 添加辅助属性到QuadTree类
 public partial class QuadTree
 {

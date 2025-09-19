@@ -24,6 +24,12 @@ public class Bullet : MonoBehaviour
 
     public bool isReleased;//检测子弹是否已经被释放了
     public List<GameObject> listCollisionCd = new();
+    // private Vector3 initScale;
+
+    void Start()
+    {
+        // initScale = transform.localScale;
+    }
 
     public void Initialize(Weapon parent)
     {
@@ -32,7 +38,7 @@ public class Bullet : MonoBehaviour
 
         speed = parent.bulletSpeed;
         lifeTime = parent.bulletReleaseTime;
-        transform.localScale = Vector3.one * parent.bulletScale / 10000f;
+        // transform.localScale = initScale * (float)(parent.bulletScale / 10000f);
 
 
         isReleased = false;
@@ -104,6 +110,7 @@ public class Bullet : MonoBehaviour
         {
             bulletPenetrate = parentWeapon.config.Penetrate;
         }
+        // transform.localScale = initScale * parentWeapon.config.BulletScale / 10000f;
         //清空冷却池
         listCollisionCd.Clear();
     }

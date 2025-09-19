@@ -14,13 +14,12 @@
     "bullet_speed": 6,
     "max_lifetime": 3,
     "penetrate_interval": 99,
-    "penetrate": 5,
+    "penetrate": 1,
     "rate_of_fire": 1,
     "row_count": 1,
     "row_space": 0.4,
     "column_count": 1,
     "column_space": 0.05,
-    "bullet_scale": 2000,
     "level_id": 1001
   },
   {
@@ -37,18 +36,17 @@
     },
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",
-    "bullet_prefab": "Bullet_Player_1",
+    "bullet_prefab": "Bullet_Player_2",
     "piece": 2002,
     "bullet_speed": 0,
     "max_lifetime": 3,
-    "penetrate_interval": 0,
-    "penetrate": 0,
-    "rate_of_fire": 0.2,
+    "penetrate_interval": 0.5,
+    "penetrate": 99,
+    "rate_of_fire": 2,
     "row_count": 1,
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -76,7 +74,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -104,7 +101,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -132,7 +128,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -160,7 +155,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -188,7 +182,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -216,7 +209,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -244,7 +236,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -272,7 +263,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -300,7 +290,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   },
   {
@@ -328,7 +317,6 @@
     "row_space": 0,
     "column_count": 1,
     "column_space": 1,
-    "bullet_scale": 10000,
     "level_id": 1002
   }
 ]

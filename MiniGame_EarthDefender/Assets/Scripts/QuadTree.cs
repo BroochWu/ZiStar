@@ -79,7 +79,10 @@ public partial class QuadTree
 
         if (nodes[0] != null)
         {
-            int index = GetIndex(GetRectForObject(obj));
+            // 获取对象的边界框
+            Rect objBounds = GetRectForObject(obj);
+            int index = GetIndex(objBounds);
+            
             if (index != -1)
             {
                 nodes[index].Insert(obj);
@@ -98,7 +101,8 @@ public partial class QuadTree
             while (i < objects.Count)
             {
                 GameObject currentObj = objects[i];
-                int index = GetIndex(GetRectForObject(currentObj));
+                Rect objBounds = GetRectForObject(currentObj);
+                int index = GetIndex(objBounds);
 
                 if (index != -1 && currentObj != null && currentObj.activeSelf)
                 {
@@ -113,26 +117,35 @@ public partial class QuadTree
         }
     }
 
-    public List<GameObject> Retrieve(List<GameObject> returnObjects, GameObject obj)
+    public List<GameObject> Retrieve(List<GameObject> returnObjects, Rect queryBounds)
     {
-        // 只处理活动对象
-        if (obj == null || !obj.activeSelf) return returnObjects;
-
-        int index = GetIndex(GetRectForObject(obj));
-        if (index != -1 && nodes[0] != null)
+        // 检查查询矩形是否与当前节点相交
+        if (!bounds.Overlaps(queryBounds))
+            return returnObjects;
+        
+        // 如果当前节点有子节点，递归查询
+        if (nodes[0] != null)
         {
-            nodes[index].Retrieve(returnObjects, obj);
-        }
-
-        // 添加当前节点的对象（包括跨越象限的对象）
-        foreach (var o in objects)
-        {
-            if (o != null && o.activeSelf && !returnObjects.Contains(o))
+            foreach (var node in nodes)
             {
-                returnObjects.Add(o);
+                node.Retrieve(returnObjects, queryBounds);
             }
         }
-
+        
+        // 添加当前节点的对象
+        foreach (var obj in objects)
+        {
+            if (obj != null && obj.activeSelf && !returnObjects.Contains(obj))
+            {
+                // 检查对象是否在查询矩形内
+                var objCollider = obj.GetComponent<SimpleCollider>();
+                if (objCollider != null && queryBounds.Overlaps(objCollider.GetBounds()))
+                {
+                    returnObjects.Add(obj);
+                }
+            }
+        }
+        
         return returnObjects;
     }
 
@@ -140,10 +153,17 @@ public partial class QuadTree
     {
         if (obj == null) return new Rect();
 
-        // 更精确的边界框计算
-        float size = obj.GetComponent<SimpleCollider>().Size;
-        Vector2 pos = new Vector2(obj.transform.position.x, obj.transform.position.y);
-        return new Rect(pos.x - size / 2, pos.y - size / 2, size, size);
-    }
+        // 获取对象的 SimpleCollider 组件
+        SimpleCollider collider = obj.GetComponent<SimpleCollider>();
+        if (collider == null) return new Rect();
 
+        // 使用 Width 和 Height 计算边界框
+        Vector2 pos = new Vector2(obj.transform.position.x, obj.transform.position.y);
+        return new Rect(
+            pos.x - collider.Width / 2, 
+            pos.y - collider.Height / 2, 
+            collider.Width, 
+            collider.Height
+        );
+    }
 }

@@ -34,7 +34,6 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
         { if(!_buf["column_count"].IsNumber) { throw new SerializationException(); }  ColumnCount = _buf["column_count"]; }
         { if(!_buf["column_space"].IsNumber) { throw new SerializationException(); }  ColumnSpace = _buf["column_space"]; }
-        { if(!_buf["bullet_scale"].IsNumber) { throw new SerializationException(); }  BulletScale = _buf["bullet_scale"]; }
         { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
     }
 
@@ -109,10 +108,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// </summary>
     public readonly float ColumnSpace;
     /// <summary>
-    /// 子弹基础缩放
-    /// </summary>
-    public readonly int BulletScale;
-    /// <summary>
     /// 等级组id（伤害等养成）
     /// </summary>
     public readonly int LevelId;
@@ -145,7 +140,6 @@ public sealed partial class Weapon : Luban.BeanBase
         + "rowSpace:" + RowSpace + ","
         + "columnCount:" + ColumnCount + ","
         + "columnSpace:" + ColumnSpace + ","
-        + "bulletScale:" + BulletScale + ","
         + "levelId:" + LevelId + ","
         + "}";
     }
