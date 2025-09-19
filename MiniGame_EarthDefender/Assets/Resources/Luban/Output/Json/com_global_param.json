@@ -33,7 +33,9 @@
     "int_value": 0,
     "str_value": "",
     "int_list_value": [
-      200201202
+      200,
+      201,
+      202
     ]
   },
   {

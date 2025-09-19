@@ -92,6 +92,8 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UILayer.BATTLELAYER:
+                SetBottomTabs(false);
+                SetTopPanels(false);
                 battleLayer.Initialize();
                 break;
             case UILayer.MAINLAYER:
@@ -137,11 +139,11 @@ public class UIManager : MonoBehaviour
             case UILayer.BATTLELAYER:
                 SetBottomTabs(false);
                 SetTopPanels(false);
-                MainHallAnim.Play("In");
                 battleLayer.UnRegister();
                 break;
             case UILayer.MAINLAYER:
-                mainLayer.gameObject.SetActive(false);
+                //仅主界面内部切换的时候直接隐藏，否则播动效隐藏
+                if (GameManager.Instance.gameState == GameManager.GameState.MAINVIEW) mainLayer.gameObject.SetActive(false);
                 break;
             case UILayer.DEVELOPLAYER:
                 developLayer.gameObject.SetActive(false);
@@ -172,7 +174,10 @@ public class UIManager : MonoBehaviour
         }
         //隐藏当前层，并打开下一层
         if (this.uiLayer != UILayer.NULL)
+        {
             HideLayer(this.uiLayer);
+        }
+
         ShowLayer(uiLayer);
 
 
@@ -184,7 +189,9 @@ public class UIManager : MonoBehaviour
     /// <param name="_bool"></param>
     void SetBottomTabs(bool _bool)
     {
-        BottomTabsUI.Instance.Show(_bool);
+        if (_bool) bottomTabs.gameObject.SetActive(true);
+        //这里false由动画决定隐藏时间
+        bottomTabs.Show(_bool);
     }
     void SetTopPanels(bool _bool)
     {

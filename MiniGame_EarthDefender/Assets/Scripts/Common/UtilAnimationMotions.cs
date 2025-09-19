@@ -6,4 +6,9 @@ public class UtilAnimationMotions : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public virtual void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 }
