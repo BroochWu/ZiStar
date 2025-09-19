@@ -77,19 +77,6 @@ public class TreasureChest : MonoBehaviour
     {
 
         DataManager.Instance.rewardList.Clear();
-        // var wait = new WaitForSecondsRealtime(0.02f);
-
-        //后面可能要改，反复跨脚本调用
-        //使用道具
-        // for (int i = 1; i <= _useNum; i++)
-        // {
-        //     if (DataManager.Instance.UseItemInItemStruct(item, 1))
-        //     {
-        //         Debug.Log($"使用了{itemId}");
-        //     }
-        //     // yield return wait;
-        // }
-
         //使用宝箱
         DataManager.Instance.UseItemInItemStruct(item, _useNum);
 

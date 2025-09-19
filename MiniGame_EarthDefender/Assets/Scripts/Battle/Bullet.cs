@@ -1,14 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    enum BulletParent
+    enum BulletParentType
     {
         PLAYER,
         ENEMY
     }
 
-    private BulletParent bulletParent;
+    private BulletParentType bulletParentType;
     public Weapon parentWeapon { get; private set; }
 
     public string bulletType;
@@ -17,11 +19,15 @@ public class Bullet : MonoBehaviour
     private float timer;
     private float speed;
 
+    public int bulletPenetrate;//子弹可碰撞次数（可穿透数量）
+    public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
+
     public bool isReleased;//检测子弹是否已经被释放了
+    public List<GameObject> listCollisionCd = new();
 
     public void Initialize(Weapon parent)
     {
-        bulletParent = BulletParent.PLAYER;
+        bulletParentType = BulletParentType.PLAYER;
         parentWeapon = parent;
 
         speed = parent.bulletSpeed;
@@ -32,11 +38,13 @@ public class Bullet : MonoBehaviour
         isReleased = false;
         timer = 0f;
         bulletDamage = parent.attack;
+        bulletPenetrate = parent.config.Penetrate;
+        bulletPenetrateInterval = parent.config.PenetrateInterval;
     }
-    public void Initialize<T>(T parent) where T:EnemyBase
+    public void Initialize<T>(T parent) where T : EnemyBase
     {
 
-        bulletParent = BulletParent.ENEMY;
+        bulletParentType = BulletParentType.ENEMY;
         speed = 1;
         lifeTime = 1.5f;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
@@ -64,12 +72,12 @@ public class Bullet : MonoBehaviour
                 ObjectPoolManager.Instance.ReleaseBullet(gameObject);
 
 
-                switch (bulletParent)
+                switch (bulletParentType)
                 {
-                    case BulletParent.PLAYER:
+                    case BulletParentType.PLAYER:
                         break;
 
-                    case BulletParent.ENEMY:
+                    case BulletParentType.ENEMY:
 
                         BattleManager.Instance.CalDamageEarthSuffer(bulletDamage);
                         break;
@@ -91,5 +99,33 @@ public class Bullet : MonoBehaviour
     public void ResetState()
     {
         //暂时没啥重置的好像
+
+        if (parentWeapon != null)
+        {
+            bulletPenetrate = parentWeapon.config.Penetrate;
+        }
+        //清空冷却池
+        listCollisionCd.Clear();
+    }
+
+    /// <summary>
+    /// 添加到冷却池，以保证一个子弹不会重复触发
+    /// </summary>
+    /// <param name="_which"></param>
+    /// <param name="_while"></param>
+    /// <returns>true:没碰撞过，false:正在冷却中</returns>
+    public bool AddToListCollisionCD(GameObject _which, float _while)
+    {
+        if (listCollisionCd.Contains(_which)) return false;
+
+        listCollisionCd.Add(_which);
+        StartCoroutine(CorAddToListCollisionCD(_which, _while));
+        return true;
+    }
+
+    IEnumerator CorAddToListCollisionCD(GameObject _which, float _while)
+    {
+        yield return new WaitForSeconds(_while);
+        listCollisionCd.Remove(_which);
     }
 }

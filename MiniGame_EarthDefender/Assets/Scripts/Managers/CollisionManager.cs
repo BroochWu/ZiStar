@@ -48,6 +48,7 @@ public class CollisionManager : MonoBehaviour
 
             foreach (var obj in potentialCollisions)
             {
+                //隐藏的不计数
                 if (!obj.activeInHierarchy)
                     continue;
 
@@ -56,13 +57,22 @@ public class CollisionManager : MonoBehaviour
 
                     // 处理碰撞
                     var bulletConfig = bullet.GetComponent<Bullet>();
-                    obj.GetComponent<EnemyBase>().TakeDamage(
-                        bulletConfig.bulletDamage, bulletConfig.parentWeapon
+                    
+                    //判断目前是不是和该实例的碰撞正在冷却中
+                    if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval))
+                    {
+                        obj.GetComponent<EnemyBase>().TakeDamage(
+                            bulletConfig.bulletDamage, bulletConfig.parentWeapon
+                        );
 
-
-                    );
-                    // 回收子弹
-                    ObjectPoolManager.Instance.ReleaseBullet(bullet);
+                        bulletConfig.bulletPenetrate -= 1;
+                        if (bulletConfig.bulletPenetrate <= 0)
+                        {
+                            // 回收子弹
+                            ObjectPoolManager.Instance.ReleaseBullet(bullet);
+                            Debug.Log("子弹剩余穿透为0，已回收");
+                        }
+                    }
 
                 }
             }

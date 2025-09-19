@@ -27,6 +27,8 @@ public sealed partial class Weapon : Luban.BeanBase
         Piece_Ref = null;
         { if(!_buf["bullet_speed"].IsNumber) { throw new SerializationException(); }  BulletSpeed = _buf["bullet_speed"]; }
         { if(!_buf["max_lifetime"].IsNumber) { throw new SerializationException(); }  MaxLifetime = _buf["max_lifetime"]; }
+        { if(!_buf["penetrate_interval"].IsNumber) { throw new SerializationException(); }  PenetrateInterval = _buf["penetrate_interval"]; }
+        { if(!_buf["penetrate"].IsNumber) { throw new SerializationException(); }  Penetrate = _buf["penetrate"]; }
         { if(!_buf["rate_of_fire"].IsNumber) { throw new SerializationException(); }  RateOfFire = _buf["rate_of_fire"]; }
         { if(!_buf["row_count"].IsNumber) { throw new SerializationException(); }  RowCount = _buf["row_count"]; }
         { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
@@ -79,6 +81,14 @@ public sealed partial class Weapon : Luban.BeanBase
     /// </summary>
     public readonly float MaxLifetime;
     /// <summary>
+    /// 基础单次子弹对同一个单位的伤害间隔（秒）
+    /// </summary>
+    public readonly float PenetrateInterval;
+    /// <summary>
+    /// 基础子弹进行X次攻击后销毁（穿透）
+    /// </summary>
+    public readonly int Penetrate;
+    /// <summary>
     /// 发射频率<br/>（每秒发射X次）
     /// </summary>
     public readonly float RateOfFire;
@@ -128,6 +138,8 @@ public sealed partial class Weapon : Luban.BeanBase
         + "piece:" + Piece + ","
         + "bulletSpeed:" + BulletSpeed + ","
         + "maxLifetime:" + MaxLifetime + ","
+        + "penetrateInterval:" + PenetrateInterval + ","
+        + "penetrate:" + Penetrate + ","
         + "rateOfFire:" + RateOfFire + ","
         + "rowCount:" + RowCount + ","
         + "rowSpace:" + RowSpace + ","

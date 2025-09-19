@@ -1,6 +1,5 @@
 // EnemyBase.cs - 基类
 using UnityEngine;
-using System.Collections;
 
 public abstract class EnemyBase : MonoBehaviour
 {
