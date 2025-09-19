@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             //首次登陆直接打关卡1
 
             SwitchGameStateToBattle(1);
-            UIManager.Instance.MainHallAnim.gameObject.SetActive(false);
+            UIManager.Instance.MainHallUI.animator.gameObject.SetActive(false);
         }
         else
         {
@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
         BattleManager.Instance.battleState = BattleState.NULL;
         Time.timeScale = 1;
 
-        UIManager.Instance.MainHallAnim.gameObject.SetActive(true);
-        UIManager.Instance.MainHallAnim.Play("In");
+        UIManager.Instance.MainHallUI.animator.gameObject.SetActive(true);
+        UIManager.Instance.MainHallUI.animator.Play("In");
 
 
         UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);
@@ -135,8 +135,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.BATTLE;
         MoveCamera(mainCamBattlePos, mainCamBattleSize);
         //初始化战斗管理器
-
-        UIManager.Instance.MainHallAnim.Play("Out");
+        UIManager.Instance.MainHallUI.animator.Play("Out");
 
         UIManager.Instance.SwitchLayer(UILayer.NULL);
         BattleManager.Instance.Initialize(dungeonId);

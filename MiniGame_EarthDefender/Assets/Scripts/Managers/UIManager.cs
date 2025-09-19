@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
     [Header("=====各个基础层=====")]
-    public Animator MainHallAnim;
+    public MainHall MainHallUI;
     public BattleUI battleLayer;
     public BackBattleUI backbattleLayer;
     public MainUI mainLayer;
@@ -101,23 +101,27 @@ public class UIManager : MonoBehaviour
                 SetTopPanels(true);
                 mainLayer.gameObject.SetActive(true);
                 mainLayer.Initialize();
+                MainHallUI.MoveBg(0);
                 break;
             case UILayer.DEVELOPLAYER:
                 SetTopPanels(true);
                 SetBottomTabs(true);
                 developLayer.gameObject.SetActive(true);
                 developLayer.Initialize();
+                MainHallUI.MoveBg(1);
                 break;
             case UILayer.WEAPONSLAYER:
                 SetTopPanels(true);
                 SetBottomTabs(true);
                 weaponsLayer.gameObject.SetActive(true);
                 _ = weaponsLayer.Initialize();
+                MainHallUI.MoveBg(2);
                 break;
             case UILayer.SHOPLAYER:
                 SetTopPanels(true);
                 SetBottomTabs(true);
                 shopLayer.gameObject.SetActive(true);
+                MainHallUI.MoveBg(3);
                 break;
             default:
                 uiLayer = UILayer.NULL;

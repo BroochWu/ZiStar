@@ -4206,7 +4206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f114c0ec8bc9943a5d18e5616c480b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHallAnim: {fileID: 1460915648}
+  MainHallUI: {fileID: 1460915650}
   battleLayer: {fileID: 35883875}
   backbattleLayer: {fileID: 304202471}
   mainLayer: {fileID: 1887893609}
@@ -12979,6 +12979,7 @@ GameObject:
   - component: {fileID: 1460915647}
   - component: {fileID: 1460915648}
   - component: {fileID: 1460915649}
+  - component: {fileID: 1460915650}
   m_Layer: 5
   m_Name: MainHall
   m_TagString: Untagged
@@ -13044,6 +13045,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1375c1e0524f1847b595bb2b415bf43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1460915650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460915646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87de1baa66cbcd44794d569c29964d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bg: {fileID: 2146951049}
+  animator: {fileID: 1460915648}
 --- !u!1 &1470755371
 GameObject:
   m_ObjectHideFlags: 0
@@ -19861,8 +19876,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000000059605014, y: 1.0162354}
-  m_SizeDelta: {x: 1430.49, y: 5.0814}
+  m_AnchoredPosition: {x: -3.1286618e-10, y: 0}
+  m_SizeDelta: {x: 1141, y: 0}
   m_Pivot: {x: 0.5, y: 0.7}
 --- !u!114 &2146951050
 MonoBehaviour:

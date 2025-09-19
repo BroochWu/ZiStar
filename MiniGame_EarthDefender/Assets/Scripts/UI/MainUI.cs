@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
     public static MainUI Instance;
+
     public Text dungeonName;
     public Text textChestButtonRemainTime;
     public GameObject objChestButtonRedPoint;
