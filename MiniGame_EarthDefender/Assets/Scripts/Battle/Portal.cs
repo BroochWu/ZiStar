@@ -22,6 +22,7 @@ public class Portal : MonoBehaviour
         Utility.LookTarget2D(transform, Player.instance.rotationTarget.transform, 1, true);
         portalBaseRotation = transform.rotation;
 
+        waitCreateEnemys.Clear();
         foreach (var i in wave.EnemyCreate)
         {
             // StartCoroutine(EnemyCreator(i.InitTime, i.EnemyInit, dungeonLevel));
@@ -34,6 +35,7 @@ public class Portal : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(timer);
         if (!isActive) return;
 
 
@@ -48,6 +50,11 @@ public class Portal : MonoBehaviour
 
         if (timer >= waitCreateEnemys[nowCreate].Key)
         {
+            if (GameManager.Instance.gameState != GameManager.GameState.BATTLE)
+            {
+                BattleManager.Instance.UnregisterPortal(this);
+                return;
+            }
             CreateEnemy(waitCreateEnemys[nowCreate].Value);
             nowCreate += 1;
         }

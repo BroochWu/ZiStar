@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
 
         mainCam = Camera.main;
         mainCamBattlePos = new Vector3(0, -0.3f, -10);
-        mainCamMainViewPos = new Vector3(0, -25, -10);
+        mainCamMainViewPos = new Vector3(2, -16.5f, -10);
         mainCamBattleSize = 5.8f;
-        mainCamMainViewSize = 30;
+        mainCamMainViewSize = 18;
 
         //检查是否第一次登录
         if (CheckIfFirstLoad())
@@ -131,8 +131,10 @@ public class GameManager : MonoBehaviour
         MoveCamera(mainCamBattlePos, mainCamBattleSize);
         //初始化战斗管理器
 
+        UIManager.Instance.MainHallAnim.Play("Out");
         UIManager.Instance.SwitchLayer(UILayer.NULL);
         BattleManager.Instance.Initialize(dungeonId);
+
 
     }
 
@@ -162,6 +164,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator CameraMove(Vector3 newPos, float newSize)
     {
+        Debug.Log("move cam");
         while (Mathf.Abs(newSize - mainCam.orthographicSize) >= 0.02f)
         {
             mainCam.transform.position = Vector3.Slerp(mainCam.transform.position, newPos, 0.04f);

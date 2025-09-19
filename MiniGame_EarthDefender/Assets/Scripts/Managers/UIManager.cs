@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
     [Header("=====各个基础层=====")]
+    public Animator MainHallAnim;
     public BattleUI battleLayer;
     public BackBattleUI backbattleLayer;
     public MainUI mainLayer;
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour
     public WeaponsUI weaponsLayer;
     public ShopUI shopLayer;
     [Header("=====更高的玩家层=====")]
-    public GameObject bottomTabs;
+    public BottomTabsUI bottomTabs;
     public TopPLPanelGroupUI topPLPanel;
     [Header("=====最高的动态层=====")]
     public Transform tipsContainer;//提示UI
@@ -54,7 +55,6 @@ public class UIManager : MonoBehaviour
         Instance = this;
 
 
-        ShowLayer(UILayer.NULL);
 
     }
 
@@ -137,6 +137,7 @@ public class UIManager : MonoBehaviour
             case UILayer.BATTLELAYER:
                 SetBottomTabs(false);
                 SetTopPanels(false);
+                MainHallAnim.Play("In");
                 battleLayer.UnRegister();
                 break;
             case UILayer.MAINLAYER:
@@ -183,7 +184,7 @@ public class UIManager : MonoBehaviour
     /// <param name="_bool"></param>
     void SetBottomTabs(bool _bool)
     {
-        bottomTabs.SetActive(_bool);
+        BottomTabsUI.Instance.Show(_bool);
     }
     void SetTopPanels(bool _bool)
     {

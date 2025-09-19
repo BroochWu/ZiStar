@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BottomTabsUI : MonoBehaviour
 {
     public static BottomTabsUI Instance;
-    
+
     public Toggle buttonShop;
     public Toggle buttonDevelop;
     public Toggle buttonCommand;
@@ -155,5 +155,25 @@ public class BottomTabsUI : MonoBehaviour
     {
         Debug.LogWarning(ShopShoppingManager.Instance.IsUnlocked);
         buttonShop.gameObject.SetActive(ShopShoppingManager.Instance.IsUnlocked);
+    }
+
+
+    public void Show(bool _is)
+    {
+        var anim = GetComponent<Animator>();
+        if (_is)
+        {
+            gameObject.SetActive(true);
+            anim.Play("In");
+        }
+        else
+        {
+            anim.Play("Out");
+        }
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 }

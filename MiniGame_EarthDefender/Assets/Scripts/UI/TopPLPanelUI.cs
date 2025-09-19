@@ -61,7 +61,7 @@ public class TopPLPanelUI : TopPLPanelGroupUI
     private void OnPanelClicked()
     {
         // 打开道具详情或商店
-        Debug.Log($"点击了道具面板: {_item.TextName}");
+        // Debug.Log($"点击了道具面板: {_item.TextName}");
         UIManager.Instance.OpenItemInfoUI(_item);
     }
 

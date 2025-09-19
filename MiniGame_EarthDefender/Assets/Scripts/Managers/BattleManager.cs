@@ -354,6 +354,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     void BattleOver()
     {
+        //停止本脚本包括传送门生成在内的所有协程
+        StopAllCoroutines();
         //刷新武器伤害总览
         RefreshSortedWeaponDamageStatisticsList();
 
@@ -449,7 +451,7 @@ public class BattleManager : MonoBehaviour
         if (activePortals.Contains(portal))
         {
             activePortals.Remove(portal);
-            portal.GetComponent<Animator>().Play("PortalDisappear");
+            portal.GetComponent<Animator>()?.Play("PortalDisappear");
         }
     }
 
