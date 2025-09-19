@@ -42,7 +42,7 @@ public class MainUI : MonoBehaviour
         }
 
 
-        dungeonName.text = $"第{nowChooseDungeonId}关";
+        dungeonName.text = $"第<color=#fec678> {nowChooseDungeonId} </color>关";
 
         //宝箱UI
         SetChestsUI();

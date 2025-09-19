@@ -358,23 +358,25 @@ public static class Utility
     /// <param name="_countRed"></param>
     /// <param name="_countYellow"></param>
     /// <returns></returns>
-    public static Color SetColorByCount(int _count, int _countRed, int _countYellow)
-    {
+    // public static Color SetColorByCount(int _count, int _countRed, int _countYellow)
+    // {
 
-        // 根据数量设置不同颜色
-        if (_count <= _countRed)
-        {
-            return Color.red;
-        }
-        else if (_countRed != _countYellow && _count < _countYellow)
-        {
-            return Color.yellow;
-        }
-        else
-        {
-            return Color.white;
-        }
-    }
+    //     // 根据数量设置不同颜色
+    //     if (_count <= _countRed)
+    //     {
+    //         return Color.red;
+    //     }
+    //     else if (_countRed != _countYellow && _count < _countYellow)
+    //     {
+    //         return Color.yellow;
+    //     }
+    //     else
+    //     {
+    //         ColorUtility.TryParseHtmlString("#2a2b35", out Color newColor);
+    //         Debug.Log(newColor);
+    //         return newColor;
+    //     }
+    // }
 
     public static string GetQualityName(cfg.Enums.Com.Quality _quality)
     {

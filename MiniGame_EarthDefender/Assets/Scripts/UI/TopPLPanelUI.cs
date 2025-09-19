@@ -54,7 +54,7 @@ public class TopPLPanelUI : TopPLPanelGroupUI
         textCount.text = Utility.BigNumber(count).ToString();
 
         // 根据数量设置不同颜色
-        textCount.color = Utility.SetColorByCount(count, 0, 10);
+        // textCount.color = Utility.SetColorByCount(count, 0, 10);
     }
 
     // 面板点击事件

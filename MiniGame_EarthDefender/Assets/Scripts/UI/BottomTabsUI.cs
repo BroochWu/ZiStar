@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class BottomTabsUI : MonoBehaviour
 {
     public static BottomTabsUI Instance;
-    public Button buttonShop;
-    public Button buttonDevelop;
-    public Button buttonCommand;
-    public Button buttonWeapons;
+    
+    public Toggle buttonShop;
+    public Toggle buttonDevelop;
+    public Toggle buttonCommand;
+    public Toggle buttonWeapons;
 
     // 引用商城红点控制器
     public GameObject reddotTabMainShop;
@@ -35,7 +36,7 @@ public class BottomTabsUI : MonoBehaviour
     {
         // Debug.Log("OnEnable");
         // 在Start中检查红点，确保RedDotManager已经初始化完成
-        CheckNow();
+        // CheckNow();
         CheckRedDot();
         CheckButtonsAppear();
     }
@@ -43,72 +44,72 @@ public class BottomTabsUI : MonoBehaviour
     /// <summary>
     /// 检测当前处于哪一个界面并高亮对应的按钮
     /// </summary>
-    void CheckNow()
-    {
-        // 获取当前UI层
-        var currentLayer = UIManager.Instance.GetUILayer();
+    // void CheckNow()
+    // {
+    //     // 获取当前UI层
+    //     var currentLayer = UIManager.Instance.GetUILayer();
 
-        // 重置所有按钮状态
-        ResetAllButtonStates();
-        //Debug.Log(currentLayer);
-        // 根据当前层高亮对应按钮
-        switch (currentLayer)
-        {
-            case UILayer.MAINLAYER:
-                SetButtonActive(buttonCommand, true);
-                break;
-            case UILayer.DEVELOPLAYER:
-                SetButtonActive(buttonDevelop, true);
-                break;
-            case UILayer.WEAPONSLAYER:
-                SetButtonActive(buttonWeapons, true);
-                break;
-            case UILayer.SHOPLAYER:
-                SetButtonActive(buttonShop, true);
-                break;
-        }
-    }
+    //     // 重置所有按钮状态
+    //     ResetAllButtonStates();
+    //     //Debug.Log(currentLayer);
+    //     // 根据当前层高亮对应按钮
+    //     switch (currentLayer)
+    //     {
+    //         case UILayer.MAINLAYER:
+    //             SetButtonActive(buttonCommand, true);
+    //             break;
+    //         case UILayer.DEVELOPLAYER:
+    //             SetButtonActive(buttonDevelop, true);
+    //             break;
+    //         case UILayer.WEAPONSLAYER:
+    //             SetButtonActive(buttonWeapons, true);
+    //             break;
+    //         case UILayer.SHOPLAYER:
+    //             SetButtonActive(buttonShop, true);
+    //             break;
+    //     }
+    // }
 
     /// <summary>
     /// 重置所有按钮状态为普通
     /// </summary>
-    void ResetAllButtonStates()
-    {
-        SetButtonActive(buttonShop, false);
-        SetButtonActive(buttonCommand, false);
-        SetButtonActive(buttonDevelop, false);
-        SetButtonActive(buttonWeapons, false);
-    }
+    // void ResetAllButtonStates()
+    // {
+    //     SetButtonActive(buttonShop, false);
+    //     SetButtonActive(buttonCommand, false);
+    //     SetButtonActive(buttonDevelop, false);
+    //     SetButtonActive(buttonWeapons, false);
+    // }
 
     /// <summary>
     /// 设置按钮为激活状态
     /// </summary>
     void SetButtonActive(Button button, bool _isActive)
     {
-        button.GetComponent<Image>().color = _isActive ? Color.blue : Color.white;
+        // button.GetComponent<Image>().color = _isActive ? Color.blue : Color.white;
     }
 
     #region 按钮点击后的事件
     public void SwitchToCommand()
     {
         UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);
-        CheckNow();
+        // CheckNow();
     }
     public void SwitchToDevelop()
     {
         UIManager.Instance.SwitchLayer(UILayer.DEVELOPLAYER);
-        CheckNow();
+        // CheckNow();
     }
     public void SwitchToWeapons()
     {
         // UIManager.Instance.CommonToast("暂未开发");
         UIManager.Instance.SwitchLayer(UILayer.WEAPONSLAYER);
-        CheckNow();
+        // CheckNow();
     }
     public void SwitchToShop()
     {
         UIManager.Instance.SwitchLayer(UILayer.SHOPLAYER);
-        CheckNow();
+        // CheckNow();
     }
     #endregion
 

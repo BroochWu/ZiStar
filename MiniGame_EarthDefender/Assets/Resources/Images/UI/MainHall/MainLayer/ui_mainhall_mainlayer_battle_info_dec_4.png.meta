@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: dff5686760e2db24ea104d3999c077e9
+guid: 0f9f49ee7fc37ec4fab771dc9a8ea6c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6032157782963417427
-    second: "\u517B\u6210icon_0"
+      213: -7320340529158661366
+    second: ui_mainhall_mainlayer_battle_info_dec_4_0
   - first:
-      213: -1624157342468164630
-    second: "\u517B\u6210icon_1"
+      213: -4147921460250061378
+    second: ui_mainhall_mainlayer_battle_info_dec_4_1
+  - first:
+      213: -5200421616502104826
+    second: ui_mainhall_mainlayer_battle_info_dec_4_2
+  - first:
+      213: 2507787249186809545
+    second: ui_mainhall_mainlayer_battle_info_dec_4_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -129,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u517B\u6210icon_0"
+      name: ui_mainhall_mainlayer_battle_info_dec_4_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 89
-        width: 17
-        height: 21
+        x: 496
+        y: 560
+        width: 97
+        height: 166
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dae8b55c478794ca0800000000000000
-      internalID: -6032157782963417427
+      spriteID: a0b5a94d21de86a90800000000000000
+      internalID: -7320340529158661366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u517B\u6210icon_1"
+      name: ui_mainhall_mainlayer_battle_info_dec_4_1
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 82
-        height: 120
+        x: 548
+        y: 537
+        width: 16
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +172,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ae3b7de8085d579e0800000000000000
-      internalID: -1624157342468164630
+      spriteID: eb55395986f9f66c0800000000000000
+      internalID: -4147921460250061378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_mainhall_mainlayer_battle_info_dec_4_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 93
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60d1122c71464d7b0800000000000000
+      internalID: -5200421616502104826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_mainhall_mainlayer_battle_info_dec_4_3
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 117
+        width: 14
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c6a80067337dc220800000000000000
+      internalID: 2507787249186809545
       vertices: []
       indices: 
       edges: []
@@ -176,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u517B\u6210icon_0": -6032157782963417427
-      "\u517B\u6210icon_1": -1624157342468164630
+      ui_mainhall_mainlayer_battle_info_dec_4_0: -7320340529158661366
+      ui_mainhall_mainlayer_battle_info_dec_4_1: -4147921460250061378
+      ui_mainhall_mainlayer_battle_info_dec_4_2: -5200421616502104826
+      ui_mainhall_mainlayer_battle_info_dec_4_3: 2507787249186809545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
