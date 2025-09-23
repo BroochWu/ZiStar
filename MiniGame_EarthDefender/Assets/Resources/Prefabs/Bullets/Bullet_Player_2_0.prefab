@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8812122871530328979}
   - component: {fileID: 3018312640235964894}
   - component: {fileID: -2014668996172076272}
+  - component: {fileID: 6130234155560651705}
   m_Layer: 0
-  m_Name: Bullet_Player_2
+  m_Name: Bullet_Player_2_0
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,8 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2229e86899c93b458777b07567031fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: 
+  lifeTime: 0.5
+  bulletNext: {fileID: 3018312640235964894, guid: bd372b97d529f3a488b7e1f473623938, type: 3}
   bulletDamage: 0
+  bulletType: 
   bulletPenetrate: 0
   bulletPenetrateInterval: 0
   isReleased: 0
@@ -114,7 +117,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50813788237837326}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06b98822a9a168f408bd175afd41f413, type: 3}
   m_Name: 
@@ -122,3 +125,25 @@ MonoBehaviour:
   Width: 2.1
   Height: 2.3
   offsetY: 2.8
+--- !u!95 &6130234155560651705
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50813788237837326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b83e58b0733d676428d62e16ce4e0de8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

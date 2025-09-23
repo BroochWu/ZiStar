@@ -455,7 +455,10 @@ public class ObjectPoolManager : MonoBehaviour
     private void OnReleaseBullet(GameObject bullet)
     {
         bullet.SetActive(false);
-        bullet.GetComponent<Bullet>().isReleased = true;
+        var config = bullet.GetComponent<Bullet>();
+        config.SetRelease();
+
+
         bullet.transform.position = Vector3.zero;
     }
 

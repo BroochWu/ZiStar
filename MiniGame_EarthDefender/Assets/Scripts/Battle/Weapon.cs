@@ -6,7 +6,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     // public static int globalDamageMultiInOneBattle { get; private set; }//所有武器共同生效的，单局游戏全局伤害加成
-
     private cfg.weapon.Weapon _config;
     public cfg.weapon.Weapon config => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
     private string bulletType;
@@ -25,7 +24,6 @@ public class Weapon : MonoBehaviour
     public int attack;
     public float bulletSpeed { get; private set; }
     // public int bulletScale { get; private set; }
-    public float bulletReleaseTime { get; private set; }
     public float battleWeaponDamage { get; private set; }//武器单局造成的伤害
 
 
@@ -90,7 +88,7 @@ public class Weapon : MonoBehaviour
     {
         // 初始化武器参数(这些未来可能都不是固定读表的)
         rateOfFire = new WaitForSeconds(1f / config.RateOfFire);
-        bulletReleaseTime = config.MaxLifetime;
+        // bulletReleaseTime = config.MaxLifetime[currentStateCount];
         rowCount = config.RowCount;
         rowSpace = config.RowSpace;
         columnCount = config.ColumnCount;

@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ui_mainhall_mainlayer_battle_info_bg_0: -1812173269614340879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -9,22 +9,29 @@ public class Bullet : MonoBehaviour
         PLAYER,
         ENEMY
     }
+    [Header("必填！！！")]
+    public float lifeTime;
+    public Bullet bulletNext;//生成之后的子弹
 
+
+    [HideInInspector] public int bulletDamage;
+    [HideInInspector] public Weapon parentWeapon { get; private set; }
+
+    [HideInInspector] public string bulletType;
+
+    [HideInInspector] public int bulletPenetrate;//子弹可碰撞次数（可穿透数量）
+    [HideInInspector] public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
+
+    [HideInInspector] public bool isReleased;//检测子弹是否已经被释放了
+    [HideInInspector] public List<GameObject> listCollisionCd = new();
     private BulletParentType bulletParentType;
-    public Weapon parentWeapon { get; private set; }
-
-    public string bulletType;
-    public int bulletDamage;
-    private float lifeTime;
     private float timer;
     private float speed;
-
-    public int bulletPenetrate;//子弹可碰撞次数（可穿透数量）
-    public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
-
-    public bool isReleased;//检测子弹是否已经被释放了
-    public List<GameObject> listCollisionCd = new();
     // private Vector3 initScale;
+
+    // public bool canCollide = true;//子弹是否可以碰撞
+    // public Bullet bulletFormer;//生成之前的子弹
+
 
     void Start()
     {
@@ -37,7 +44,6 @@ public class Bullet : MonoBehaviour
         parentWeapon = parent;
 
         speed = parent.bulletSpeed;
-        lifeTime = parent.bulletReleaseTime;
         // transform.localScale = initScale * (float)(parent.bulletScale / 10000f);
 
 
@@ -134,5 +140,19 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(_while);
         listCollisionCd.Remove(_which);
+    }
+
+    public void SetRelease()
+    {
+        //这里要小心，不要在父类的坐标被重置以后赋值
+        isReleased = true;
+        if (bulletNext != null)
+        {
+            Debug.LogError(bulletNext.name);
+            var child = ObjectPoolManager.Instance.GetBullet(bulletNext.name);
+            child.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            if (bulletParentType == BulletParentType.PLAYER) child.GetComponent<Bullet>().Initialize(parentWeapon);
+            else Debug.LogError("暂不支持此种子弹的派生");
+        }
     }
 }

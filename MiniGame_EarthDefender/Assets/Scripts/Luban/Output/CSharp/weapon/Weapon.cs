@@ -26,7 +26,6 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
         Piece_Ref = null;
         { if(!_buf["bullet_speed"].IsNumber) { throw new SerializationException(); }  BulletSpeed = _buf["bullet_speed"]; }
-        { if(!_buf["max_lifetime"].IsNumber) { throw new SerializationException(); }  MaxLifetime = _buf["max_lifetime"]; }
         { if(!_buf["penetrate_interval"].IsNumber) { throw new SerializationException(); }  PenetrateInterval = _buf["penetrate_interval"]; }
         { if(!_buf["penetrate"].IsNumber) { throw new SerializationException(); }  Penetrate = _buf["penetrate"]; }
         { if(!_buf["rate_of_fire"].IsNumber) { throw new SerializationException(); }  RateOfFire = _buf["rate_of_fire"]; }
@@ -75,10 +74,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 子弹飞行速度
     /// </summary>
     public readonly float BulletSpeed;
-    /// <summary>
-    /// 最长生存时间（秒）
-    /// </summary>
-    public readonly float MaxLifetime;
     /// <summary>
     /// 基础单次子弹对同一个单位的伤害间隔（秒）
     /// </summary>
@@ -132,7 +127,6 @@ public sealed partial class Weapon : Luban.BeanBase
         + "bulletPrefab:" + BulletPrefab + ","
         + "piece:" + Piece + ","
         + "bulletSpeed:" + BulletSpeed + ","
-        + "maxLifetime:" + MaxLifetime + ","
         + "penetrateInterval:" + PenetrateInterval + ","
         + "penetrate:" + Penetrate + ","
         + "rateOfFire:" + RateOfFire + ","
