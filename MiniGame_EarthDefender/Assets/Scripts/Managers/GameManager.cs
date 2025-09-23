@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.MainHallUI.animator.gameObject.SetActive(true);
         UIManager.Instance.MainHallUI.animator.Play("In");
 
-
+        UIManager.Instance.battleLayer.UnRegister();
         UIManager.Instance.SwitchLayer(UILayer.MAINLAYER);
         BattleManager.Instance.ResetDungeon();
         MoveCamera(mainCamMainViewPos, mainCamMainViewSize);

@@ -44,11 +44,18 @@ public class ShopDrawLevelInfo : MonoBehaviour
 
 
 
+        // for (int i = 0; i < shopDrawLevelInfoPanels.Count; i++)
         for (int i = shopDrawLevelInfoPanels.Count - 1; i >= 0; i--)
         {
+            if (i > config.Probs.Count - 1)
+            {
+                shopDrawLevelInfoPanels[shopDrawLevelInfoPanels.Count - 1 - i].Initialize(cfg.Enums.Com.Quality.NULL, 0);
+                continue;
+            }
             var quality = (cfg.Enums.Com.Quality)(i + 1);
+            //如果没这个数，就继续
             float prob = config.Probs[i] * 1f / totalWeight;
-            shopDrawLevelInfoPanels[i].Initialize(quality, prob);
+            shopDrawLevelInfoPanels[shopDrawLevelInfoPanels.Count - 1 - i].Initialize(quality, prob);
         }
         return true;
     }

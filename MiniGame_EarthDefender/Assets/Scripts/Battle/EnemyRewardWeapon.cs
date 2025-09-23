@@ -24,7 +24,7 @@ public class EnemyRewardWeapon : EnemyBase
         BattleManager.Instance.RegisterEnemy(this);
 
         //宝箱怪无偏移
-        transform.SetPositionAndRotation(parent.transform.position, Quaternion.Euler(new Vector3(0,0,180)));
+        transform.SetPositionAndRotation(parent.transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
 
         _enemyLevel = enemyLevel;
 
@@ -99,8 +99,8 @@ public class EnemyRewardWeapon : EnemyBase
         Vector2 screenBounds = CameraController.Instance.GetScreenBounds();
 
         // 在屏幕内随机选择一个目标点
-        float x = (float)(_wanderRandom.NextDouble() * screenBounds.x * 1.8f - screenBounds.x);
-        float y = (float)(_wanderRandom.NextDouble() * screenBounds.y * 1.5f - screenBounds.y);
+        float x = (float)(_wanderRandom.NextDouble() * screenBounds.x * 2f - screenBounds.x) * 0.6f;
+        float y = (float)(_wanderRandom.NextDouble() * screenBounds.y * 2f - screenBounds.y) * 0.5f;
 
         _wanderTarget = new Vector2(x, y);
     }

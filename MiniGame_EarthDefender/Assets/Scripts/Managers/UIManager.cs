@@ -143,7 +143,7 @@ public class UIManager : MonoBehaviour
             case UILayer.BATTLELAYER:
                 SetBottomTabs(false);
                 SetTopPanels(false);
-                battleLayer.UnRegister();
+                // battleLayer.UnRegister();
                 break;
             case UILayer.MAINLAYER:
                 //仅主界面内部切换的时候直接隐藏，否则播动效隐藏
