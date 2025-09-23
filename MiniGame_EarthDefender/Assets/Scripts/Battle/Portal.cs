@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(timer);
+        // Debug.Log(timer);
         if (!isActive) return;
 
 

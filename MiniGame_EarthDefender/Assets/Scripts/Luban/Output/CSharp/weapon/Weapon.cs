@@ -22,15 +22,12 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["unlock_cond"].IsObject) { throw new SerializationException(); }  UnlockCond = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_cond"]);  }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
         { if(!_buf["image_icon_path"].IsString) { throw new SerializationException(); }  ImageIconPath = _buf["image_icon_path"]; }
-        { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
+        { if(!_buf["bullet_id"].IsNumber) { throw new SerializationException(); }  BulletId = _buf["bullet_id"]; }
+        BulletId_Ref = null;
         { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
         Piece_Ref = null;
-        { if(!_buf["bullet_speed"].IsNumber) { throw new SerializationException(); }  BulletSpeed = _buf["bullet_speed"]; }
-        { if(!_buf["penetrate_interval"].IsNumber) { throw new SerializationException(); }  PenetrateInterval = _buf["penetrate_interval"]; }
-        { if(!_buf["penetrate"].IsNumber) { throw new SerializationException(); }  Penetrate = _buf["penetrate"]; }
         { if(!_buf["rate_of_fire"].IsNumber) { throw new SerializationException(); }  RateOfFire = _buf["rate_of_fire"]; }
         { if(!_buf["row_count"].IsNumber) { throw new SerializationException(); }  RowCount = _buf["row_count"]; }
-        { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
         { if(!_buf["column_count"].IsNumber) { throw new SerializationException(); }  ColumnCount = _buf["column_count"]; }
         { if(!_buf["column_space"].IsNumber) { throw new SerializationException(); }  ColumnSpace = _buf["column_space"]; }
         { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
@@ -62,26 +59,15 @@ public sealed partial class Weapon : Luban.BeanBase
     /// </summary>
     public readonly string ImageIconPath;
     /// <summary>
-    /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
+    /// 子弹ID
     /// </summary>
-    public readonly string BulletPrefab;
+    public readonly int BulletId;
+    public weapon.Bullet BulletId_Ref;
     /// <summary>
     /// 绑定的碎片ID
     /// </summary>
     public readonly int Piece;
     public item.Item Piece_Ref;
-    /// <summary>
-    /// 子弹飞行速度
-    /// </summary>
-    public readonly float BulletSpeed;
-    /// <summary>
-    /// 基础单次子弹对同一个单位的伤害间隔（秒）
-    /// </summary>
-    public readonly float PenetrateInterval;
-    /// <summary>
-    /// 基础子弹进行X次攻击后销毁（穿透）
-    /// </summary>
-    public readonly int Penetrate;
     /// <summary>
     /// 发射频率<br/>（每秒发射X次）
     /// </summary>
@@ -90,10 +76,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 基础1行几个
     /// </summary>
     public readonly int RowCount;
-    /// <summary>
-    /// 间隔像素
-    /// </summary>
-    public readonly float RowSpace;
     /// <summary>
     /// 基础连发几次
     /// </summary>
@@ -113,6 +95,7 @@ public sealed partial class Weapon : Luban.BeanBase
     public  void ResolveRef(Tables tables)
     {
         UnlockCond?.ResolveRef(tables);
+        BulletId_Ref = tables.Bullet.GetOrDefault(BulletId);
         Piece_Ref = tables.Item.GetOrDefault(Piece);
     }
 
@@ -124,14 +107,10 @@ public sealed partial class Weapon : Luban.BeanBase
         + "unlockCond:" + UnlockCond + ","
         + "initQuality:" + InitQuality + ","
         + "imageIconPath:" + ImageIconPath + ","
-        + "bulletPrefab:" + BulletPrefab + ","
+        + "bulletId:" + BulletId + ","
         + "piece:" + Piece + ","
-        + "bulletSpeed:" + BulletSpeed + ","
-        + "penetrateInterval:" + PenetrateInterval + ","
-        + "penetrate:" + Penetrate + ","
         + "rateOfFire:" + RateOfFire + ","
         + "rowCount:" + RowCount + ","
-        + "rowSpace:" + RowSpace + ","
         + "columnCount:" + ColumnCount + ","
         + "columnSpace:" + ColumnSpace + ","
         + "levelId:" + LevelId + ","

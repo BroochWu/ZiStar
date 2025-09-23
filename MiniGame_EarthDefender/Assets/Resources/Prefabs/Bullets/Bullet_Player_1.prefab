@@ -103,12 +103,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 3
   bulletNext: {fileID: 0}
+  speed: 6
+  bulletPenetrate: 1
+  bulletPenetrateInterval: 99
   bulletDamage: 0
   bulletType: 
-  bulletPenetrate: 0
-  bulletPenetrateInterval: 0
   isReleased: 0
   listCollisionCd: []
+  bulletState: 0
 --- !u!114 &-2014668996172076272
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -102,14 +102,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2229e86899c93b458777b07567031fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
+  lifeTime: 1
   bulletNext: {fileID: 3018312640235964894, guid: 65da87ed5a0ffd24da4e5d0c5eb9ffb3, type: 3}
+  speed: 0
+  bulletPenetrate: 99
+  bulletPenetrateInterval: 0.5
   bulletDamage: 0
   bulletType: 
-  bulletPenetrate: 0
-  bulletPenetrateInterval: 0
   isReleased: 0
   listCollisionCd: []
+  bulletState: 0
 --- !u!114 &-2014668996172076272
 MonoBehaviour:
   m_ObjectHideFlags: 0

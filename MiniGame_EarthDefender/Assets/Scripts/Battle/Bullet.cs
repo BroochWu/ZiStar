@@ -9,24 +9,24 @@ public class Bullet : MonoBehaviour
         PLAYER,
         ENEMY
     }
-    [Header("必填！！！")]
+
+    private cfg.weapon.Bullet _bulletConfig;
+    //基础值
+    private int baseBulletPenetrate;//子弹可碰撞次数（可穿透数量）
+
+    //最终值
     public float lifeTime;
-    public Bullet bulletNext;//生成之后的子弹
-
-
-    [HideInInspector] public int bulletDamage;
-    [HideInInspector] public Weapon parentWeapon { get; private set; }
-
-    [HideInInspector] public string bulletType;
-
-    [HideInInspector] public int bulletPenetrate;//子弹可碰撞次数（可穿透数量）
-    [HideInInspector] public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
-
-    [HideInInspector] public bool isReleased;//检测子弹是否已经被释放了
-    [HideInInspector] public List<GameObject> listCollisionCd = new();
+    public float speed;
+    public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
+    public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
+    public int bulletDamage;
+    public Weapon parentWeapon { get; private set; }
+    public string bulletType;
+    public bool isReleased;//检测子弹是否已经被释放了
+    public List<GameObject> listCollisionCd = new();
     private BulletParentType bulletParentType;
     private float timer;
-    private float speed;
+    public int bulletState = 0;//子弹阶段，用来判断效果生成对象
     // private Vector3 initScale;
 
     // public bool canCollide = true;//子弹是否可以碰撞
@@ -37,37 +37,74 @@ public class Bullet : MonoBehaviour
     {
         // initScale = transform.localScale;
     }
-
+    /// <summary>
+    /// 由武器直接生成
+    /// </summary>
+    /// <param name="parent"></param>
     public void Initialize(Weapon parent)
     {
-        bulletParentType = BulletParentType.PLAYER;
-        parentWeapon = parent;
-
-        speed = parent.bulletSpeed;
-        // transform.localScale = initScale * (float)(parent.bulletScale / 10000f);
-
-
         isReleased = false;
         timer = 0f;
-        bulletDamage = parent.attack;
-        bulletPenetrate = parent.config.Penetrate;
-        bulletPenetrateInterval = parent.config.PenetrateInterval;
+
+        //来自父
+        bulletParentType = BulletParentType.PLAYER;
+
+        parentWeapon = parent;
+        bulletDamage = parent.finalAttack;
+
+        _bulletConfig = parent.bulletConfig;
+
+        //来自表
+        speed = _bulletConfig.Speed;
+        baseBulletPenetrate = _bulletConfig.PenetrateCount;
+        bulletPenetrateInterval = _bulletConfig.PenetrateSep;
+        lifeTime = _bulletConfig.LifeTime;
     }
+
+    /// <summary>
+    /// 由敌人生成
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="parent"></param>
     public void Initialize<T>(T parent) where T : EnemyBase
     {
-
-        bulletParentType = BulletParentType.ENEMY;
-        speed = 1;
-        lifeTime = 1.5f;
-        transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
-
-
         isReleased = false;
         timer = 0f;
+
+        bulletParentType = BulletParentType.ENEMY;
+        transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
         bulletDamage = parent.Damage;
+
+
+        speed = 1;
+        lifeTime = 1.5f;
         //敌人的子弹移动后自动销毁就行，不需要碰撞
     }
 
+    /// <summary>
+    /// 派生子弹，但继承最初的父类
+    /// </summary>
+    /// <param name="_parent"></param>
+    /// <param name="_bullet"></param>
+    public void Initialize(Weapon _parent, cfg.weapon.Bullet _bullet)
+    {
+        isReleased = false;
+        timer = 0f;
+
+        //来自父
+        bulletParentType = BulletParentType.PLAYER;
+
+        parentWeapon = _parent;
+        bulletDamage = _parent.finalAttack;
+
+        _bulletConfig = _bullet;//子弹是重写的
+
+        //来自表
+        speed = _bulletConfig.Speed;
+        baseBulletPenetrate = _bulletConfig.PenetrateCount;
+        bulletPenetrateInterval = _bulletConfig.PenetrateSep;
+        lifeTime = _bulletConfig.LifeTime;
+    }
 
     void Update()
     {
@@ -114,7 +151,7 @@ public class Bullet : MonoBehaviour
 
         if (parentWeapon != null)
         {
-            bulletPenetrate = parentWeapon.config.Penetrate;
+            finalBulletPenetrate = baseBulletPenetrate;
         }
         // transform.localScale = initScale * parentWeapon.config.BulletScale / 10000f;
         //清空冷却池
@@ -146,13 +183,29 @@ public class Bullet : MonoBehaviour
     {
         //这里要小心，不要在父类的坐标被重置以后赋值
         isReleased = true;
-        if (bulletNext != null)
+        if (_bulletConfig.NextBullet != null)
         {
-            Debug.LogError(bulletNext.name);
-            var child = ObjectPoolManager.Instance.GetBullet(bulletNext.name);
-            child.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            if (bulletParentType == BulletParentType.PLAYER) child.GetComponent<Bullet>().Initialize(parentWeapon);
-            else Debug.LogError("暂不支持此种子弹的派生");
+
+            var a = _bulletConfig.NextBullet_Ref;
+            if (a != null)
+            {
+                // Debug.LogError(bulletNext.name);
+                var child = ObjectPoolManager.Instance.GetBullet(a.BulletPrefab);
+                child.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+                if (bulletParentType == BulletParentType.PLAYER)
+                {
+                    var childComponent = child.GetComponent<Bullet>();
+                    childComponent.Initialize(parentWeapon, a);
+                    childComponent.bulletState = bulletState + 1;
+                }
+
+                else Debug.LogError("暂不支持此种子弹的派生");
+            }
+            else
+            {
+                throw new System.Exception("检查配置！");
+            }
         }
     }
 }

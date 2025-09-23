@@ -72,8 +72,8 @@ public class CollisionManager : MonoBehaviour
                             bulletConfig.bulletDamage, bulletConfig.parentWeapon
                         );
 
-                        bulletConfig.bulletPenetrate -= 1;
-                        if (bulletConfig.bulletPenetrate <= 0)
+                        bulletConfig.finalBulletPenetrate -= 1;
+                        if (bulletConfig.finalBulletPenetrate <= 0)
                         {
                             // 回收子弹
                             ObjectPoolManager.Instance.ReleaseBullet(bullet);

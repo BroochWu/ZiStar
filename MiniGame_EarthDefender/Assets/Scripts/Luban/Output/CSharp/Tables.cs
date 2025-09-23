@@ -94,6 +94,10 @@ public partial class Tables
     /// 商店抽卡表
     /// </summary>
     public Tbshop.drawLevel DrawLevel {get; }
+    /// <summary>
+    /// 武器子弹表
+    /// </summary>
+    public Tbweapon.Bullet Bullet {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -117,6 +121,7 @@ public partial class Tables
         AvgStory = new Tbavg.AvgStory(loader("avg_story"));
         RedDot = new Tbcom.RedDot(loader("com_reddot"));
         DrawLevel = new Tbshop.drawLevel(loader("shop_drawlevel"));
+        Bullet = new Tbweapon.Bullet(loader("weapon_bullet"));
         ResolveRef();
     }
     
@@ -142,6 +147,7 @@ public partial class Tables
         AvgStory.ResolveRef(this);
         RedDot.ResolveRef(this);
         DrawLevel.ResolveRef(this);
+        Bullet.ResolveRef(this);
     }
 }
 

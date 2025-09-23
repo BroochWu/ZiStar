@@ -1,0 +1,40 @@
+[
+  {
+    "id": 100,
+    "bullet_prefab": "Bullet_Player_1",
+    "speed": 6,
+    "life_time": 3,
+    "penetrate_sep": 99,
+    "penetrate_count": 1,
+    "row_space": 0.4
+  },
+  {
+    "id": 200,
+    "bullet_prefab": "Bullet_Player_2_0",
+    "speed": 0,
+    "life_time": 0.5,
+    "penetrate_sep": 0,
+    "penetrate_count": 0,
+    "row_space": 0,
+    "next_bullet": 201
+  },
+  {
+    "id": 201,
+    "bullet_prefab": "Bullet_Player_2_1",
+    "speed": 0,
+    "life_time": 0.2,
+    "penetrate_sep": 0.5,
+    "penetrate_count": 99,
+    "row_space": 0,
+    "next_bullet": 202
+  },
+  {
+    "id": 202,
+    "bullet_prefab": "Bullet_Player_2_2",
+    "speed": 0,
+    "life_time": 0.5,
+    "penetrate_sep": 0,
+    "penetrate_count": 0,
+    "row_space": 0
+  }
+]

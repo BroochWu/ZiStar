@@ -8,21 +8,26 @@ public class Weapon : MonoBehaviour
     // public static int globalDamageMultiInOneBattle { get; private set; }//所有武器共同生效的，单局游戏全局伤害加成
     private cfg.weapon.Weapon _config;
     public cfg.weapon.Weapon config => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
-    private string bulletType;
-    private int localDamageMultiInOneBattle; //仅这个武器生效
+    private cfg.weapon.Bullet _bulletConfig;
+    public cfg.weapon.Bullet bulletConfig => _bulletConfig ??= config.BulletId_Ref;
+    private string bulletName;
+    //发射
     private int rowCount;
-    private float rowSpace;
+    // private float rowSpace;//行间距由子弹自己控制
     private int columnCount;
     private WaitForSeconds columnSpace;
+
+
     private Transform bulletInitTransform;
     private Coroutine corShootBullet;
-    private WaitForSeconds rateOfFire;
-    private int weaponLevel;
+    private WaitForSeconds rateOfFire;//发射频率
+    private int weaponLevel;//武器等级
 
+    private int localDamageMultiInOneBattle; //仅这个武器生效
 
     public int weaponId;
-    public int attack;
-    public float bulletSpeed { get; private set; }
+    public int finalAttack;//最终伤害
+    // public float bulletSpeed { get; private set; }
     // public int bulletScale { get; private set; }
     public float battleWeaponDamage { get; private set; }//武器单局造成的伤害
 
@@ -76,7 +81,7 @@ public class Weapon : MonoBehaviour
             + localDamageMultiInOneBattle / 10000f //单局本武器独特加成（基本上也是卡牌带来的）
             )
             );
-        attack = final;
+        finalAttack = final;
 
         return final;
     }
@@ -90,12 +95,11 @@ public class Weapon : MonoBehaviour
         rateOfFire = new WaitForSeconds(1f / config.RateOfFire);
         // bulletReleaseTime = config.MaxLifetime[currentStateCount];
         rowCount = config.RowCount;
-        rowSpace = config.RowSpace;
         columnCount = config.ColumnCount;
         columnSpace = new WaitForSeconds(config.ColumnSpace);
-        bulletSpeed = config.BulletSpeed;
+        // bulletSpeed = config.BulletSpeed;
         // bulletScale = config.BulletScale;
-        bulletType = config.BulletPrefab;
+        bulletName = config.BulletId_Ref.BulletPrefab;
         GetAndSetWeaponAttack();
 
         // 预热对象池（可选）
@@ -127,7 +131,7 @@ public class Weapon : MonoBehaviour
             // 计算起始位置（居中分布）
             if (columnCount > 1)
             {
-                float totalWidth = rowSpace * (columnCount - 1);
+                float totalWidth = bulletConfig.RowSpace * (columnCount - 1);
                 Vector3 startOffset = perpendicular * (totalWidth / 2f);
                 spawnPos = bulletInitTransform.position - startOffset;
             }
@@ -153,7 +157,7 @@ public class Weapon : MonoBehaviour
                     {
                         bulletComponent.Initialize(this);
                     }
-                    spawnPos += perpendicular * rowSpace;
+                    spawnPos += perpendicular * bulletConfig.RowSpace;
                 }
                 yield return columnSpace;
 
@@ -166,7 +170,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private GameObject GetBulletFromPool()
     {
-        return ObjectPoolManager.Instance.GetBullet(bulletType);
+        return ObjectPoolManager.Instance.GetBullet(bulletName);
     }
 
     /// <summary>
