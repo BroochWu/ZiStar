@@ -16,7 +16,8 @@ public class VFX : MonoBehaviour
     // 添加条件属性（仅用于代码提示，实际隐藏由Editor脚本处理）
     [ConditionalHide("vFXType", VFXType.DAMAGETEXT)]
     public Text damageText;
-    public float damageLifeTime = 1.0f;
+    public const float DAMAGE_LIFE_TIME = 1.0f;
+    public const float TEXT_SCALE_TIME = 0.5f;
 
     // 爆炸特效
     // [ConditionalHide("vFXType", VFXType.BOMB)]
@@ -65,29 +66,34 @@ public class VFX : MonoBehaviour
 
     private IEnumerator PlayDamageTextAnimation()
     {
-        // var dirZ = Random.Range(0, 360) * Mathf.Deg2Rad;//弧度
-        // var red = Mathf.Tan(dirZ);//求出tan
-        // var moveDir = (Vector3.right + red * Vector3.up).normalized;
         // 随机初始方向（使用弧度制更高效）
         float randomAngle = Random.Range(0f, Mathf.PI * 2f);
         Vector2 moveDir = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle));
 
         float currentLifeTime = 0;
-        var rand = Random.Range(5, 10);
-        while (currentLifeTime < damageLifeTime)
+        var rand = Random.Range(5, 12);
+        while (currentLifeTime < DAMAGE_LIFE_TIME)
         {
             currentLifeTime += Time.deltaTime;
             moveDir = Vector2.Lerp(moveDir, Vector2.zero, 0.1f);
             transform.position += (Vector3)moveDir * Time.deltaTime * rand;
-            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 3.5f * Time.deltaTime);
+            // transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 3.5f * Time.deltaTime);
             yield return null;
         }
+
+        // currentLifeTime = 0;
+        // while (currentLifeTime < TEXT_SCALE_TIME)
+        // {
+        //     currentLifeTime += Time.deltaTime;
+        //     transform.localScale *= 0.3f;
+        //     yield return null;
+        // }
         // while (currentLifeTime < damageLifeTime + 1)
         // {
         //     damageText.color.a -= 3;
         //     yield return null;
         // }
-        ObjectPoolManager.Instance.ReleaseVFX(gameObject);
+        // ObjectPoolManager.Instance.ReleaseVFX(gameObject);
     }
 
 
