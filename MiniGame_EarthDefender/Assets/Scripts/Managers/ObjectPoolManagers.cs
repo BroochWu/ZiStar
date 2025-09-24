@@ -458,7 +458,7 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null)
         {
-            bulletComponent.ResetState();
+            bulletComponent.ResetData();
         }
     }
 

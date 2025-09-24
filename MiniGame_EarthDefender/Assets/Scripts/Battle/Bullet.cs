@@ -18,9 +18,19 @@ public class Bullet : MonoBehaviour
     //最终值
     public float lifeTime;
     public float speed;
-    public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
     public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
-    public int bulletDamage;
+    public float bulletPenetrateDamageMulti;//子弹穿透单位的伤害衰减
+    private int bulletBaseDamage;
+    public int bulletFinalDamage
+    {
+        get
+        {
+            return
+            (int)(bulletBaseDamage
+            * finalDamagePenetrateMulti
+            * (float)(_bulletConfig.DamageMulti / 10000f));
+        }
+    }
     public Weapon parentWeapon { get; private set; }
     public int bulletType;
     public bool isReleased;//检测子弹是否已经被释放了
@@ -33,6 +43,12 @@ public class Bullet : MonoBehaviour
     private Vector3 currentDirection;
     private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;
     private SimpleCollider bulletCol;
+    private int hitTime;//发生碰撞的次数
+
+    //伤害递减
+    private float finalDamagePenetrateMulti => Mathf.Max(Mathf.Pow(bulletPenetrateDamageMulti, hitTime), 0.4f);
+    public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
+
 
     // public bool canCollide = true;//子弹是否可以碰撞
     // public Bullet bulletFormer;//生成之前的子弹
@@ -57,7 +73,7 @@ public class Bullet : MonoBehaviour
         bulletParentType = BulletParentType.PLAYER;
 
         parentWeapon = parent;
-        bulletDamage = parent.finalAttack;
+        bulletBaseDamage = parent.finalAttack;
 
         _bulletConfig = parent.bulletConfig;
 
@@ -77,7 +93,7 @@ public class Bullet : MonoBehaviour
 
         bulletParentType = BulletParentType.ENEMY;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
-        bulletDamage = parent.Damage;
+        bulletBaseDamage = parent.Damage;
 
 
         speed = 1;
@@ -100,7 +116,7 @@ public class Bullet : MonoBehaviour
         bulletParentType = BulletParentType.PLAYER;
 
         parentWeapon = _parent;
-        bulletDamage = _parent.finalAttack;
+        bulletBaseDamage = _parent.finalAttack;
 
         _bulletConfig = _bullet;//子弹是重写的
         SetCfgBasicData();
@@ -117,11 +133,14 @@ public class Bullet : MonoBehaviour
         bulletPenetrateInterval = _bulletConfig.PenetrateSep;
         lifeTime = _bulletConfig.LifeTime;
         trackType = _bulletConfig.TrackType;
+        bulletPenetrateDamageMulti = _bulletConfig.PenetrateDamageMulti / 10000f;
+
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
 
-        bulletDamage = (int)(bulletDamage * _bulletConfig.DamageMulti / 10000f);
         if (!_bulletConfig.CanCol) bulletCol.enabled = false;
         // Debug.LogError($"{bulletType},BD:{bulletDamage}");
+
+        ResetData();
     }
 
     void Update()
@@ -166,7 +185,7 @@ public class Bullet : MonoBehaviour
 
                     case BulletParentType.ENEMY:
 
-                        BattleManager.Instance.CalDamageEarthSuffer(bulletDamage);
+                        BattleManager.Instance.CalDamageEarthSuffer(bulletFinalDamage);
                         break;
 
                     default:
@@ -209,9 +228,9 @@ public class Bullet : MonoBehaviour
     }
 
     /// <summary>
-    /// 重置子弹状态
+    /// 重置子弹数据
     /// </summary>
-    public void ResetState()
+    public void ResetData()
     {
         //重置初始朝向
         currentDirection = Vector3.up;
@@ -221,6 +240,10 @@ public class Bullet : MonoBehaviour
         {
             finalBulletPenetrate = baseBulletPenetrate;
         }
+
+        //重置已撞击次数
+        hitTime = 0;
+
         //清空冷却池
         listCollisionCd.Clear();
     }
@@ -287,4 +310,21 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
+    public void OnHIt()
+    {
+        hitTime += 1;
+
+
+        if (!isInfinityPenetrate)
+        {
+            if (hitTime >= finalBulletPenetrate)
+            {
+                // 回收子弹
+                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+            }
+        }
+
+    }
+
 }

@@ -12,6 +12,7 @@
     "life_time": 3,
     "penetrate_sep": 99,
     "penetrate_count": 1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0.4,
     "row_angle_sep": 0,
     "next_bullet_row": 0
@@ -29,6 +30,7 @@
     "life_time": 0.5,
     "penetrate_sep": 0,
     "penetrate_count": 0,
+    "penetrate_damage_multi": 0,
     "row_space": 0,
     "row_angle_sep": 5,
     "next_bullet": 201,
@@ -47,6 +49,7 @@
     "life_time": 0.2,
     "penetrate_sep": 0.5,
     "penetrate_count": -1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0,
     "row_angle_sep": 0,
     "next_bullet": 202,
@@ -65,6 +68,7 @@
     "life_time": 0.5,
     "penetrate_sep": 0,
     "penetrate_count": 0,
+    "penetrate_damage_multi": 0,
     "row_space": 0,
     "row_angle_sep": 0,
     "next_bullet_row": 0
@@ -82,6 +86,7 @@
     "life_time": 2,
     "penetrate_sep": 99,
     "penetrate_count": 1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0,
     "row_angle_sep": 5,
     "next_bullet": 301,
@@ -100,6 +105,7 @@
     "life_time": 1,
     "penetrate_sep": 99,
     "penetrate_count": -1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0,
     "row_angle_sep": 0,
     "next_bullet_row": 0
@@ -117,6 +123,7 @@
     "life_time": 3,
     "penetrate_sep": 99,
     "penetrate_count": 1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0.2,
     "row_angle_sep": -3,
     "next_bullet": 401,
@@ -135,6 +142,7 @@
     "life_time": 3,
     "penetrate_sep": 99,
     "penetrate_count": 1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0,
     "row_angle_sep": 0,
     "next_bullet_row": 0
@@ -152,8 +160,27 @@
     "life_time": 100,
     "penetrate_sep": 1,
     "penetrate_count": -1,
+    "penetrate_damage_multi": 6000,
     "row_space": 0,
     "row_angle_sep": 0,
+    "next_bullet_row": 0
+  },
+  {
+    "id": 600,
+    "bullet_prefab": "Bullet_Player_6_1",
+    "parent_container": 1,
+    "can_col": true,
+    "uncol_time": 0,
+    "track_type": 0,
+    "track_start_time": 0.3,
+    "damage_multi": 10000,
+    "speed": 3,
+    "life_time": 3,
+    "penetrate_sep": 1,
+    "penetrate_count": -1,
+    "penetrate_damage_multi": 6000,
+    "row_space": 0,
+    "row_angle_sep": 5,
     "next_bullet_row": 0
   }
 ]

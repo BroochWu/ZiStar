@@ -69,23 +69,11 @@ public class CollisionManager : MonoBehaviour
                     if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval))
                     {
                         obj.GetComponent<EnemyBase>().TakeDamage(
-                            bulletConfig.bulletDamage, bulletConfig.parentWeapon
+                            bulletConfig.bulletFinalDamage, bulletConfig.parentWeapon
                         );
 
-                        if (bulletConfig.isInfinityPenetrate)
-                        {
-                            //代表子弹是无限穿透的
-                            return;
-                        }
-                        else
-                        {
-                            bulletConfig.finalBulletPenetrate -= 1;
-                            if (bulletConfig.finalBulletPenetrate <= 0)
-                            {
-                                // 回收子弹
-                                ObjectPoolManager.Instance.ReleaseBullet(bullet);
-                            }
-                        }
+                        bulletConfig.OnHIt();
+
                     }
                 }
             }

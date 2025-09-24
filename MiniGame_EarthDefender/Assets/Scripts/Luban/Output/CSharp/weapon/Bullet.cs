@@ -29,6 +29,7 @@ public sealed partial class Bullet : Luban.BeanBase
         { if(!_buf["life_time"].IsNumber) { throw new SerializationException(); }  LifeTime = _buf["life_time"]; }
         { if(!_buf["penetrate_sep"].IsNumber) { throw new SerializationException(); }  PenetrateSep = _buf["penetrate_sep"]; }
         { if(!_buf["penetrate_count"].IsNumber) { throw new SerializationException(); }  PenetrateCount = _buf["penetrate_count"]; }
+        { if(!_buf["penetrate_damage_multi"].IsNumber) { throw new SerializationException(); }  PenetrateDamageMulti = _buf["penetrate_damage_multi"]; }
         { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
         { if(!_buf["row_angle_sep"].IsNumber) { throw new SerializationException(); }  RowAngleSep = _buf["row_angle_sep"]; }
         { var _j = _buf["next_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextBullet = _j; } } else { NextBullet = null; } }
@@ -90,6 +91,10 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly int PenetrateCount;
     /// <summary>
+    /// 连续碰撞的伤害递减<br/>（万分数）
+    /// </summary>
+    public readonly int PenetrateDamageMulti;
+    /// <summary>
     /// 当多个生成时的间隔像素
     /// </summary>
     public readonly float RowSpace;
@@ -130,6 +135,7 @@ public sealed partial class Bullet : Luban.BeanBase
         + "lifeTime:" + LifeTime + ","
         + "penetrateSep:" + PenetrateSep + ","
         + "penetrateCount:" + PenetrateCount + ","
+        + "penetrateDamageMulti:" + PenetrateDamageMulti + ","
         + "rowSpace:" + RowSpace + ","
         + "rowAngleSep:" + RowAngleSep + ","
         + "nextBullet:" + NextBullet + ","
