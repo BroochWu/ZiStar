@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
     public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
+    public bool isInfinityPenetrate { get; private set; }//是否无敌
     public int bulletDamage;
     public Weapon parentWeapon { get; private set; }
     public string bulletType;
@@ -112,6 +113,7 @@ public class Bullet : MonoBehaviour
         bulletPenetrateInterval = _bulletConfig.PenetrateSep;
         lifeTime = _bulletConfig.LifeTime;
         trackType = _bulletConfig.TrackType;
+        isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
     }
 
     void Update()

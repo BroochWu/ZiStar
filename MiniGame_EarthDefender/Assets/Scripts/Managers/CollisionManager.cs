@@ -72,7 +72,7 @@ public class CollisionManager : MonoBehaviour
                             bulletConfig.bulletDamage, bulletConfig.parentWeapon
                         );
 
-                        if (bulletConfig.finalBulletPenetrate == -1)
+                        if (bulletConfig.isInfinityPenetrate)
                         {
                             //代表子弹是无限穿透的
                             return;

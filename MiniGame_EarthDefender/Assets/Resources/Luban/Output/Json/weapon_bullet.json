@@ -30,7 +30,7 @@
     "speed": 0,
     "life_time": 0.2,
     "penetrate_sep": 0.5,
-    "penetrate_count": 99,
+    "penetrate_count": -1,
     "row_space": 0,
     "next_bullet": 202
   },
