@@ -11,7 +11,7 @@ public class EnemyTrash : EnemyBase
 
     public override void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent)
     {
-        _isReleased = false;
+        IsReleased = false;
         BattleManager.Instance.RegisterEnemy(this);
         // sprite.sortingOrder = _initOrder;
         transform.SetPositionAndRotation(parent.transform.position, initDir);
@@ -62,7 +62,7 @@ public class EnemyTrash : EnemyBase
     {
         while (_state == EnemyState.ATTACK)
         {
-            var obj = ObjectPoolManager.Instance.GetBullet(_bulletId);
+            var obj = ObjectPoolManager.Instance.GetBullet(bulletId);
             obj.GetOrAddComponent<Bullet>().Initialize(this);
             yield return _attackSep;
         }

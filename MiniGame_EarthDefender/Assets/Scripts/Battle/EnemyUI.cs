@@ -9,6 +9,7 @@ public class EnemyUI : MonoBehaviour
     public GameObject hpLight;
     public SpriteRenderer sprite;
     public Material _spriteMaterial;
+    public Transform battleObjContainer;
     public int _initOrder = 20;
 
 

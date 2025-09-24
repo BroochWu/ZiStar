@@ -40,19 +40,52 @@ public class CollisionManager : MonoBehaviour
         // 检测子弹与敌人的碰撞
         foreach (var bullet in bullets)
         {
+            //如果子弹为隐藏态，不检测碰撞
             if (!bullet.activeInHierarchy)
                 continue;
 
             // 获取子弹的碰撞体
+            // 如果子弹没有碰撞体，不检测
             var bulletCollider = bullet.GetComponent<SimpleCollider>();
             if (bulletCollider == null) continue;
 
             // 获取子弹的边界框
             Rect bulletBounds = bulletCollider.GetBounds();
 
+
+            //如果子弹已经释放了，不检测
+            var bulletConfig = bullet.GetComponent<Bullet>();
+            if (bulletConfig.isReleased) return;
+
             // 获取可能碰撞的敌人对象
+            // 如果是非单体伤害，找到列表
+            // 如果是单体伤害，锁定单体目标
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bulletBounds);
+
+            if (bulletConfig.isSingleCol)
+            {
+                if (bulletConfig.colObj == null)
+                {
+                    foreach (var a in potentialCollisions)
+                    {
+                        var component = a.GetComponent<EnemyBase>();
+                        if (component == null)
+                        {
+                            return;
+                        }
+                        else if (!component.IsReleased)
+                        {
+                            potentialCollisions = new List<GameObject>() { potentialCollisions[0] };
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    potentialCollisions = new List<GameObject>() { bulletConfig.colObj };
+                }
+            }
 
             foreach (var obj in potentialCollisions)
             {
@@ -63,7 +96,6 @@ public class CollisionManager : MonoBehaviour
                 if (obj.CompareTag("Enemy") && IsColliding(bullet, obj))
                 {
                     // 处理碰撞
-                    var bulletConfig = bullet.GetComponent<Bullet>();
 
                     // 判断目前是不是和该实例的碰撞正在冷却中
                     if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval))
@@ -74,8 +106,6 @@ public class CollisionManager : MonoBehaviour
 
                         bulletConfig.OnHIt(obj);
 
-                        //如果是单体伤害，返回第一个就算了
-                        if (bulletConfig.isSingleCol) return;
 
                     }
                 }

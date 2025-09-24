@@ -61,7 +61,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// </summary>
     public GameObject GetBullet(int bulletId)
     {
-        Debug.Log("bt:" + bulletId);
+        // Debug.Log("bt:" + bulletId);
         if (!bulletPools.ContainsKey(bulletId))
         {
             CreateBulletPool(bulletId);
@@ -78,11 +78,14 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent.isReleased) return;
 
-        int bulletId = bulletComponent.bulletType;
+
+        int bulletId = bulletComponent.bulletId;
         // if (bulletPools.ContainsKey(bulletType))
         // {
+
+        //从敌人身上解离子弹，进入待命区
+        transform.SetParent(BattleManager.Instance.BulletsPath);
         bulletPools[bulletId].Release(bullet);
-        bullet.transform.position = Player.instance.shootPath.transform.position;
         // }
         // else
         // {
@@ -133,7 +136,7 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null)
         {
-            bulletComponent.bulletType = bulletId;
+            bulletComponent.bulletId = bulletId;
         }
         else
         {
@@ -191,10 +194,10 @@ public class ObjectPoolManager : MonoBehaviour
         switch (_type)
         {
             case cfg.Enums.Enemy.Type.TRASH:
-                obj.AddComponent<EnemyTrash>();
+                obj.GetOrAddComponent<EnemyTrash>();
                 break;
             case cfg.Enums.Enemy.Type.REWARDWEAPON:
-                obj.AddComponent<EnemyRewardWeapon>();
+                obj.GetOrAddComponent<EnemyRewardWeapon>();
                 break;
             default:
                 Debug.LogError("你这是放了个什么几把玩意进来啊啊啊");
@@ -455,28 +458,35 @@ public class ObjectPoolManager : MonoBehaviour
     {
         bullet.SetActive(true);
 
-        // 重置子弹状态
-        Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        if (bulletComponent != null)
-        {
-            bulletComponent.ResetData();
-        }
+        // // 重置子弹状态
+        // Bullet bulletComponent = bullet.GetComponent<Bullet>();
+        // if (bulletComponent != null)
+        // {
+        //     bulletComponent.ResetData();
+        // }
     }
 
-    // 释放回池时的操作（子弹）
+    // 释放回池时的操作（子弹）    
     private void OnReleaseBullet(GameObject bullet)
     {
-        bullet.SetActive(false);
         var config = bullet.GetComponent<Bullet>();
+
+        // 先解除任何可能的父子关系
+        if (bullet.transform.parent != BattleManager.Instance.BulletsPath)
+        {
+            bullet.transform.SetParent(BattleManager.Instance.BulletsPath);
+        }
+
         config.SetRelease();
-
-
+        bullet.SetActive(false);
         bullet.transform.position = Vector3.zero;
+        bullet.transform.rotation = Quaternion.identity;
     }
 
     // 从池中获取时的操作（敌人）
     private void OnGetEnemy(GameObject enemy)
     {
+        // enemy.GetComponent<EnemyBase>().IsReleased = false;
         enemy.SetActive(true);
 
         // 重置敌人状态（别搞了，预热的时候可能没有）
@@ -501,17 +511,31 @@ public class ObjectPoolManager : MonoBehaviour
     // 释放回池时的操作（敌人）
     private void OnReleaseEnemy(GameObject enemy)
     {
+        var enemyBase = enemy.GetComponent<EnemyBase>();
+        if (enemyBase != null)
+        {
+            enemyBase.UnregistAllMountBullets();
+        }
+
         enemy.SetActive(false);
         enemy.transform.position = Vector3.zero;
+        enemy.transform.rotation = Quaternion.identity;
 
-        // 重置敌人组件
-        // EnemyBase enemyComponent = enemy.GetComponent<EnemyBase>();
-        // if (enemyComponent != null)
-        // {
-        //     enemyComponent.hpBar.SetActive(false);
-        // }
+        // 清理所有子对象（确保没有残留的子弹）
+        foreach (Transform child in enemy.GetComponent<EnemyUI>()?.battleObjContainer)
+        {
+            var bullet = child.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                bullet.ReleaseOnEnemy();
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+                child.SetParent(null);
+            }
+        }
     }
-
 
 
     /// <summary>

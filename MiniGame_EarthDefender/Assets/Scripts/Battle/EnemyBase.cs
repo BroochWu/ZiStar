@@ -1,4 +1,5 @@
 // EnemyBase.cs - 基类
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
@@ -21,7 +22,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected cfg.enemy.EnemyLevel _levelData => levelData ??= _dynamicConfig.LevelId_Ref;
     protected int _enemyLevel;
     protected cfg.Enums.Enemy.Type _enemyType;
-    protected int _bulletId;
 
     // 状态变量
     protected bool _isReleased;
@@ -30,9 +30,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected float _rotationSpeed;
 
     // 属性
+    public int bulletId { get; protected set; }
     public int Damage { get; protected set; }
     public int InitHp { get; protected set; }
     public bool IsReleased { get => _isReleased; set => _isReleased = value; }
+    //挂在这里的子弹
+    public List<Bullet> mountBullets { get; private set; } = new();
 
     // 抽象方法，子类必须实现
     public abstract void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent);
@@ -99,9 +102,14 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    // 在 OnDie 方法中确保清理
     protected virtual void OnDie()
     {
+        // 先清理所有附着子弹
+        UnregistAllMountBullets();
+
         enemyUI.hpBar.SetActive(false);
+
         // 爆炸效果
         var bomb = ObjectPoolManager.Instance.GetVFX(VFXType.BOMB);
         bomb.GetComponent<VFX>().InitializeAsBomb(transform.position);
@@ -109,6 +117,36 @@ public abstract class EnemyBase : MonoBehaviour
         ObjectPoolManager.Instance.ReleaseEnemy(this);
         BattleManager.Instance.UnregisterEnemy(this);
     }
+
+    public void RegistMountBullets(Bullet bullet)
+    {
+        mountBullets.Add(bullet);
+    }
+
+
+    // 修改 UnregistAllMountBullets 方法
+    public void UnregistAllMountBullets()
+    {
+        // 先创建副本避免在遍历时修改集合
+        var bulletsToRelease = new List<Bullet>(mountBullets);
+        mountBullets.Clear();
+
+        foreach (Bullet bullet in bulletsToRelease)
+        {
+            if (bullet != null)
+            {
+                bullet.ReleaseOnEnemy();
+            }
+        }
+    }
+
+
+    // 新增方法：单独卸载一个子弹
+    public void UnregistMountBullet(Bullet bullet)
+    {
+        mountBullets.Remove(bullet);
+    }
+
 
     // protected IEnumerator OnHitEffect()
     // {
@@ -123,6 +161,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void ResetAttributes()
     {
+        // mountBullets.Clear();
 
         var baseDamage = (int)(_levelData.Damage + (_enemyLevel - 1) * _levelData.DamageMulti / 10000f);
         var baseHp = (int)(_levelData.Hp + (_enemyLevel - 1) * _levelData.HpMulti / 10000f);
@@ -154,7 +193,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyId = _dynamicConfig.Id;
         _enemyType = _dynamicConfig.EnemyType;
         enemyExp = _dynamicConfig.exp;
-        _bulletId = _dynamicConfig.Id;
+        bulletId = _dynamicConfig.Id;
 
         // 预计算速度值
         _moveSpeed = _dynamicConfig.MultiMoveSpeed * 0.0001f;

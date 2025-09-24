@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using cfg.enemy;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -14,7 +16,8 @@ public class Bullet : MonoBehaviour
     {
         NULL,
         LIFETIME,//到达时间
-        HIT//碰撞
+        HIT,//碰撞
+        ENEMYDIE //敌人死亡
     }
 
     private cfg.weapon.Bullet _bulletConfig;
@@ -39,8 +42,14 @@ public class Bullet : MonoBehaviour
         }
     }
     public Weapon parentWeapon { get; private set; }
-    public int bulletType;
-    public bool isReleased;//检测子弹是否已经被释放了
+    public int bulletId;
+
+    private bool _isReleased;
+    public bool isReleased//检测子弹是否已经被释放了
+    {
+        get => _isReleased;
+        private set => _isReleased = value;
+    }
     public List<GameObject> listCollisionCd = new();
     public int bulletState = 0;//子弹阶段，用来判断效果生成对象
 
@@ -55,9 +64,14 @@ public class Bullet : MonoBehaviour
     //伤害递减
     private float finalDamagePenetrateMulti => Mathf.Max(Mathf.Pow(bulletPenetrateDamageMulti, hitTime), 0.4f);
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
-    private GameObject colObj;//子弹碰撞到的单位
+    public GameObject colObj { get; private set; }//子弹碰撞到的单位
+    private EnemyBase attachedEnemy;
     public bool isInfinityPenetrate { get; private set; }//是否无敌
-    public bool isSingleCol { get; private set; }//是否单体伤害
+    [SerializeField]
+    public bool isSingleCol
+    {
+        get { return _bulletConfig?.ParentContainer == cfg.Enums.Bullet.Container.ENEMY; }
+    }//是否单体伤害
 
 
     // public bool canCollide = true;//子弹是否可以碰撞
@@ -70,14 +84,14 @@ public class Bullet : MonoBehaviour
         currentDirection = transform.up;
     }
 
-    void OnDisable()
-    {
-        if (isReleased)
-        {
-            Debug.LogWarning("检测到隐藏时未释放本子弹，已释放");
-            ObjectPoolManager.Instance.ReleaseBullet(gameObject);
-        }
-    }
+    // void OnDisable()
+    // {
+    //     if (isReleased)
+    //     {
+    //         Debug.LogWarning("检测到隐藏时未释放本子弹，已释放");
+    //         ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+    //     }
+    // }
     /// <summary>
     /// 由武器直接生成
     /// </summary>
@@ -109,6 +123,7 @@ public class Bullet : MonoBehaviour
     {
         isReleased = false;
         timer = 0f;
+        _bulletConfig = cfg.Tables.tb.Bullet.Get(parent.bulletId);
 
         bulletParentType = BulletParentType.ENEMY;
         transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
@@ -139,9 +154,9 @@ public class Bullet : MonoBehaviour
 
 
         _bulletConfig = _bullet;//子弹是重写的
-        // if (_bulletConfig.ParentContainer == cfg.Enums.Bullet.Container.ENEMY)
-        // {
-        // }
+                                // if (_bulletConfig.ParentContainer == cfg.Enums.Bullet.Container.ENEMY)
+                                // {
+                                // }
 
 
         SetCfgBasicData();
@@ -161,7 +176,6 @@ public class Bullet : MonoBehaviour
         bulletPenetrateDamageMulti = _bulletConfig.PenetrateDamageMulti / 10000f;
 
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
-        isSingleCol = _bulletConfig.ParentContainer == cfg.Enums.Bullet.Container.ENEMY;
 
         bulletCol.enabled = false;
         // Debug.LogError($"{bulletType},BD:{bulletDamage}");
@@ -270,9 +284,11 @@ public class Bullet : MonoBehaviour
 
         //重置已撞击次数
         hitTime = 0;
-
+        //重置正在碰撞的单位
+        colObj = null;
         //清空冷却池
         listCollisionCd.Clear();
+
     }
 
     /// <summary>
@@ -297,16 +313,15 @@ public class Bullet : MonoBehaviour
         listCollisionCd.Remove(_which);
     }
 
-    //设置为子弹已回收
+    // 修改 SetRelease 方法中的附着逻辑
     public void SetRelease()
     {
-        //这里要小心，不要在父类的坐标被重置以后赋值
         isReleased = true;
 
-
-        //根据不同的结束类型，判断生成什么子弹
+        // 根据不同的结束类型，判断生成什么子弹
         cfg.weapon.Bullet nextBullet = null;
         int rowCount = 0;
+
         switch (bulletDestroyReason)
         {
             case BulletDestroyReason.LIFETIME:
@@ -317,70 +332,91 @@ public class Bullet : MonoBehaviour
                 nextBullet = _bulletConfig.NextColBullet_Ref;
                 rowCount = _bulletConfig.NextColBulletRow;
                 break;
+            case BulletDestroyReason.ENEMYDIE:
+                nextBullet = null;
+                break;
         }
 
-
-        if (nextBullet != null)
+        if (nextBullet != null && bulletParentType == BulletParentType.PLAYER)
         {
-
             for (int i = 0; i < rowCount; i++)
             {
-                // Debug.LogError(bulletNext.name);
                 var child = ObjectPoolManager.Instance.GetBullet(nextBullet.Id);
-                //默认按圆角等比分割展开
+                var childComponent = child.GetComponent<Bullet>();
 
-                if (bulletParentType == BulletParentType.PLAYER)
+                switch (nextBullet.ParentContainer)
                 {
-                    var childComponent = child.GetComponent<Bullet>();
-                    switch (nextBullet.ParentContainer)
-                    {
-                        case cfg.Enums.Bullet.Container.NORMAL:
-                            var angleOffset = 360 / rowCount * (i - (rowCount - 1) / 2f);
-                            child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
-                            break;
-                            
-                        case cfg.Enums.Bullet.Container.ENEMY:
-                            if (colObj.activeSelf == false)
-                            {
-                                Debug.LogWarning("目前已死亡，无法附着");
-                                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
-                                return;
-                            }
-                            transform.SetParent(colObj.transform);
-                            transform.localPosition = Vector3.zero;
-                            break;
+                    case cfg.Enums.Bullet.Container.NORMAL:
+                        var angleOffset = 360 / rowCount * (i - (rowCount - 1) / 2f);
+                        child.transform.SetPositionAndRotation(transform.position,
+                            transform.rotation * Quaternion.Euler(0, 0, angleOffset));
+                        break;
 
-                        case cfg.Enums.Bullet.Container.PLAYER:
-                            //暂时不在这里处理
-                            break;
-                    }
-
-
-                    childComponent.Initialize(parentWeapon, nextBullet);
-                    childComponent.bulletState = bulletState + 1;
+                    case cfg.Enums.Bullet.Container.ENEMY:
+                        if (colObj == null || !colObj.activeInHierarchy ||
+                            colObj.GetComponent<EnemyBase>().IsReleased)
+                        {
+                            Debug.LogWarning("目标已死亡，无法附着");
+                            ObjectPoolManager.Instance.ReleaseBullet(child);
+                            continue; // 跳过这个子弹的初始化
+                        }
+                        child.transform.SetParent(colObj.GetComponent<EnemyUI>().battleObjContainer);
+                        child.transform.localPosition = Vector3.zero;
+                        break;
                 }
 
-                else Debug.LogError("暂不支持此种子弹的派生");
+                childComponent.Initialize(parentWeapon, nextBullet);
+                childComponent.bulletState = bulletState + 1;
             }
         }
+
+        ResetData();
+
     }
 
+
+
+    // 修改 OnHIt 方法，记录附着的敌人
     public void OnHIt(GameObject _colObj)
     {
         colObj = _colObj;
+        var enemy = colObj.GetComponent<EnemyBase>();
+
+        // 注册在目标的子弹挂载列表
+        enemy.RegistMountBullets(this);
+        attachedEnemy = enemy; // 记录附着的敌人
+
         hitTime += 1;
 
-
-        if (!isInfinityPenetrate)
+        if (!isInfinityPenetrate && hitTime >= finalBulletPenetrate)
         {
-            if (hitTime >= finalBulletPenetrate)
-            {
-                bulletDestroyReason = BulletDestroyReason.HIT;
-                // 回收子弹
-                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
-            }
+            bulletDestroyReason = BulletDestroyReason.HIT;
+            ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+        }
+    }
+
+    // 修改 ReleaseOnEnemy 方法
+    public void ReleaseOnEnemy()
+    {
+        // 先解除父子关系
+        if (attachedEnemy != null)
+        {
+            DetachFromEnemy();
         }
 
+        bulletDestroyReason = BulletDestroyReason.ENEMYDIE;
+        colObj = null;
+        ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+    }
+    // 新增方法：从敌人身上分离
+    public void DetachFromEnemy()
+    {
+        if (attachedEnemy != null)
+        {
+            attachedEnemy.UnregistMountBullet(this);
+            attachedEnemy = null;
+        }
+        transform.SetParent(BattleManager.Instance.BulletsPath);
     }
 
 }

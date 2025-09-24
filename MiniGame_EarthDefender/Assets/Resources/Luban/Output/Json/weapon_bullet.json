@@ -1,5 +1,24 @@
 [
   {
+    "id": 1001,
+    "bullet_prefab": "Bullet_Enemy_1",
+    "parent_container": 1,
+    "can_col": false,
+    "uncol_time": 0,
+    "track_type": 0,
+    "track_start_time": 0,
+    "damage_multi": 10000,
+    "speed": 5,
+    "life_time": 1.5,
+    "penetrate_sep": 0,
+    "penetrate_count": 0,
+    "penetrate_damage_multi": 0,
+    "row_space": 0,
+    "row_angle_sep": 0,
+    "next_col_bullet_row": 0,
+    "next_lifetime_bullet_row": 0
+  },
+  {
     "id": 100,
     "bullet_prefab": "Bullet_Player_1",
     "parent_container": 1,
@@ -200,7 +219,7 @@
     "can_col": true,
     "uncol_time": 0,
     "track_type": 1,
-    "track_start_time": 0,
+    "track_start_time": 0.3,
     "damage_multi": 0,
     "speed": 2,
     "life_time": 3,
