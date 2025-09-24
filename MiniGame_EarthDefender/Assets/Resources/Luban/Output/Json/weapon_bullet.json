@@ -2,6 +2,7 @@
   {
     "id": 100,
     "bullet_prefab": "Bullet_Player_1",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0,
     "track_type": 0,
@@ -18,6 +19,7 @@
   {
     "id": 200,
     "bullet_prefab": "Bullet_Player_2_0",
+    "parent_container": 1,
     "can_col": false,
     "uncol_time": 0,
     "track_type": 0,
@@ -35,6 +37,7 @@
   {
     "id": 201,
     "bullet_prefab": "Bullet_Player_2_1",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0,
     "track_type": 0,
@@ -52,6 +55,7 @@
   {
     "id": 202,
     "bullet_prefab": "Bullet_Player_2_2",
+    "parent_container": 1,
     "can_col": false,
     "uncol_time": 0,
     "track_type": 0,
@@ -68,6 +72,7 @@
   {
     "id": 300,
     "bullet_prefab": "Bullet_Player_3_1",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0,
     "track_type": 1,
@@ -85,6 +90,7 @@
   {
     "id": 301,
     "bullet_prefab": "Bullet_Player_3_Bomb",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0,
     "track_type": 0,
@@ -101,6 +107,7 @@
   {
     "id": 400,
     "bullet_prefab": "Bullet_Player_4_1",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0,
     "track_type": 0,
@@ -118,6 +125,7 @@
   {
     "id": 401,
     "bullet_prefab": "Bullet_Player_4_1",
+    "parent_container": 1,
     "can_col": true,
     "uncol_time": 0.2,
     "track_type": 0,
@@ -127,6 +135,23 @@
     "life_time": 3,
     "penetrate_sep": 99,
     "penetrate_count": 1,
+    "row_space": 0,
+    "row_angle_sep": 0,
+    "next_bullet_row": 0
+  },
+  {
+    "id": 500,
+    "bullet_prefab": "Bullet_Player_5_1",
+    "parent_container": 2,
+    "can_col": true,
+    "uncol_time": 0,
+    "track_type": 0,
+    "track_start_time": 0,
+    "damage_multi": 10000,
+    "speed": 0,
+    "life_time": 100,
+    "penetrate_sep": 1,
+    "penetrate_count": -1,
     "row_space": 0,
     "row_angle_sep": 0,
     "next_bullet_row": 0

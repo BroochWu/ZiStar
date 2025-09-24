@@ -21,8 +21,8 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["unlock_cond"].IsObject) { throw new SerializationException(); }  UnlockCond = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_cond"]);  }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
-        { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
         { if(!_buf["image_icon_path"].IsString) { throw new SerializationException(); }  ImageIconPath = _buf["image_icon_path"]; }
+        { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
         { if(!_buf["bullet_id"].IsNumber) { throw new SerializationException(); }  BulletId = _buf["bullet_id"]; }
         BulletId_Ref = null;
         { if(!_buf["piece"].IsNumber) { throw new SerializationException(); }  Piece = _buf["piece"]; }
@@ -55,13 +55,13 @@ public sealed partial class Weapon : Luban.BeanBase
     /// </summary>
     public readonly Enums.Com.Quality InitQuality;
     /// <summary>
-    /// 等级组id（伤害等养成）
-    /// </summary>
-    public readonly int LevelId;
-    /// <summary>
     /// 图片资源索引
     /// </summary>
     public readonly string ImageIconPath;
+    /// <summary>
+    /// 等级组id（伤害等养成）
+    /// </summary>
+    public readonly int LevelId;
     /// <summary>
     /// 子弹ID
     /// </summary>
@@ -106,8 +106,8 @@ public sealed partial class Weapon : Luban.BeanBase
         + "textName:" + TextName + ","
         + "unlockCond:" + UnlockCond + ","
         + "initQuality:" + InitQuality + ","
-        + "levelId:" + LevelId + ","
         + "imageIconPath:" + ImageIconPath + ","
+        + "levelId:" + LevelId + ","
         + "bulletId:" + BulletId + ","
         + "piece:" + Piece + ","
         + "rateOfFire:" + RateOfFire + ","

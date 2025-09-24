@@ -11,7 +11,6 @@ public class Weapon : MonoBehaviour
     public cfg.weapon.Weapon weaponConfig => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
     private cfg.weapon.Bullet _bulletConfig;
     public cfg.weapon.Bullet bulletConfig => _bulletConfig ??= weaponConfig.BulletId_Ref;
-    private string bulletName;
     //发射
     private int rowCount;
     // private float rowSpace;//行间距由子弹自己控制
@@ -100,7 +99,6 @@ public class Weapon : MonoBehaviour
         columnSpace = new WaitForSeconds(weaponConfig.ColumnSpace);
         // bulletSpeed = config.BulletSpeed;
         // bulletScale = config.BulletScale;
-        bulletName = weaponConfig.BulletId_Ref.BulletPrefab;
         GetAndSetWeaponAttack();
 
         // 预热对象池（可选）
@@ -119,8 +117,18 @@ public class Weapon : MonoBehaviour
         while (true)
         {
             yield return rateOfFire;
+            Vector3 spawnPos = Vector3.zero;
+            switch (bulletConfig.ParentContainer)
+            {
+                case cfg.Enums.Bullet.Container.NORMAL:
+                    spawnPos = bulletInitTransform.position;
+                    break;
+                case cfg.Enums.Bullet.Container.PLAYER:
+                    spawnPos = Player.instance.transform.position;
+                    break;
+            }
 
-            var spawnPos = bulletInitTransform.position;
+
             Quaternion baseRotation = Player.instance.rotationTarget.transform.rotation;
 
             // 获取发射方向
@@ -182,7 +190,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private GameObject GetBulletFromPool()
     {
-        return ObjectPoolManager.Instance.GetBullet(bulletName);
+        return ObjectPoolManager.Instance.GetBullet(_config.BulletId);
     }
 
     /// <summary>

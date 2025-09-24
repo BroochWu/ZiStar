@@ -62,7 +62,7 @@ public class EnemyTrash : EnemyBase
     {
         while (_state == EnemyState.ATTACK)
         {
-            var obj = ObjectPoolManager.Instance.GetBullet(_bulletType);
+            var obj = ObjectPoolManager.Instance.GetBullet(_bulletId);
             obj.GetOrAddComponent<Bullet>().Initialize(this);
             yield return _attackSep;
         }

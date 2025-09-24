@@ -8,8 +8,8 @@ public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance { get; private set; }
     // 对象池容器
-    private Dictionary<string, ObjectPool<GameObject>> bulletPools =
-        new Dictionary<string, ObjectPool<GameObject>>();
+    private Dictionary<int, ObjectPool<GameObject>> bulletPools =
+        new Dictionary<int, ObjectPool<GameObject>>();
 
     private Dictionary<int, ObjectPool<GameObject>> enemyPools =
         new Dictionary<int, ObjectPool<GameObject>>();
@@ -47,27 +47,27 @@ public class ObjectPoolManager : MonoBehaviour
     /// <summary>
     /// 预加载子弹类型
     /// </summary>
-    public void PreloadBulletType(string bulletType, int prewarmCount = 20)
+    public void PreloadBulletType(int bulletId, int prewarmCount = 20)
     {
-        if (!bulletPools.ContainsKey(bulletType))
+        if (!bulletPools.ContainsKey(bulletId))
         {
-            CreateBulletPool(bulletType);
-            WarmUpBulletPool(bulletType, prewarmCount);
+            CreateBulletPool(bulletId);
+            WarmUpBulletPool(bulletId, prewarmCount);
         }
     }
 
     /// <summary>
     /// 获取子弹
     /// </summary>
-    public GameObject GetBullet(string bulletType)
+    public GameObject GetBullet(int bulletId)
     {
-        Debug.Log("bt:" + bulletType);
-        if (!bulletPools.ContainsKey(bulletType))
+        Debug.Log("bt:" + bulletId);
+        if (!bulletPools.ContainsKey(bulletId))
         {
-            CreateBulletPool(bulletType);
+            CreateBulletPool(bulletId);
         }
 
-        return bulletPools[bulletType].Get();
+        return bulletPools[bulletId].Get();
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent.isReleased) return;
 
-        string bulletType = bulletComponent.bulletType;
+        int bulletType = bulletComponent.bulletType;
         // if (bulletPools.ContainsKey(bulletType))
         // {
         bulletPools[bulletType].Release(bullet);
@@ -92,9 +92,9 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     // 创建子弹对象池
-    private void CreateBulletPool(string bulletType)
+    private void CreateBulletPool(int bulletId)
     {
-        string prefabPath = $"Prefabs/Bullets/{bulletType}";
+        string prefabPath = $"Prefabs/Bullets/{cfg.Tables.tb.Bullet.Get(bulletId).BulletPrefab}";
         GameObject prefab = LoadPrefab(prefabPath);
 
         if (prefab == null)
@@ -103,8 +103,8 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
 
-        bulletPools[bulletType] = new ObjectPool<GameObject>(
-            createFunc: () => CreateBulletInstance(prefab, bulletType),
+        bulletPools[bulletId] = new ObjectPool<GameObject>(
+            createFunc: () => CreateBulletInstance(prefab, bulletId),
             actionOnGet: (obj) => OnGetBullet(obj),
             actionOnRelease: (obj) => OnReleaseBullet(obj),
             actionOnDestroy: (obj) => Destroy(obj),
@@ -115,31 +115,42 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     // 创建子弹实例
-    private GameObject CreateBulletInstance(GameObject prefab, string bulletType)
+    private GameObject CreateBulletInstance(GameObject prefab, int bulletId)
     {
-        GameObject bullet = Instantiate(prefab, BattleManager.Instance.BulletsPath);
+        var config = cfg.Tables.tb.Bullet.Get(bulletId);
+
+        var path = BattleManager.Instance.BulletsPath;
+        switch (config.ParentContainer)
+        {
+            case cfg.Enums.Bullet.Container.NORMAL:
+                break;
+            case cfg.Enums.Bullet.Container.PLAYER:
+                path = Player.instance.bulletContainer;
+                break;
+        }
+        GameObject bullet = Instantiate(prefab, path);
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null)
         {
-            bulletComponent.bulletType = bulletType;
+            bulletComponent.bulletType = bulletId;
         }
         else
         {
-            Debug.LogWarning($"子弹预制体 {bulletType} 缺少Bullet组件");
+            Debug.LogWarning($"子弹预制体 {bulletId} 缺少Bullet组件");
         }
         return bullet;
     }
 
     // 预热子弹池
-    private void WarmUpBulletPool(string bulletType, int count)
+    private void WarmUpBulletPool(int bulletId, int count)
     {
-        if (!bulletPools.ContainsKey(bulletType)) return;
+        if (!bulletPools.ContainsKey(bulletId)) return;
 
         List<GameObject> tempList = new List<GameObject>();
 
         for (int i = 0; i < count; i++)
         {
-            tempList.Add(GetBullet(bulletType));
+            tempList.Add(GetBullet(bulletId));
         }
 
         foreach (GameObject bullet in tempList)

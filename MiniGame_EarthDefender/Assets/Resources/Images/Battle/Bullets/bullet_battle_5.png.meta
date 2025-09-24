@@ -1,0 +1,321 @@
+fileFormatVersion: 2
+guid: 359dd55e5a4026d409871c54d5ba3006
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6286072828089587720
+    second: bullet_battle_5_0
+  - first:
+      213: -8236299442384646590
+    second: bullet_battle_5_1
+  - first:
+      213: -53337476802430214
+    second: bullet_battle_5_2
+  - first:
+      213: 2604201893868827093
+    second: bullet_battle_5_3
+  - first:
+      213: -5998014026330601509
+    second: bullet_battle_5_4
+  - first:
+      213: -6749740504928762048
+    second: bullet_battle_5_5
+  - first:
+      213: 5927682473091720323
+    second: bullet_battle_5_6
+  - first:
+      213: -951229655989719330
+    second: bullet_battle_5_7
+  - first:
+      213: 2495628559238240609
+    second: bullet_battle_5_8
+  - first:
+      213: 1332682247678297749
+    second: bullet_battle_5_9
+  - first:
+      213: 3150323938275967750
+    second: bullet_battle_5_10
+  - first:
+      213: 650968378439477465
+    second: bullet_battle_5_11
+  - first:
+      213: -2923493518147323645
+    second: bullet_battle_5_12
+  - first:
+      213: -5516724285236709091
+    second: bullet_battle_5_13
+  - first:
+      213: 5655572545519954806
+    second: bullet_battle_5_14
+  - first:
+      213: -8216556699226318378
+    second: bullet_battle_5_15
+  - first:
+      213: 2957922126142480464
+    second: bullet_battle_5_16
+  - first:
+      213: 1237742147897648006
+    second: bullet_battle_5_17
+  - first:
+      213: 7604397829981192826
+    second: bullet_battle_5_18
+  - first:
+      213: -6244174738268479783
+    second: bullet_battle_5_19
+  - first:
+      213: 3804172783127476757
+    second: bullet_battle_5_20
+  - first:
+      213: -253532008498620783
+    second: bullet_battle_5_21
+  - first:
+      213: -8375663662884828572
+    second: bullet_battle_5_22
+  - first:
+      213: -6689276993608797802
+    second: bullet_battle_5_23
+  - first:
+      213: -5912385140820121512
+    second: bullet_battle_5_24
+  - first:
+      213: -5322396734894761771
+    second: bullet_battle_5_25
+  - first:
+      213: -5690233063046679090
+    second: bullet_battle_5_26
+  - first:
+      213: 338781332481722128
+    second: bullet_battle_5_27
+  - first:
+      213: 8992924457876545027
+    second: bullet_battle_5_28
+  - first:
+      213: 4879648616171042227
+    second: bullet_battle_5_29
+  - first:
+      213: 1239247171305360784
+    second: bullet_battle_5_30
+  - first:
+      213: -2925420308884814548
+    second: bullet_battle_5_31
+  - first:
+      213: 3499489908994087010
+    second: bullet_battle_5_32
+  - first:
+      213: 4257979726061591331
+    second: bullet_battle_5_33
+  - first:
+      213: 3351957107221013456
+    second: bullet_battle_5_34
+  - first:
+      213: 8293251652445371602
+    second: bullet_battle_5_35
+  - first:
+      213: 1604417195375669357
+    second: bullet_battle_5_36
+  - first:
+      213: -5317704330193817477
+    second: bullet_battle_5_37
+  - first:
+      213: 110140837036557817
+    second: bullet_battle_5_38
+  - first:
+      213: 3783678064282967584
+    second: bullet_battle_5_39
+  - first:
+      213: 855347950653782846
+    second: bullet_battle_5_40
+  - first:
+      213: 8751282694031542503
+    second: bullet_battle_5_41
+  - first:
+      213: 8377946768771350270
+    second: bullet_battle_5_42
+  - first:
+      213: -7806582933664838267
+    second: bullet_battle_5_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bullet_battle_5_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 132
+        width: 247
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e0bdbea3078cb34e88834271f70ff3b
+      internalID: 6286072828089587720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet_battle_5_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 132
+        width: 246
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16389a0d298413a49b18b46b1a72a4cb
+      internalID: -8236299442384646590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5efefc0e14bdae345999fc837e9cf1dd
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bullet_battle_5_0: 6286072828089587720
+      bullet_battle_5_1: -8236299442384646590
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

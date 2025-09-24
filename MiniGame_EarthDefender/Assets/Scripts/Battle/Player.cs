@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject shootPath;
     public GameObject guideLine;
     public GameObject earthSprite;
+    public Transform bulletContainer;
 
     public Dictionary<Weapon, int> battleEquipedWeapon { get; private set; } = new();//局中使用的装备列表及其本局伤害量
     public bool canMove;
@@ -44,6 +45,11 @@ public class Player : MonoBehaviour
         cursorObj.GetComponent<SpriteRenderer>().enabled = false;
 #endif
         guideLine.SetActive(false);
+
+        foreach (Transform child in bulletContainer)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     // Update is called once per frame

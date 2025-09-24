@@ -21,7 +21,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected cfg.enemy.EnemyLevel _levelData => levelData ??= _dynamicConfig.LevelId_Ref;
     protected int _enemyLevel;
     protected cfg.Enums.Enemy.Type _enemyType;
-    protected string _bulletType;
+    protected int _bulletId;
 
     // 状态变量
     protected bool _isReleased;
@@ -154,7 +154,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyId = _dynamicConfig.Id;
         _enemyType = _dynamicConfig.EnemyType;
         enemyExp = _dynamicConfig.exp;
-        _bulletType = _dynamicConfig.PrefabBullet;
+        _bulletId = _dynamicConfig.Id;
 
         // 预计算速度值
         _moveSpeed = _dynamicConfig.MultiMoveSpeed * 0.0001f;

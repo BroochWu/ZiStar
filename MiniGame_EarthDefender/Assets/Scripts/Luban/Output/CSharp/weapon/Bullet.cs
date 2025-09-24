@@ -19,6 +19,7 @@ public sealed partial class Bullet : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
+        { if(!_buf["parent_container"].IsNumber) { throw new SerializationException(); }  ParentContainer = (Enums.Bullet.Container)_buf["parent_container"].AsInt; }
         { if(!_buf["can_col"].IsBoolean) { throw new SerializationException(); }  CanCol = _buf["can_col"]; }
         { if(!_buf["uncol_time"].IsNumber) { throw new SerializationException(); }  UncolTime = _buf["uncol_time"]; }
         { if(!_buf["track_type"].IsNumber) { throw new SerializationException(); }  TrackType = (Enums.Bullet.TrackType)_buf["track_type"].AsInt; }
@@ -48,6 +49,10 @@ public sealed partial class Bullet : Luban.BeanBase
     /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
     /// </summary>
     public readonly string BulletPrefab;
+    /// <summary>
+    /// 父物体容器
+    /// </summary>
+    public readonly Enums.Bullet.Container ParentContainer;
     /// <summary>
     /// 是否造成碰撞
     /// </summary>
@@ -115,6 +120,7 @@ public sealed partial class Bullet : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "bulletPrefab:" + BulletPrefab + ","
+        + "parentContainer:" + ParentContainer + ","
         + "canCol:" + CanCol + ","
         + "uncolTime:" + UncolTime + ","
         + "trackType:" + TrackType + ","

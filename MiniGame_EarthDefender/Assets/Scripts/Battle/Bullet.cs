@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
     public int bulletDamage;
     public Weapon parentWeapon { get; private set; }
-    public string bulletType;
+    public int bulletType;
     public bool isReleased;//检测子弹是否已经被释放了
     public List<GameObject> listCollisionCd = new();
     public int bulletState = 0;//子弹阶段，用来判断效果生成对象
@@ -32,15 +32,10 @@ public class Bullet : MonoBehaviour
     private float timer;
     private Vector3 currentDirection;
     private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;
-    private SimpleCollider collider;
+    private SimpleCollider bulletCol;
 
     // public bool canCollide = true;//子弹是否可以碰撞
     // public Bullet bulletFormer;//生成之前的子弹
-
-    void Awake()
-    {
-        collider ??= GetComponent<SimpleCollider>();
-    }
 
     void Start()
     {
@@ -56,6 +51,7 @@ public class Bullet : MonoBehaviour
     {
         isReleased = false;
         timer = 0f;
+        bulletCol = GetComponent<SimpleCollider>();
 
         //来自父
         bulletParentType = BulletParentType.PLAYER;
@@ -98,6 +94,7 @@ public class Bullet : MonoBehaviour
     {
         isReleased = false;
         timer = 0f;
+        bulletCol = GetComponent<SimpleCollider>();
 
         //来自父
         bulletParentType = BulletParentType.PLAYER;
@@ -123,12 +120,15 @@ public class Bullet : MonoBehaviour
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
 
         bulletDamage = (int)(bulletDamage * _bulletConfig.DamageMulti / 10000f);
-        if (!_bulletConfig.CanCol) collider.enabled = false;
+        if (!_bulletConfig.CanCol) bulletCol.enabled = false;
         // Debug.LogError($"{bulletType},BD:{bulletDamage}");
     }
 
     void Update()
     {
+        //子弹未加载完成之前不启用
+        if (_bulletConfig == null) return;
+
         //根据跟踪类型，决定跟踪方式
         switch (trackType)
         {
@@ -150,7 +150,7 @@ public class Bullet : MonoBehaviour
 
             if (timer >= _bulletConfig.UncolTime && _bulletConfig.CanCol)
             {
-                collider.enabled = true;//初始false
+                bulletCol.enabled = true;//初始false
             }
 
             // 检查是否超过生存时间
@@ -261,7 +261,7 @@ public class Bullet : MonoBehaviour
                 for (int i = 0; i < _bulletConfig.NextBulletRow; i++)
                 {
                     // Debug.LogError(bulletNext.name);
-                    var child = ObjectPoolManager.Instance.GetBullet(a.BulletPrefab);
+                    var child = ObjectPoolManager.Instance.GetBullet(a.Id);
                     //默认按圆角等比分割展开
 
                     if (bulletParentType == BulletParentType.PLAYER)
