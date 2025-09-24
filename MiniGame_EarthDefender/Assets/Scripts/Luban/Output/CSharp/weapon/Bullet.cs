@@ -19,6 +19,8 @@ public sealed partial class Bullet : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
+        { if(!_buf["can_col"].IsBoolean) { throw new SerializationException(); }  CanCol = _buf["can_col"]; }
+        { if(!_buf["uncol_time"].IsNumber) { throw new SerializationException(); }  UncolTime = _buf["uncol_time"]; }
         { if(!_buf["track_type"].IsNumber) { throw new SerializationException(); }  TrackType = (Enums.Bullet.TrackType)_buf["track_type"].AsInt; }
         { if(!_buf["track_start_time"].IsNumber) { throw new SerializationException(); }  TrackStartTime = _buf["track_start_time"]; }
         { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
@@ -30,6 +32,7 @@ public sealed partial class Bullet : Luban.BeanBase
         { if(!_buf["row_angle_sep"].IsNumber) { throw new SerializationException(); }  RowAngleSep = _buf["row_angle_sep"]; }
         { var _j = _buf["next_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextBullet = _j; } } else { NextBullet = null; } }
         NextBullet_Ref = null;
+        { if(!_buf["next_bullet_row"].IsNumber) { throw new SerializationException(); }  NextBulletRow = _buf["next_bullet_row"]; }
     }
 
     public static Bullet DeserializeBullet(JSONNode _buf)
@@ -45,6 +48,14 @@ public sealed partial class Bullet : Luban.BeanBase
     /// 子弹预制体地址<br/>（相对于Resources/Prefabs/Bullets）
     /// </summary>
     public readonly string BulletPrefab;
+    /// <summary>
+    /// 是否造成碰撞
+    /// </summary>
+    public readonly bool CanCol;
+    /// <summary>
+    /// 子弹出生无敌时间<br/>（派生子弹可以用这个来无法攻击父物体）
+    /// </summary>
+    public readonly float UncolTime;
     /// <summary>
     /// 跟踪方式
     /// </summary>
@@ -78,7 +89,7 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly float RowSpace;
     /// <summary>
-    /// 同行多个同时生成时，错开的角度
+    /// 同行多个同时生成时，错开的角度<br/>（目前以后续生成的方式实现的，会按圆角分割）
     /// </summary>
     public readonly float RowAngleSep;
     /// <summary>
@@ -86,6 +97,10 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly int? NextBullet;
     public weapon.Bullet NextBullet_Ref;
+    /// <summary>
+    /// 后续生成数量
+    /// </summary>
+    public readonly int NextBulletRow;
    
     public const int __ID__ = 399957300;
     public override int GetTypeId() => __ID__;
@@ -100,6 +115,8 @@ public sealed partial class Bullet : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "bulletPrefab:" + BulletPrefab + ","
+        + "canCol:" + CanCol + ","
+        + "uncolTime:" + UncolTime + ","
         + "trackType:" + TrackType + ","
         + "trackStartTime:" + TrackStartTime + ","
         + "damageMulti:" + DamageMulti + ","
@@ -110,6 +127,7 @@ public sealed partial class Bullet : Luban.BeanBase
         + "rowSpace:" + RowSpace + ","
         + "rowAngleSep:" + RowAngleSep + ","
         + "nextBullet:" + NextBullet + ","
+        + "nextBulletRow:" + NextBulletRow + ","
         + "}";
     }
 }

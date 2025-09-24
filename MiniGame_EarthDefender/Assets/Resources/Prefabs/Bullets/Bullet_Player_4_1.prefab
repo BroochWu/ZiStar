@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3018312640235964894}
   - component: {fileID: -2014668996172076272}
   m_Layer: 0
-  m_Name: Bullet_Player_4
+  m_Name: Bullet_Player_4_1
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1551200033
   m_SortingLayer: 3
-  m_SortingOrder: 25
+  m_SortingOrder: 10
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -235,7 +235,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key0: {r: 1, g: 0, b: 0, a: 0.78431374}
       key1: {r: 1, g: 1, b: 1, a: 0.78431374}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

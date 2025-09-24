@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
     public float speed;
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
     public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
-    public bool isInfinityPenetrate { get; private set; }//是否无敌
     public int bulletDamage;
     public Weapon parentWeapon { get; private set; }
     public string bulletType;
@@ -28,14 +27,20 @@ public class Bullet : MonoBehaviour
     public List<GameObject> listCollisionCd = new();
     public int bulletState = 0;//子弹阶段，用来判断效果生成对象
 
+    public bool isInfinityPenetrate { get; private set; }//是否无敌
     private BulletParentType bulletParentType;
     private float timer;
     private Vector3 currentDirection;
     private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;
+    private SimpleCollider collider;
 
     // public bool canCollide = true;//子弹是否可以碰撞
     // public Bullet bulletFormer;//生成之前的子弹
 
+    void Awake()
+    {
+        collider ??= GetComponent<SimpleCollider>();
+    }
 
     void Start()
     {
@@ -118,6 +123,7 @@ public class Bullet : MonoBehaviour
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
 
         bulletDamage = (int)(bulletDamage * _bulletConfig.DamageMulti / 10000f);
+        if (!_bulletConfig.CanCol) collider.enabled = false;
         // Debug.LogError($"{bulletType},BD:{bulletDamage}");
     }
 
@@ -130,7 +136,7 @@ public class Bullet : MonoBehaviour
                 BulletTrack();
                 break;
             case cfg.Enums.Bullet.TrackType.NULL:
-                transform.Translate(currentDirection * speed * Time.deltaTime);
+                transform.Translate(Vector3.up * speed * Time.deltaTime);
                 break;
             default:
                 break;
@@ -141,6 +147,11 @@ public class Bullet : MonoBehaviour
         if (!isReleased)
         {
             timer += Time.deltaTime;
+
+            if (timer >= _bulletConfig.UncolTime && _bulletConfig.CanCol)
+            {
+                collider.enabled = true;//初始false
+            }
 
             // 检查是否超过生存时间
             if (timer >= lifeTime)
@@ -247,18 +258,28 @@ public class Bullet : MonoBehaviour
             var a = _bulletConfig.NextBullet_Ref;
             if (a != null)
             {
-                // Debug.LogError(bulletNext.name);
-                var child = ObjectPoolManager.Instance.GetBullet(a.BulletPrefab);
-                child.transform.SetPositionAndRotation(transform.position, transform.rotation);
-
-                if (bulletParentType == BulletParentType.PLAYER)
+                for (int i = 0; i < _bulletConfig.NextBulletRow; i++)
                 {
-                    var childComponent = child.GetComponent<Bullet>();
-                    childComponent.Initialize(parentWeapon, a);
-                    childComponent.bulletState = bulletState + 1;
-                }
+                    // Debug.LogError(bulletNext.name);
+                    var child = ObjectPoolManager.Instance.GetBullet(a.BulletPrefab);
+                    //默认按圆角等比分割展开
 
-                else Debug.LogError("暂不支持此种子弹的派生");
+                    if (bulletParentType == BulletParentType.PLAYER)
+                    {
+                        var childComponent = child.GetComponent<Bullet>();
+
+                        var angleOffset = 360 / _bulletConfig.NextBulletRow * (i - (_bulletConfig.NextBulletRow - 1) / 2f);
+                        child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
+
+
+                        childComponent.Initialize(parentWeapon, a);
+
+
+                        childComponent.bulletState = bulletState + 1;
+                    }
+
+                    else Debug.LogError("暂不支持此种子弹的派生");
+                }
             }
             else
             {

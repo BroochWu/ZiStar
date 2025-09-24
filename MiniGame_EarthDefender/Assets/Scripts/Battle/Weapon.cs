@@ -129,7 +129,6 @@ public class Weapon : MonoBehaviour
             // 计算垂直于发射方向的向量
             Vector3 perpendicular = Vector3.Cross(fireDirection, Vector3.forward).normalized;
 
-            float totalAngleSpread = 0f;
             // 计算起始位置（居中分布）
             if (columnCount > 1)
             {
@@ -137,8 +136,6 @@ public class Weapon : MonoBehaviour
                 Vector3 startOffset = perpendicular * (totalWidth / 2f);
                 spawnPos = bulletInitTransform.position - startOffset;
 
-                //计算散射斜角
-                totalAngleSpread = bulletConfig.RowAngleSep * (columnCount - 1);
             }
 
             var oldSpawnPos = spawnPos;
