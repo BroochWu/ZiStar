@@ -24,10 +24,12 @@ public class Bullet : MonoBehaviour
     public string bulletType;
     public bool isReleased;//检测子弹是否已经被释放了
     public List<GameObject> listCollisionCd = new();
+    public int bulletState = 0;//子弹阶段，用来判断效果生成对象
+
     private BulletParentType bulletParentType;
     private float timer;
-    public int bulletState = 0;//子弹阶段，用来判断效果生成对象
-    // private Vector3 initScale;
+    private Vector3 currentDirection;
+    private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;
 
     // public bool canCollide = true;//子弹是否可以碰撞
     // public Bullet bulletFormer;//生成之前的子弹
@@ -36,6 +38,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         // initScale = transform.localScale;
+        currentDirection = transform.up;
     }
     /// <summary>
     /// 由武器直接生成
@@ -55,10 +58,7 @@ public class Bullet : MonoBehaviour
         _bulletConfig = parent.bulletConfig;
 
         //来自表
-        speed = _bulletConfig.Speed;
-        baseBulletPenetrate = _bulletConfig.PenetrateCount;
-        bulletPenetrateInterval = _bulletConfig.PenetrateSep;
-        lifeTime = _bulletConfig.LifeTime;
+        SetCfgBasicData();
     }
 
     /// <summary>
@@ -98,18 +98,38 @@ public class Bullet : MonoBehaviour
         bulletDamage = _parent.finalAttack;
 
         _bulletConfig = _bullet;//子弹是重写的
-
+        SetCfgBasicData();
         //来自表
+    }
+
+    /// <summary>
+    /// 设置表属性
+    /// </summary>
+    void SetCfgBasicData()
+    {
         speed = _bulletConfig.Speed;
         baseBulletPenetrate = _bulletConfig.PenetrateCount;
         bulletPenetrateInterval = _bulletConfig.PenetrateSep;
         lifeTime = _bulletConfig.LifeTime;
+        trackType = _bulletConfig.TrackType;
     }
 
     void Update()
     {
-        // 移动子弹
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        //根据跟踪类型，决定跟踪方式
+        switch (trackType)
+        {
+            case cfg.Enums.Bullet.TrackType.SLERP:
+                BulletTrack();
+                break;
+            case cfg.Enums.Bullet.TrackType.NULL:
+                transform.Translate(currentDirection * speed * Time.deltaTime);
+                break;
+            default:
+                break;
+        }
+        // 移动
+        //更新旋转使其朝向移动方向
 
         if (!isReleased)
         {
@@ -142,18 +162,45 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    //子弹跟踪
+    void BulletTrack()
+    {
+        //如果生成时间小于跟踪开始时间，则不跟踪
+        if (timer < _bulletConfig.TrackStartTime)
+            return;
+
+        // 寻找目标
+        if (BattleManager.Instance.activeEnemys.Count > 0)
+        {
+            Vector3 targetPosition = BattleManager.Instance.activeEnemys[0].transform.position;
+            Vector3 targetDirection = (targetPosition - transform.position).normalized;
+
+            // 使用旋转步长来平滑转向
+            float rotateSpeed = 5f; // 控制转向速度，单位是度/秒
+            float step = rotateSpeed * Time.deltaTime;
+            currentDirection = Vector3.RotateTowards(currentDirection, targetDirection, step, 0.02f);
+
+            // 也可以使用插值，但RotateTowards更易于控制最大旋转角度
+            // currentDirection = Vector3.Slerp(currentDirection, targetDirection, rotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, currentDirection);
+            transform.Translate(currentDirection * speed * Time.deltaTime, Space.World);
+        }
+
+    }
+
     /// <summary>
     /// 重置子弹状态
     /// </summary>
     public void ResetState()
     {
-        //暂时没啥重置的好像
+        //重置初始朝向
+        currentDirection = Vector3.up;
 
+        //重置可穿透数量
         if (parentWeapon != null)
         {
             finalBulletPenetrate = baseBulletPenetrate;
         }
-        // transform.localScale = initScale * parentWeapon.config.BulletScale / 10000f;
         //清空冷却池
         listCollisionCd.Clear();
     }
@@ -173,12 +220,14 @@ public class Bullet : MonoBehaviour
         return true;
     }
 
+    //开启协程记录每个CD
     IEnumerator CorAddToListCollisionCD(GameObject _which, float _while)
     {
         yield return new WaitForSeconds(_while);
         listCollisionCd.Remove(_which);
     }
 
+    //设置为子弹已回收
     public void SetRelease()
     {
         //这里要小心，不要在父类的坐标被重置以后赋值
