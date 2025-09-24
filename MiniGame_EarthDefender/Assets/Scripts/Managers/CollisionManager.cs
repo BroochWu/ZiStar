@@ -72,7 +72,10 @@ public class CollisionManager : MonoBehaviour
                             bulletConfig.bulletFinalDamage, bulletConfig.parentWeapon
                         );
 
-                        bulletConfig.OnHIt();
+                        bulletConfig.OnHIt(obj);
+
+                        //如果是单体伤害，返回第一个就算了
+                        if (bulletConfig.isSingleCol) return;
 
                     }
                 }

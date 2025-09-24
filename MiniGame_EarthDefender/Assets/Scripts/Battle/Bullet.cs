@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +44,6 @@ public class Bullet : MonoBehaviour
     public List<GameObject> listCollisionCd = new();
     public int bulletState = 0;//子弹阶段，用来判断效果生成对象
 
-    public bool isInfinityPenetrate { get; private set; }//是否无敌
     private BulletParentType bulletParentType;
     private BulletDestroyReason bulletDestroyReason = BulletDestroyReason.NULL;
     private float timer;
@@ -55,6 +55,9 @@ public class Bullet : MonoBehaviour
     //伤害递减
     private float finalDamagePenetrateMulti => Mathf.Max(Mathf.Pow(bulletPenetrateDamageMulti, hitTime), 0.4f);
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
+    private GameObject colObj;//子弹碰撞到的单位
+    public bool isInfinityPenetrate { get; private set; }//是否无敌
+    public bool isSingleCol { get; private set; }//是否单体伤害
 
 
     // public bool canCollide = true;//子弹是否可以碰撞
@@ -65,6 +68,15 @@ public class Bullet : MonoBehaviour
         // initScale = transform.localScale;
         if (!CompareTag("PlayerBullet")) Debug.LogError("子弹的标签不对，这样无法碰撞");
         currentDirection = transform.up;
+    }
+
+    void OnDisable()
+    {
+        if (isReleased)
+        {
+            Debug.LogWarning("检测到隐藏时未释放本子弹，已释放");
+            ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+        }
     }
     /// <summary>
     /// 由武器直接生成
@@ -125,7 +137,13 @@ public class Bullet : MonoBehaviour
         parentWeapon = _parent;
         bulletBaseDamage = _parent.finalAttack;
 
+
         _bulletConfig = _bullet;//子弹是重写的
+        // if (_bulletConfig.ParentContainer == cfg.Enums.Bullet.Container.ENEMY)
+        // {
+        // }
+
+
         SetCfgBasicData();
         //来自表
     }
@@ -143,8 +161,9 @@ public class Bullet : MonoBehaviour
         bulletPenetrateDamageMulti = _bulletConfig.PenetrateDamageMulti / 10000f;
 
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
+        isSingleCol = _bulletConfig.ParentContainer == cfg.Enums.Bullet.Container.ENEMY;
 
-        if (!_bulletConfig.CanCol) bulletCol.enabled = false;
+        bulletCol.enabled = false;
         // Debug.LogError($"{bulletType},BD:{bulletDamage}");
 
         ResetData();
@@ -174,7 +193,7 @@ public class Bullet : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer >= _bulletConfig.UncolTime && _bulletConfig.CanCol)
+            if (timer >= _bulletConfig.UncolTime && _bulletConfig.CanCol && bulletCol.enabled == false)
             {
                 bulletCol.enabled = true;//初始false
             }
@@ -313,14 +332,31 @@ public class Bullet : MonoBehaviour
                 if (bulletParentType == BulletParentType.PLAYER)
                 {
                     var childComponent = child.GetComponent<Bullet>();
+                    switch (nextBullet.ParentContainer)
+                    {
+                        case cfg.Enums.Bullet.Container.NORMAL:
+                            var angleOffset = 360 / rowCount * (i - (rowCount - 1) / 2f);
+                            child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
+                            break;
+                            
+                        case cfg.Enums.Bullet.Container.ENEMY:
+                            if (colObj.activeSelf == false)
+                            {
+                                Debug.LogWarning("目前已死亡，无法附着");
+                                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+                                return;
+                            }
+                            transform.SetParent(colObj.transform);
+                            transform.localPosition = Vector3.zero;
+                            break;
 
-                    var angleOffset = 360 / rowCount * (i - (rowCount - 1) / 2f);
-                    child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
+                        case cfg.Enums.Bullet.Container.PLAYER:
+                            //暂时不在这里处理
+                            break;
+                    }
 
 
                     childComponent.Initialize(parentWeapon, nextBullet);
-
-
                     childComponent.bulletState = bulletState + 1;
                 }
 
@@ -329,8 +365,9 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void OnHIt()
+    public void OnHIt(GameObject _colObj)
     {
+        colObj = _colObj;
         hitTime += 1;
 
 

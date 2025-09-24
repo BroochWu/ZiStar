@@ -28,6 +28,10 @@ namespace cfg.Enums.Bullet
         /// 星球
         /// </summary>
         PLAYER = 2,
+        /// <summary>
+        /// 敌人
+        /// </summary>
+        ENEMY = 3,
     }
 
 } 

@@ -123,6 +123,7 @@ public class ObjectPoolManager : MonoBehaviour
         switch (config.ParentContainer)
         {
             case cfg.Enums.Bullet.Container.NORMAL:
+                path = BattleManager.Instance.BulletsPath;
                 break;
             case cfg.Enums.Bullet.Container.PLAYER:
                 path = Player.instance.bulletContainer;
