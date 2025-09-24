@@ -62,7 +62,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void TakeDamage(int damage, Weapon source)
     {
+        //如果伤害量是0，不显示（后面可能会有无敌之类的显示？到时候再说吧）
+        if (damage == 0) return;
+
+        //如果已经释放，无法造成伤害
         if (_dynamicConfig == null || _isReleased) return;
+
 
         var dtx = ObjectPoolManager.Instance.GetVFX(VFXType.DAMAGETEXT);
         dtx.GetComponent<VFX>().InitializeAsDTX(damage, transform.position);

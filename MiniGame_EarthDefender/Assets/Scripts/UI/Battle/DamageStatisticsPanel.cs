@@ -23,8 +23,8 @@ public class DamageStatisticsPanel : MonoBehaviour
 
         mvpWeapon = BattleManager.Instance.sortedWeaponDamageStatisticsList[0].Key;
         mvpWeaponDamage = BattleManager.Instance.sortedWeaponDamageStatisticsList[0].Value;
-        imageMvpWeapon.sprite = mvpWeapon.config.ImageIcon;
-        textMvpWeaponName.text = mvpWeapon.config.TextName;
+        imageMvpWeapon.sprite = mvpWeapon.weaponConfig.ImageIcon;
+        textMvpWeaponName.text = mvpWeapon.weaponConfig.TextName;
         if (mvpWeaponDamage == 0)
         {
             textMvpWeaponDamageCount.text = "造成伤害……0？？居然是0耶……";

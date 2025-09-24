@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     }
 
     private cfg.weapon.Bullet _bulletConfig;
+    private const float ROTATE_SPEED = 3f; // 控制转向速度，单位是度/秒
     //基础值
     private int baseBulletPenetrate;//子弹可碰撞次数（可穿透数量）
 
@@ -39,6 +40,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         // initScale = transform.localScale;
+        if (!CompareTag("PlayerBullet")) Debug.LogError("子弹的标签不对，这样无法碰撞");
         currentDirection = transform.up;
     }
     /// <summary>
@@ -114,6 +116,9 @@ public class Bullet : MonoBehaviour
         lifeTime = _bulletConfig.LifeTime;
         trackType = _bulletConfig.TrackType;
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
+
+        bulletDamage = (int)(bulletDamage * _bulletConfig.DamageMulti / 10000f);
+        // Debug.LogError($"{bulletType},BD:{bulletDamage}");
     }
 
     void Update()
@@ -167,9 +172,12 @@ public class Bullet : MonoBehaviour
     //子弹跟踪
     void BulletTrack()
     {
-        //如果生成时间小于跟踪开始时间，则不跟踪
-        if (timer < _bulletConfig.TrackStartTime)
+        //如果生成时间小于跟踪开始时间，则不跟踪，往前跑
+        if (timer < _bulletConfig.TrackStartTime || BattleManager.Instance.activeEnemys.Count <= 0)
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
             return;
+        }
 
         // 寻找目标
         if (BattleManager.Instance.activeEnemys.Count > 0)
@@ -178,8 +186,7 @@ public class Bullet : MonoBehaviour
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
 
             // 使用旋转步长来平滑转向
-            float rotateSpeed = 5f; // 控制转向速度，单位是度/秒
-            float step = rotateSpeed * Time.deltaTime;
+            float step = ROTATE_SPEED * Time.deltaTime;
             currentDirection = Vector3.RotateTowards(currentDirection, targetDirection, step, 0.02f);
 
             // 也可以使用插值，但RotateTowards更易于控制最大旋转角度

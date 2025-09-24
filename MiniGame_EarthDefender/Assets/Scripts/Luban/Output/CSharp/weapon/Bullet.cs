@@ -21,11 +21,13 @@ public sealed partial class Bullet : Luban.BeanBase
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
         { if(!_buf["track_type"].IsNumber) { throw new SerializationException(); }  TrackType = (Enums.Bullet.TrackType)_buf["track_type"].AsInt; }
         { if(!_buf["track_start_time"].IsNumber) { throw new SerializationException(); }  TrackStartTime = _buf["track_start_time"]; }
+        { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
         { if(!_buf["speed"].IsNumber) { throw new SerializationException(); }  Speed = _buf["speed"]; }
         { if(!_buf["life_time"].IsNumber) { throw new SerializationException(); }  LifeTime = _buf["life_time"]; }
         { if(!_buf["penetrate_sep"].IsNumber) { throw new SerializationException(); }  PenetrateSep = _buf["penetrate_sep"]; }
         { if(!_buf["penetrate_count"].IsNumber) { throw new SerializationException(); }  PenetrateCount = _buf["penetrate_count"]; }
         { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
+        { if(!_buf["row_angle_sep"].IsNumber) { throw new SerializationException(); }  RowAngleSep = _buf["row_angle_sep"]; }
         { var _j = _buf["next_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextBullet = _j; } } else { NextBullet = null; } }
         NextBullet_Ref = null;
     }
@@ -52,6 +54,10 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly float TrackStartTime;
     /// <summary>
+    /// 碰撞后的伤害倍率<br/>（万分数）
+    /// </summary>
+    public readonly int DamageMulti;
+    /// <summary>
     /// 子弹飞行速度
     /// </summary>
     public readonly float Speed;
@@ -71,6 +77,10 @@ public sealed partial class Bullet : Luban.BeanBase
     /// 当多个生成时的间隔像素
     /// </summary>
     public readonly float RowSpace;
+    /// <summary>
+    /// 同行多个同时生成时，错开的角度
+    /// </summary>
+    public readonly float RowAngleSep;
     /// <summary>
     /// 后续生成
     /// </summary>
@@ -92,11 +102,13 @@ public sealed partial class Bullet : Luban.BeanBase
         + "bulletPrefab:" + BulletPrefab + ","
         + "trackType:" + TrackType + ","
         + "trackStartTime:" + TrackStartTime + ","
+        + "damageMulti:" + DamageMulti + ","
         + "speed:" + Speed + ","
         + "lifeTime:" + LifeTime + ","
         + "penetrateSep:" + PenetrateSep + ","
         + "penetrateCount:" + PenetrateCount + ","
         + "rowSpace:" + RowSpace + ","
+        + "rowAngleSep:" + RowAngleSep + ","
         + "nextBullet:" + NextBullet + ","
         + "}";
     }

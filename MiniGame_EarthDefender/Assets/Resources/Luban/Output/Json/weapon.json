@@ -8,14 +8,14 @@
       "int_params": []
     },
     "init_quality": 2,
+    "level_id": 1001,
     "image_icon_path": "Items/item_gold",
-    "bullet_id": 100,
+    "bullet_id": 300,
     "piece": 2001,
     "rate_of_fire": 1,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 0.05,
-    "level_id": 1001
+    "column_space": 0.05
   },
   {
     "id": 2,
@@ -30,14 +30,14 @@
       ]
     },
     "init_quality": 2,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 201,
     "piece": 2002,
-    "rate_of_fire": 2,
+    "rate_of_fire": 0.5,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 0.2
   },
   {
     "id": 3,
@@ -52,14 +52,14 @@
       ]
     },
     "init_quality": 2,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
-    "bullet_id": 100,
+    "bullet_id": 300,
     "piece": 2003,
-    "rate_of_fire": 0.2,
+    "rate_of_fire": 1,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 0.2
   },
   {
     "id": 4,
@@ -74,14 +74,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2004,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 5,
@@ -96,14 +96,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2005,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 6,
@@ -118,14 +118,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2006,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 7,
@@ -140,14 +140,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2007,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 8,
@@ -162,14 +162,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2008,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 9,
@@ -184,14 +184,14 @@
       ]
     },
     "init_quality": 3,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2009,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 10,
@@ -206,14 +206,14 @@
       ]
     },
     "init_quality": 4,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2010,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 11,
@@ -228,14 +228,14 @@
       ]
     },
     "init_quality": 4,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2011,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   },
   {
     "id": 12,
@@ -250,13 +250,13 @@
       ]
     },
     "init_quality": 4,
+    "level_id": 1002,
     "image_icon_path": "Items/item_gold",
     "bullet_id": 100,
     "piece": 2012,
     "rate_of_fire": 0.2,
     "row_count": 1,
     "column_count": 1,
-    "column_space": 1,
-    "level_id": 1002
+    "column_space": 1
   }
 ]

@@ -21,6 +21,7 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["unlock_cond"].IsObject) { throw new SerializationException(); }  UnlockCond = global::cfg.Beans.Com_UnlockConds.DeserializeCom_UnlockConds(_buf["unlock_cond"]);  }
         { if(!_buf["init_quality"].IsNumber) { throw new SerializationException(); }  InitQuality = (Enums.Com.Quality)_buf["init_quality"].AsInt; }
+        { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
         { if(!_buf["image_icon_path"].IsString) { throw new SerializationException(); }  ImageIconPath = _buf["image_icon_path"]; }
         { if(!_buf["bullet_id"].IsNumber) { throw new SerializationException(); }  BulletId = _buf["bullet_id"]; }
         BulletId_Ref = null;
@@ -30,7 +31,6 @@ public sealed partial class Weapon : Luban.BeanBase
         { if(!_buf["row_count"].IsNumber) { throw new SerializationException(); }  RowCount = _buf["row_count"]; }
         { if(!_buf["column_count"].IsNumber) { throw new SerializationException(); }  ColumnCount = _buf["column_count"]; }
         { if(!_buf["column_space"].IsNumber) { throw new SerializationException(); }  ColumnSpace = _buf["column_space"]; }
-        { if(!_buf["level_id"].IsNumber) { throw new SerializationException(); }  LevelId = _buf["level_id"]; }
     }
 
     public static Weapon DeserializeWeapon(JSONNode _buf)
@@ -54,6 +54,10 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 初始稀有度
     /// </summary>
     public readonly Enums.Com.Quality InitQuality;
+    /// <summary>
+    /// 等级组id（伤害等养成）
+    /// </summary>
+    public readonly int LevelId;
     /// <summary>
     /// 图片资源索引
     /// </summary>
@@ -84,10 +88,6 @@ public sealed partial class Weapon : Luban.BeanBase
     /// 连发间隔（秒）
     /// </summary>
     public readonly float ColumnSpace;
-    /// <summary>
-    /// 等级组id（伤害等养成）
-    /// </summary>
-    public readonly int LevelId;
    
     public const int __ID__ = 986069582;
     public override int GetTypeId() => __ID__;
@@ -106,6 +106,7 @@ public sealed partial class Weapon : Luban.BeanBase
         + "textName:" + TextName + ","
         + "unlockCond:" + UnlockCond + ","
         + "initQuality:" + InitQuality + ","
+        + "levelId:" + LevelId + ","
         + "imageIconPath:" + ImageIconPath + ","
         + "bulletId:" + BulletId + ","
         + "piece:" + Piece + ","
@@ -113,7 +114,6 @@ public sealed partial class Weapon : Luban.BeanBase
         + "rowCount:" + RowCount + ","
         + "columnCount:" + ColumnCount + ","
         + "columnSpace:" + ColumnSpace + ","
-        + "levelId:" + LevelId + ","
         + "}";
     }
 }

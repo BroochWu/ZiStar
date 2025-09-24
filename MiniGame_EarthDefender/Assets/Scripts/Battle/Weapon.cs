@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -7,9 +8,9 @@ public class Weapon : MonoBehaviour
 {
     // public static int globalDamageMultiInOneBattle { get; private set; }//所有武器共同生效的，单局游戏全局伤害加成
     private cfg.weapon.Weapon _config;
-    public cfg.weapon.Weapon config => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
+    public cfg.weapon.Weapon weaponConfig => _config ??= cfg.Tables.tb.Weapon.GetOrDefault(weaponId);
     private cfg.weapon.Bullet _bulletConfig;
-    public cfg.weapon.Bullet bulletConfig => _bulletConfig ??= config.BulletId_Ref;
+    public cfg.weapon.Bullet bulletConfig => _bulletConfig ??= weaponConfig.BulletId_Ref;
     private string bulletName;
     //发射
     private int rowCount;
@@ -47,9 +48,9 @@ public class Weapon : MonoBehaviour
         //初始化武器伤害
         // this.attack = GetWeaponAttack();
 
-        if (config == null)
+        if (weaponConfig == null)
         {
-            Debug.LogError($"Weapon config not found for ID: {config.Id}");
+            Debug.LogError($"Weapon config not found for ID: {weaponConfig.Id}");
             return;
         }
 
@@ -75,8 +76,8 @@ public class Weapon : MonoBehaviour
         int final = (int)(
             basicValue *
             (1
-            + config.basicAdditionAtk //基础武器伤害倍率
-                                      // + DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100f //武器带来的全局加成量（删除，叠加在单局加成里）
+            + weaponConfig.basicAdditionAtk //基础武器伤害倍率
+                                            // + DataManager.Instance.TotalWeaponsGlobalAtkBonus / 100f //武器带来的全局加成量（删除，叠加在单局加成里）
             + BattleManager.Instance.globalDamageMultiInOneBattle / 10000f  //单局加成（基本上是卡牌带来的）
             + localDamageMultiInOneBattle / 10000f //单局本武器独特加成（基本上也是卡牌带来的）
             )
@@ -92,14 +93,14 @@ public class Weapon : MonoBehaviour
     void UpdateData()
     {
         // 初始化武器参数(这些未来可能都不是固定读表的)
-        rateOfFire = new WaitForSeconds(1f / config.RateOfFire);
+        rateOfFire = new WaitForSeconds(1f / weaponConfig.RateOfFire);
         // bulletReleaseTime = config.MaxLifetime[currentStateCount];
-        rowCount = config.RowCount;
-        columnCount = config.ColumnCount;
-        columnSpace = new WaitForSeconds(config.ColumnSpace);
+        rowCount = weaponConfig.RowCount;
+        columnCount = weaponConfig.ColumnCount;
+        columnSpace = new WaitForSeconds(weaponConfig.ColumnSpace);
         // bulletSpeed = config.BulletSpeed;
         // bulletScale = config.BulletScale;
-        bulletName = config.BulletId_Ref.BulletPrefab;
+        bulletName = weaponConfig.BulletId_Ref.BulletPrefab;
         GetAndSetWeaponAttack();
 
         // 预热对象池（可选）
@@ -120,20 +121,24 @@ public class Weapon : MonoBehaviour
             yield return rateOfFire;
 
             var spawnPos = bulletInitTransform.position;
-            Quaternion rotation = Player.instance.rotationTarget.transform.rotation;
+            Quaternion baseRotation = Player.instance.rotationTarget.transform.rotation;
 
             // 获取发射方向
-            Vector3 fireDirection = rotation * Vector3.up;
+            Vector3 fireDirection = baseRotation * Vector3.up;
 
             // 计算垂直于发射方向的向量
             Vector3 perpendicular = Vector3.Cross(fireDirection, Vector3.forward).normalized;
 
+            float totalAngleSpread = 0f;
             // 计算起始位置（居中分布）
             if (columnCount > 1)
             {
                 float totalWidth = bulletConfig.RowSpace * (columnCount - 1);
                 Vector3 startOffset = perpendicular * (totalWidth / 2f);
                 spawnPos = bulletInitTransform.position - startOffset;
+
+                //计算散射斜角
+                totalAngleSpread = bulletConfig.RowAngleSep * (columnCount - 1);
             }
 
             var oldSpawnPos = spawnPos;
@@ -144,12 +149,22 @@ public class Weapon : MonoBehaviour
                 // 生成子弹列
                 for (int i = 0; i < columnCount; i++)
                 {
+                    // 计算当前子弹的角度偏移（居中对称分布）
+                    float angleOffset = 0f;
+                    if (columnCount > 1)
+                    {
+                        // 例如：3列时，角度偏移为 [-角度间隔, 0, +角度间隔]
+                        angleOffset = bulletConfig.RowAngleSep * (i - (columnCount - 1) / 2f);
+                    }
+
+
                     // 从对象池获取子弹
                     GameObject bullet = GetBulletFromPool();
 
                     // 设置子弹位置和旋转
                     bullet.transform.position = spawnPos;
-                    bullet.transform.rotation = rotation;
+                    // 应用基础旋转 + 角度偏移（绕Z轴旋转）
+                    bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, angleOffset);
 
                     // 初始化子弹
                     Bullet bulletComponent = bullet.GetComponent<Bullet>();
@@ -192,7 +207,7 @@ public class Weapon : MonoBehaviour
     public void PlusLocalDamageMultiInOneBattle(int number)
     {
         localDamageMultiInOneBattle += number;
-        Debug.Log($"当前 {config.TextName} 基础伤害加成：" + localDamageMultiInOneBattle);
+        Debug.Log($"当前 {weaponConfig.TextName} 基础伤害加成：" + localDamageMultiInOneBattle);
         GetAndSetWeaponAttack();
     }
 
