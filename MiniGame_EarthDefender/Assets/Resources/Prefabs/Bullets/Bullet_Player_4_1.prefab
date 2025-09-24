@@ -104,13 +104,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   speed: 0
-  finalBulletPenetrate: 0
   bulletPenetrateInterval: 0.5
-  bulletDamage: 0
-  bulletType: 
+  bulletPenetrateDamageMulti: 0
+  bulletType: 0
   isReleased: 0
   listCollisionCd: []
   bulletState: 0
+  finalBulletPenetrate: 0
 --- !u!114 &-2014668996172076272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 0.3
-  Height: 0.15
+  Height: 0.03
   offsetY: 0
 --- !u!1 &4671002287197215473
 GameObject:

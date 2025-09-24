@@ -9,6 +9,12 @@ public class Bullet : MonoBehaviour
         PLAYER,
         ENEMY
     }
+    enum BulletDestroyReason
+    {
+        NULL,
+        LIFETIME,//到达时间
+        HIT//碰撞
+    }
 
     private cfg.weapon.Bullet _bulletConfig;
     private const float ROTATE_SPEED = 3f; // 控制转向速度，单位是度/秒
@@ -39,6 +45,7 @@ public class Bullet : MonoBehaviour
 
     public bool isInfinityPenetrate { get; private set; }//是否无敌
     private BulletParentType bulletParentType;
+    private BulletDestroyReason bulletDestroyReason = BulletDestroyReason.NULL;
     private float timer;
     private Vector3 currentDirection;
     private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;
@@ -175,6 +182,7 @@ public class Bullet : MonoBehaviour
             // 检查是否超过生存时间
             if (timer >= lifeTime)
             {
+                bulletDestroyReason = BulletDestroyReason.LIFETIME;
                 ObjectPoolManager.Instance.ReleaseBullet(gameObject);
 
 
@@ -275,38 +283,48 @@ public class Bullet : MonoBehaviour
     {
         //这里要小心，不要在父类的坐标被重置以后赋值
         isReleased = true;
-        if (_bulletConfig.NextBullet != null)
+
+
+        //根据不同的结束类型，判断生成什么子弹
+        cfg.weapon.Bullet nextBullet = null;
+        int rowCount = 0;
+        switch (bulletDestroyReason)
+        {
+            case BulletDestroyReason.LIFETIME:
+                nextBullet = _bulletConfig.NextLifetimeBullet_Ref;
+                rowCount = _bulletConfig.NextLifetimeBulletRow;
+                break;
+            case BulletDestroyReason.HIT:
+                nextBullet = _bulletConfig.NextColBullet_Ref;
+                rowCount = _bulletConfig.NextColBulletRow;
+                break;
+        }
+
+
+        if (nextBullet != null)
         {
 
-            var a = _bulletConfig.NextBullet_Ref;
-            if (a != null)
+            for (int i = 0; i < rowCount; i++)
             {
-                for (int i = 0; i < _bulletConfig.NextBulletRow; i++)
+                // Debug.LogError(bulletNext.name);
+                var child = ObjectPoolManager.Instance.GetBullet(nextBullet.Id);
+                //默认按圆角等比分割展开
+
+                if (bulletParentType == BulletParentType.PLAYER)
                 {
-                    // Debug.LogError(bulletNext.name);
-                    var child = ObjectPoolManager.Instance.GetBullet(a.Id);
-                    //默认按圆角等比分割展开
+                    var childComponent = child.GetComponent<Bullet>();
 
-                    if (bulletParentType == BulletParentType.PLAYER)
-                    {
-                        var childComponent = child.GetComponent<Bullet>();
-
-                        var angleOffset = 360 / _bulletConfig.NextBulletRow * (i - (_bulletConfig.NextBulletRow - 1) / 2f);
-                        child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
+                    var angleOffset = 360 / rowCount * (i - (rowCount - 1) / 2f);
+                    child.transform.SetPositionAndRotation(transform.position, transform.rotation * Quaternion.Euler(0, 0, angleOffset));
 
 
-                        childComponent.Initialize(parentWeapon, a);
+                    childComponent.Initialize(parentWeapon, nextBullet);
 
 
-                        childComponent.bulletState = bulletState + 1;
-                    }
-
-                    else Debug.LogError("暂不支持此种子弹的派生");
+                    childComponent.bulletState = bulletState + 1;
                 }
-            }
-            else
-            {
-                throw new System.Exception("检查配置！");
+
+                else Debug.LogError("暂不支持此种子弹的派生");
             }
         }
     }
@@ -320,6 +338,7 @@ public class Bullet : MonoBehaviour
         {
             if (hitTime >= finalBulletPenetrate)
             {
+                bulletDestroyReason = BulletDestroyReason.HIT;
                 // 回收子弹
                 ObjectPoolManager.Instance.ReleaseBullet(gameObject);
             }

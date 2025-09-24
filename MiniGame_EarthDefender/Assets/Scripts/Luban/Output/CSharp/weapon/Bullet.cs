@@ -32,9 +32,12 @@ public sealed partial class Bullet : Luban.BeanBase
         { if(!_buf["penetrate_damage_multi"].IsNumber) { throw new SerializationException(); }  PenetrateDamageMulti = _buf["penetrate_damage_multi"]; }
         { if(!_buf["row_space"].IsNumber) { throw new SerializationException(); }  RowSpace = _buf["row_space"]; }
         { if(!_buf["row_angle_sep"].IsNumber) { throw new SerializationException(); }  RowAngleSep = _buf["row_angle_sep"]; }
-        { var _j = _buf["next_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextBullet = _j; } } else { NextBullet = null; } }
-        NextBullet_Ref = null;
-        { if(!_buf["next_bullet_row"].IsNumber) { throw new SerializationException(); }  NextBulletRow = _buf["next_bullet_row"]; }
+        { var _j = _buf["next_col_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextColBullet = _j; } } else { NextColBullet = null; } }
+        NextColBullet_Ref = null;
+        { if(!_buf["next_col_bullet_row"].IsNumber) { throw new SerializationException(); }  NextColBulletRow = _buf["next_col_bullet_row"]; }
+        { var _j = _buf["next_lifetime_bullet"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsNumber) { throw new SerializationException(); }  NextLifetimeBullet = _j; } } else { NextLifetimeBullet = null; } }
+        NextLifetimeBullet_Ref = null;
+        { if(!_buf["next_lifetime_bullet_row"].IsNumber) { throw new SerializationException(); }  NextLifetimeBulletRow = _buf["next_lifetime_bullet_row"]; }
     }
 
     public static Bullet DeserializeBullet(JSONNode _buf)
@@ -103,21 +106,31 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly float RowAngleSep;
     /// <summary>
-    /// 后续生成
+    /// 后续生成<br/>（碰撞）
     /// </summary>
-    public readonly int? NextBullet;
-    public weapon.Bullet NextBullet_Ref;
+    public readonly int? NextColBullet;
+    public weapon.Bullet NextColBullet_Ref;
     /// <summary>
-    /// 后续生成数量
+    /// 后续生成数量<br/>（碰撞）
     /// </summary>
-    public readonly int NextBulletRow;
+    public readonly int NextColBulletRow;
+    /// <summary>
+    /// 后续生成<br/>（时限）
+    /// </summary>
+    public readonly int? NextLifetimeBullet;
+    public weapon.Bullet NextLifetimeBullet_Ref;
+    /// <summary>
+    /// 后续生成数量<br/>（时限）
+    /// </summary>
+    public readonly int NextLifetimeBulletRow;
    
     public const int __ID__ = 399957300;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        NextBullet_Ref = NextBullet!= null ? tables.Bullet.GetOrDefault(NextBullet.Value) : null;
+        NextColBullet_Ref = NextColBullet!= null ? tables.Bullet.GetOrDefault(NextColBullet.Value) : null;
+        NextLifetimeBullet_Ref = NextLifetimeBullet!= null ? tables.Bullet.GetOrDefault(NextLifetimeBullet.Value) : null;
     }
 
     public override string ToString()
@@ -138,8 +151,10 @@ public sealed partial class Bullet : Luban.BeanBase
         + "penetrateDamageMulti:" + PenetrateDamageMulti + ","
         + "rowSpace:" + RowSpace + ","
         + "rowAngleSep:" + RowAngleSep + ","
-        + "nextBullet:" + NextBullet + ","
-        + "nextBulletRow:" + NextBulletRow + ","
+        + "nextColBullet:" + NextColBullet + ","
+        + "nextColBulletRow:" + NextColBulletRow + ","
+        + "nextLifetimeBullet:" + NextLifetimeBullet + ","
+        + "nextLifetimeBulletRow:" + NextLifetimeBulletRow + ","
         + "}";
     }
 }

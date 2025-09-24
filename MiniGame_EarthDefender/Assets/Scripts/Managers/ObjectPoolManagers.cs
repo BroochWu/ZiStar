@@ -78,10 +78,10 @@ public class ObjectPoolManager : MonoBehaviour
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent.isReleased) return;
 
-        int bulletType = bulletComponent.bulletType;
+        int bulletId = bulletComponent.bulletType;
         // if (bulletPools.ContainsKey(bulletType))
         // {
-        bulletPools[bulletType].Release(bullet);
+        bulletPools[bulletId].Release(bullet);
         bullet.transform.position = Player.instance.shootPath.transform.position;
         // }
         // else
