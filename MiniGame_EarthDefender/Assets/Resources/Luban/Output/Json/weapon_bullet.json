@@ -2,7 +2,6 @@
   {
     "id": 100,
     "bullet_prefab": "Bullet_Player_1",
-    "is_col_destroy": true,
     "track_type": 0,
     "track_start_time": 0,
     "speed": 6,
@@ -14,7 +13,6 @@
   {
     "id": 200,
     "bullet_prefab": "Bullet_Player_2_0",
-    "is_col_destroy": true,
     "track_type": 0,
     "track_start_time": 0,
     "speed": 0,
@@ -27,7 +25,6 @@
   {
     "id": 201,
     "bullet_prefab": "Bullet_Player_2_1",
-    "is_col_destroy": true,
     "track_type": 0,
     "track_start_time": 0,
     "speed": 0,
@@ -40,7 +37,6 @@
   {
     "id": 202,
     "bullet_prefab": "Bullet_Player_2_2",
-    "is_col_destroy": true,
     "track_type": 0,
     "track_start_time": 0,
     "speed": 0,
@@ -52,7 +48,6 @@
   {
     "id": 300,
     "bullet_prefab": "Bullet_Player_3_1",
-    "is_col_destroy": true,
     "track_type": 1,
     "track_start_time": 1,
     "speed": 5,
@@ -65,13 +60,12 @@
   {
     "id": 301,
     "bullet_prefab": "Bullet_Player_3_Bomb",
-    "is_col_destroy": false,
     "track_type": 0,
     "track_start_time": 0,
     "speed": 0,
     "life_time": 1,
     "penetrate_sep": 99,
-    "penetrate_count": 1,
+    "penetrate_count": -1,
     "row_space": 0
   }
 ]

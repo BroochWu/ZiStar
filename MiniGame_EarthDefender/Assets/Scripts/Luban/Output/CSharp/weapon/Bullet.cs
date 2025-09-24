@@ -19,7 +19,6 @@ public sealed partial class Bullet : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
-        { if(!_buf["is_col_destroy"].IsBoolean) { throw new SerializationException(); }  IsColDestroy = _buf["is_col_destroy"]; }
         { if(!_buf["track_type"].IsNumber) { throw new SerializationException(); }  TrackType = (Enums.Bullet.TrackType)_buf["track_type"].AsInt; }
         { if(!_buf["track_start_time"].IsNumber) { throw new SerializationException(); }  TrackStartTime = _buf["track_start_time"]; }
         { if(!_buf["speed"].IsNumber) { throw new SerializationException(); }  Speed = _buf["speed"]; }
@@ -45,10 +44,6 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly string BulletPrefab;
     /// <summary>
-    /// 碰撞后是否销毁<br/>（前提是打开了碰撞）
-    /// </summary>
-    public readonly bool IsColDestroy;
-    /// <summary>
     /// 跟踪方式
     /// </summary>
     public readonly Enums.Bullet.TrackType TrackType;
@@ -69,7 +64,7 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly float PenetrateSep;
     /// <summary>
-    /// 基础子弹进行X次攻击后销毁（穿透）
+    /// 基础子弹进行X次攻击后销毁（穿透）<br/>-1代表不会根据穿透与否销毁
     /// </summary>
     public readonly int PenetrateCount;
     /// <summary>
@@ -95,7 +90,6 @@ public sealed partial class Bullet : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "bulletPrefab:" + BulletPrefab + ","
-        + "isColDestroy:" + IsColDestroy + ","
         + "trackType:" + TrackType + ","
         + "trackStartTime:" + TrackStartTime + ","
         + "speed:" + Speed + ","

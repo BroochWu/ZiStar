@@ -42,14 +42,14 @@ public class CollisionManager : MonoBehaviour
         {
             if (!bullet.activeInHierarchy)
                 continue;
-                
+
             // 获取子弹的碰撞体
             var bulletCollider = bullet.GetComponent<SimpleCollider>();
             if (bulletCollider == null) continue;
-            
+
             // 获取子弹的边界框
             Rect bulletBounds = bulletCollider.GetBounds();
-            
+
             // 获取可能碰撞的敌人对象
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bulletBounds);
@@ -72,11 +72,19 @@ public class CollisionManager : MonoBehaviour
                             bulletConfig.bulletDamage, bulletConfig.parentWeapon
                         );
 
-                        bulletConfig.finalBulletPenetrate -= 1;
-                        if (bulletConfig.finalBulletPenetrate <= 0)
+                        if (bulletConfig.finalBulletPenetrate == -1)
                         {
-                            // 回收子弹
-                            ObjectPoolManager.Instance.ReleaseBullet(bullet);
+                            //代表子弹是无限穿透的
+                            return;
+                        }
+                        else
+                        {
+                            bulletConfig.finalBulletPenetrate -= 1;
+                            if (bulletConfig.finalBulletPenetrate <= 0)
+                            {
+                                // 回收子弹
+                                ObjectPoolManager.Instance.ReleaseBullet(bullet);
+                            }
                         }
                     }
                 }
