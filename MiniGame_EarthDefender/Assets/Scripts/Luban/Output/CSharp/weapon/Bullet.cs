@@ -59,7 +59,7 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly bool CanCol;
     /// <summary>
-    /// 子弹出生无敌时间<br/>（派生子弹可以用这个来无法攻击父物体）
+    /// 子弹出生不攻击时间<br/>（派生子弹可以用这个来无法攻击父物体）
     /// </summary>
     public readonly float UncolTime;
     /// <summary>
