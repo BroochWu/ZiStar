@@ -102,15 +102,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2229e86899c93b458777b07567031fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletId: 0
   lifeTime: 1
   speed: 0
-  finalBulletPenetrate: 0
   bulletPenetrateInterval: 0.5
-  bulletDamage: 0
-  bulletType: 
-  isReleased: 0
+  bulletPenetrateDamageMulti: 0
   listCollisionCd: []
   bulletState: 0
+  finalBulletPenetrate: 0
+  destroyEnemy: {fileID: 0}
+  attachedEnemy: {fileID: 0}
 --- !u!114 &-2014668996172076272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,8 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 2.1
-  Height: 2.3
-  offsetY: 2.8
+  Height: 3.3
+  offsetY: 1.65
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!95 &4213792751122343985
 Animator:
   serializedVersion: 7

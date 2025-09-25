@@ -308,11 +308,11 @@ public class Bullet : MonoBehaviour
 
 
         //重置初始朝向
-        currentDirection = Vector3.up;
+        // currentDirection = Vector3.up;
 
         gameObject.SetActive(false);
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+        // transform.position = Vector3.zero;
+        // transform.rotation = Quaternion.identity;
 
         //清空冷却池
         listCollisionCd.Clear();
