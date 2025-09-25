@@ -82,7 +82,7 @@ public partial class QuadTree
             // 获取对象的边界框
             Rect objBounds = GetRectForObject(obj);
             int index = GetIndex(objBounds);
-            
+
             if (index != -1)
             {
                 nodes[index].Insert(obj);
@@ -122,7 +122,7 @@ public partial class QuadTree
         // 检查查询矩形是否与当前节点相交
         if (!bounds.Overlaps(queryBounds))
             return returnObjects;
-        
+
         // 如果当前节点有子节点，递归查询
         if (nodes[0] != null)
         {
@@ -131,7 +131,7 @@ public partial class QuadTree
                 node.Retrieve(returnObjects, queryBounds);
             }
         }
-        
+
         // 添加当前节点的对象
         foreach (var obj in objects)
         {
@@ -145,7 +145,7 @@ public partial class QuadTree
                 }
             }
         }
-        
+
         return returnObjects;
     }
 
@@ -157,13 +157,7 @@ public partial class QuadTree
         SimpleCollider collider = obj.GetComponent<SimpleCollider>();
         if (collider == null) return new Rect();
 
-        // 使用 Width 和 Height 计算边界框
-        Vector2 pos = new Vector2(obj.transform.position.x, obj.transform.position.y);
-        return new Rect(
-            pos.x - collider.Width / 2, 
-            pos.y - collider.Height / 2, 
-            collider.Width, 
-            collider.Height
-        );
+        // 使用碰撞体的实际边界框（考虑旋转）
+        return collider.GetBounds();
     }
 }

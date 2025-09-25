@@ -115,22 +115,29 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    bool IsColliding(SimpleCollider colA, GameObject b)
+    {
+        if (colA == null || b == null) return false;
+        if (!colA.gameObject.activeInHierarchy || !b.activeInHierarchy) return false;
+
+        SimpleCollider colB = b.GetComponent<SimpleCollider>();
+        if (colB == null) return false;
+
+        // 使用分离轴定理进行精确的旋转碰撞检测
+        var result = colA.CheckCollision(colB);
+        Debug.Log("碰撞结果：" + result);
+        return result;
+    }
+
+    // 重载方法，保持向后兼容
     bool IsColliding(GameObject a, GameObject b)
     {
         if (a == null || b == null) return false;
-        if (!a.activeInHierarchy || !b.activeInHierarchy) return false;
 
         SimpleCollider colA = a.GetComponent<SimpleCollider>();
-        SimpleCollider colB = b.GetComponent<SimpleCollider>();
+        if (colA == null) return false;
 
-        if (colA == null || colB == null) return false;
-
-        // 获取两个碰撞体的边界框
-        Rect rectA = colA.GetBounds();
-        Rect rectB = colB.GetBounds();
-
-        // 检查两个矩形是否相交
-        return rectA.Overlaps(rectB);
+        return IsColliding(colA, b);
     }
 
     public void RegisterEnemy(GameObject enemy)

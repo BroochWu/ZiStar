@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,15 +102,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2229e86899c93b458777b07567031fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletId: 0
   lifeTime: 1
   speed: 0
   bulletPenetrateInterval: 0.5
   bulletPenetrateDamageMulti: 0
-  bulletType: 0
-  isReleased: 0
   listCollisionCd: []
   bulletState: 0
   finalBulletPenetrate: 0
+  destroyEnemy: {fileID: 0}
+  attachedEnemy: {fileID: 0}
 --- !u!114 &-2014668996172076272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +127,8 @@ MonoBehaviour:
   Width: 0.9
   Height: 0.15
   offsetY: 0
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &8129356242196444444
 MonoBehaviour:
   m_ObjectHideFlags: 0
