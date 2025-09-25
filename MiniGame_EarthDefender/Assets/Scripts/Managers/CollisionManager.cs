@@ -58,15 +58,16 @@ public class CollisionManager : MonoBehaviour
             if (bulletConfig.isReleased) return;
 
             // 获取可能碰撞的敌人对象
-            // 如果是非单体伤害，找到列表
-            // 如果是单体伤害，锁定单体目标
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bulletBounds);
 
+            // 如果是非单体伤害，找到列表
+            // 如果是单体伤害，锁定单体目标
             if (bulletConfig.isSingleCol)
             {
-                if (bulletConfig.colObj == null)
+                if (bulletConfig.attachedEnemy == null)
                 {
+                    //如果没有挂载目标，则黏住第一个碰撞的单位
                     foreach (var a in potentialCollisions)
                     {
                         var component = a.GetComponent<EnemyBase>();
@@ -83,7 +84,8 @@ public class CollisionManager : MonoBehaviour
                 }
                 else
                 {
-                    potentialCollisions = new List<GameObject>() { bulletConfig.colObj };
+                    //如果有挂载目标，只对挂载目标造成伤害
+                    potentialCollisions = new List<GameObject>() { bulletConfig.attachedEnemy.gameObject };
                 }
             }
 

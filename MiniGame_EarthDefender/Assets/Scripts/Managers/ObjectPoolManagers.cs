@@ -84,7 +84,8 @@ public class ObjectPoolManager : MonoBehaviour
         // {
 
         //从敌人身上解离子弹，进入待命区
-        transform.SetParent(BattleManager.Instance.BulletsPath);
+        bullet.transform.SetParent(BattleManager.Instance.BulletsPath);
+
         bulletPools[bulletId].Release(bullet);
         // }
         // else
@@ -478,9 +479,6 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         config.SetRelease();
-        bullet.SetActive(false);
-        bullet.transform.position = Vector3.zero;
-        bullet.transform.rotation = Quaternion.identity;
     }
 
     // 从池中获取时的操作（敌人）

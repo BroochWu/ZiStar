@@ -12,6 +12,8 @@ public class DevTest : MonoBehaviour
     public int test_avg_story_id;
     public float test_time_scale;
     public int test_dungeon_pass_id;
+    public int test_weapon_id;
+    public bool 武器测试模式;
 
     void Update()
     {
@@ -41,6 +43,18 @@ public class DevTest : MonoBehaviour
                 BattleManager.Instance.currentEarthHp = 99999999;
                 // BattleManager.Instance.globalDamageMultiInOneBattle = 99999999;
             }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                Debug.LogWarning("武器已更改触发成功");
+                Player.instance.AddWeaponInBattle(test_weapon_id);
+            }
+
+        }
+        if (武器测试模式)
+        {
+            BattleManager.Instance.globalDamageMultiInOneBattle = 0;
+            BattleManager.Instance.currentEarthHp = 99999999;
+            BattleManager.Instance.nextExp = 99999999;
         }
     }
 }

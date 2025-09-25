@@ -12,7 +12,7 @@
     "level_id": 1001,
     "bullet_id": 800,
     "piece": 2001,
-    "rate_of_fire": 1,
+    "rate_of_fire": 0.4,
     "row_count": 1,
     "column_count": 1,
     "column_space": 0.05

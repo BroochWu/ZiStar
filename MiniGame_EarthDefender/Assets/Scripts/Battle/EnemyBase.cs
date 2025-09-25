@@ -35,7 +35,7 @@ public abstract class EnemyBase : MonoBehaviour
     public int InitHp { get; protected set; }
     public bool IsReleased { get => _isReleased; set => _isReleased = value; }
     //挂在这里的子弹
-    public List<Bullet> mountBullets { get; private set; } = new();
+    public List<Bullet> mountBullets = new();
 
     // 抽象方法，子类必须实现
     public abstract void Initialize(cfg.enemy.Enemy enemy, int enemyLevel, Quaternion initDir, Portal parent);
@@ -118,9 +118,15 @@ public abstract class EnemyBase : MonoBehaviour
         BattleManager.Instance.UnregisterEnemy(this);
     }
 
+    // 注册挂载的子弹（跟随本enemy）
     public void RegistMountBullets(Bullet bullet)
     {
         mountBullets.Add(bullet);
+
+        bullet.transform.SetParent(enemyUI.battleObjContainer);
+        bullet.transform.localPosition = Vector3.zero;
+        bullet.OnAttachEnemy(this);
+
     }
 
 
