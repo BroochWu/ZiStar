@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using cfg.enemy;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -21,7 +19,7 @@ public class Bullet : MonoBehaviour
     }
 
     private cfg.weapon.Bullet _bulletConfig;
-    private const float ROTATE_SPEED = 3f; // 控制转向速度，单位是度/秒
+    private const float ROTATE_SPEED = 2f; // 控制转向速度，单位是度/秒
 
 
     //基础设置
@@ -278,6 +276,7 @@ public class Bullet : MonoBehaviour
             if (trackTarget == null)
             {
                 Debug.LogWarning("未能找到跟踪目标");
+                MoveAsNormal();
                 return;
             }
             Vector3 targetPosition = trackTarget.transform.position;
