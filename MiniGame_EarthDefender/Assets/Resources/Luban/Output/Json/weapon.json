@@ -10,9 +10,9 @@
     "init_quality": 2,
     "image_icon_path": "Items/item_gold",
     "level_id": 1001,
-    "bullet_id": 800,
+    "bullet_id": 100,
     "piece": 2001,
-    "rate_of_fire": 0.4,
+    "rate_of_fire": 1,
     "row_count": 1,
     "column_count": 1,
     "column_space": 0.05
@@ -78,7 +78,7 @@
     "level_id": 1002,
     "bullet_id": 400,
     "piece": 2004,
-    "rate_of_fire": 0.2,
+    "rate_of_fire": 1,
     "row_count": 1,
     "column_count": 1,
     "column_space": 1
