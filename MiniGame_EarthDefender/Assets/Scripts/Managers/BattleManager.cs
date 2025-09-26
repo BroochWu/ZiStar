@@ -249,6 +249,19 @@ public class BattleManager : MonoBehaviour
         {
             UnregisterPortal(portal);
         }
+        activePortals.Clear();
+
+        //移除所有敌人
+        var tempList2 = new List<EnemyBase>();
+        tempList2.AddRange(activeEnemys);
+        foreach (var enemy in tempList2)
+        {
+            UnregisterEnemy(enemy);
+        }
+        activeEnemys.Clear();
+
+
+
 
         if (BulletsPath != null)
         {
