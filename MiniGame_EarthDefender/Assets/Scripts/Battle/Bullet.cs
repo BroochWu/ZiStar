@@ -205,10 +205,19 @@ public class Bullet : MonoBehaviour
         switch (trackType)
         {
             case cfg.Enums.Bullet.TrackType.SLERP:
-                BulletTrack();
+                try
+                {
+                    MoveAsTrack();
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("欲进行跟踪，但因为未知原因，跟踪失败了" + ex);
+                    MoveAsNormal();
+                }
                 break;
             case cfg.Enums.Bullet.TrackType.NULL:
-                transform.Translate(Vector3.up * speed * Time.deltaTime);
+                MoveAsNormal();
                 break;
             default:
                 break;
@@ -254,19 +263,24 @@ public class Bullet : MonoBehaviour
     }
 
     //子弹跟踪
-    void BulletTrack()
+    void MoveAsTrack()
     {
         //如果生成时间小于跟踪开始时间，则不跟踪，往前跑
         if (timer < _bulletConfig.TrackStartTime || BattleManager.Instance.activeEnemys.Count <= 0)
         {
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
+            MoveAsNormal();
             return;
         }
-
-        // 寻找目标
-        if (BattleManager.Instance.activeEnemys.Count > 0)
+        else
         {
-            Vector3 targetPosition = BattleManager.Instance.activeEnemys[0].transform.position;
+            // 寻找目标
+            var trackTarget = BattleManager.Instance.activeEnemys[0];
+            if (trackTarget == null)
+            {
+                Debug.LogWarning("未能找到跟踪目标");
+                return;
+            }
+            Vector3 targetPosition = trackTarget.transform.position;
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
 
             // 使用旋转步长来平滑转向
@@ -279,6 +293,11 @@ public class Bullet : MonoBehaviour
             transform.Translate(currentDirection * speed * Time.deltaTime, Space.World);
         }
 
+    }
+
+    void MoveAsNormal()
+    {
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
     /// <summary>
