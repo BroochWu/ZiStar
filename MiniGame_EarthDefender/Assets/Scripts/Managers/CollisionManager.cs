@@ -65,29 +65,52 @@ public class CollisionManager : MonoBehaviour
             // 如果是单体伤害，锁定单体目标
             if (bulletConfig.isSingleCol)
             {
-                if (bulletConfig.attachedEnemy == null)
+                switch (bulletConfig.trackType)
                 {
-                    //如果没有挂载目标，则黏住第一个碰撞的单位
-                    foreach (var a in potentialCollisions)
-                    {
-                        var component = a.GetComponent<EnemyBase>();
-                        if (component == null)
+                    case cfg.Enums.Bullet.TrackType.SLERP:
+                        if (bulletConfig.attachedEnemy == null)
                         {
-                            return;
+                            //如果没有挂载目标，则黏住第一个碰撞的单位
+                            foreach (var a in potentialCollisions)
+                            {
+                                var component = a.GetComponent<EnemyBase>();
+                                if (component == null)
+                                {
+                                    //如果ta没有enemy脚本（不能碰撞），就判断下一个（应该也不会触发）
+                                    continue;
+                                }
+                                else if (!component.IsReleased)
+                                {
+                                    //否则只要能碰撞，就直接打断
+                                    potentialCollisions = new List<GameObject>() { potentialCollisions[0] };
+                                    break;
+                                }
+                            }
                         }
-                        else if (!component.IsReleased)
+                        else
                         {
-                            potentialCollisions = new List<GameObject>() { potentialCollisions[0] };
-                            break;
+                            //如果有挂载目标，只对挂载目标造成伤害
+                            potentialCollisions = new List<GameObject>() { bulletConfig.attachedEnemy.gameObject };
                         }
-                    }
-                }
-                else
-                {
-                    //如果有挂载目标，只对挂载目标造成伤害
-                    potentialCollisions = new List<GameObject>() { bulletConfig.attachedEnemy.gameObject };
+                        break;
+                    case cfg.Enums.Bullet.TrackType.LASER:
+                        return;
+                        //     if (bulletConfig.trackTarget != null)
+                        //     {
+                        //         potentialCollisions = new List<GameObject>() { bulletConfig.trackTarget.gameObject };
+                        //     }
+                        //     else
+                        //     {
+                        //         //如果镭射武器没有挂载目标，就返回，不过应该也不会碰撞到，以防万一
+                        //         return;
+                        //     }
+                        break;
+
                 }
             }
+
+            if (potentialCollisions.Count == 0)
+                return;
 
             foreach (var obj in potentialCollisions)
             {
@@ -114,6 +137,41 @@ public class CollisionManager : MonoBehaviour
             }
         }
     }
+
+
+    /// <summary>
+    /// 单体指向型碰撞（否则需要碰撞到才触发）
+    /// </summary>
+    public void SingleDirectionalCol(Bullet _bullet, EnemyBase _enemy)
+    {
+        if (_enemy.IsReleased)
+        {
+            ObjectPoolManager.Instance.ReleaseBullet(_bullet.gameObject);
+        }
+        if (_bullet.isReleased)
+        {
+            return;
+        }
+        if (_enemy.CompareTag("Enemy"))
+        {
+            // 处理碰撞
+
+            // 判断目前是不是和该实例的碰撞正在冷却中
+            if (_bullet.AddToListCollisionCD(_enemy.gameObject, _bullet.bulletPenetrateInterval))
+            {
+                _enemy.TakeDamage(
+                    _bullet.bulletFinalDamage, _bullet.parentWeapon
+                );
+
+                _bullet.OnHIt(_enemy.gameObject);
+
+
+            }
+        }
+
+    }
+
+
 
     bool IsColliding(SimpleCollider colA, GameObject b)
     {

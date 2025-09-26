@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
 
     private BulletParentType bulletParentType;//子弹来源
     private BulletDestroyReason bulletDestroyReason = BulletDestroyReason.NULL;//销毁原因
-    private cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;//跟踪模式
+    public cfg.Enums.Bullet.TrackType trackType = cfg.Enums.Bullet.TrackType.NULL;//跟踪模式
 
 
     public int bulletId;
@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 
     public bool isSingleCol//是否单体伤害
     {
-        get { return parentContainer == cfg.Enums.Bullet.Container.ENEMY; }
+        get { return parentContainer == cfg.Enums.Bullet.Container.ENEMY || trackType == cfg.Enums.Bullet.TrackType.LASER; }
     }
 
 
@@ -81,13 +81,15 @@ public class Bullet : MonoBehaviour
     private int hitTime;//发生碰撞的次数
 
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
-    [SerializeField] public GameObject destroyEnemy;//导致子弹销毁的敌人
-    [SerializeField] public EnemyBase attachedEnemy;//子弹吸附单位
-    private EnemyBase trackTarget = null;
+    public GameObject destroyEnemy;//导致子弹销毁的敌人
+    public EnemyBase attachedEnemy;//子弹吸附单位
+    public EnemyBase trackTarget = null;
 
+    //镭射子弹相关
+    private float width = 0.6f;//镭射子弹宽度
+    private Vector2 startPos;//镭射子弹开始点
+    private Vector2 targetPos;//镭射子弹目标点
 
-    // public bool canCollide = true;//子弹是否可以碰撞
-    // public Bullet bulletFormer;//生成之前的子弹
 
     void Start()
     {
@@ -206,17 +208,20 @@ public class Bullet : MonoBehaviour
             case cfg.Enums.Bullet.TrackType.SLERP:
                 try
                 {
-                    MoveAsTrack();
+                    ActionAsTrack();
 
                 }
                 catch (Exception ex)
                 {
                     Debug.LogWarning("欲进行跟踪，但因为未知原因，跟踪失败了" + ex);
-                    MoveAsNormal();
+                    ActionAsNormal();
                 }
                 break;
             case cfg.Enums.Bullet.TrackType.NULL:
-                MoveAsNormal();
+                ActionAsNormal();
+                break;
+            case cfg.Enums.Bullet.TrackType.LASER:
+                ActionAsLaser();
                 break;
             default:
                 break;
@@ -261,40 +266,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    //子弹跟踪
-    void MoveAsTrack()
-    {
-        //如果生成时间小于跟踪开始时间，则不跟踪，往前跑
-        if (timer < _bulletConfig.TrackStartTime || BattleManager.Instance.activeEnemys.Count <= 0)
-        {
-            MoveAsNormal();
-            return;
-        }
-        else
-        {
-            // 寻找目标
-            //如果跟踪目标是空的，则持续检测，否则仅跟踪他
-            if (trackTarget == null)
-            {
-                FindTrackTarget(BattleManager.Instance.activeEnemys, ref trackTarget);
-                MoveAsNormal();
-                return;
-            }
-
-            Vector3 targetPosition = trackTarget.transform.position;
-            Vector3 targetDirection = (targetPosition - transform.position).normalized;
-
-            // 使用旋转步长来平滑转向
-            float step = ROTATE_SPEED * Time.deltaTime;
-            currentDirection = Vector3.RotateTowards(currentDirection, targetDirection, step, 0.02f);
-
-            // 也可以使用插值，但RotateTowards更易于控制最大旋转角度
-            // currentDirection = Vector3.Slerp(currentDirection, targetDirection, rotateSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, currentDirection);
-            transform.Translate(currentDirection * speed * Time.deltaTime, Space.World);
-        }
-
-    }
+    #region 子弹行动模式
     void FindTrackTarget(List<EnemyBase> _enemyPoolList, ref EnemyBase result)
     {
         if (_enemyPoolList.Count == 0)
@@ -319,10 +291,119 @@ public class Bullet : MonoBehaviour
 
     }
 
-    void MoveAsNormal()
+    bool CheckIfStartTrack()
+    {
+        return timer < _bulletConfig.TrackStartTime || BattleManager.Instance.activeEnemys.Count <= 0;
+    }
+
+    //以跟踪模式进行行为
+    void ActionAsTrack()
+    {
+        //如果生成时间小于跟踪开始时间，则不跟踪，往前跑
+        if (CheckIfStartTrack())
+        {
+            ActionAsNormal();
+            return;
+        }
+        else
+        {
+            // 寻找目标
+            //如果跟踪目标是空的，则持续检测，否则仅跟踪他
+            if (trackTarget == null)
+            {
+                FindTrackTarget(BattleManager.Instance.activeEnemys, ref trackTarget);
+                ActionAsNormal();
+                return;
+            }
+
+            Vector3 targetPosition = trackTarget.transform.position;
+            Vector3 targetDirection = (targetPosition - transform.position).normalized;
+
+            // 使用旋转步长来平滑转向
+            float step = ROTATE_SPEED * Time.deltaTime;
+            currentDirection = Vector3.RotateTowards(currentDirection, targetDirection, step, 0.02f);
+
+            // 也可以使用插值，但RotateTowards更易于控制最大旋转角度
+            // currentDirection = Vector3.Slerp(currentDirection, targetDirection, rotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, currentDirection);
+            transform.Translate(currentDirection * speed * Time.deltaTime, Space.World);
+        }
+
+    }
+
+
+    //以正常模式进行行动
+    void ActionAsNormal()
     {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+
+    //以镭射模式进行行为
+    void ActionAsLaser()
+    {
+        //如果没有单位，*直接释放*
+        if (BattleManager.Instance.activeEnemys.Count <= 0)
+        {
+            ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+            return;
+        }
+        else
+        {
+            // 寻找目标，首次尝试遍历寻找，找不到等会就删除
+            if (trackTarget == null)
+            {
+                FindTrackTarget(BattleManager.Instance.activeEnemys, ref trackTarget);
+            }
+
+            //如果跟踪目标是空的，则直接释放吧
+            if (trackTarget == null)
+            {
+                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+                return;
+            }
+
+            DrawLaserLine(trackTarget);
+            CollisionManager.Instance.SingleDirectionalCol(this, trackTarget);
+
+        }
+    }
+
+    /// <summary>
+    /// 画镭射线
+    /// </summary>
+    /// <param name="_enemy"></param>
+    void DrawLaserLine(EnemyBase _enemy)
+    {
+
+        //获取自身坐标和目标点坐标
+        startPos = Player.instance.shootPath.position;
+        targetPos = _enemy.transform.position;
+
+
+
+        //获取旋转
+        Vector2 direction = targetPos - startPos;
+        float distance = direction.magnitude;
+
+
+        //将图片设置为中点
+        transform.position = startPos + direction * 0.5f;
+
+
+        //旋转自身，指向目标
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90
+        ;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
+        //缩放图片
+        transform.localScale = new Vector3(width, distance, 1f);
+
+
+
+    }
+
+    #endregion
 
     /// <summary>
     /// 初始化数据（Initialize的时候调用）
@@ -523,5 +604,6 @@ public class Bullet : MonoBehaviour
     //     {
     //     }
     // }
+
 
 }

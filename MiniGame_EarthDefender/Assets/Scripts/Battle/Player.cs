@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public GameObject rotationTarget;
     public GameObject cursorObj;
-    public GameObject shootPath;
+    public Transform shootPath;
     public GameObject guideLine;
     public GameObject earthSprite;
     public Transform bulletContainer;
@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
 
         // 添加武器组件
         Weapon weapon = weaponObj.AddComponent<Weapon>();
-        weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath.transform, 1);
+        weapon.Initialize(cfg.Tables.tb.Weapon.Get(weaponId), shootPath, 1);
 
         //没处理卸载后又装上的情况
         battleEquipedWeapon.Add(weapon, 0);

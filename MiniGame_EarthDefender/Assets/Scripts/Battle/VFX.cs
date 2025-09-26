@@ -71,7 +71,7 @@ public class VFX : MonoBehaviour
         Vector2 moveDir = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle));
 
         float currentLifeTime = 0;
-        var rand = Random.Range(5, 12);
+        var rand = Random.Range(5, 10);
         while (currentLifeTime < DAMAGE_LIFE_TIME)
         {
             currentLifeTime += Time.deltaTime;

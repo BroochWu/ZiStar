@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationTarget: {fileID: 1724342948145164888}
   cursorObj: {fileID: 0}
-  shootPath: {fileID: 8857797380858322452}
+  shootPath: {fileID: 763416112110563407}
   guideLine: {fileID: 7956663422290026013}
   earthSprite: {fileID: 9044129385258249474}
   bulletContainer: {fileID: 559391672850508630}
