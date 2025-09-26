@@ -250,5 +250,24 @@
     "row_angle_sep": 0,
     "next_col_bullet_row": 0,
     "next_lifetime_bullet_row": 0
+  },
+  {
+    "id": 900,
+    "bullet_prefab": "Bullet_Player_9_1",
+    "parent_container": 4,
+    "can_col": true,
+    "uncol_time": 0,
+    "track_type": 2,
+    "track_start_time": 0,
+    "damage_multi": 10000,
+    "speed": 0,
+    "life_time": 2,
+    "penetrate_sep": 0.5,
+    "penetrate_count": -1,
+    "penetrate_damage_multi": 10000,
+    "row_space": 0,
+    "row_angle_sep": 10,
+    "next_col_bullet_row": 0,
+    "next_lifetime_bullet_row": 0
   }
 ]

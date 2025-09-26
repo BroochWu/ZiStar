@@ -115,7 +115,6 @@ public abstract class EnemyBase : MonoBehaviour
         bomb.GetComponent<VFX>().InitializeAsBomb(transform.position);
 
         ObjectPoolManager.Instance.ReleaseEnemy(this);
-        BattleManager.Instance.UnregisterEnemy(this);
     }
 
     // 注册挂载的子弹（跟随本enemy）

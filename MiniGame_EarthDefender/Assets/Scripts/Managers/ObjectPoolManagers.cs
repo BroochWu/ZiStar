@@ -219,6 +219,7 @@ public class ObjectPoolManager : MonoBehaviour
         if (enemyPools.ContainsKey(enemyId))
         {
             enemy.IsReleased = true; // 先设置释放状态
+            BattleManager.Instance.UnregisterEnemy(enemy);
             enemyPools[enemyId].Release(enemy.gameObject);
         }
         else

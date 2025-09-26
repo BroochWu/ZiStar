@@ -24,6 +24,10 @@ namespace cfg.Enums.Bullet
         /// 曲线跟踪
         /// </summary>
         SLERP = 1,
+        /// <summary>
+        /// 镭射跟踪
+        /// </summary>
+        LASER = 2,
     }
 
 } 

@@ -32,6 +32,10 @@ namespace cfg.Enums.Bullet
         /// 敌人
         /// </summary>
         ENEMY = 3,
+        /// <summary>
+        /// 玩家武器
+        /// </summary>
+        PLAYERWEAPON = 4,
     }
 
 } 

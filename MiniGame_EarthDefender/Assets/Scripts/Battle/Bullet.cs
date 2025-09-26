@@ -83,6 +83,7 @@ public class Bullet : MonoBehaviour
     public int finalBulletPenetrate;//子弹可碰撞次数（可穿透数量）
     [SerializeField] public GameObject destroyEnemy;//导致子弹销毁的敌人
     [SerializeField] public EnemyBase attachedEnemy;//子弹吸附单位
+    private EnemyBase trackTarget = null;
 
 
     // public bool canCollide = true;//子弹是否可以碰撞
@@ -272,13 +273,14 @@ public class Bullet : MonoBehaviour
         else
         {
             // 寻找目标
-            var trackTarget = BattleManager.Instance.activeEnemys[0];
+            //如果跟踪目标是空的，则持续检测，否则仅跟踪他
             if (trackTarget == null)
             {
-                Debug.LogWarning("未能找到跟踪目标");
+                FindTrackTarget(BattleManager.Instance.activeEnemys, ref trackTarget);
                 MoveAsNormal();
                 return;
             }
+
             Vector3 targetPosition = trackTarget.transform.position;
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
 
@@ -290,6 +292,29 @@ public class Bullet : MonoBehaviour
             // currentDirection = Vector3.Slerp(currentDirection, targetDirection, rotateSpeed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, currentDirection);
             transform.Translate(currentDirection * speed * Time.deltaTime, Space.World);
+        }
+
+    }
+    void FindTrackTarget(List<EnemyBase> _enemyPoolList, ref EnemyBase result)
+    {
+        if (_enemyPoolList.Count == 0)
+        {
+            result = null;
+            return;
+        }
+
+        var trackTarget = Utility.GetRandomByList(_enemyPoolList);
+        if (trackTarget != null)
+        {
+            result = trackTarget;
+            return;
+        }
+        else
+        {
+            //递归重新找
+            _enemyPoolList.Remove(result);
+            FindTrackTarget(_enemyPoolList, ref result);
+            return;
         }
 
     }
@@ -337,6 +362,7 @@ public class Bullet : MonoBehaviour
 
         //重置跟踪单位
         attachedEnemy = null;
+        trackTarget = null;
 
     }
 
