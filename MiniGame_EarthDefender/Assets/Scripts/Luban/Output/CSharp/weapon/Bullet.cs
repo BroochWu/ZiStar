@@ -70,7 +70,7 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly UnityEngine.Vector2? PositionOffset;
     /// <summary>
-    /// 是否有指向性碰撞<br/>（将会返回附着/跟踪单位/第一个碰撞的单位）
+    /// 是否有指向性碰撞<br/>（无视是否相交，返回附着/跟踪单位/第一个碰撞的单位）
     /// </summary>
     public readonly bool IsSingleAttack;
     /// <summary>
