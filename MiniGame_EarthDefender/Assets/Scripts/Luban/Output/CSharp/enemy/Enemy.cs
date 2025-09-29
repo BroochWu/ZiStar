@@ -20,7 +20,7 @@ public sealed partial class Enemy : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["text_name"].IsString) { throw new SerializationException(); }  TextName = _buf["text_name"]; }
         { if(!_buf["prefab"].IsString) { throw new SerializationException(); }  Prefab = _buf["prefab"]; }
-        { if(!_buf["prefab_bullet"].IsString) { throw new SerializationException(); }  PrefabBullet = _buf["prefab_bullet"]; }
+        { if(!_buf["bullet_id"].IsNumber) { throw new SerializationException(); }  BulletId = _buf["bullet_id"]; }
         { if(!_buf["multi_move_speed"].IsNumber) { throw new SerializationException(); }  MultiMoveSpeed = _buf["multi_move_speed"]; }
         { if(!_buf["multi_angle"].IsNumber) { throw new SerializationException(); }  MultiAngle = _buf["multi_angle"]; }
         { if(!_buf["enemy_type"].IsNumber) { throw new SerializationException(); }  EnemyType = (Enums.Enemy.Type)_buf["enemy_type"].AsInt; }
@@ -46,9 +46,9 @@ public sealed partial class Enemy : Luban.BeanBase
     /// </summary>
     public readonly string Prefab;
     /// <summary>
-    /// 子弹prefab名称
+    /// 子弹id
     /// </summary>
-    public readonly string PrefabBullet;
+    public readonly int BulletId;
     /// <summary>
     /// 移动速度倍率（万分数）
     /// </summary>
@@ -81,7 +81,7 @@ public sealed partial class Enemy : Luban.BeanBase
         + "id:" + Id + ","
         + "textName:" + TextName + ","
         + "prefab:" + Prefab + ","
-        + "prefabBullet:" + PrefabBullet + ","
+        + "bulletId:" + BulletId + ","
         + "multiMoveSpeed:" + MultiMoveSpeed + ","
         + "multiAngle:" + MultiAngle + ","
         + "enemyType:" + EnemyType + ","

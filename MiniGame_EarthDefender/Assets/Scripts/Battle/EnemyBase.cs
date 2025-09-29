@@ -1,5 +1,6 @@
 // EnemyBase.cs - 基类
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
@@ -63,6 +64,13 @@ public abstract class EnemyBase : MonoBehaviour
         UpdateBehavior();
     }
 
+    public virtual void TakeDamage(float damage, Weapon source)
+    {
+        if (damage == 0) return;
+        int damageInt = Mathf.Max((int)damage, 1);
+        TakeDamage(damageInt, source);
+    }
+
     public virtual void TakeDamage(int damage, Weapon source)
     {
         //如果伤害量是0，不显示（后面可能会有无敌之类的显示？到时候再说吧）
@@ -121,10 +129,20 @@ public abstract class EnemyBase : MonoBehaviour
     public void RegistMountBullets(Bullet bullet)
     {
         mountBullets.Add(bullet);
-
-        bullet.transform.SetParent(enemyUI.battleObjContainer);
-        bullet.transform.localPosition = Vector3.zero;
         bullet.OnAttachEnemy(this);
+
+        if (bullet._bulletConfig.RotateByParent)
+        {
+            bullet.transform.SetParent(enemyUI.battleObjContainer);
+            bullet.transform.localPosition = Vector3.zero + (Vector3)(bullet._bulletConfig.PositionOffset);
+        }
+        else
+        {
+            bullet.GetOrAddComponent<Follow>().target = transform;
+            bullet.GetOrAddComponent<Follow>().offset = bullet._bulletConfig.PositionOffset ?? Vector3.zero;
+
+            bullet.transform.position = transform.position + (Vector3)(bullet._bulletConfig.PositionOffset ?? Vector3.zero);
+        }
 
     }
 
@@ -149,6 +167,9 @@ public abstract class EnemyBase : MonoBehaviour
     // 新增方法：单独卸载一个子弹
     public void UnregistMountBullet(Bullet bullet)
     {
+        bullet.TryGetComponent<Follow>(out var bulletFollow);
+        if (!bulletFollow) bulletFollow.target = null;
+
         mountBullets.Remove(bullet);
     }
 
@@ -198,7 +219,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyId = _dynamicConfig.Id;
         _enemyType = _dynamicConfig.EnemyType;
         enemyExp = _dynamicConfig.exp;
-        bulletId = _dynamicConfig.Id;
+        bulletId = _dynamicConfig.BulletId;
 
         // 预计算速度值
         _moveSpeed = _dynamicConfig.MultiMoveSpeed * 0.0001f;

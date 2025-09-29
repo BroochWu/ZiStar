@@ -20,11 +20,15 @@ public sealed partial class Bullet : Luban.BeanBase
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["bullet_prefab"].IsString) { throw new SerializationException(); }  BulletPrefab = _buf["bullet_prefab"]; }
         { if(!_buf["parent_container"].IsNumber) { throw new SerializationException(); }  ParentContainer = (Enums.Bullet.Container)_buf["parent_container"].AsInt; }
-        { if(!_buf["can_col"].IsBoolean) { throw new SerializationException(); }  CanCol = _buf["can_col"]; }
+        { if(!_buf["rotate_by_parent"].IsBoolean) { throw new SerializationException(); }  RotateByParent = _buf["rotate_by_parent"]; }
+        { var _j = _buf["position_offset"]; if (_j.Tag != JSONNodeType.None && _j.Tag != JSONNodeType.NullValue) { { if(!_j.IsObject) { throw new SerializationException(); }  PositionOffset = ExternalTypeUtil.NewVector2(global::cfg.Vector2.DeserializeVector2(_j));  } } else { PositionOffset = null; } }
+        { if(!_buf["is_single_attack"].IsBoolean) { throw new SerializationException(); }  IsSingleAttack = _buf["is_single_attack"]; }
+        { if(!_buf["single_attack_multi"].IsNumber) { throw new SerializationException(); }  SingleAttackMulti = _buf["single_attack_multi"]; }
         { if(!_buf["uncol_time"].IsNumber) { throw new SerializationException(); }  UncolTime = _buf["uncol_time"]; }
         { if(!_buf["track_type"].IsNumber) { throw new SerializationException(); }  TrackType = (Enums.Bullet.TrackType)_buf["track_type"].AsInt; }
         { if(!_buf["track_start_time"].IsNumber) { throw new SerializationException(); }  TrackStartTime = _buf["track_start_time"]; }
-        { if(!_buf["damage_multi"].IsNumber) { throw new SerializationException(); }  DamageMulti = _buf["damage_multi"]; }
+        { if(!_buf["track_angle_speed"].IsNumber) { throw new SerializationException(); }  TrackAngleSpeed = _buf["track_angle_speed"]; }
+        { if(!_buf["group_damage_multi"].IsNumber) { throw new SerializationException(); }  GroupDamageMulti = _buf["group_damage_multi"]; }
         { if(!_buf["speed"].IsNumber) { throw new SerializationException(); }  Speed = _buf["speed"]; }
         { if(!_buf["life_time"].IsNumber) { throw new SerializationException(); }  LifeTime = _buf["life_time"]; }
         { if(!_buf["penetrate_sep"].IsNumber) { throw new SerializationException(); }  PenetrateSep = _buf["penetrate_sep"]; }
@@ -58,9 +62,21 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly Enums.Bullet.Container ParentContainer;
     /// <summary>
-    /// 是否造成碰撞
+    /// 是否跟随父物体旋转
     /// </summary>
-    public readonly bool CanCol;
+    public readonly bool RotateByParent;
+    /// <summary>
+    /// 父物体偏移
+    /// </summary>
+    public readonly UnityEngine.Vector2? PositionOffset;
+    /// <summary>
+    /// 是否有指向性碰撞<br/>（将会返回附着/跟踪单位/第一个碰撞的单位）
+    /// </summary>
+    public readonly bool IsSingleAttack;
+    /// <summary>
+    /// 指向性碰撞伤害倍率
+    /// </summary>
+    public readonly int SingleAttackMulti;
     /// <summary>
     /// 子弹出生不攻击时间<br/>（派生子弹可以用这个来无法攻击父物体）
     /// </summary>
@@ -74,9 +90,13 @@ public sealed partial class Bullet : Luban.BeanBase
     /// </summary>
     public readonly float TrackStartTime;
     /// <summary>
-    /// 碰撞后的伤害倍率<br/>（万分数）
+    /// 跟踪旋转角速度
     /// </summary>
-    public readonly int DamageMulti;
+    public readonly float TrackAngleSpeed;
+    /// <summary>
+    /// 群体碰撞伤害倍率<br/>（万分数）
+    /// </summary>
+    public readonly int GroupDamageMulti;
     /// <summary>
     /// 子弹飞行速度
     /// </summary>
@@ -139,11 +159,15 @@ public sealed partial class Bullet : Luban.BeanBase
         + "id:" + Id + ","
         + "bulletPrefab:" + BulletPrefab + ","
         + "parentContainer:" + ParentContainer + ","
-        + "canCol:" + CanCol + ","
+        + "rotateByParent:" + RotateByParent + ","
+        + "positionOffset:" + PositionOffset + ","
+        + "isSingleAttack:" + IsSingleAttack + ","
+        + "singleAttackMulti:" + SingleAttackMulti + ","
         + "uncolTime:" + UncolTime + ","
         + "trackType:" + TrackType + ","
         + "trackStartTime:" + TrackStartTime + ","
-        + "damageMulti:" + DamageMulti + ","
+        + "trackAngleSpeed:" + TrackAngleSpeed + ","
+        + "groupDamageMulti:" + GroupDamageMulti + ","
         + "speed:" + Speed + ","
         + "lifeTime:" + LifeTime + ","
         + "penetrateSep:" + PenetrateSep + ","

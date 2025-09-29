@@ -61,53 +61,57 @@ public class CollisionManager : MonoBehaviour
             var potentialCollisions = new List<GameObject>();
             quadTree.Retrieve(potentialCollisions, bulletBounds);
 
+            //(废弃内容)
             // 如果是非单体伤害，找到列表
             // 如果是单体伤害，锁定单体目标
-            if (bulletConfig.isSingleCol)
-            {
-                switch (bulletConfig.trackType)
-                {
-                    case cfg.Enums.Bullet.TrackType.SLERP:
-                        if (bulletConfig.attachedEnemy == null)
-                        {
-                            //如果没有挂载目标，则黏住第一个碰撞的单位
-                            foreach (var a in potentialCollisions)
-                            {
-                                var component = a.GetComponent<EnemyBase>();
-                                if (component == null)
-                                {
-                                    //如果ta没有enemy脚本（不能碰撞），就判断下一个（应该也不会触发）
-                                    continue;
-                                }
-                                else if (!component.IsReleased)
-                                {
-                                    //否则只要能碰撞，就直接打断
-                                    potentialCollisions = new List<GameObject>() { potentialCollisions[0] };
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            //如果有挂载目标，只对挂载目标造成伤害
-                            potentialCollisions = new List<GameObject>() { bulletConfig.attachedEnemy.gameObject };
-                        }
-                        break;
-                    case cfg.Enums.Bullet.TrackType.LASER:
-                        return;
-                        //     if (bulletConfig.trackTarget != null)
-                        //     {
-                        //         potentialCollisions = new List<GameObject>() { bulletConfig.trackTarget.gameObject };
-                        //     }
-                        //     else
-                        //     {
-                        //         //如果镭射武器没有挂载目标，就返回，不过应该也不会碰撞到，以防万一
-                        //         return;
-                        //     }
-                        break;
 
-                }
-            }
+            //指向性为单独的方法，不在群体碰撞方法中检测
+            // switch (bulletConfig.trackType)
+            // {
+            //     case cfg.Enums.Bullet.TrackType.SLERP:
+            //         if (bulletConfig.attachedEnemy == null)
+            //         {
+            //             //如果没有挂载目标，则黏住第一个碰撞的单位
+            //             foreach (var a in potentialCollisions)
+            //             {
+            //                 var component = a.GetComponent<EnemyBase>();
+            //                 if (component == null)
+            //                 {
+            //                     //如果ta没有enemy脚本（不能碰撞），就判断下一个（应该也不会触发）
+            //                     continue;
+            //                 }
+            //                 else if (!component.IsReleased)
+            //                 {
+            //                     //否则只要能碰撞，就直接打断
+            //                     bulletConfig.attachedEnemy = component;
+            //                     potentialCollisions = new List<GameObject>() { potentialCollisions[0] };
+            //                     break;
+            //                 }
+            //             }
+            //         }
+            //         else
+            //         {
+            //             //如果有挂载目标，只对挂载目标造成伤害
+            //             // potentialCollisions = new List<GameObject>() { bulletConfig.attachedEnemy.gameObject };
+            //             SingleDirectionalCol(bulletConfig, bulletConfig.attachedEnemy);
+            //             return;
+            //         }
+            //         break;
+            //     case cfg.Enums.Bullet.TrackType.LASER:
+            //         return;
+            //         //     if (bulletConfig.trackTarget != null)
+            //         //     {
+            //         //         potentialCollisions = new List<GameObject>() { bulletConfig.trackTarget.gameObject };
+            //         //     }
+            //         //     else
+            //         //     {
+            //         //         //如果镭射武器没有挂载目标，就返回，不过应该也不会碰撞到，以防万一
+            //         //         return;
+            //         //     }
+            //         break;
+
+
+            // }
 
             if (potentialCollisions.Count == 0)
                 return;
@@ -123,10 +127,10 @@ public class CollisionManager : MonoBehaviour
                     // 处理碰撞
 
                     // 判断目前是不是和该实例的碰撞正在冷却中
-                    if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval))
+                    if (bulletConfig.AddToListCollisionCD(obj, bulletConfig.bulletPenetrateInterval, Bullet.CollisionType.GROUP))
                     {
                         obj.GetComponent<EnemyBase>().TakeDamage(
-                            bulletConfig.bulletFinalDamage, bulletConfig.parentWeapon
+                            bulletConfig.bulletFinalInitDamage * bulletConfig.bulletGroupDamageMulti, bulletConfig.parentWeapon
                         );
 
                         bulletConfig.OnHIt(obj);
@@ -157,10 +161,12 @@ public class CollisionManager : MonoBehaviour
             // 处理碰撞
 
             // 判断目前是不是和该实例的碰撞正在冷却中
-            if (_bullet.AddToListCollisionCD(_enemy.gameObject, _bullet.bulletPenetrateInterval))
+            if (_bullet.AddToListCollisionCD(_enemy.gameObject, _bullet.bulletPenetrateInterval, Bullet.CollisionType.SINGLE))
             {
+                var finalDamage = _bullet.bulletFinalInitDamage * _bullet.bulletSingleDamageMulti;
+                Debug.Log($"正在进行指向碰撞{finalDamage}");
                 _enemy.TakeDamage(
-                    _bullet.bulletFinalDamage, _bullet.parentWeapon
+                    finalDamage, _bullet.parentWeapon
                 );
 
                 _bullet.OnHIt(_enemy.gameObject);
@@ -183,7 +189,7 @@ public class CollisionManager : MonoBehaviour
 
         // 使用分离轴定理进行精确的旋转碰撞检测
         var result = colA.CheckCollision(colB);
-        Debug.Log("碰撞结果：" + result);
+        // Debug.Log("碰撞结果：" + result);
         return result;
     }
 

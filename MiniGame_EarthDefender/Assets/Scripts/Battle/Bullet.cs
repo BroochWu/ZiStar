@@ -18,8 +18,13 @@ public class Bullet : MonoBehaviour
         ENEMYDIE //敌人死亡
     }
 
-    private cfg.weapon.Bullet _bulletConfig;
-    private const float ROTATE_SPEED = 2f; // 控制转向速度，单位是度/秒
+    public enum CollisionType
+    {
+        SINGLE,
+        GROUP
+    }
+
+    public cfg.weapon.Bullet _bulletConfig { get; private set; }
 
 
     //基础设置
@@ -42,10 +47,8 @@ public class Bullet : MonoBehaviour
     public Weapon parentWeapon { get; private set; }
 
 
-    public bool isSingleCol//是否单体伤害
-    {
-        get { return parentContainer == cfg.Enums.Bullet.Container.ENEMY || trackType == cfg.Enums.Bullet.TrackType.LASER; }
-    }
+    private bool? _isSingleCol = null;//是否单体伤害
+    public bool? isSingleCol => _isSingleCol ??= _bulletConfig.IsSingleAttack;//是否单体伤害
 
 
     //基础数值
@@ -59,21 +62,26 @@ public class Bullet : MonoBehaviour
     public float bulletPenetrateInterval;//子弹穿透同一个单位造成连续伤害的伤害间隔
     public float bulletPenetrateDamageMulti;//子弹穿透单位的伤害衰减
     private int bulletBaseDamage;
-    public int bulletFinalDamage
+    public int bulletFinalInitDamage
     {
         get
         {
             return
-            (int)(bulletBaseDamage
-            * finalDamagePenetrateMulti
-            * (float)(_bulletConfig.DamageMulti / 10000f));
+            Mathf.Max(
+                1,
+                (int)(bulletBaseDamage * finalDamagePenetrateMulti
+            /** (float)(_bulletConfig.DamageMulti / 10000f)*/
+            ));
         }
     }
+    public float bulletGroupDamageMulti;//子弹群体碰撞最终伤害
+    public float bulletSingleDamageMulti;//子弹指向碰撞最终伤害
     private float finalDamagePenetrateMulti => Mathf.Max(Mathf.Pow(bulletPenetrateDamageMulti, hitTime), 0.4f);//伤害递减
     public bool isInfinityPenetrate { get; private set; }//是否无敌
 
     //动态内容
-    public List<GameObject> listCollisionCd = new();
+    public List<GameObject> listGroupCollisionCd = new();
+    public List<GameObject> listSingleCollisionCd = new();
     public int bulletState = 0;//子弹阶段，用来判断效果生成对象
     private float timer;//子弹持续时间
     private Vector3 currentDirection;//当前朝向
@@ -188,6 +196,8 @@ public class Bullet : MonoBehaviour
         lifeTime = _bulletConfig.LifeTime;
         trackType = _bulletConfig.TrackType;
         bulletPenetrateDamageMulti = _bulletConfig.PenetrateDamageMulti / 10000f;
+        bulletSingleDamageMulti = _bulletConfig.SingleAttackMulti / 10000f;
+        bulletGroupDamageMulti = _bulletConfig.GroupDamageMulti / 10000f;
 
         isInfinityPenetrate = _bulletConfig.PenetrateCount == -1;
 
@@ -201,6 +211,46 @@ public class Bullet : MonoBehaviour
     {
         //子弹未加载完成之前不启用
         if (_bulletConfig == null) return;
+        if (isReleased) return;
+
+
+        // 移动
+        //更新旋转使其朝向移动方向
+
+        timer += Time.deltaTime;
+
+        if (bulletCol != null)
+        {
+            if (timer >= _bulletConfig.UncolTime && bulletCol.enabled == false)
+            {
+                bulletCol.enabled = true;//初始false
+            }
+        }
+
+        // 检查是否超过生存时间
+        if (timer >= lifeTime)
+        {
+            bulletDestroyReason = BulletDestroyReason.LIFETIME;
+            ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+
+
+            switch (bulletParentType)
+            {
+                case BulletParentType.PLAYER:
+                    break;
+
+                case BulletParentType.ENEMY:
+
+                    BattleManager.Instance.CalDamageEarthSuffer(bulletFinalInitDamage);
+                    break;
+
+                default:
+                    Debug.LogError("子弹没有父类？");
+                    break;
+            }
+
+
+        }
 
         //根据跟踪类型，决定跟踪方式
         switch (trackType)
@@ -226,44 +276,11 @@ public class Bullet : MonoBehaviour
             default:
                 break;
         }
-        // 移动
-        //更新旋转使其朝向移动方向
 
-        if (!isReleased)
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= _bulletConfig.UncolTime && _bulletConfig.CanCol && bulletCol.enabled == false)
-            {
-                bulletCol.enabled = true;//初始false
-            }
-
-            // 检查是否超过生存时间
-            if (timer >= lifeTime)
-            {
-                bulletDestroyReason = BulletDestroyReason.LIFETIME;
-                ObjectPoolManager.Instance.ReleaseBullet(gameObject);
+        //检测是否指向性
+        CheckColDetectType();
 
 
-                switch (bulletParentType)
-                {
-                    case BulletParentType.PLAYER:
-                        break;
-
-                    case BulletParentType.ENEMY:
-
-                        BattleManager.Instance.CalDamageEarthSuffer(bulletFinalDamage);
-                        break;
-
-                    default:
-                        Debug.LogError("子弹没有父类？");
-                        break;
-                }
-
-
-            }
-
-        }
     }
 
     #region 子弹行动模式
@@ -308,7 +325,8 @@ public class Bullet : MonoBehaviour
         else
         {
             // 寻找目标
-            //如果跟踪目标是空的，则持续检测，否则仅跟踪他
+            // 如果跟踪目标是空的，则持续检测，否则仅跟踪他
+            // 注意：跟踪目标未必和你发生了碰撞，无法当作attached使用
             if (trackTarget == null)
             {
                 FindTrackTarget(BattleManager.Instance.activeEnemys, ref trackTarget);
@@ -320,7 +338,7 @@ public class Bullet : MonoBehaviour
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
 
             // 使用旋转步长来平滑转向
-            float step = ROTATE_SPEED * Time.deltaTime;
+            float step = _bulletConfig.TrackAngleSpeed * Time.deltaTime;
             currentDirection = Vector3.RotateTowards(currentDirection, targetDirection, step, 0.02f);
 
             // 也可以使用插值，但RotateTowards更易于控制最大旋转角度
@@ -363,8 +381,22 @@ public class Bullet : MonoBehaviour
             }
 
             DrawLaserLine(trackTarget);
-            CollisionManager.Instance.SingleDirectionalCol(this, trackTarget);
 
+        }
+    }
+
+    /// <summary>
+    /// 检测碰撞形式
+    /// </summary>
+    void CheckColDetectType()
+    {
+        if ((bool)isSingleCol)
+        {
+            CollisionManager.Instance.SingleDirectionalCol(this, trackTarget);
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -439,7 +471,8 @@ public class Bullet : MonoBehaviour
         // transform.rotation = Quaternion.identity;
 
         //清空冷却池
-        listCollisionCd.Clear();
+        listGroupCollisionCd.Clear();
+        listSingleCollisionCd.Clear();
 
         //重置跟踪单位
         attachedEnemy = null;
@@ -453,20 +486,40 @@ public class Bullet : MonoBehaviour
     /// <param name="_which"></param>
     /// <param name="_while"></param>
     /// <returns>true:没碰撞过，false:正在冷却中</returns>
-    public bool AddToListCollisionCD(GameObject _which, float _while)
+    public bool AddToListCollisionCD(GameObject _which, float _while, CollisionType _collisionType)
     {
-        if (listCollisionCd.Contains(_which)) return false;
+        List<GameObject> whichList = listGroupCollisionCd;
 
-        listCollisionCd.Add(_which);
-        StartCoroutine(CorAddToListCollisionCD(_which, _while));
+        switch (_collisionType)
+        {
+            case CollisionType.SINGLE:
+                whichList = listSingleCollisionCd;
+                break;
+            case CollisionType.GROUP:
+                break;
+        }
+
+        if (whichList.Contains(_which)) return false;
+
+        whichList.Add(_which);
+        StartCoroutine(CorAddToListCollisionCD(_which, _while, _collisionType));
         return true;
     }
 
     //开启协程记录每个CD
-    IEnumerator CorAddToListCollisionCD(GameObject _which, float _while)
+    IEnumerator CorAddToListCollisionCD(GameObject _which, float _while, CollisionType _collisionType)
     {
         yield return new WaitForSeconds(_while);
-        listCollisionCd.Remove(_which);
+        switch (_collisionType)
+        {
+            case CollisionType.SINGLE:
+                listSingleCollisionCd.Remove(_which);
+                break;
+            case CollisionType.GROUP:
+                listGroupCollisionCd.Remove(_which);
+                break;
+        }
+
     }
 
     // 修改 SetRelease 方法中的附着逻辑
@@ -534,7 +587,8 @@ public class Bullet : MonoBehaviour
                             continue; // 跳过这个子弹的初始化
                         }
 
-                        //成功附着在目标身上
+                        childComponent._bulletConfig = nextBullet;
+                        //成功附着在目标身上（目前只能通过子物体附着）
                         enemyComponent.RegistMountBullets(childComponent);
                         break;
                 }
@@ -595,6 +649,7 @@ public class Bullet : MonoBehaviour
     public void OnAttachEnemy(EnemyBase _enemy)
     {
         attachedEnemy = _enemy;
+        trackTarget = _enemy;
     }
 
     // // 新增方法：从敌人身上分离
