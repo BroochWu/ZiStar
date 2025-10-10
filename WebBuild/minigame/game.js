@@ -9,11 +9,11 @@ import checkVersion from './check-version';
 import { launchEventType, scaleMode } from './plugin-config';
 import { preloadWxCommonFont } from './unity-sdk/font/index';
 const managerConfig = {
-    DATA_FILE_MD5: 'b260a037773da789',
-    CODE_FILE_MD5: 'f4c519ef4f6c9aac',
+    DATA_FILE_MD5: 'ab038b2341963c8d',
+    CODE_FILE_MD5: '09933fe2f92a015f',
     GAME_NAME: 'webgl',
     APPID: 'wxd013d5ff3faf8046',
-    DATA_FILE_SIZE: '7292677',
+    DATA_FILE_SIZE: '7760721',
     OPT_DATA_FILE_SIZE: '$OPT_DATA_FILE_SIZE',
     DATA_CDN: '',
     // 资源包是否作为小游戏分包加载
