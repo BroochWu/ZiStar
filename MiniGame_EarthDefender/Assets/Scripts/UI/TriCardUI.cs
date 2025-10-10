@@ -13,7 +13,7 @@ public class TriCardUI : MonoBehaviour
     public Button buttonGetAll;//全都要
 
 
-    public async Task Initialize(List<cfg.card.Card> cards)
+    public void Initialize(List<cfg.card.Card> cards)
     {
         // gameObject.GetComponent<Animator>().Play("Appear");
 
@@ -34,9 +34,15 @@ public class TriCardUI : MonoBehaviour
         // cardSlots[1].GetComponentInChildren<CardUI>().Initialize(cards[1]);
         // cardSlots[2].GetComponentInChildren<CardUI>().Initialize(cards[2]);
         // GetComponent<Animator>().Update(0f);
-        await Task.Delay(100);
-        TriCard.Instance.canChooseCard = true;
         gameObject.SetActive(true);
+        StartCoroutine(CInitialize());
+    }
+
+    IEnumerator CInitialize()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        TriCard.Instance.canChooseCard = true;
     }
 
 

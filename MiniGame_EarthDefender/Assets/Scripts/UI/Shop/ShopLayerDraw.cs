@@ -142,7 +142,7 @@ public class ShopLayerDraw : MonoBehaviour
     /// <summary>
     /// 开始抽卡
     /// </summary>
-    public async void LetUsDraw(int drawCount, bool isAdDraw)
+    public void LetUsDraw(int drawCount, bool isAdDraw)
     {
         // // 禁用按钮，防止重复点击
         // btnRegularDraw.interactable = false;
@@ -154,7 +154,7 @@ public class ShopLayerDraw : MonoBehaviour
         try
         {
             // 执行抽卡逻辑
-            var rewards = await ShopDrawManager.instance.DrawCards(drawCount);
+            var rewards = ShopDrawManager.instance.DrawCards(drawCount);
 
             // 显示抽卡结果
             Debug.Log($"抽卡完成，获得{rewards.Count}个碎片");

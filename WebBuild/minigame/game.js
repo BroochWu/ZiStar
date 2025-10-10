@@ -9,17 +9,17 @@ import checkVersion from './check-version';
 import { launchEventType, scaleMode } from './plugin-config';
 import { preloadWxCommonFont } from './unity-sdk/font/index';
 const managerConfig = {
-    DATA_FILE_MD5: '3ff6cbc155711e76',
-    CODE_FILE_MD5: 'f20cfba28e92db68',
+    DATA_FILE_MD5: 'e28ebc8e82c57081',
+    CODE_FILE_MD5: 'e83a8879739f1775',
     GAME_NAME: 'webgl',
     APPID: 'wxd013d5ff3faf8046',
-    DATA_FILE_SIZE: '10315786',
+    DATA_FILE_SIZE: '6996719',
     OPT_DATA_FILE_SIZE: '$OPT_DATA_FILE_SIZE',
     DATA_CDN: '',
     // 资源包是否作为小游戏分包加载
     loadDataPackageFromSubpackage: true,
     // 资源包放小游戏分包加载时，是否br压缩
-    compressDataPackage: false,
+    compressDataPackage: true,
     // 需要在网络空闲时预加载的资源，支持如下形式的路径
     preloadDataList: [
         // 'DATA_CDN/StreamingAssets/WebGL/textures_8d265a9dfd6cb7669cdb8b726f0afb1e',

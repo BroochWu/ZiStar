@@ -119,7 +119,7 @@ public class TriCard
         RebackTempRemove();
 
         //可以初始化UI了
-        _ = UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
+        UIManager.Instance.battleLayer.triCardUI.Initialize(listCardsThree);
 
 
         //判断AVG事件（刷新的时候也会触发）

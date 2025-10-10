@@ -224,7 +224,7 @@ public class ShopDrawManager
     {
         return (DateTime.Now - lastAdDrawTime).TotalSeconds >= ADDrawCooldown;
     }
-    public async Task<List<Rewards>> DrawCards(int count)
+    public List<Rewards> DrawCards(int count)
     {
         List<Rewards> results = new List<Rewards>(count); // 预分配容量
         int currentLevel = DrawLevel;

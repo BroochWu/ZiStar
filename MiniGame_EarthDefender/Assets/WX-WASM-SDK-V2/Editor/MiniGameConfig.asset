@@ -17,7 +17,7 @@ MonoBehaviour:
     Appid: wxd013d5ff3faf8046
     CDN: 
     assetLoadType: 1
-    compressDataPackage: 0
+    compressDataPackage: 1
     VideoUrl: 
     DST: D:/Mine/Project/MiniGame_EarthDefender/WebBuild
     StreamCDN: 
@@ -53,7 +53,7 @@ MonoBehaviour:
     Il2CppOptimizeSize: 1
     profilingFuncs: 1
     Webgl2: 0
-    fbslim: 0
+    fbslim: 1
     DeleteStreamingAssets: 1
     ProfilingMemory: 0
     CleanBuild: 0

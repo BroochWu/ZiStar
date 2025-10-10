@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
                 SetTopPanels(true);
                 SetBottomTabs(true);
                 weaponsLayer.gameObject.SetActive(true);
-                _ = weaponsLayer.Initialize();
+                weaponsLayer.Initialize();
                 MainHallUI.MoveBg(2);
                 break;
             case UILayer.SHOPLAYER:

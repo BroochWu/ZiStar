@@ -828,7 +828,10 @@ PlayerSettings:
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration:
     WebGL: 1
-  managedStrippingLevel: {}
+  managedStrippingLevel:
+    Android: 3
+    Standalone: 3
+    WebGL: 3
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
