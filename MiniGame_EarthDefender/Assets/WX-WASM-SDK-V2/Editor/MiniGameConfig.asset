@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: 
-    Appid: 
+    projectName: "\u5431\u661F"
+    Appid: wxd013d5ff3faf8046
     CDN: 
-    assetLoadType: 0
+    assetLoadType: 1
     compressDataPackage: 0
     VideoUrl: 
-    DST: D:\Mine\Project\MiniGame_EarthDefender\MiniGame_EarthDefender\
+    DST: D:/Mine/Project/MiniGame_EarthDefender/WebBuild
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: StreamingAssets;
@@ -29,7 +29,7 @@ MonoBehaviour:
     HideAfterCallMain: 1
     preloadFiles: 
     Orientation: 0
-    bgImageSrc: Assets/WX-WASM-SDK-V2/Runtime/wechat-default/images/background.jpg
+    bgImageSrc: Assets/Logo/logo.png
     dataFileSubPrefix: 
     maxStorage: 200
     defaultReleaseSize: 31457280
@@ -44,7 +44,7 @@ MonoBehaviour:
     UseFriendRelation: 0
     UseCompressedTexture: 0
     UseMiniGameChat: 0
-    PreloadWXFont: 0
+    PreloadWXFont: 1
     disableMultiTouch: 0
   CompileOptions:
     DevelopBuild: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
     CustomNodePath: 
     autoAdaptScreen: 0
     showMonitorSuggestModal: 1
-    enableProfileStats: 0
+    enableProfileStats: 1
     enableRenderAnalysis: 0
     enablePerfAnalysis: 0
     iOSAutoGCInterval: 10000

@@ -7,57 +7,41 @@ namespace cfg
         private static Tables _tb;
         public static Tables tb => _tb ??= InitializeTables();
 
-        // 在运行时自动初始化
         [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeOnLoad()
         {
-            // 确保在游戏启动时立即初始化
             if (_tb == null)
             {
                 InitializeTables();
             }
         }
+
         private static Tables InitializeTables()
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
-// #if UNITY_EDITOR
-    // Android平台（非编辑器）使用Resources.Load
-     return new Tables(file =>
-    {
-        try
-        {
-            // 修正路径：去掉文件扩展名，确保路径正确
-            string resourcePath = $"Luban/Output/Json/{file}";
-            TextAsset textAsset = UnityEngine.Resources.Load<TextAsset>(resourcePath);
-            
-            if (textAsset == null)
-            {
-                Debug.LogError($"无法加载配置文件: {resourcePath}");
-                throw new System.Exception($"Load config file failed: {file}");
-            }
-            
-            return SimpleJSON.JSON.Parse(textAsset.text);
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"加载配置表 {file} 时出错: {ex.Message}");
-            throw;
-        }
-    }
-    );
-#else
-            // 其他平台（包括编辑器）使用原来的文件读取方式
+            // 所有平台都使用 Resources.Load
             return new Tables(file =>
             {
-                string filePath = UnityEngine.Application.dataPath + $"/Resources/Luban/Output/Json/{file}.json";
-                if (!System.IO.File.Exists(filePath))
+                try
                 {
-                    Debug.LogError($"配置文件不存在: {filePath}");
-                    throw new System.Exception($"Config file not found: {file}");
+                    // 注意：Resources.Load 不需要文件扩展名
+                    string resourcePath = $"Luban/Output/Json/{file}";
+                    TextAsset textAsset = UnityEngine.Resources.Load<TextAsset>(resourcePath);
+                    
+                    if (textAsset == null)
+                    {
+                        Debug.LogError($"无法加载配置文件: {resourcePath}");
+                        throw new System.Exception($"Load config file failed: {file}");
+                    }
+                    
+                    Debug.Log($"成功加载配置文件: {resourcePath}");
+                    return SimpleJSON.JSON.Parse(textAsset.text);
                 }
-                return SimpleJSON.JSON.Parse(System.IO.File.ReadAllText(filePath));
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"加载配置表 {file} 时出错: {ex.Message}");
+                    throw;
+                }
             });
-#endif
         }
     }
 }
